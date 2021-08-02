@@ -6,9 +6,9 @@ import cn.throwx.canal.gule.support.parser.converter.CanalFieldConverterFactory;
 import cn.throwx.canal.gule.support.parser.converter.InMemoryCanalFieldConverterFactory;
 import cn.throwx.canal.gule.support.processor.BaseCanalBinlogEventProcessor;
 import cn.throwx.canal.gule.support.processor.CanalBinlogEventProcessorFactory;
-import com.mall4j.cloud.search.canal.mall4cloudCanalBinLogEventParser;
-import com.mall4j.cloud.search.canal.mall4cloudCanalBinlogEventProcessorFactory;
-import com.mall4j.cloud.search.canal.mall4cloudCanalGlue;
+import com.mall4j.cloud.search.canal.Mall4cloudCanalBinLogEventParser;
+import com.mall4j.cloud.search.canal.Mall4cloudCanalBinlogEventProcessorFactory;
+import com.mall4j.cloud.search.canal.Mall4cloudCanalGlue;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -35,7 +35,7 @@ public class CanalGlueAutoConfiguration implements SmartInitializingSingleton, B
     @Bean
     @ConditionalOnMissingBean
     public CanalBinlogEventProcessorFactory canalBinlogEventProcessorFactory() {
-        return mall4cloudCanalBinlogEventProcessorFactory.of();
+        return Mall4cloudCanalBinlogEventProcessorFactory.of();
     }
 
     @Bean
@@ -53,7 +53,7 @@ public class CanalGlueAutoConfiguration implements SmartInitializingSingleton, B
     @Bean
     @ConditionalOnMissingBean
     public CanalBinLogEventParser canalBinLogEventParser() {
-        return mall4cloudCanalBinLogEventParser.of();
+        return Mall4cloudCanalBinLogEventParser.of();
     }
 
     @Bean
@@ -65,7 +65,7 @@ public class CanalGlueAutoConfiguration implements SmartInitializingSingleton, B
     @Bean
     @Primary
     public CanalGlue canalGlue(CanalBinlogEventProcessorFactory canalBinlogEventProcessorFactory) {
-        return mall4cloudCanalGlue.of(canalBinlogEventProcessorFactory);
+        return Mall4cloudCanalGlue.of(canalBinlogEventProcessorFactory);
     }
 
     @Override

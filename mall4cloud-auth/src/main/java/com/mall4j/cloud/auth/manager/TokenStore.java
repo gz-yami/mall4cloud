@@ -6,7 +6,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.symmetric.AES;
 import com.mall4j.cloud.common.cache.constant.CacheNames;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ResponseEnum;
 import com.mall4j.cloud.common.security.bo.TokenInfoBO;
 import com.mall4j.cloud.api.auth.bo.UserInfoInTokenBO;
@@ -308,7 +308,7 @@ public class TokenStore {
 		String uidKey = getUidToAccessKey(getApprovalKey(appId, uid));
 		Set<String> tokenInfoBoList = stringRedisTemplate.opsForSet().members(uidKey);
 		if (tokenInfoBoList == null || tokenInfoBoList.size() == 0) {
-			throw new mall4cloudException(ResponseEnum.UNAUTHORIZED);
+			throw new Mall4cloudException(ResponseEnum.UNAUTHORIZED);
 		}
 		for (String accessTokenWithRefreshToken : tokenInfoBoList) {
 			String[] accessTokenWithRefreshTokenArr = accessTokenWithRefreshToken.split(StrUtil.COLON);

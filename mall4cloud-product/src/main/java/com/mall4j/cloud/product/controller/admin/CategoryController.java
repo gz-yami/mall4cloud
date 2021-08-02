@@ -3,7 +3,7 @@ package com.mall4j.cloud.product.controller.admin;
 import com.mall4j.cloud.api.product.constant.CategoryLevel;
 import com.mall4j.cloud.api.product.vo.CategoryVO;
 import com.mall4j.cloud.common.constant.Constant;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.security.AuthUserContext;
 import com.mall4j.cloud.product.dto.CategoryDTO;
@@ -48,7 +48,7 @@ public class CategoryController {
     @ApiOperation(value = "保存分类信息", notes = "保存分类信息")
     public ServerResponseEntity<Void> save(@Valid @RequestBody CategoryDTO categoryDTO) {
         if (!Objects.equals(Constant.PLATFORM_SHOP_ID, AuthUserContext.get().getTenantId()) && categoryDTO.getLevel() > CategoryLevel.SECOND.value()) {
-            throw new mall4cloudException("分类等级最高只能为二级分类");
+            throw new Mall4cloudException("分类等级最高只能为二级分类");
         }
         Category category = mapperFacade.map(categoryDTO, Category.class);
         categoryService.save(category);

@@ -4,7 +4,7 @@ import com.mall4j.cloud.api.multishop.vo.ShopDetailVO;
 import com.mall4j.cloud.common.constant.Constant;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.vo.PageVO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ResponseEnum;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.security.AuthUserContext;
@@ -40,7 +40,7 @@ public class ShopDetailController {
     @ApiOperation(value = "分页查询", notes = "分页查询")
     public ServerResponseEntity<PageVO<ShopDetailVO>> getShopAuditingPage(PageDTO pageDTO, ShopDetailDTO shopDetailDTO) {
         if (!Objects.equals(Constant.PLATFORM_SHOP_ID, AuthUserContext.get().getTenantId())) {
-            throw new mall4cloudException(ResponseEnum.UNAUTHORIZED);
+            throw new Mall4cloudException(ResponseEnum.UNAUTHORIZED);
         }
         return ServerResponseEntity.success(shopDetailService.page(pageDTO, shopDetailDTO));
     }

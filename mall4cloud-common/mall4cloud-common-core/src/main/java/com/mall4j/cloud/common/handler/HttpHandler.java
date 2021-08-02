@@ -2,7 +2,7 @@ package com.mall4j.cloud.common.handler;
 
 import cn.hutool.core.util.CharsetUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.xss.XssUtil;
 import org.slf4j.Logger;
@@ -55,7 +55,7 @@ public class HttpHandler {
 			printWriter.write(XssUtil.clean(objectMapper.writeValueAsString(serverResponseEntity)));
 		}
 		catch (IOException e) {
-			throw new mall4cloudException("io 异常", e);
+			throw new Mall4cloudException("io 异常", e);
 		}
 	}
 

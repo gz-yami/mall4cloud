@@ -7,7 +7,7 @@ import com.mall4j.cloud.biz.service.AttachFileService;
 import com.mall4j.cloud.biz.vo.AttachFileVO;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.vo.PageVO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -62,7 +62,7 @@ public class AttachFileController {
     public ServerResponseEntity<Boolean> updateFileName(@RequestBody AttachFileDTO attachFileDto) {
         if (Objects.isNull(attachFileDto.getFileName())) {
             // 图片名称不能为空
-            throw new mall4cloudException("图片名称不能为空");
+            throw new Mall4cloudException("图片名称不能为空");
         }
         AttachFile attachFile = mapperFacade.map(attachFileDto, AttachFile.class);
         return ServerResponseEntity.success(attachFileService.updateFileName(attachFile));

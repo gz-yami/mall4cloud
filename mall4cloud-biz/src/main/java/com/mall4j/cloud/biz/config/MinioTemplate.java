@@ -1,6 +1,6 @@
 package com.mall4j.cloud.biz.config;
 
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ResponseEnum;
 import io.minio.*;
 import io.minio.http.Method;
@@ -49,7 +49,7 @@ public class MinioTemplate implements InitializingBean {
             return presignedObjectUrl;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new mall4cloudException(ResponseEnum.EXCEPTION);
+            throw new Mall4cloudException(ResponseEnum.EXCEPTION);
         }
     }
 }

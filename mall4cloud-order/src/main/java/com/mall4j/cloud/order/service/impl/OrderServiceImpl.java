@@ -12,7 +12,7 @@ import com.mall4j.cloud.api.order.vo.OrderAmountVO;
 import com.mall4j.cloud.api.product.dto.SkuStockLockDTO;
 import com.mall4j.cloud.api.product.feign.ShopCartFeignClient;
 import com.mall4j.cloud.api.product.feign.SkuStockLockFeignClient;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.order.vo.ShopCartItemVO;
 import com.mall4j.cloud.common.order.vo.ShopCartOrderMergerVO;
 import com.mall4j.cloud.common.order.vo.ShopCartOrderVO;
@@ -103,13 +103,13 @@ public class OrderServiceImpl implements OrderService {
         ServerResponseEntity<Void> lockStockResponse = skuStockLockFeignClient.lock(skuStockLocks);
         // 锁定不成，抛异常，让回滚订单
         if (!lockStockResponse.isSuccess()) {
-            throw new mall4cloudException(lockStockResponse.getMsg());
+            throw new Mall4cloudException(lockStockResponse.getMsg());
         }
         // 发送消息，如果三十分钟后没有支付，则取消订单
         SendStatus sendStatus = orderCancelTemplate.syncSend(RocketMqConstant.ORDER_CANCEL_TOPIC, new GenericMessage<>(orderIds), RocketMqConstant.TIMEOUT, RocketMqConstant.CANCEL_ORDER_DELAY_LEVEL).getSendStatus();
         if (!Objects.equals(sendStatus,SendStatus.SEND_OK)) {
             // 消息发不出去就抛异常，发的出去无所谓
-            throw new mall4cloudException(ResponseEnum.EXCEPTION);
+            throw new Mall4cloudException(ResponseEnum.EXCEPTION);
         }
         return orderIds;
     }
@@ -170,7 +170,7 @@ public class OrderServiceImpl implements OrderService {
         SendStatus stockSendStatus = stockMqTemplate.syncSend(RocketMqConstant.STOCK_UNLOCK_TOPIC, new GenericMessage<>(orderIds)).getSendStatus();
         if (!Objects.equals(stockSendStatus,SendStatus.SEND_OK)) {
             // 消息发不出去就抛异常，发的出去无所谓
-            throw new mall4cloudException(ResponseEnum.EXCEPTION);
+            throw new Mall4cloudException(ResponseEnum.EXCEPTION);
         }
     }
 
@@ -179,7 +179,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderMapper.getOrderByOrderIdAndUserId(orderId, userId);
         if (order == null) {
             // 订单不存在
-            throw new mall4cloudException(ResponseEnum.ORDER_NOT_EXIST);
+            throw new Mall4cloudException(ResponseEnum.ORDER_NOT_EXIST);
         }
         return order;
     }
@@ -189,7 +189,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderMapper.getOrderByOrderIdAndShopId(orderId, AuthUserContext.get().getTenantId());
         if (order == null) {
             // 订单不存在
-            throw new mall4cloudException(ResponseEnum.ORDER_NOT_EXIST);
+            throw new Mall4cloudException(ResponseEnum.ORDER_NOT_EXIST);
         }
         return mapperFacade.map(order, OrderVO.class);
     }
@@ -242,7 +242,7 @@ public class OrderServiceImpl implements OrderService {
         // 地址信息
         if (Objects.isNull(orderAddr)) {
             // 请填写收货地址
-            throw new mall4cloudException("请填写收货地址");
+            throw new Mall4cloudException("请填写收货地址");
         }
         // 保存收货地址
         orderAddrService.save(orderAddr);
@@ -294,7 +294,7 @@ public class OrderServiceImpl implements OrderService {
     private Order getOrder(Long userId, Integer dvyType, ShopCartOrderVO shopCartOrderDto) {
         ServerResponseEntity<Long> segmentIdResponse = segmentFeignClient.getSegmentId(Order.DISTRIBUTED_ID_KEY);
         if (!segmentIdResponse.isSuccess()) {
-            throw new mall4cloudException("获取订单id失败");
+            throw new Mall4cloudException("获取订单id失败");
         }
         // 订单信息
         Order order = new Order();

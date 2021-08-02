@@ -14,6 +14,13 @@
 
 gitee：https://gitee.com/gz-yami/mall4cloud/tree/master/doc
 
+本项目是一个极度遵守阿里巴巴代码规约的项目，以下是代码规约扫描结果
+
+
+![阿里代码规约扫描结果](./doc/阿里代码规约扫描结果.png)
+
+具体目录结构和代码规范，可以查看 https://gitee.com/gz-yami/mall4cloud/tree/master/doc/%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84
+
 ### 授权
 
 除开源版本外，本商城还提供商业版本的B2B2C商城，采用PC+小程序+APP，欲知详情，请访问官网。

@@ -5,7 +5,7 @@ import com.mall4j.cloud.api.product.vo.AttrVO;
 import com.mall4j.cloud.common.constant.Constant;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.vo.PageVO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.security.AuthUserContext;
 import com.mall4j.cloud.product.constant.AttrType;
@@ -59,7 +59,7 @@ public class AttrController {
     @ApiOperation(value = "保存属性信息", notes = "保存属性信息")
     public ServerResponseEntity<Void> save(@Valid @RequestBody AttrDTO attrDTO) {
         if (Objects.equals(Constant.PLATFORM_SHOP_ID, AuthUserContext.get().getTenantId()) && Objects.isNull(attrDTO.getAttrType())) {
-            throw new mall4cloudException("属性类型不能为空");
+            throw new Mall4cloudException("属性类型不能为空");
         }
 	    checkAttrInfo(attrDTO);
         Attr attr = mapperFacade.map(attrDTO, Attr.class);
@@ -124,10 +124,10 @@ public class AttrController {
             return;
         }
         if (CollUtil.isEmpty(attrDTO.getCategoryIds())) {
-            throw new mall4cloudException("关联分类不能为空");
+            throw new Mall4cloudException("关联分类不能为空");
         }
         if (Objects.isNull(attrDTO.getSearchType())) {
-            throw new mall4cloudException("搜索属性不能为空");
+            throw new Mall4cloudException("搜索属性不能为空");
         }
     }
 

@@ -6,7 +6,7 @@ import cn.throwx.canal.gule.support.processor.BaseCanalBinlogEventProcessor;
 import com.mall4j.cloud.api.product.bo.EsProductBO;
 import com.mall4j.cloud.common.cache.constant.CacheNames;
 import com.mall4j.cloud.common.cache.util.CacheManagerUtil;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.util.Json;
 import com.mall4j.cloud.search.bo.SpuExtensionBO;
 import com.mall4j.cloud.search.constant.EsIndexEnum;
@@ -71,7 +71,7 @@ public class SpuExtensionCanalListener extends BaseCanalBinlogEventProcessor<Spu
             log.info(updateResponse.toString());
         } catch (IOException e) {
             log.error(e.toString());
-            throw new mall4cloudException("更新es信息异常",e);
+            throw new Mall4cloudException("更新es信息异常",e);
         }
     }
 }

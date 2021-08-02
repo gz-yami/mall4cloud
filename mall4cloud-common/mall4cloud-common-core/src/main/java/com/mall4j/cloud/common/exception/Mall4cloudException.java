@@ -6,7 +6,7 @@ import com.mall4j.cloud.common.response.ResponseEnum;
  * @author FrozenWatermelon
  * @date 2020/7/11
  */
-public class mall4cloudException extends RuntimeException {
+public class Mall4cloudException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
@@ -14,26 +14,26 @@ public class mall4cloudException extends RuntimeException {
 
 	private ResponseEnum responseEnum;
 
-	public mall4cloudException(String msg) {
+	public Mall4cloudException(String msg) {
 		super(msg);
 	}
 
-	public mall4cloudException(String msg, Object object) {
+	public Mall4cloudException(String msg, Object object) {
 		super(msg);
 		this.object = object;
 	}
 
-	public mall4cloudException(String msg, Throwable cause) {
+	public Mall4cloudException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
 
-	public mall4cloudException(ResponseEnum responseEnum) {
+	public Mall4cloudException(ResponseEnum responseEnum) {
 		super(responseEnum.getMsg());
 		this.responseEnum = responseEnum;
 	}
 
-	public mall4cloudException(ResponseEnum responseEnum, Object object) {
+	public Mall4cloudException(ResponseEnum responseEnum, Object object) {
 		super(responseEnum.getMsg());
 		this.responseEnum = responseEnum;
 		this.object = object;

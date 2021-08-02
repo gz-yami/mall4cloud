@@ -1,7 +1,7 @@
 package com.mall4j.cloud.multishop.controller.app;
 
 import com.mall4j.cloud.api.multishop.vo.ShopDetailVO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.multishop.service.ShopDetailService;
 import com.mall4j.cloud.multishop.vo.ShopHeadInfoVO;
@@ -37,7 +37,7 @@ public class ShopDetailController {
         ShopHeadInfoVO shopHeadInfoVO = new ShopHeadInfoVO();
         ShopDetailVO shopDetailVO = shopDetailService.getByShopId(shopId);
         if (Objects.isNull(shopDetailVO)) {
-            throw new mall4cloudException("店铺不存在");
+            throw new Mall4cloudException("店铺不存在");
         }
         shopHeadInfoVO.setShopStatus(shopDetailVO.getShopStatus());
         if (!Objects.equals(shopDetailVO.getShopStatus(), 1)) {

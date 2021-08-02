@@ -8,7 +8,7 @@ import com.mall4j.cloud.api.product.dto.SkuStockLockDTO;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.util.PageUtil;
 import com.mall4j.cloud.common.database.vo.PageVO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ResponseEnum;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.rocketmq.config.RocketMqConstant;
@@ -96,12 +96,12 @@ public class SkuStockLockServiceImpl implements SkuStockLockService {
             // 减sku库存
             int skuStockUpdateIsSuccess = skuStockMapper.reduceStockByOrder(skuStockLockDTO.getSkuId(), skuStockLockDTO.getCount());
             if (skuStockUpdateIsSuccess < 1) {
-                throw new mall4cloudException(ResponseEnum.NOT_STOCK, skuStockLockDTO.getSkuId());
+                throw new Mall4cloudException(ResponseEnum.NOT_STOCK, skuStockLockDTO.getSkuId());
             }
             // 减商品库存
             int spuStockUpdateIsSuccess = spuExtensionMapper.reduceStockByOrder(skuStockLockDTO.getSpuId(), skuStockLockDTO.getCount());
             if (spuStockUpdateIsSuccess < 1) {
-                throw new mall4cloudException(ResponseEnum.NOT_STOCK, skuStockLockDTO.getSkuId());
+                throw new Mall4cloudException(ResponseEnum.NOT_STOCK, skuStockLockDTO.getSkuId());
             }
         }
         // 保存库存锁定信息
@@ -111,7 +111,7 @@ public class SkuStockLockServiceImpl implements SkuStockLockService {
         SendStatus sendStatus = stockMqTemplate.syncSend(RocketMqConstant.STOCK_UNLOCK_TOPIC, new GenericMessage<>(orderIds), RocketMqConstant.TIMEOUT, RocketMqConstant.CANCEL_ORDER_DELAY_LEVEL + 1).getSendStatus();
         if (!Objects.equals(sendStatus,SendStatus.SEND_OK)) {
             // 消息发不出去就抛异常，发的出去无所谓
-            throw new mall4cloudException(ResponseEnum.EXCEPTION);
+            throw new Mall4cloudException(ResponseEnum.EXCEPTION);
         }
         return ServerResponseEntity.success();
     }
@@ -121,7 +121,7 @@ public class SkuStockLockServiceImpl implements SkuStockLockService {
     public void unlockStock(List<Long> orderIds) {
         ServerResponseEntity<List<OrderStatusBO>> ordersStatusResponse = orderFeignClient.getOrdersStatus(orderIds);
         if (!ordersStatusResponse.isSuccess()) {
-            throw new mall4cloudException(ordersStatusResponse.getMsg());
+            throw new Mall4cloudException(ordersStatusResponse.getMsg());
         }
         List<OrderStatusBO> orderStatusList = ordersStatusResponse.getData();
 

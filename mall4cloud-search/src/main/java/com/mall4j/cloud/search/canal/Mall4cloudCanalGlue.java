@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author FrozenWatermelon
  */
-public class mall4cloudCanalGlue implements CanalGlue {
+public class Mall4cloudCanalGlue implements CanalGlue {
 
     private final CanalBinlogEventProcessorFactory canalBinlogEventProcessorFactory;
 
@@ -31,11 +31,11 @@ public class mall4cloudCanalGlue implements CanalGlue {
     }
 
 
-    private mall4cloudCanalGlue(CanalBinlogEventProcessorFactory canalBinlogEventProcessorFactory) {
+    private Mall4cloudCanalGlue(CanalBinlogEventProcessorFactory canalBinlogEventProcessorFactory) {
         this.canalBinlogEventProcessorFactory = canalBinlogEventProcessorFactory;
     }
 
-    public static mall4cloudCanalGlue of(CanalBinlogEventProcessorFactory canalBinlogEventProcessorFactory) {
-        return new mall4cloudCanalGlue(canalBinlogEventProcessorFactory);
+    public static Mall4cloudCanalGlue of(CanalBinlogEventProcessorFactory canalBinlogEventProcessorFactory) {
+        return new Mall4cloudCanalGlue(canalBinlogEventProcessorFactory);
     }
 }

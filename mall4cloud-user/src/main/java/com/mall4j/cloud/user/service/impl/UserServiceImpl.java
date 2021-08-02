@@ -11,7 +11,7 @@ import com.mall4j.cloud.common.cache.constant.UserCacheNames;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.util.PageUtil;
 import com.mall4j.cloud.common.database.vo.PageVO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ResponseEnum;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.util.IpHelper;
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
         ServerResponseEntity<Long> segmentIdResponse = segmentFeignClient.getSegmentId(User.DISTRIBUTED_ID_KEY);
         if (!segmentIdResponse.isSuccess()) {
-            throw new mall4cloudException(ResponseEnum.EXCEPTION);
+            throw new Mall4cloudException(ResponseEnum.EXCEPTION);
         }
         Long userId = segmentIdResponse.getData();
 
@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         ServerResponseEntity<Long> serverResponse = accountFeignClient.save(authAccountDTO);
         // 抛异常回滚
         if (!serverResponse.isSuccess()) {
-            throw new mall4cloudException(serverResponse.getMsg());
+            throw new Mall4cloudException(serverResponse.getMsg());
         }
 
         User user = new User();
@@ -124,10 +124,10 @@ public class UserServiceImpl implements UserService {
     private void checkRegisterInfo(UserRegisterDTO userRegisterDTO) {
         ServerResponseEntity<AuthAccountVO> responseEntity = accountFeignClient.getByUsernameAndSysType(userRegisterDTO.getUserName(), SysTypeEnum.ORDINARY);
         if (!responseEntity.isSuccess()) {
-            throw new mall4cloudException(responseEntity.getMsg());
+            throw new Mall4cloudException(responseEntity.getMsg());
         }
         if (Objects.nonNull(responseEntity.getData())) {
-            throw new mall4cloudException("用户名已存在");
+            throw new Mall4cloudException("用户名已存在");
         }
     }
 

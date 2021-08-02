@@ -6,7 +6,7 @@ import cn.throwx.canal.gule.support.processor.BaseCanalBinlogEventProcessor;
 import cn.throwx.canal.gule.support.processor.ExceptionHandler;
 import com.mall4j.cloud.api.order.bo.EsOrderBO;
 import com.mall4j.cloud.api.order.feign.OrderFeignClient;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.util.Json;
 import com.mall4j.cloud.search.bo.OrderBO;
@@ -58,7 +58,7 @@ public class OrderCanalListener extends BaseCanalBinlogEventProcessor<OrderBO> {
         } catch (IOException e) {
             e.printStackTrace();
             log.error(e.toString());
-            throw new mall4cloudException("保存es信息异常", e);
+            throw new Mall4cloudException("保存es信息异常", e);
         }
     }
 
@@ -77,14 +77,14 @@ public class OrderCanalListener extends BaseCanalBinlogEventProcessor<OrderBO> {
             log.info(updateResponse.toString());
         } catch (IOException e) {
             log.error(e.toString());
-            throw new mall4cloudException("更新订单es信息异常",e);
+            throw new Mall4cloudException("更新订单es信息异常",e);
         }
     }
 
     @Override
     protected ExceptionHandler exceptionHandler() {
         return (CanalBinLogEvent event, Throwable throwable) -> {
-            throw new mall4cloudException("创建索引异常",throwable);
+            throw new Mall4cloudException("创建索引异常",throwable);
         };
     }
 }

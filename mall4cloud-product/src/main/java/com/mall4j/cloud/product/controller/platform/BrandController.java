@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.mall4j.cloud.api.product.vo.BrandVO;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.vo.PageVO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.product.dto.BrandDTO;
 import com.mall4j.cloud.product.model.Brand;
@@ -63,7 +63,7 @@ public class BrandController {
     @ApiOperation(value = "保存品牌信息", notes = "保存品牌信息")
     public ServerResponseEntity<Void> save(@Valid @RequestBody BrandDTO brandDTO) {
         if (CollUtil.isEmpty(brandDTO.getCategoryIds())) {
-            throw new mall4cloudException("分类不能为空");
+            throw new Mall4cloudException("分类不能为空");
         }
         Brand brand = mapperFacade.map(brandDTO, Brand.class);
         brandService.save(brand, brandDTO.getCategoryIds());
@@ -75,7 +75,7 @@ public class BrandController {
     @ApiOperation(value = "更新品牌信息", notes = "更新品牌信息")
     public ServerResponseEntity<Void> update(@Valid @RequestBody BrandDTO brandDTO) {
         if (CollUtil.isEmpty(brandDTO.getCategoryIds())) {
-            throw new mall4cloudException("分类不能为空");
+            throw new Mall4cloudException("分类不能为空");
         }
         Brand brand = mapperFacade.map(brandDTO, Brand.class);
         brandService.update(brand, brandDTO.getCategoryIds());
@@ -98,10 +98,10 @@ public class BrandController {
     @ApiOperation(value = "更新品牌状态（启用或禁用）", notes = "更新品牌状态（启用或禁用）")
     public ServerResponseEntity<Void> updateBrandStatus(@RequestBody BrandDTO brandDTO) {
 	    if (Objects.isNull(brandDTO.getStatus())) {
-	        throw new mall4cloudException("状态不能为空");
+	        throw new Mall4cloudException("状态不能为空");
         }
         if (Objects.isNull(brandDTO.getBrandId())) {
-            throw new mall4cloudException("品牌id不能为空");
+            throw new Mall4cloudException("品牌id不能为空");
         }
         brandService.updateBrandStatus(brandDTO);
         return ServerResponseEntity.success();

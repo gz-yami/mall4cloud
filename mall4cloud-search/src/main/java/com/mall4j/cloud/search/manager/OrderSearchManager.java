@@ -5,7 +5,7 @@ import com.mall4j.cloud.api.dto.EsPageDTO;
 import com.mall4j.cloud.api.vo.EsPageVO;
 import com.mall4j.cloud.api.vo.search.EsOrderVO;
 import com.mall4j.cloud.common.dto.OrderSearchDTO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.util.BooleanUtil;
 import com.mall4j.cloud.common.util.Json;
 import com.mall4j.cloud.search.constant.EsIndexEnum;
@@ -68,7 +68,7 @@ public class OrderSearchManager {
             result = buildSearchResult(pageDTO, response);
         } catch (IOException e) {
             log.error(e.toString());
-            throw new mall4cloudException("搜索服务出了点小差，请稍后再试", e);
+            throw new Mall4cloudException("搜索服务出了点小差，请稍后再试", e);
         }
         return result;
     }

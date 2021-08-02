@@ -3,7 +3,7 @@ package com.mall4j.cloud.user.service.impl;
 import com.google.common.collect.Lists;
 import com.mall4j.cloud.api.user.vo.AreaVO;
 import com.mall4j.cloud.common.cache.constant.CacheNames;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.user.mapper.AreaMapper;
 import com.mall4j.cloud.user.model.Area;
 import com.mall4j.cloud.user.service.AreaService;
@@ -76,7 +76,7 @@ public class AreaServiceImpl implements AreaService {
     public void deleteById(Long areaId) {
         int areaNum = areaMapper.countByAreaId(areaId);
         if (areaNum > 0) {
-            throw new mall4cloudException("请先删除子地区");
+            throw new Mall4cloudException("请先删除子地区");
         }
         areaMapper.deleteById(areaId);
     }

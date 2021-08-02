@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.mall4j.cloud.common.cache.constant.CacheNames;
 import com.mall4j.cloud.common.constant.Constant;
 import com.mall4j.cloud.common.constant.StatusEnum;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.security.AuthUserContext;
 import com.mall4j.cloud.api.product.constant.CategoryLevel;
 import com.mall4j.cloud.product.dto.CategoryDTO;
@@ -74,7 +74,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void update(Category category) {
         CategoryVO dbCategory = getById(category.getCategoryId());
         if (Objects.equals(dbCategory.getCategoryId(), category.getParentId())) {
-            throw new mall4cloudException("分类不能成为本身的上级分类");
+            throw new Mall4cloudException("分类不能成为本身的上级分类");
         }
         checkName(category.getCategoryId(), category.getName());
         int updateCount = categoryMapper.update(category);
@@ -84,7 +84,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteById(Long categoryId) {
         int count = categoryMapper.getCategoryUseNum(categoryId);
         if (count > 0) {
-            throw new mall4cloudException("该分类在使用中，不能进行删除操作");
+            throw new Mall4cloudException("该分类在使用中，不能进行删除操作");
         }
         categoryMapper.deleteById(categoryId);
     }
@@ -257,7 +257,7 @@ public class CategoryServiceImpl implements CategoryService {
     private void checkName(Long categoryId, String name) {
         int countByName = categoryMapper.getCountByName(categoryId, name);
         if (countByName > 0) {
-            throw new mall4cloudException("分类名已存在，请重新输入");
+            throw new Mall4cloudException("分类名已存在，请重新输入");
         }
     }
 }

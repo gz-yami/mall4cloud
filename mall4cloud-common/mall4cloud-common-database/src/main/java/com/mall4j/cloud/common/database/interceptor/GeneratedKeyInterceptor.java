@@ -2,7 +2,7 @@ package com.mall4j.cloud.common.database.interceptor;
 
 import com.mall4j.cloud.api.leaf.feign.SegmentFeignClient;
 import com.mall4j.cloud.common.database.annotations.DistributedId;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.model.BaseModel;
 import com.mall4j.cloud.common.response.ResponseEnum;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
@@ -144,7 +144,7 @@ public class GeneratedKeyInterceptor implements Interceptor {
                 field.set(parameter,segmentIdResponseEntity.getData());
             } else {
                 logger.error("can't get distributed id !!!! ");
-                throw new mall4cloudException(ResponseEnum.EXCEPTION);
+                throw new Mall4cloudException(ResponseEnum.EXCEPTION);
             }
         }
     }

@@ -3,7 +3,7 @@ package com.mall4j.cloud.api.product.manager;
 import cn.hutool.core.collection.CollectionUtil;
 import com.google.common.collect.Lists;
 import com.mall4j.cloud.api.multishop.feign.ShopDetailFeignClient;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.api.product.dto.ShopCartItemDTO;
 import com.mall4j.cloud.api.product.feign.ShopCartFeignClient;
 import com.mall4j.cloud.api.product.feign.SpuFeignClient;
@@ -113,7 +113,7 @@ public class ShopCartAdapter {
             // 店铺信息
             ServerResponseEntity<String> shopNameResponse = shopDetailFeignClient.getShopNameByShopId(shopId);
             if (!shopNameResponse.isSuccess()) {
-                throw new mall4cloudException(shopNameResponse.getMsg());
+                throw new Mall4cloudException(shopNameResponse.getMsg());
             }
             shopCart.setShopName(shopNameResponse.getData());
             shopCarts.add(shopCart);

@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import com.mall4j.cloud.api.vo.*;
 import com.mall4j.cloud.api.vo.search.*;
 import com.mall4j.cloud.common.constant.StatusEnum;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.util.BooleanUtil;
 import com.mall4j.cloud.common.util.Json;
 import com.mall4j.cloud.search.constant.*;
@@ -100,7 +100,7 @@ public class ProductSearchManager {
             spuList = getSpuListByResponse(response.getHits().getHits());
         } catch (IOException e) {
             log.error(e.toString());
-            throw new mall4cloudException("搜索服务出了点小差，请稍后再试", e);
+            throw new Mall4cloudException("搜索服务出了点小差，请稍后再试", e);
         }
         return spuList;
     }
@@ -124,7 +124,7 @@ public class ProductSearchManager {
             log.debug("搜索返回结果：" + response.toString());
         } catch (IOException e) {
             log.error(e.toString());
-            throw new mall4cloudException("搜索服务出了点小差，请稍后再试", e);
+            throw new Mall4cloudException("搜索服务出了点小差，请稍后再试", e);
         }
         return response;
     }

@@ -6,7 +6,7 @@ import com.mall4j.cloud.common.constant.Constant;
 import com.mall4j.cloud.common.constant.StatusEnum;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.vo.PageVO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.security.AuthUserContext;
 import com.mall4j.cloud.product.dto.SkuDTO;
@@ -144,7 +144,7 @@ public class SpuController {
         SpuVO dbSpu = spuService.getBySpuId(spu.getSpuId());
         String error = checkUpdateStatusData(dbSpu);
         if (StrUtil.isNotBlank(error)) {
-            throw new mall4cloudException(error);
+            throw new Mall4cloudException(error);
         }
         spuService.changeSpuStatus(spu.getSpuId(), spu.getStatus());
         spuService.removeSpuCacheBySpuId(spu.getSpuId());
@@ -159,7 +159,7 @@ public class SpuController {
         List<Long> errorList = new ArrayList<>(spu.getSpuIds());
         List<SpuVO> spuList = spuService.listBySpuIds(spu.getSpuIds(), null, null);
         if (CollUtil.isEmpty(spuList)) {
-            throw new mall4cloudException("您选择的商品信息有误，请刷新后重试");
+            throw new Mall4cloudException("您选择的商品信息有误，请刷新后重试");
         }
         Map<Long, SpuVO> spuMap = spuList.stream().collect(Collectors.toMap(SpuVO::getSpuId, s -> s));
         for (Long spuId : spu.getSpuIds()) {
@@ -170,11 +170,11 @@ public class SpuController {
             }
         }
         if (CollUtil.isEmpty(spuIds)) {
-            throw new mall4cloudException("您所选择的商品中没有符合操作条件的商品");
+            throw new Mall4cloudException("您所选择的商品中没有符合操作条件的商品");
         }
         spuService.batchRemoveSpuCacheBySpuId(spuIds);
         if (errorList.size() > 0) {
-            throw new mall4cloudException("商品id为：" + errorList.toString() + "的" + errorList.size() + "件商品不符合操作条件");
+            throw new Mall4cloudException("商品id为：" + errorList.toString() + "的" + errorList.size() + "件商品不符合操作条件");
         }
         spuService.changeSpuStatus(spu.getSpuId(), spu.getStatus());
         spuService.removeSpuCacheBySpuId(spu.getSpuId());
@@ -223,7 +223,7 @@ public class SpuController {
      */
     private void checkSaveOrUpdateInfo(SpuDTO spuDTO) {
         if (!Objects.equals(Constant.PLATFORM_SHOP_ID, AuthUserContext.get().getTenantId()) && Objects.isNull(spuDTO.getShopCategoryId())) {
-            throw new mall4cloudException("店铺分类不能为空");
+            throw new Mall4cloudException("店铺分类不能为空");
         }
         if (Objects.isNull(spuDTO.getSeq())) {
             spuDTO.setSeq(0);

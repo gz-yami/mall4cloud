@@ -3,7 +3,7 @@ package com.mall4j.cloud.common.cache.util;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.mall4j.cloud.common.cache.constant.CacheNames;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ResponseEnum;
 import com.mall4j.cloud.common.util.SpringContextUtils;
 import org.slf4j.Logger;
@@ -40,7 +40,7 @@ public class RedisUtil {
 	 */
 	public static Boolean expire(String key, long time) {
 		if (key.contains(StrUtil.SPACE)) {
-			throw new mall4cloudException(ResponseEnum.EXCEPTION);
+			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
 		try {
 			if (time > 0) {
@@ -61,7 +61,7 @@ public class RedisUtil {
 	 */
 	public static Long getExpire(String key) {
 		if (key.contains(StrUtil.SPACE)) {
-			throw new mall4cloudException(ResponseEnum.EXCEPTION);
+			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
 		return REDIS_TEMPLATE.getExpire(key, TimeUnit.SECONDS);
 	}
@@ -73,7 +73,7 @@ public class RedisUtil {
 	 */
 	public static Boolean hasKey(String key) {
 		if (key.contains(StrUtil.SPACE)) {
-			throw new mall4cloudException(ResponseEnum.EXCEPTION);
+			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
 		try {
 			return REDIS_TEMPLATE.hasKey(key);
@@ -93,7 +93,7 @@ public class RedisUtil {
 		if (key != null && key.length > 0) {
 			for (String s : key) {
 				if (s.contains(StrUtil.SPACE)) {
-					throw new mall4cloudException(ResponseEnum.EXCEPTION);
+					throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 				}
 			}
 
@@ -115,7 +115,7 @@ public class RedisUtil {
 	@SuppressWarnings("unchecked")
 	public static <T> T get(String key) {
 		if (key.contains(StrUtil.SPACE)) {
-			throw new mall4cloudException(ResponseEnum.EXCEPTION);
+			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
 		return (T) REDIS_TEMPLATE.opsForValue().get(key);
 	}
@@ -129,7 +129,7 @@ public class RedisUtil {
 	 */
 	public static boolean set(String key, Object value, long time) {
 		if (key.contains(StrUtil.SPACE)) {
-			throw new mall4cloudException(ResponseEnum.EXCEPTION);
+			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
 		try {
 			if (time > 0) {
@@ -154,7 +154,7 @@ public class RedisUtil {
 	 */
 	public static Long incr(String key, long delta) {
 		if (key.contains(StrUtil.SPACE)) {
-			throw new mall4cloudException(ResponseEnum.EXCEPTION);
+			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
 		if (delta < 0) {
 			throw new RuntimeException("递增因子必须大于0");
@@ -170,7 +170,7 @@ public class RedisUtil {
 	 */
 	public static Long decr(String key, long delta) {
 		if (key.contains(StrUtil.SPACE)) {
-			throw new mall4cloudException(ResponseEnum.EXCEPTION);
+			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
 		if (delta < 0) {
 			throw new RuntimeException("递减因子必须小于0");
@@ -180,7 +180,7 @@ public class RedisUtil {
 
 	public static boolean setLongValue(String key, Long value, long time) {
 		if (key.contains(StrUtil.SPACE)) {
-			throw new mall4cloudException(ResponseEnum.EXCEPTION);
+			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
 		try {
 			if (time > 0) {
@@ -207,7 +207,7 @@ public class RedisUtil {
 			return null;
 		}
 		if (key.contains(StrUtil.SPACE)) {
-			throw new mall4cloudException(ResponseEnum.EXCEPTION);
+			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
 		String result = STRING_REDIS_TEMPLATE.opsForValue().get(key);
 		if (result == null) {
@@ -226,7 +226,7 @@ public class RedisUtil {
 		}
 		for (String key : keys) {
 			if (key.contains(StrUtil.SPACE)) {
-				throw new mall4cloudException(ResponseEnum.EXCEPTION);
+				throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 			}
 		}
 		REDIS_TEMPLATE.delete(keys);
@@ -247,7 +247,7 @@ public class RedisUtil {
 			String key = cacheName + CacheNames.UNION + cacheKey;
 			keys.add(key);
 			if (key.contains(StrUtil.SPACE)) {
-				throw new mall4cloudException(ResponseEnum.EXCEPTION);
+				throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 			}
 		}
 		REDIS_TEMPLATE.delete(keys);
@@ -260,7 +260,7 @@ public class RedisUtil {
 	public static boolean cad(String key, String value) {
 
 		if (key.contains(StrUtil.SPACE) || value.contains(StrUtil.SPACE)) {
-			throw new mall4cloudException(ResponseEnum.EXCEPTION);
+			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
 
 		String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";

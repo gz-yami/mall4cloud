@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.mall4j.cloud.api.leaf.feign.SegmentFeignClient;
 import com.mall4j.cloud.api.order.feign.OrderFeignClient;
 import com.mall4j.cloud.api.order.vo.OrderAmountVO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.order.bo.PayNotifyBO;
 import com.mall4j.cloud.common.response.ResponseEnum;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
@@ -55,7 +55,7 @@ public class PayInfoServiceImpl implements PayInfoService {
         // 支付单号
         ServerResponseEntity<Long> segmentIdResponse = segmentFeignClient.getSegmentId(PayInfo.DISTRIBUTED_ID_KEY);
         if (!segmentIdResponse.isSuccess()) {
-            throw new mall4cloudException(ResponseEnum.EXCEPTION);
+            throw new Mall4cloudException(ResponseEnum.EXCEPTION);
         }
         Long payId = segmentIdResponse.getData();
         List<Long> orderIds = payParam.getOrderIds();
@@ -63,7 +63,7 @@ public class PayInfoServiceImpl implements PayInfoService {
         ServerResponseEntity<OrderAmountVO> ordersAmountAndIfNoCancelResponse = orderFeignClient.getOrdersAmountAndIfNoCancel(orderIds);
         // 如果订单已经关闭了，此时不能够支付了
         if (!ordersAmountAndIfNoCancelResponse.isSuccess()) {
-            throw new mall4cloudException(ordersAmountAndIfNoCancelResponse.getMsg());
+            throw new Mall4cloudException(ordersAmountAndIfNoCancelResponse.getMsg());
         }
         OrderAmountVO orderAmount = ordersAmountAndIfNoCancelResponse.getData();
         PayInfo payInfo = new PayInfo();
@@ -104,7 +104,7 @@ public class PayInfoServiceImpl implements PayInfoService {
         SendStatus sendStatus = orderNotifyTemplate.syncSend(RocketMqConstant.ORDER_NOTIFY_TOPIC, new GenericMessage<>(new PayNotifyBO(orderIds))).getSendStatus();
         if (!Objects.equals(sendStatus, SendStatus.SEND_OK)) {
             // 消息发不出去就抛异常，因为订单回调会有多次，几乎不可能每次都无法发送出去，发的出去无所谓因为接口是幂等的
-            throw new mall4cloudException(ResponseEnum.EXCEPTION);
+            throw new Mall4cloudException(ResponseEnum.EXCEPTION);
         }
     }
 

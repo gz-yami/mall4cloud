@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author FrozenWatermelon
  */
-public class mall4cloudCanalBinlogEventProcessorFactory implements CanalBinlogEventProcessorFactory {
+public class Mall4cloudCanalBinlogEventProcessorFactory implements CanalBinlogEventProcessorFactory {
 
     private final ConcurrentMap<ModelTable, List<BaseCanalBinlogEventProcessor<?>>> cache = new ConcurrentHashMap<>(16);
 
@@ -29,10 +29,10 @@ public class mall4cloudCanalBinlogEventProcessorFactory implements CanalBinlogEv
         return this.cache.get(modelTable);
     }
 
-    private mall4cloudCanalBinlogEventProcessorFactory() {
+    private Mall4cloudCanalBinlogEventProcessorFactory() {
     }
 
-    public static mall4cloudCanalBinlogEventProcessorFactory of() {
-        return new mall4cloudCanalBinlogEventProcessorFactory();
+    public static Mall4cloudCanalBinlogEventProcessorFactory of() {
+        return new Mall4cloudCanalBinlogEventProcessorFactory();
     }
 }

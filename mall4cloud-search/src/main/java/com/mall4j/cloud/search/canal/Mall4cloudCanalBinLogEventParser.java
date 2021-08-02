@@ -17,7 +17,7 @@ import java.util.*;
 /**
  * @author FrozenWatermelon
  */
-public class mall4cloudCanalBinLogEventParser implements CanalBinLogEventParser {
+public class Mall4cloudCanalBinLogEventParser implements CanalBinLogEventParser {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultCanalBinLogEventParser.class);
 
@@ -84,10 +84,10 @@ public class mall4cloudCanalBinLogEventParser implements CanalBinLogEventParser 
         }
     }
 
-    private mall4cloudCanalBinLogEventParser() {
+    private Mall4cloudCanalBinLogEventParser() {
     }
 
-    public static mall4cloudCanalBinLogEventParser of() {
-        return new mall4cloudCanalBinLogEventParser();
+    public static Mall4cloudCanalBinLogEventParser of() {
+        return new Mall4cloudCanalBinLogEventParser();
     }
 }

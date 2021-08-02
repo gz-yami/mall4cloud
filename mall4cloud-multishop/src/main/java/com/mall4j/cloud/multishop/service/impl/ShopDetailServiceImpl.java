@@ -18,7 +18,7 @@ import com.mall4j.cloud.common.constant.StatusEnum;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.util.PageUtil;
 import com.mall4j.cloud.common.database.vo.PageVO;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ResponseEnum;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.security.AuthUserContext;
@@ -78,7 +78,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
     public ShopDetailVO getByShopId(Long shopId) {
         ServerResponseEntity<AuthAccountVO> accountRes = accountFeignClient.getMerchantInfoByTenantId(shopId);
         if (!accountRes.isSuccess()) {
-            throw new mall4cloudException("商家信息获取失败");
+            throw new Mall4cloudException("商家信息获取失败");
         }
         AuthAccountVO authAccountVO = accountRes.getData();
         ShopDetailVO shopDetailVO = shopDetailMapper.getByShopId(shopId);
@@ -119,7 +119,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
         Set<Long> spuIdSet = page.getList().stream().map(ShopDetailAppVO::getShopId).collect(Collectors.toSet());
         ServerResponseEntity<List<SpuSearchVO>> spuResponse = searchSpuFeignClient.limitSizeListByShopIds(new ArrayList<>(spuIdSet), Constant.SPU_SIZE_FIVE);
         if (!Objects.equals(spuResponse.getCode(), ResponseEnum.OK.value())) {
-            throw new mall4cloudException(spuResponse.getMsg());
+            throw new Mall4cloudException(spuResponse.getMsg());
         } else if (CollectionUtil.isEmpty(spuResponse.getData())) {
             return page;
         }
@@ -169,7 +169,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
         checkShopInfo(shopDetailDTO);
         UserInfoInTokenBO userInfoInTokenBO = AuthUserContext.get();
         if (Objects.nonNull(userInfoInTokenBO.getTenantId())) {
-            throw new mall4cloudException("该用户已经创建过店铺");
+            throw new Mall4cloudException("该用户已经创建过店铺");
         }
         // 保存店铺
         ShopDetail shopDetail = mapperFacade.map(shopDetailDTO, ShopDetail.class);
@@ -197,7 +197,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
         userInfoInTokenBO.setTenantId(shopDetail.getShopId());
         ServerResponseEntity<Void> updateTenantIdRes = accountFeignClient.updateUserInfoByUserIdAndSysType(userInfoInTokenBO, AuthUserContext.get().getUserId(), SysTypeEnum.ORDINARY.value());
         if (!Objects.equals(updateTenantIdRes.getCode(), ResponseEnum.OK.value())) {
-            throw new mall4cloudException(updateTenantIdRes.getMsg());
+            throw new Mall4cloudException(updateTenantIdRes.getMsg());
         }
     }
 
@@ -222,23 +222,23 @@ public class ShopDetailServiceImpl implements ShopDetailService {
             shopDetailDTO.setShopName(shopDetailDTO.getShopName().trim());
         }
         if(shopDetailMapper.countShopName(shopDetailDTO.getShopName(), null) > 0) {
-            throw new mall4cloudException("店铺名称已存在");
+            throw new Mall4cloudException("店铺名称已存在");
         }
 
         String username = shopDetailDTO.getUsername();
         // 用户名
         if (!PrincipalUtil.isUserName(username)) {
-            throw new mall4cloudException("用户名格式不正确");
+            throw new Mall4cloudException("用户名格式不正确");
         }
 
         ServerResponseEntity<AuthAccountVO> accountResponse = accountFeignClient.getByUsernameAndSysType(username, SysTypeEnum.MULTISHOP);
         if (!Objects.equals(accountResponse.getCode(), ResponseEnum.OK.value())) {
-            throw new mall4cloudException(accountResponse.getMsg());
+            throw new Mall4cloudException(accountResponse.getMsg());
         }
 
         AuthAccountVO authAccountVO = accountResponse.getData();
         if (Objects.nonNull(authAccountVO)) {
-            throw new mall4cloudException("用户账号已存在");
+            throw new Mall4cloudException("用户账号已存在");
         }
     }
 
@@ -266,7 +266,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
         authAccountDTO.setIsAdmin(UserAdminType.ADMIN.value());
         ServerResponseEntity<Long> save = accountFeignClient.save(authAccountDTO);
         if (!Objects.equals(save.getCode(), ResponseEnum.OK.value())) {
-            throw new mall4cloudException(save.getMsg());
+            throw new Mall4cloudException(save.getMsg());
         }
     }
 }

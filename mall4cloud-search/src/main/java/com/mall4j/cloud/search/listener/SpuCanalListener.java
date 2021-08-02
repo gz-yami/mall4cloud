@@ -6,7 +6,7 @@ import cn.throwx.canal.gule.support.processor.BaseCanalBinlogEventProcessor;
 import cn.throwx.canal.gule.support.processor.ExceptionHandler;
 import com.mall4j.cloud.api.product.bo.EsProductBO;
 import com.mall4j.cloud.api.product.feign.ProductFeignClient;
-import com.mall4j.cloud.common.exception.mall4cloudException;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.util.Json;
 import com.mall4j.cloud.search.bo.SpuBO;
@@ -48,7 +48,7 @@ public class SpuCanalListener extends BaseCanalBinlogEventProcessor<SpuBO> {
         Long spuId = result.getPrimaryKey();
         ServerResponseEntity<EsProductBO> esProductBO = productFeignClient.loadEsProductBO(spuId);
         if (!esProductBO.isSuccess()) {
-            throw new mall4cloudException("创建索引异常");
+            throw new Mall4cloudException("创建索引异常");
         }
 
         IndexRequest request = new IndexRequest(EsIndexEnum.PRODUCT.value());
@@ -60,7 +60,7 @@ public class SpuCanalListener extends BaseCanalBinlogEventProcessor<SpuBO> {
 
         } catch (IOException e) {
             log.error(e.toString());
-            throw new mall4cloudException("保存es信息异常", e);
+            throw new Mall4cloudException("保存es信息异常", e);
         }
     }
 
@@ -80,14 +80,14 @@ public class SpuCanalListener extends BaseCanalBinlogEventProcessor<SpuBO> {
             log.info(updateResponse.toString());
         } catch (IOException e) {
             log.error(e.toString());
-            throw new mall4cloudException("删除es信息异常",e);
+            throw new Mall4cloudException("删除es信息异常",e);
         }
     }
 
     @Override
     protected ExceptionHandler exceptionHandler() {
         return (CanalBinLogEvent event, Throwable throwable) -> {
-            throw new mall4cloudException("创建索引异常",throwable);
+            throw new Mall4cloudException("创建索引异常",throwable);
         };
     }
 }
