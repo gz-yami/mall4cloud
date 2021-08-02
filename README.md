@@ -17,7 +17,7 @@ gitee：https://gitee.com/gz-yami/mall4cloud/tree/master/doc
 本项目是一个极度遵守阿里巴巴代码规约的项目，以下是代码规约扫描结果
 
 
-![阿里代码规约扫描结果](doc/img/阿里代码规约扫描结果.png)
+![阿里代码规约扫描结果](doc/img/readme/阿里代码规约扫描结果.png)
 
 具体目录结构和代码规范，可以查看 https://gitee.com/gz-yami/mall4cloud/tree/master/doc/%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84
 
@@ -75,7 +75,7 @@ H5端：https://h5.mall4j.com/cloud
 
 ### 系统架构图
 
-![架构图](doc/img/架构图.png)
+![架构图](doc/img/readme/架构图.png)
 
 ### 商城部署后 API 地址
 
@@ -117,11 +117,11 @@ H5端：https://h5.mall4j.com/cloud
 
 #### 2.小程序截图
 
-![小程序-1625472143277](doc/img/readme/小程序-1625472143277.png)
+![小程序-1625472143277](doc/img/readme/小程序.png)
 
 #### 3.uni-app截图
 
-![uniapp-1625469707350](doc/img/readme/uniapp-1625469707350.png)
+![uniapp-1625469707350](doc/img/readme/uniapp.png)
 
 ### 
 
