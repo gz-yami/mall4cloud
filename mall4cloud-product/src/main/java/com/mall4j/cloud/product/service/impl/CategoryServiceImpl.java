@@ -54,7 +54,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void save(Category category) {
-        checkName(null, category.getName());
+        existCategoryName(category);
         category.setShopId(AuthUserContext.get().getTenantId());
         String path = "";
         if (!Objects.equals(CategoryLevel.First.value(), category.getLevel())) {
@@ -76,7 +76,7 @@ public class CategoryServiceImpl implements CategoryService {
         if (Objects.equals(dbCategory.getCategoryId(), category.getParentId())) {
             throw new Mall4cloudException("分类不能成为本身的上级分类");
         }
-        checkName(category.getCategoryId(), category.getName());
+        existCategoryName(category);
         int updateCount = categoryMapper.update(category);
     }
 
@@ -251,11 +251,11 @@ public class CategoryServiceImpl implements CategoryService {
     /**
      * 校验分类名是否已存在
      *
-     * @param categoryId
-     * @param name
+     * @param category
      */
-    private void checkName(Long categoryId, String name) {
-        int countByName = categoryMapper.getCountByName(categoryId, name);
+    private void existCategoryName(Category category) {
+        category.setShopId(AuthUserContext.get().getTenantId());
+        int countByName = categoryMapper.existCategoryName(category);
         if (countByName > 0) {
             throw new Mall4cloudException("分类名已存在，请重新输入");
         }
