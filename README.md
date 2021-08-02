@@ -1,14 +1,14 @@
 # README
 
-#### ![image-20210705143529597](doc/img/readme/image-20210705143529597.png)
+![image-20210705143529597](doc/img/readme/image-20210705143529597.png)
 
-### 前言
+## 前言
 
 本商城是基于Spring Cloud、Nacos、Seata、Mysql、Redis、RocketMQ、canal、ElasticSearch、minio的微服务B2B2C电商商城系统，采用主流的互联网技术架构、全新的UI设计、支持集群部署、服务注册和发现以及拥有完整的订单流程等，代码完全开源，没有任何二次封装，是一个非常适合二次开发的电商平台系统。
 
 本商城致力于为中大型企业打造一个功能完整、易于维护的微服务B2B2C电商商城系统，采用主流微服务技术实现。后台管理系统包含平台管理，店铺管理、商品管理、订单管理、规格管理、权限管理、资源管理等模块。
 
-### 文档
+## 文档
 
 这代码有没有文档呀？ 当然有啦，你已经下载了，在doc这个文件夹上，实在不知道，我就给链接出来咯：
 
@@ -21,7 +21,7 @@ gitee：https://gitee.com/gz-yami/mall4cloud/tree/master/doc
 
 具体目录结构和代码规范，可以查看 https://gitee.com/gz-yami/mall4cloud/tree/master/doc/%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84
 
-### 授权
+## 授权
 
 除开源版本外，本商城还提供商业版本的商城，欲知详情，请访问官网。
 
@@ -29,7 +29,7 @@ gitee：https://gitee.com/gz-yami/mall4cloud/tree/master/doc
 
 商城使用 AGPLv3 开源，请遵守 AGPLv3 的相关条款，或者联系作者获取商业授权(https://www.mall4j.com)
 
-### 项目链接
+## 项目链接
 
 JAVA后台：https://gitee.com/gz-yami/mall4cloud
 
@@ -39,7 +39,7 @@ JAVA后台：https://gitee.com/gz-yami/mall4cloud
 
 uni-app：https://gitee.com/gz-yami/mall4cloud-uniapp
 
-### 演示地址
+## 演示地址
 
 商业版演示地址：
 
@@ -51,7 +51,7 @@ H5端：https://h5.mall4j.com/cloud
 
 
 
-### 技术选型
+## 技术选型
 
 | 技术        | 版本  | 说明        |
 | :-----------: | :-----: | :-----------: |
@@ -73,11 +73,11 @@ H5端：https://h5.mall4j.com/cloud
 | Element UI | 2.13 | UI框架 |
 | vue、uni-app | vue2.6 | JS框架 |
 
-### 系统架构图
+## 系统架构图
 
 ![架构图](doc/img/readme/架构图.png)
 
-### 商城部署后 API 地址
+## 商城部署后 API 地址
 
 | 服务                                                 | 地址                  |
 | ---------------------------------------------------- | --------------------- |
@@ -95,13 +95,13 @@ H5端：https://h5.mall4j.com/cloud
 
 
 
-### 部署教程
+## 部署教程
 
 部署教程请参考该文件夹下的`/基本开发文档/mall4cloud开发环境搭建.md`以及`/开发环境搭建`目录下的中间件安装。
 
-### 代码运行相关截图
+## 代码运行相关截图
 
-#### 1.后台截图
+### 1.后台截图
 
 - 平台端
 
@@ -115,15 +115,14 @@ H5端：https://h5.mall4j.com/cloud
 
   ![image-20210705151847270](doc/img/readme/image-20210705151847270.png)
 
-#### 2.小程序截图
+### 2.小程序截图
 
 ![小程序-1625472143277](doc/img/readme/小程序.png)
 
-#### 3.uni-app截图
+### 3.uni-app截图
 
 ![uniapp-1625469707350](doc/img/readme/uniapp.png)
 
-### 
 
 ## 提交反馈
 - Mall4j官网 https://www.mall4j.com
