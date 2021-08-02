@@ -1,0 +1,22 @@
+server:
+  port: 9112
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_HOST:192.168.1.46}:${NACOS_PORT:8848}
+        username: nacos
+        password: nacos
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        namespace: @nacos.namespace@
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        username: ${spring.cloud.nacos.discovery.username}
+        password: ${spring.cloud.nacos.discovery.password}
+  profiles:
+    active: @profiles.active@
+

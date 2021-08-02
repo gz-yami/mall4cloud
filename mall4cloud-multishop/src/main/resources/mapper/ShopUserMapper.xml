@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall4j.cloud.multishop.mapper.ShopUserMapper">
+  <resultMap id="BaseResultMap" type="com.mall4j.cloud.multishop.model.ShopUser">
+    <!--@mbg.generated-->
+    <!--@Table shop_user-->
+    <id column="shop_user_id" property="shopUserId" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="shop_id" property="shopId" />
+    <result column="nick_name" property="nickName" />
+    <result column="code" property="code" />
+    <result column="phone_num" property="phoneNum" />
+    <result column="has_account" property="hasAccount"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    shop_user_id, create_time, update_time, shop_id, nick_name,`code`,phone_num,has_account
+  </sql>
+
+  <select id="getByUserId" resultType="com.mall4j.cloud.multishop.vo.ShopUserVO">
+    select shop_user_id,nick_name,`code`,phone_num,has_account,shop_id  from shop_user where shop_user_id = #{userId}
+  </select>
+  <select id="listByShopId" resultType="com.mall4j.cloud.multishop.vo.ShopUserVO">
+    select shop_user_id,nick_name,`code`,phone_num,has_account from shop_user
+    where shop_id = #{shopId}
+    <if test="nickName != null and nickName != ''">
+     and nick_name like concat('%', #{nickName}, '%')
+    </if>
+    order by shop_user_id desc
+  </select>
+  <insert id="save" useGeneratedKeys="true" keyProperty="shopUser.shopUserId">
+    insert into `shop_user` ( `shop_user_id`, `shop_id`, `nick_name`, `code`, `phone_num`,has_account)
+    values (#{shopUser.shopUserId},#{shopUser.shopId},#{shopUser.nickName},#{shopUser.code},#{shopUser.phoneNum}, #{shopUser.hasAccount});
+  </insert>
+  <update id="update">
+    update shop_user
+    <set>
+      <if test="shopUser.nickName != null">
+        nick_name = #{shopUser.nickName},
+      </if>
+      <if test="shopUser.code != null">
+        code = #{shopUser.code},
+      </if>
+      <if test="shopUser.phoneNum != null">
+        phone_num = #{shopUser.phoneNum},
+      </if>
+      <if test="shopUser.hasAccount != null">
+        has_account = #{shopUser.hasAccount},
+      </if>
+    </set>
+    where shop_user_id = #{shopUser.shopUserId} and shop_id = #{shopUser.shopId}
+  </update>
+
+  <delete id="deleteById">
+    delete  from shop_user where shop_user_id = #{shopUserId}
+  </delete>
+
+  <select id="getUserIdByShopId" resultType="java.lang.Long">
+    SELECT shop_user_id FROM shop_user WHERE shop_id = #{shopId} HAVING MAX(create_time) ORDER BY shop_user_id ASC
+  </select>
+</mapper>

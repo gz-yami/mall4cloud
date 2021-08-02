@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.SpuMapper">
+  <resultMap id="spuMap" type="com.mall4j.cloud.product.model.Spu">
+    <id column="spu_id" property="spuId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="shop_id" property="shopId"/>
+    <result column="brand_id" property="brandId"/>
+    <result column="category_id" property="categoryId"/>
+    <result column="shop_category_id" property="shopCategoryId"/>
+    <result column="name" property="name"/>
+    <result column="selling_point" property="sellingPoint"/>
+    <result column="img_urls" property="imgUrls"/>
+    <result column="main_img_url" property="mainImgUrl"/>
+    <result column="price_fee" property="priceFee"/>
+    <result column="market_price_fee" property="marketPriceFee"/>
+    <result column="status" property="status"/>
+    <result column="seq" property="seq"/>
+    <result column="has_sku_img" property="hasSkuImg"/>
+  </resultMap>
+  <resultMap id="spuDetailMap" type="com.mall4j.cloud.api.product.vo.SpuVO" extends="com.mall4j.cloud.product.mapper.SpuMapper.spuMap">
+    <result column="detail" property="detail"/>
+    <result column="total_stock" property="totalStock"/>
+    <collection property="spuAttrValues" ofType="com.mall4j.cloud.api.product.vo.SpuAttrValueVO">
+      <id column="spu_attr_value_id" property="spuAttrValueId"/>
+      <result column="attr_id" property="attrId"/>
+      <result column="attr_name" property="attrName"/>
+      <result column="attr_value_id" property="attrValueId"/>
+      <result column="attr_value_name" property="attrValueName"/>
+      <result column="search_type" property="searchType"/>
+    </collection>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    s.`spu_id`,s.`shop_id`,s.`create_time`,s.`update_time`,s.`brand_id`,s.`shop_category_id`,s.`category_id`,s.`name`,s.`selling_point`,s.`img_urls`,s.`main_img_url`,s.`price_fee`
+    ,s.`market_price_fee`,s.`status`,s.`has_sku_img`,s.`seq`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.api.product.vo.SpuVO">
+    select distinct <include refid="Vo_Column_List"/> ,se.actual_stock as total_stock,se.sale_num from spu s
+    left join `spu_extension` se on s.`spu_id` = se.`spu_id`
+    <if test="spu.partyCode != null and spu.partyCode != ''">
+        join `sku` sku on s.`spu_id` = sku.`spu_id` and sku.party_code = #{spu.partyCode}
+    </if>
+    where s.status <![CDATA[<>]]> -1
+    <if test="spu.spuId != null">
+      and s.spu_id = #{spu.spuId}
+    </if>
+    <if test="spu.brandId != null">
+      and s.brand_id = #{spu.brandId}
+    </if>
+    <if test="spu.categoryId != null">
+      and s.category_id = #{spu.categoryId}
+    </if>
+    <if test="spu.name != null and spu.name != ''">
+      and s.name = #{spu.name}
+    </if>
+    <if test="spu.status != null">
+      and s.status = #{spu.status}
+    </if>
+    <if test="spu.spuStatus == 1">
+      and s.status = 1 and se.stock &gt; 0
+    </if>
+    <if test="spu.spuStatus == 2">
+      and s.status = 1 and se.stock = 0
+    </if>
+    <if test="spu.spuStatus == 3">
+      and s.status = 0
+    </if>
+    <if test="spu.maxPrice != null">
+      and s.price_fee &lt; #{spu.maxPrice}
+    </if>
+    <if test="spu.minPrice != null">
+      and s.price_fee &gt; #{spu.minPrice}
+    </if>
+    <if test="spu.maxSaleNum != null">
+      and se.sale_num &lt;= #{spu.maxSaleNum}
+    </if>
+    <if test="spu.minSaleNum != null">
+      and se.sale_num &gt;= #{spu.minSaleNum}
+    </if>
+    order by
+    <trim prefixOverrides=",">
+        <if test="spu.priceFeeSort == 0">s.price_fee desc</if>
+        <if test="spu.priceFeeSort == 1">,s.price_fee</if>
+        <if test="spu.marketPriceFeeSort == 0">,s.market_price_fee desc</if>
+        <if test="spu.marketPriceFeeSort == 1">,s.market_price_fee</if>
+        <if test="spu.saleNumSort == 0">,se.sale_num desc</if>
+        <if test="spu.saleNumSort == 1">,se.sale_num</if>
+        <if test="spu.stockSort == 0">,se.actual_stock desc</if>
+        <if test="spu.stockSort == 1">,se.actual_stock</if>
+        <if test="spu.seqSort == 0">,s.seq desc</if>
+        <if test="spu.seqSort == 1">,s.seq</if>
+        <if test="spu.createTimeSort == 0">,s.create_time desc</if>
+        <if test="spu.createTimeSort == 1">,s.create_time</if>
+        <if test="spu.priceFeeSort == null and spu.marketPriceFeeSort == null and spu.saleNumSort == null
+            and spu.stockSort == null and spu.seqSort == null and spu.createTimeSort == null">
+          s.update_time desc, s.spu_id
+        </if>
+    </trim>
+  </select>
+
+  <select id="getBySpuId" resultMap="spuDetailMap">
+    select <include refid="Vo_Column_List"/> ,
+    sd.`detail`,sav.attr_id,sav.attr_name,sav.attr_value_id,sav.attr_value_name,sav.spu_attr_value_id,sav.attr_id,a.search_type
+    FROM `spu` s
+    LEFT JOIN spu_detail sd ON s.`spu_id` = sd.`spu_id`
+    LEFT JOIN spu_attr_value sav ON sav.`spu_id` = s.`spu_id`
+    LEFT JOIN attr a ON a.attr_id = sav.attr_id
+    WHERE s.`spu_id` = #{spuId}
+  </select>
+
+  <insert id="save" useGeneratedKeys="true" keyProperty="spuId">
+    insert into spu (`brand_id`,`shop_id`,`category_id`,`shop_category_id`,`name`,`selling_point`,`img_urls`,`main_img_url`,`price_fee`,`market_price_fee`,`status`,`seq`)
+    values (#{spu.brandId},#{spu.shopId},#{spu.categoryId},#{spu.shopCategoryId},#{spu.name},#{spu.sellingPoint},#{spu.imgUrls},#{spu.mainImgUrl},#{spu.priceFee},#{spu.marketPriceFee},#{spu.status},#{spu.seq});
+  </insert>
+  <update id="updateStatusBySpuId">
+    update spu set status = -1 where spu_id = #{spuId}
+  </update>
+  <update id="update">
+    update spu
+    <set>
+      <if test="spu.brandId != null">
+        `brand_id` = #{spu.brandId},
+      </if>
+      <if test="spu.categoryId != null">
+        `category_id` = #{spu.categoryId},
+      </if>
+      <if test="spu.shopCategoryId != null">
+        `shop_category_id` = #{spu.shopCategoryId},
+      </if>
+      <if test="spu.name != null">
+        `name` = #{spu.name},
+      </if>
+      <if test="spu.sellingPoint != null">
+        `selling_point` = #{spu.sellingPoint},
+      </if>
+      <if test="spu.imgUrls != null">
+        `img_urls` = #{spu.imgUrls},
+      </if>
+      <if test="spu.mainImgUrl != null">
+        `main_img_url` = #{spu.mainImgUrl},
+      </if>
+      <if test="spu.priceFee != null">
+        `price_fee` = #{spu.priceFee},
+      </if>
+      <if test="spu.marketPriceFee != null">
+        `market_price_fee` = #{spu.marketPriceFee},
+      </if>
+      <if test="spu.status != null">
+        `status` = #{spu.status},
+      </if>
+      <if test="spu.hasSkuImg != null">
+        `has_sku_img` = #{spu.hasSkuImg},
+      </if>
+      <if test="spu.seq != null">
+        `seq` = #{spu.seq},
+      </if>
+    </set>
+    where spu_id = #{spu.spuId}
+  </update>
+  <delete id="deleteById">
+    delete from spu where spu_id = #{spuId}
+  </delete>
+
+  <select id="loadEsProductBO" resultType="com.mall4j.cloud.api.product.bo.EsProductBO">
+    SELECT s.spu_id,s.name AS spu_name,s.shop_id,s.selling_point,s.price_fee,s.market_price_fee,s.img_urls,s.status AS spu_status,
+           s.seq, IF(se.stock>0,1,0) AS has_stock,se.sale_num,s.create_time,s.category_id,s.main_img_url,s.category_id,
+           s.shop_category_id, se.actual_stock AS stock, s.brand_id,b.name AS brand_name,b.img_url AS brand_img, s.shop_category_id AS  shop_secondary_category_id,
+           s.shop_category_id AS shop_secondary_category_id
+    FROM spu s
+    LEFT JOIN spu_extension se ON s.spu_id = se.spu_id
+    LEFT JOIN brand b ON s.brand_id = b.brand_id
+    WHERE s.spu_id = #{spuId}
+  </select>
+
+  <select id="getSpuIdsBySpuUpdateDTO" resultType="java.lang.Long">
+    SELECT spu_id FROM spu
+    <where>
+        <if test="shopCategoryIds != null">
+          shop_category_id IN
+            <foreach collection="shopCategoryIds" item="shopCategoryId" open="(" close=")" separator=",">
+              #{shopCategoryId}
+            </foreach>
+        </if>
+        <if test="categoryIds != null">
+          AND category_id IN
+            <foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+              #{categoryId}
+            </foreach>
+        </if>
+        <if test="brandId != null">
+          AND brand_id = #{brandId}
+        </if>
+        <if test="shopId != null">
+          AND shop_id = #{shopId}
+        </if>
+    </where>
+  </select>
+
+  <update id="changeSpuStatus">
+    update spu set `status` = #{status} where spu_id = #{spuId}
+  </update>
+  <update id="updateSpuUpdateTime">
+    update spu set `update_time` = NOW()
+    <where>
+        <if test="categoryIds != null ">
+           category_id in
+           <foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+              #{categoryId}
+           </foreach>
+        </if>
+        <if test="spuIds != null">
+           and spu_id in
+           <foreach collection="spuIds" item="spuId" open="(" close=")" separator=",">
+               #{spuId}
+           </foreach>
+        </if>
+    </where>
+  </update>
+  <update id="batchChangeSpuStatusBySpuIdsAndStatus">
+    update spu set status = #{status}
+    where status <![CDATA[<>]]>  -1 and  spu_id in
+    <foreach collection="spuIdList" item="spuId" open="(" close=")" separator=",">
+      #{spuId}
+    </foreach>
+  </update>
+  <select id="listBySpuIds" resultMap="spuDetailMap">
+    select spu_id,name,main_img_url,status,price_fee from spu where spu_id in
+    <foreach collection="spuIds" item="spuId" open="(" close=")" separator=",">
+        #{spuId}
+    </foreach>
+    <if test="spuName != null and spuName !=''" >
+      AND spuName LIKE concat('%',#{spuName},'%')
+    </if>
+    <if test="isFailure == 2 " >
+      AND status <![CDATA[ <> ]]> 1
+    </if>
+  </select>
+
+  <select id="pageByLangAndTagId" resultType="com.mall4j.cloud.api.product.vo.SpuVO">
+    SELECT p.name,p.main_img_url,p.spu_id
+    <if test="isContain == 1">
+      ,pt.seq,pt.reference_id
+      FROM spu_tag_reference pt
+      left join spu p on pt.spu_id = p.spu_id
+    </if>
+    <if test="isContain == 0">
+      ,0 as seq
+      FROM spu p
+    </if>
+    WHERE  p.status <![CDATA[<>]]>  -1
+    <if test="spuDTO.shopId != null">
+      and p.`shop_id` =#{spuDTO.shopId}
+    </if>
+    <if test="spuDTO.shopCategoryId != null">
+      and p.shop_category_id = #{spuDTO.shopCategoryId}
+    </if>
+    <if test="spuDTO.categoryId != null">
+      and p.category_id = #{spuDTO.categoryId}
+    </if>
+    <if test="spuDTO.name != null and spuDTO.name != ''">
+      and p.name like concat('%',#{spuDTO.name},'%')
+    </if>
+    <if test="spuDTO.status != null">
+      and p.status = #{spuDTO.status}
+    </if>
+    <if test="isContain == 1">
+      and pt.tag_id = #{spuDTO.tagId}
+      order by pt.seq
+    </if>
+    <if test="isContain == 0">
+      and p.spu_id not IN (
+      select spu_id from spu_tag_reference where tag_id = #{spuDTO.tagId}
+      )
+      order by p.update_time desc
+    </if>
+  </select>
+  <select id="listIdsByCidListAndTypeAndShopId" resultType="java.lang.Long">
+    select spu_id from spu
+    where status <![CDATA[<>]]> -1
+    <if test="type == 1">
+      and category_id in
+    </if>
+    <if test="type == 2">
+      and shop_id = #{shopId}
+      and shop_category_id in
+    </if>
+    <foreach collection="cidList" item="categoryId" open="(" close=")" separator=",">
+      #{categoryId}
+    </foreach>
+  </select>
+
+</mapper>

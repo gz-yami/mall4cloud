@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall4j.cloud.platform.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.mall4j.cloud.platform.model.SysUser">
+    <!--@mbg.generated-->
+    <!--@Table sys_user-->
+    <id column="sys_user_id" property="sysUserId" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="nick_name" property="nickName" />
+    <result column="avatar" property="avatar" />
+    <result column="code" property="code" />
+    <result column="phone_num" property="phoneNum" />
+    <result column="has_account" property="hasAccount"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    sys_user_id, create_time, update_time, nick_name, avatar,`code`,phone_num,has_account
+  </sql>
+
+  <select id="getSimpleByUserId" resultType="com.mall4j.cloud.platform.vo.SysUserSimpleVO">
+    select nick_name, avatar  from sys_user where sys_user_id = #{userId}
+  </select>
+
+  <select id="getByUserId" resultType="com.mall4j.cloud.platform.vo.SysUserVO">
+    select sys_user_id,nick_name, avatar,`code`,phone_num,has_account  from sys_user where sys_user_id = #{userId}
+  </select>
+  <select id="listByShopId" resultType="com.mall4j.cloud.platform.vo.SysUserVO">
+    select sys_user_id,nick_name, avatar,`code`,phone_num,has_account from sys_user order by sys_user_id desc
+    <where>
+      <if test="nickName != null and nickName != ''">
+        nick_name like concat('%', #{nickName}, '%')
+      </if>
+    </where>
+  </select>
+  <insert id="save">
+    insert into `sys_user` ( `sys_user_id`,  `nick_name`, `avatar`, `code`, `phone_num`,has_account)
+    values (#{sysUser.sysUserId},#{sysUser.nickName},#{sysUser.avatar},#{sysUser.code},#{sysUser.phoneNum}, #{sysUser.hasAccount});
+  </insert>
+  <update id="update">
+    update sys_user
+    <set>
+      <if test="sysUser.nickName != null">
+        nick_name = #{sysUser.nickName},
+      </if>
+      <if test="sysUser.avatar != null">
+        avatar = #{sysUser.avatar},
+      </if>
+      <if test="sysUser.code != null">
+        code = #{sysUser.code},
+      </if>
+      <if test="sysUser.phoneNum != null">
+        phone_num = #{sysUser.phoneNum},
+      </if>
+      <if test="sysUser.hasAccount != null">
+        has_account = #{sysUser.hasAccount},
+      </if>
+    </set>
+    where sys_user_id = #{sysUser.sysUserId}
+  </update>
+
+  <delete id="deleteById">
+    delete  from sys_user where sys_user_id = #{sysUserId}
+  </delete>
+
+
+</mapper>

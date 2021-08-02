@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.order.mapper.OrderAddrMapper">
+  <resultMap id="orderAddrMap" type="com.mall4j.cloud.order.model.OrderAddr">
+    <id column="order_addr_id" property="orderAddrId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="user_id" property="userId"/>
+    <result column="consignee" property="consignee"/>
+    <result column="province_id" property="provinceId"/>
+    <result column="province" property="province"/>
+    <result column="city_id" property="cityId"/>
+    <result column="city" property="city"/>
+    <result column="area_id" property="areaId"/>
+    <result column="area" property="area"/>
+    <result column="addr" property="addr"/>
+    <result column="post_code" property="postCode"/>
+    <result column="mobile" property="mobile"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `order_addr_id`,`create_time`,`update_time`,`user_id`,`consignee`,`province_id`,`province`,`city_id`,`city`,`area_id`,`area`,`addr`,`post_code`,`mobile`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.order.model.OrderAddr">
+    select <include refid="Vo_Column_List"/> from order_addr order by order_addr_id desc
+  </select>
+  <select id="getByOrderAddrId" resultType="com.mall4j.cloud.order.model.OrderAddr">
+    select <include refid="Vo_Column_List"/> from order_addr where order_addr_id = #{orderAddrId}
+  </select>
+  <insert id="save" useGeneratedKeys="true" keyProperty="orderAddr.orderAddrId">
+    insert into order_addr (`user_id`,`consignee`,`province_id`,`province`,`city_id`,`city`,`area_id`,`area`,`addr`,`post_code`,`mobile`)
+    values (#{orderAddr.userId},#{orderAddr.consignee},#{orderAddr.provinceId},#{orderAddr.province},#{orderAddr.cityId},#{orderAddr.city},#{orderAddr.areaId},#{orderAddr.area},#{orderAddr.addr},#{orderAddr.postCode},#{orderAddr.mobile});
+  </insert>
+  <update id="update">
+    update order_addr
+    <set>
+      <if test="orderAddr.userId != null">
+        `user_id` = #{orderAddr.userId},
+      </if>
+      <if test="orderAddr.consignee != null">
+        `consignee` = #{orderAddr.consignee},
+      </if>
+      <if test="orderAddr.provinceId != null">
+        `province_id` = #{orderAddr.provinceId},
+      </if>
+      <if test="orderAddr.province != null">
+        `province` = #{orderAddr.province},
+      </if>
+      <if test="orderAddr.cityId != null">
+        `city_id` = #{orderAddr.cityId},
+      </if>
+      <if test="orderAddr.city != null">
+        `city` = #{orderAddr.city},
+      </if>
+      <if test="orderAddr.areaId != null">
+        `area_id` = #{orderAddr.areaId},
+      </if>
+      <if test="orderAddr.area != null">
+        `area` = #{orderAddr.area},
+      </if>
+      <if test="orderAddr.addr != null">
+        `addr` = #{orderAddr.addr},
+      </if>
+      <if test="orderAddr.postCode != null">
+        `post_code` = #{orderAddr.postCode},
+      </if>
+      <if test="orderAddr.mobile != null">
+        `mobile` = #{orderAddr.mobile},
+      </if>
+    </set>
+    where order_addr_id = #{orderAddr.orderAddrId}
+  </update>
+  <delete id="deleteById">
+    delete from order_addr where order_addr_id = #{orderAddrId}
+  </delete>
+
+</mapper>

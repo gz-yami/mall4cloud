@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.CategoryBrandMapper">
+  <resultMap id="categoryBrandMap" type="com.mall4j.cloud.product.model.CategoryBrand">
+    <id column="id" property="id" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="brand_id" property="brandId"/>
+    <result column="category_id" property="categoryId"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `id`,`create_time`,`update_time`,`brand_id`,`category_id`
+  </sql>
+  <delete id="deleteByBrandId">
+    delete from category_brand where brand_id = #{brandId}
+  </delete>
+
+  <insert id="saveBatch">
+    <foreach collection="categoryBrandList" item="categoryBrand">
+      insert into category_brand (`brand_id`,`category_id`)
+      values (#{categoryBrand.brandId},#{categoryBrand.categoryId});
+    </foreach>
+  </insert>
+
+  <select id="getCategoryIdsByBrandId" resultType="java.lang.Long">
+    SELECT category_id FROM category_brand WHERE brand_id = #{brandId}
+  </select>
+
+  <delete id="deleteByBrandIdAndCategoryIds">
+    DELETE FROM category_brand
+    WHERE brand_id = #{brandId} AND category_id IN
+    <foreach collection="categoryIds" item="categoryId" separator="," open="(" close=")">
+      #{categoryId}
+    </foreach>
+  </delete>
+</mapper>

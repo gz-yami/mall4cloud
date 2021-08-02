@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.biz.mapper.AttachFileGroupMapper">
+  <resultMap id="attachFileGroupMap" type="com.mall4j.cloud.biz.model.AttachFileGroup">
+    <id column="attach_file_group_id" property="attachFileGroupId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="shop_id" property="shopId"/>
+    <result column="name" property="name"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `attach_file_group_id`,`create_time`,`update_time`,`shop_id`,`name`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.biz.vo.AttachFileGroupVO">
+    select <include refid="Vo_Column_List"/> from attach_file_group
+    where shop_id = #{shopId}
+    order by attach_file_group_id desc
+  </select>
+  <select id="getByAttachFileGroupId" resultType="com.mall4j.cloud.biz.vo.AttachFileGroupVO">
+    select <include refid="Vo_Column_List"/> from attach_file_group where attach_file_group_id = #{attachFileGroupId}
+  </select>
+  <insert id="save">
+    insert into attach_file_group (`shop_id`,`name`)
+    values (#{attachFileGroup.shopId},#{attachFileGroup.name});
+  </insert>
+  <update id="update">
+    update attach_file_group
+    <set>
+      <if test="attachFileGroup.shopId != null">
+        `shop_id` = #{attachFileGroup.shopId},
+      </if>
+      <if test="attachFileGroup.name != null">
+        `name` = #{attachFileGroup.name},
+      </if>
+    </set>
+    where attach_file_group_id = #{attachFileGroup.attachFileGroupId}
+  </update>
+  <delete id="deleteById">
+    delete from attach_file_group where attach_file_group_id = #{attachFileGroupId}
+  </delete>
+
+</mapper>

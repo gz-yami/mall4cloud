@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall4j.cloud.rbac.mapper.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.mall4j.cloud.rbac.model.UserRole">
+        <!--@mbg.generated-->
+        <!--@Table user_role-->
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_id" property="roleId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, create_time, update_time, user_id, role_id
+    </sql>
+
+    <delete id="deleteByUserId">
+
+
+        delete
+        from user_role
+        where user_id = #{userId}
+
+
+    </delete>
+
+    <insert id="insertUserAndUserRole">
+
+
+        insert into user_role (user_id, role_id) values
+
+
+        <foreach collection="roleIdList" item="roleId" separator=",">
+            (#{userId}, #{roleId})
+        </foreach>
+    </insert>
+    <select id="getRoleIds" resultType="java.lang.Long">
+
+
+        select role_id
+        from user_role
+        where user_id = #{userId}
+
+
+    </select>
+    <delete id="deleteByRoleId">
+        delete
+        from user_role
+        where role_id = #{roleId}
+    </delete>
+</mapper>

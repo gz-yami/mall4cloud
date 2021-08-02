@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.multishop.mapper.ShopDetailMapper">
+  <resultMap id="shopDetailMap" type="com.mall4j.cloud.multishop.model.ShopDetail">
+    <id column="shop_id" property="shopId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="type" property="type"/>
+    <result column="shop_name" property="shopName"/>
+    <result column="intro" property="intro"/>
+    <result column="shop_logo" property="shopLogo"/>
+    <result column="mobile_background_pic" property="mobileBackgroundPic"/>
+    <result column="shop_status" property="shopStatus"/>
+    <result column="business_license" property="businessLicense"/>
+    <result column="identity_card_front" property="identityCardFront"/>
+    <result column="identity_card_later" property="identityCardLater"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `shop_id`,`create_time`,`update_time`,`type`,`shop_name`,`intro`,`shop_logo`,`mobile_background_pic`,`shop_status`,`business_license`,`identity_card_front`,`identity_card_later`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.api.multishop.vo.ShopDetailVO">
+    select <include refid="Vo_Column_List"/>
+    from shop_detail
+    where shop_status != -1
+        <if test="shopDetail.shopName">
+            and shop_name like concat('%', #{shopDetail.shopName}, '%')
+        </if>
+        <if test="shopDetail.shopStatus">
+            and shop_status = #{shopDetail.shopStatus}
+        </if>
+    order by shop_id desc
+  </select>
+  <select id="getByShopId" resultType="com.mall4j.cloud.api.multishop.vo.ShopDetailVO">
+    select `shop_id`,`type`,`shop_name`,`intro`,`shop_logo`,`mobile_background_pic`,`shop_status`,`business_license`,`identity_card_front`,`identity_card_later`
+    from shop_detail where shop_id = #{shopId}
+  </select>
+  <select id="getShoExtensionsByShopId" resultType="com.mall4j.cloud.api.multishop.vo.ShopDetailVO">
+    select s.`shop_id`,s.intro,s.`type`,s.`shop_name`,s.`intro`,s.`shop_logo`,s.`mobile_background_pic`,s.`shop_status`,s.`business_license`,
+    s.`identity_card_front`,s.`identity_card_later`,s.type,s.mobile_background_pic,s.pc_background_pic
+    from shop_detail s
+    left join shop_extension se on se.shop_id = s.shop_id
+    where s.shop_id = #{shopId}
+  </select>
+  <insert id="save" useGeneratedKeys="true" keyProperty="shopDetail.shopId">
+    insert into shop_detail (`type`,`shop_name`,`intro`,`shop_logo`,`mobile_background_pic`,`shop_status`,`business_license`,`identity_card_front`,`identity_card_later`)
+    values (#{shopDetail.type},#{shopDetail.shopName},#{shopDetail.intro},#{shopDetail.shopLogo},#{shopDetail.mobileBackgroundPic},#{shopDetail.shopStatus},#{shopDetail.businessLicense},#{shopDetail.identityCardFront},#{shopDetail.identityCardLater});
+  </insert>
+  <update id="update">
+    update shop_detail
+    <set>
+      <if test="shopDetail.type != null">
+        `type` = #{shopDetail.type},
+      </if>
+      <if test="shopDetail.shopName != null">
+        `shop_name` = #{shopDetail.shopName},
+      </if>
+      <if test="shopDetail.intro != null">
+        `intro` = #{shopDetail.intro},
+      </if>
+      <if test="shopDetail.shopLogo != null">
+        `shop_logo` = #{shopDetail.shopLogo},
+      </if>
+      <if test="shopDetail.mobileBackgroundPic != null">
+        `mobile_background_pic` = #{shopDetail.mobileBackgroundPic}
+      </if>
+      <if test="shopDetail.shopStatus != null">
+        `shop_status` = #{shopDetail.shopStatus},
+      </if>
+      <if test="shopDetail.businessLicense != null">
+        `business_license` = #{shopDetail.businessLicense},
+      </if>
+      <if test="shopDetail.identityCardFront != null">
+        `identity_card_front` = #{shopDetail.identityCardFront},
+      </if>
+      <if test="shopDetail.identityCardLater != null">
+        `identity_card_later` = #{shopDetail.identityCardLater},
+      </if>
+    </set>
+    where shop_id = #{shopDetail.shopId}
+  </update>
+  <delete id="deleteById">
+    delete from shop_detail where shop_id = #{shopId}
+  </delete>
+
+  <select id="listByShopIds" resultMap="shopDetailMap">
+    select `shop_id`,`shop_name`,`shop_logo` from shop_detail where shop_id in
+    <foreach collection="shopIds" item="shopId" open="(" close=")" separator=",">
+        #{shopId}
+    </foreach>
+  </select>
+  <select id="shopSearchList" resultType="com.mall4j.cloud.multishop.vo.ShopDetailAppVO">
+    select sd.shop_id,sd.type,sd.shop_name,sd.intro,sd.shop_logo from shop_detail sd
+    where shop_status = 1
+    <if test="shopDetail.shopName != null and shopDetail.shopName != ''">
+        and shop_name like concat('%', #{shopDetail.shopName}, '%')
+    </if>
+    order by type desc
+  </select>
+
+  <select id="countShopName" resultType="int">
+    select count(*) from shop_detail where shop_name = #{shopName} and shop_status != -1
+    <if test="shopId != null">
+        and shop_id != #{shopId}
+    </if>
+  </select>
+  <update id="changeSpuStatus">
+    update shop_detail set `shop_status` = #{shopStatus} where shop_id = #{shopId}
+  </update>
+
+  <select id="shopExtensionData" resultType="com.mall4j.cloud.api.multishop.bo.EsShopDetailBO">
+    SELECT ad.shop_id,ad.shop_name,ad.type,ad.shop_logo FROM shop_detail ad
+    WHERE ad.shop_id = #{shopId}
+  </select>
+
+  <select id="getShopDetailByShopIdAndShopName" resultType="com.mall4j.cloud.api.multishop.vo.ShopDetailVO">
+    SELECT ad.shop_id,ad.shop_name,ad.type,ad.shop_logo,ad.shop_status FROM shop_detail ad
+    WHERE ad.shop_id in
+    <foreach collection="shopIds" item="shopId" open="(" separator="," close=")">
+      #{shopId}
+    </foreach>
+    <if test="shopName != null and shopName != ''">
+      ad.shop_name like concat('%',#{shopName},'%')
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.biz.mapper.AttachFileMapper">
+  <resultMap id="attachFileMap" type="com.mall4j.cloud.biz.model.AttachFile">
+    <id column="file_id" property="fileId" />
+    <result column="file_path" property="filePath"/>
+    <result column="file_type" property="fileType"/>
+    <result column="file_name" property="fileName"/>
+    <result column="file_size" property="fileSize"/>
+    <result column="shop_id" property="shopId"/>
+    <result column="type" property="type"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `file_id`,`file_path`,`file_type`,`file_name`,`file_size`,`shop_id`,`type`,`create_time`,`update_time`,`attach_file_group_id`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.biz.vo.AttachFileVO">
+    select <include refid="Vo_Column_List"/> from attach_file
+    WHERE `type` = 1 AND shop_id = #{shopId}
+    <if test="fileName != null and fileName != ''">
+      AND file_name LIKE CONCAT('%',#{fileName},'%')
+    </if>
+    <if test="fileGroupId != null and fileGroupId != ''">
+      AND attach_file_group_id = #{fileGroupId}
+    </if>
+    ORDER BY update_time DESC, file_id DESC
+  </select>
+  <insert id="save">
+    insert into attach_file (`file_path`,`file_type`,`file_name`,`file_size`,`shop_id`,`type`,`attach_file_group_id`)
+    values
+    <foreach collection="attachFiles" item="attachFile" separator=",">
+      (#{attachFile.filePath},#{attachFile.fileType},#{attachFile.fileName},#{attachFile.fileSize},#{shopId},#{attachFile.type},#{attachFile.attachFileGroupId})
+    </foreach>
+  </insert>
+  <update id="update">
+    update attach_file
+    <set>
+      <if test="attachFile.fileName != null">
+        `file_name` = #{attachFile.fileName},
+      </if>
+      <if test="attachFile.attachFileGroupId != null">
+        `attach_file_group_id` = #{attachFile.attachFileGroupId},
+      </if>
+    </set>
+    where file_id = #{attachFile.fileId}
+  </update>
+  <delete id="deleteById">
+    delete from attach_file where file_id = #{fileId}
+  </delete>
+  <select id="getById" resultMap="attachFileMap">
+   select  <include refid="Vo_Column_List"/> from attach_file where file_id = #{fileId}
+  </select>
+
+  <update id="updateBatchByAttachFileGroupId">
+    update attach_file
+    set attach_file_group_id = 0
+    where attach_file_group_id = #{attachFileGroupId}
+  </update>
+</mapper>

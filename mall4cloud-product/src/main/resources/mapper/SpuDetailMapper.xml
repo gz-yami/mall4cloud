@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.SpuDetailMapper">
+  <resultMap id="spuDetailMap" type="com.mall4j.cloud.product.model.SpuDetail">
+    <id column="spu_id" property="spuId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="detail" property="detail"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `spu_id`,`create_time`,`update_time`,`detail`
+  </sql>
+
+  <insert id="save">
+    insert into spu_detail (`spu_id`,`detail`)
+    values (#{spuDetail.spuId},#{spuDetail.detail});
+  </insert>
+  <update id="update">
+    update spu_detail
+    <set>
+      <if test="spuDetail.detail != null">
+        `detail` = #{spuDetail.detail},
+      </if>
+    </set>
+    where spu_id = #{spuDetail.spuId}
+  </update>
+  <delete id="deleteById">
+    delete from spu_detail where spu_id = #{spuId}
+  </delete>
+
+</mapper>

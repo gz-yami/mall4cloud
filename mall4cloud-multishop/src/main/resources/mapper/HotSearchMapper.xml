@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.multishop.mapper.HotSearchMapper">
+  <resultMap id="hotSearchMap" type="com.mall4j.cloud.multishop.model.HotSearch">
+    <id column="hot_search_id" property="hotSearchId" />
+    <result column="shop_id" property="shopId"/>
+    <result column="content" property="content"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="seq" property="seq"/>
+    <result column="status" property="status"/>
+    <result column="title" property="title"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `hot_search_id`,`shop_id`,`content`,`create_time`,`update_time`,`seq`,`status`,`title`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.multishop.vo.HotSearchVO">
+    select <include refid="Vo_Column_List"/>
+    from hot_search
+    <where>
+        <if test="hotSearchDTO.shopId != null ">
+            and shop_id = #{hotSearchDTO.shopId}
+        </if>
+        <if test="hotSearchDTO.status != null ">
+            and status = #{hotSearchDTO.status}
+        </if>
+        <if test="hotSearchDTO.title != null ">
+            and title like concat('%',#{hotSearchDTO.title}, '%')
+        </if>
+        <if test="hotSearchDTO.content != null ">
+            and content like concat('%',#{hotSearchDTO.content}, '%')
+        </if>
+    </where>
+    order by hot_search_id desc
+  </select>
+  <select id="getByHotSearchId" resultType="com.mall4j.cloud.multishop.vo.HotSearchVO">
+    select <include refid="Vo_Column_List"/> from hot_search where hot_search_id = #{hotSearchId}
+  </select>
+  <insert id="save">
+    insert into hot_search (`shop_id`,`content`,`seq`,`status`,`title`)
+    values (#{hotSearch.shopId},#{hotSearch.content},#{hotSearch.seq},#{hotSearch.status},#{hotSearch.title});
+  </insert>
+  <update id="update">
+    update hot_search
+    set  `content` = #{hotSearch.content},`seq` = #{hotSearch.seq},`status` = #{hotSearch.status},`title` = #{hotSearch.title}
+    where hot_search_id = #{hotSearch.hotSearchId} and shop_id = #{hotSearch.shopId}
+  </update>
+  <delete id="deleteById">
+    delete from hot_search where hot_search_id = #{hotSearchId} and shop_id = #{shopId}
+  </delete>
+  <select id="listByShopId" resultType="com.mall4j.cloud.multishop.vo.HotSearchVO">
+    select hot_search_id,content from hot_search where shop_id = #{shopId}
+  </select>
+
+</mapper>

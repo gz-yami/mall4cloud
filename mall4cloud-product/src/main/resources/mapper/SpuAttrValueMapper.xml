@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.SpuAttrValueMapper">
+  <resultMap id="spuAttrValueMap" type="com.mall4j.cloud.product.model.SpuAttrValue">
+    <id column="spu_attr_value_id" property="spuAttrValueId" />
+    <result column="spu_id" property="spuId"/>
+    <result column="attr_id" property="attrId"/>
+    <result column="attr_name" property="attrName"/>
+    <result column="attr_value_id" property="attrValueId"/>
+    <result column="attr_value_name" property="attrValueName"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `spu_attr_value_id`,`spu_id`,`attr_id`,`attr_name`,`attr_value_id`,`attr_value_name`
+  </sql>
+  <insert id="save">
+    insert into spu_attr_value (`spu_id`,`attr_id`,`attr_name`,`attr_value_id`,`attr_value_name`)
+    values (#{spuAttrValue.spuId},#{spuAttrValue.attrId},#{spuAttrValue.attrName},#{spuAttrValue.attrValueId},#{spuAttrValue.attrValueName});
+  </insert>
+
+  <insert id="saveBatch">
+    insert into spu_attr_value (`spu_id`,`attr_id`,`attr_name`,`attr_value_id`,`attr_value_name`)values
+    <foreach collection="spuAttrValues" item="spuAttrValue" separator=",">
+      (#{spuAttrValue.spuId},#{spuAttrValue.attrId},#{spuAttrValue.attrName},#{spuAttrValue.attrValueId},#{spuAttrValue.attrValueName})
+    </foreach>
+  </insert>
+
+  <update id="deleteBySpuId">
+    delete from spu_attr_value where spu_id = #{spuId}
+  </update>
+
+  <update id="update">
+    update spu_attr_value
+    <set>
+      <if test="spuAttrValue.spuId != null">
+        `spu_id` = #{spuAttrValue.spuId},
+      </if>
+      <if test="spuAttrValue.attrId != null">
+        `attr_id` = #{spuAttrValue.attrId},
+      </if>
+      <if test="spuAttrValue.attrName != null">
+        `attr_name` = #{spuAttrValue.attrName},
+      </if>
+      <if test="spuAttrValue.attrValueId != null">
+        `attr_value_id` = #{spuAttrValue.attrValueId},
+      </if>
+      <if test="spuAttrValue.attrValueName != null">
+        `attr_value_name` = #{spuAttrValue.attrValueName},
+      </if>
+    </set>
+    where spu_attr_value_id = #{spuAttrValue.spuAttrValueId}
+  </update>
+
+  <delete id="deleteByAttIdAndCategoryIds">
+    DELETE FROM spu_attr_value WHERE attr_id = #{attrId}
+    <if test="attrValueIds != null">
+      AND attr_value_id IN
+      <foreach collection="attrValueIds" item="attrValueId" open="(" close=")" separator=",">
+        #{attrValueId}
+      </foreach>
+    </if>
+  </delete>
+
+  <select id="getSpuAttrsBySpuId" resultType="com.mall4j.cloud.api.product.vo.SpuAttrValueVO">
+    SELECT sav.attr_id,sav.attr_name,sav.attr_value_id,sav.attr_value_name,a.search_type
+    FROM spu_attr_value sav
+    LEFT JOIN attr a ON a.attr_id = sav.attr_id
+    WHERE sav.spu_id = #{spuId}
+  </select>
+
+  <update id="updateBatch">
+    <foreach collection="spuAttrValues" item="spuAttrValue">
+      update spu_attr_value
+      <set>
+        <if test="spuAttrValue.attrValueId != null">
+          `attr_value_id` = #{spuAttrValue.attrValueId}
+        </if>
+        <if test="spuAttrValue.attrValueName != null">
+          ,`attr_value_name` = #{spuAttrValue.attrValueName}
+        </if>
+      </set>
+      where spu_attr_value_id = #{spuAttrValue.spuAttrValueId};
+    </foreach>
+  </update>
+
+  <delete id="deleteBatch">
+    delete from spu_attr_value where spu_attr_value_id in
+      <foreach collection="spuAttrValueIds" item="spuAttrValueId" open="(" close=")" separator=",">
+        #{spuAttrValueId}
+      </foreach>
+  </delete>
+  <select id="getShopIdByAttrValueIds" resultType="java.lang.Long">
+    select distinct spu_id from spu_attr_value where attr_value_id in
+    <foreach collection="attrValueIds" item="attrValueId" open="(" close=")" separator=",">
+        #{attrValueId}
+    </foreach>
+  </select>
+  <update id="batchUpdateSpuAttrValue">
+    <foreach collection="spuAttrValues" item="spuAttrValue">
+      update spu_attr_value
+      <set>
+        <if test="spuAttrValue.attrName != null">
+          `attr_name` = #{spuAttrValue.attrName}
+        </if>
+        <if test="spuAttrValue.attrValueName != null">
+          ,`attr_value_name` = #{spuAttrValue.attrValueName}
+        </if>
+      </set>
+      where `attr_value_id` = #{spuAttrValue.attrValueId} and attr_id = #{spuAttrValue.attrId};
+    </foreach>
+  </update>
+</mapper>

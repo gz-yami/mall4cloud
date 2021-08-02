@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall4j.cloud.rbac.mapper.RoleMenuMapper">
+    <resultMap id="BaseResultMap" type="com.mall4j.cloud.rbac.model.RoleMenu">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="role_id" property="roleId"/>
+        <result column="menu_id" property="menuId"/>
+        <result column="menu_permission_id" property="menuPermissionId"/>
+    </resultMap>
+    <insert id="insertBatch">
+        insert into role_menu (role_id, menu_id, menu_permission_id) values
+        <foreach collection="roleMenus" item="roleMenu" separator=",">
+          (#{roleMenu.roleId},#{roleMenu.menuId},#{roleMenu.menuPermissionId})
+        </foreach>
+    </insert>
+    <delete id="deleteByRoleId">
+        delete from role_menu where role_id = #{roleId}
+    </delete>
+    <select id="getByRoleId" resultMap="BaseResultMap">
+        select menu_id, menu_permission_id from role_menu where role_id = #{roleId}
+    </select>
+
+</mapper>

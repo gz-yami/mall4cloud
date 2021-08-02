@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.SpuExtensionMapper">
+    <resultMap id="spuExtensionMap" type="com.mall4j.cloud.product.model.SpuExtension">
+        <id column="spu_extend_id" property="spuExtendId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="sale_num" property="saleNum"/>
+        <result column="actual_stock" property="actualStock"/>
+        <result column="lock_stock" property="lockStock"/>
+        <result column="stock" property="stock"/>
+    </resultMap>
+    <sql id="Vo_Column_List">
+        `spu_extend_id`,
+        `create_time`,
+        `update_time`,
+        `spu_id`,
+        `sale_num`,
+        `actual_stock`,
+        `lock_stock`,
+        `stock`
+    </sql>
+    <select id="list" resultType="com.mall4j.cloud.product.vo.SpuExtensionVO">
+        select
+        <include refid="Vo_Column_List"/>
+        from spu_extension
+        order by spu_extend_id desc
+    </select>
+    <select id="getBySpuExtendId" resultType="com.mall4j.cloud.product.vo.SpuExtensionVO">
+        select
+        <include refid="Vo_Column_List"/>
+        from spu_extension
+        where spu_extend_id = #{spuExtendId}
+    </select>
+    <insert id="save">
+        insert into spu_extension (`spu_id`, `sale_num`, `actual_stock`, `lock_stock`, `stock`)
+        values (#{spuExtension.spuId}, 0, #{spuExtension.actualStock}, 0, #{spuExtension.stock});
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        from spu_extension
+        where spu_id = #{spuId}
+    </delete>
+
+    <update id="updateStock">
+        update spu_extension
+        set `stock`      = `stock` + #{count},
+            actual_stock = actual_stock + #{count}
+        where spu_id = #{spuId}
+    </update>
+
+    <update id="reduceStockByOrder">
+        update spu_extension
+        set `stock`      = `stock` - #{count},
+            `lock_stock` = `lock_stock` + #{count}
+        where spu_id = #{spuId}
+          and #{count} &lt;= `stock`
+    </update>
+
+    <update id="addStockByOrder">
+        <foreach collection="skuWithStocks" item="skuWithStock" separator=";">
+            update spu_extension
+            set `stock` = `stock` + #{skuWithStock.count},
+            `lock_stock` = `lock_stock` - #{skuWithStock.count}
+            where spu_id = #{skuWithStock.spuId}
+        </foreach>
+    </update>
+
+    <update id="reduceActualStockByOrder">
+        <foreach collection="skuWithStocks" item="skuWithStock" separator=";">
+            update spu_extension
+            set `lock_stock` = `lock_stock` - #{skuWithStock.count},
+            `actual_stock` = `actual_stock` - #{skuWithStock.count},
+            `sale_num` = `sale_num` + #{skuWithStock.count}
+            where spu_id = #{skuWithStock.spuId}
+        </foreach>
+    </update>
+
+    <update id="reduceActualStockByCancelOrder">
+        <foreach collection="skuWithStocks" item="skuWithStock" separator=";">
+            update spu_extension
+            set `lock_stock` = `lock_stock` - #{skuWithStock.count},
+            `actual_stock` = `actual_stock` - #{skuWithStock.count},
+            `stock` = `stock` - #{skuWithStock.count},
+            `sale_num` = `sale_num` + #{skuWithStock.count}
+            where spu_id = #{skuWithStock.spuId}
+        </foreach>
+    </update>
+    <select id="getBySpuId" resultMap="spuExtensionMap">
+        select `spu_extend_id`, `spu_id`, `sale_num`, `actual_stock`, `lock_stock`, `stock`
+        from spu_extension
+        where spu_id = #{spuId}
+    </select>
+</mapper>

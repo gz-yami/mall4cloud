@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.SpuSkuAttrValueMapper">
+  <resultMap id="spuSkuAttrValueMap" type="com.mall4j.cloud.product.model.SpuSkuAttrValue">
+    <id column="spu_sku_attr_id" property="spuSkuAttrId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="spu_id" property="spuId"/>
+    <result column="sku_id" property="skuId"/>
+    <result column="attr_id" property="attrId"/>
+    <result column="attr_name" property="attrName"/>
+    <result column="attr_value_id" property="attrValueId"/>
+    <result column="attr_value_name" property="attrValueName"/>
+    <result column="status" property="status"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `spu_sku_attr_id`,`create_time`,`update_time`,`spu_id`,`sku_id`,`attr_id`,`attr_name`,`attr_value_id`,`attr_value_name`,`status`
+  </sql>
+  <insert id="save">
+    insert into spu_sku_attr_value (`spu_id`,`sku_id`,`attr_id`,`attr_name`,`attr_value_id`,`attr_value_name`,`status`)
+    values (#{spuSkuAttrValue.spuId},#{spuSkuAttrValue.skuId},#{spuSkuAttrValue.attrId},#{spuSkuAttrValue.attrName},#{spuSkuAttrValue.attrValueId},#{spuSkuAttrValue.attrValueName},#{spuSkuAttrValue.status});
+  </insert>
+
+  <insert id="saveBatch">
+    insert into spu_sku_attr_value (`spu_id`,`sku_id`,`attr_id`,`attr_name`,`attr_value_id`,`attr_value_name`,`status`) values
+    <foreach collection="spuSkuAttrValues" item="spuSkuAttrValue" separator=",">
+      (#{spuSkuAttrValue.spuId},#{spuSkuAttrValue.skuId},#{spuSkuAttrValue.attrId},#{spuSkuAttrValue.attrName},
+      #{spuSkuAttrValue.attrValueId},#{spuSkuAttrValue.attrValueName},#{spuSkuAttrValue.status})
+    </foreach>
+  </insert>
+
+  <update id="updateBySpuId">
+    update spu_sku_attr_value set status = -1 where spu_id = #{spuId}
+  </update>
+
+  <update id="updateBatch">
+    <foreach collection="spuSkuAttrValues" item="spuSkuAttrValue">
+        update spu_sku_attr_value
+        <set>
+          <if test="spuSkuAttrValue.attrName != null">
+            `attr_name` = #{spuSkuAttrValue.attrName},
+          </if>
+          <if test="spuSkuAttrValue.attrValueName != null">
+            `attr_value_name` = #{spuSkuAttrValue.attrValueName},
+          </if>
+        </set>
+        where spu_sku_attr_id = #{spuSkuAttrValue.spuSkuAttrId};
+    </foreach>
+  </update>
+
+  <update id="update">
+    update spu_sku_attr_value
+    <set>
+      <if test="spuSkuAttrValue.spuId != null">
+        `spu_id` = #{spuSkuAttrValue.spuId},
+      </if>
+      <if test="spuSkuAttrValue.skuId != null">
+        `sku_id` = #{spuSkuAttrValue.skuId},
+      </if>
+      <if test="spuSkuAttrValue.attrId != null">
+        `attr_id` = #{spuSkuAttrValue.attrId},
+      </if>
+      <if test="spuSkuAttrValue.attrName != null">
+        `attr_name` = #{spuSkuAttrValue.attrName},
+      </if>
+      <if test="spuSkuAttrValue.attrValueId != null">
+        `attr_value_id` = #{spuSkuAttrValue.attrValueId},
+      </if>
+      <if test="spuSkuAttrValue.attrValueName != null">
+        `attr_value_name` = #{spuSkuAttrValue.attrValueName},
+      </if>
+      <if test="spuSkuAttrValue.status != null">
+        `status` = #{spuSkuAttrValue.status},
+      </if>
+    </set>
+    where spu_sku_attr_id = #{spuSkuAttrValue.spuSkuAttrId}
+  </update>
+  <delete id="deleteById">
+    delete from spu_sku_attr_value where spu_sku_attr_id = #{spuSkuAttrId}
+  </delete>
+
+  <update id="changeStatusBySkuId">
+    update spu_sku_attr_value set `status` = #{status} where sku_id in
+      <foreach collection="skuIds" item="skuId" open="(" close=")" separator=",">
+        #{skuId}
+      </foreach>
+  </update>
+</mapper>

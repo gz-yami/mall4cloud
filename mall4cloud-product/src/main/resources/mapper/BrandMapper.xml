@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--suppress ALL -->
+<mapper namespace="com.mall4j.cloud.product.mapper.BrandMapper">
+  <resultMap id="brandMap" type="com.mall4j.cloud.product.model.Brand">
+    <id column="brand_id" property="brandId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="name" property="name"/>
+    <result column="desc" property="desc"/>
+    <result column="img_url" property="imgUrl"/>
+    <result column="first_letter" property="firstLetter"/>
+    <result column="seq" property="seq"/>
+    <result column="status" property="status"/>
+  </resultMap>
+  <resultMap id="brandInfo" type="com.mall4j.cloud.api.product.vo.BrandVO">
+    <id column="brand_id" property="brandId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="name" property="name"/>
+    <result column="desc" property="desc"/>
+    <result column="img_url" property="imgUrl"/>
+    <result column="first_letter" property="firstLetter"/>
+    <result column="seq" property="seq"/>
+    <result column="status" property="status"/>
+    <collection property="categories" ofType="com.mall4j.cloud.api.product.vo.CategoryVO">
+      <id column="category_id" property="categoryId"/>
+      <result column="parent_id" property="parentId"/>
+      <result column="category_name" property="name"/>
+      <result column="path" property="path"/>
+    </collection>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `brand_id`,`create_time`,`update_time`,`name`,`desc`,`img_url`,`first_letter`,`seq`,`status`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.api.product.vo.BrandVO">
+    select <include refid="Vo_Column_List"/> from brand
+    <where>
+      <if test="brandDTO.name != null">
+        `name` = #{brandDTO.name}
+      </if>
+      <if test="brandDTO.status != null">
+        `status` = #{brandDTO.status}
+      </if>
+    </where>
+    order by brand_id desc
+  </select>
+  <select id="getByBrandId" resultMap="brandInfo">
+    SELECT b.*,c.category_id,c.parent_id,c.name as category_name,c.path
+    FROM brand b
+    JOIN category_brand cb ON b.brand_id = cb.brand_id
+    JOIN category c ON c.category_id = cb.category_id
+    WHERE b.brand_id = #{brandId}
+  </select>
+  <insert id="save" useGeneratedKeys="true" keyProperty="brandId">
+    insert into brand (`name`,`desc`,`img_url`,`first_letter`,`seq`,`status`)
+    values (#{brand.name},#{brand.desc},#{brand.imgUrl},#{brand.firstLetter},#{brand.seq},#{brand.status});
+  </insert>
+  <update id="update">
+    update brand
+    set
+      <if test="brand.name != null">
+        `name` = #{brand.name},
+      </if>
+      <if test="brand.desc != null">
+        `desc` = #{brand.desc},
+      </if>
+      <if test="brand.imgUrl != null">
+        `img_url` = #{brand.imgUrl},
+      </if>
+      <if test="brand.firstLetter != null">
+        `first_letter` = #{brand.firstLetter},
+      </if>
+      <if test="brand.seq != null">
+        `seq` = #{brand.seq},
+      </if>
+      <if test="brand.status != null">
+        `status` = #{brand.status},
+      </if>
+    update_time = NOW()
+    where brand_id = #{brand.brandId}
+  </update>
+  <delete id="deleteById">
+    delete from brand where brand_id = #{brandId}
+  </delete>
+
+  <select id="getUseNum" resultType="int">
+    SELECT COUNT(*) FROM spu WHERE brand_id = #{brandId}
+  </select>
+
+  <select id="getBrandByCategoryId" resultType="com.mall4j.cloud.api.product.vo.BrandVO">
+    SELECT b.* FROM brand AS b
+    JOIN category_brand AS cb ON b.brand_id = cb.brand_id AND cb.category_id = #{categoryId}
+  </select>
+
+  <update id="updateBrandStatus">
+    UPDATE brand SET `status` = #{brand.status} WHERE `brand_id` = #{brand.brandId};
+  </update>
+  <select id="listByCategory" resultMap="brandInfo">
+    SELECT b.brand_id,b.name,b.img_url FROM brand AS b
+    JOIN category_brand AS cb ON b.brand_id = cb.brand_id
+    AND cb.category_id IN
+    (SELECT category_id FROM category
+    WHERE parent_id IN (SELECT category_id FROM category WHERE parent_id = #{categoryId})
+    )
+    GROUP BY b.brand_id
+    LIMIT 8
+  </select>
+  <select id="topBrandList" resultMap="brandInfo">
+    select brand_id,name,img_url from brand where status = 1 order by update_time desc limit 24
+  </select>
+</mapper>

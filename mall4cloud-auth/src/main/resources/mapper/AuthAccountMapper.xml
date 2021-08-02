@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall4j.cloud.auth.mapper.AuthAccountMapper">
+  <resultMap id="BaseResultMap" type="com.mall4j.cloud.auth.model.AuthAccount">
+    <!--@mbg.generated-->
+    <!--@Table auth_account-->
+    <id column="uid" property="uid" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+    <result column="username" property="username" />
+    <result column="password" property="password" />
+    <result column="create_ip" property="createIp" />
+    <result column="status" property="status" />
+    <result column="sys_type" property="sysType" />
+    <result column="user_id" property="userId"/>
+    <result column="tenant_id" property="tenantId"/>
+    <result column="is_admin" property="isAdmin"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    `uid`, create_time, update_time, username, `password`, create_ip,
+     `status`, sys_type, user_id, tenant_id, is_admin
+  </sql>
+
+  <select id="getAuthAccountInVerifyByInputUserName" resultType="com.mall4j.cloud.common.security.bo.AuthAccountInVerifyBO">
+    select user_id, sys_type,uid,password,is_admin,tenant_id, status from auth_account
+    where sys_type = #{sysType} and status != -1
+    <if test="inputUserNameType == 1">
+        and username = #{inputUserName}
+    </if>
+
+  </select>
+  <select id="getByUserIdAndType" resultMap="BaseResultMap">
+    select uid, username, `password`, create_ip,
+     `status`, sys_type, user_id, tenant_id, is_admin from auth_account where sys_type = #{sysType} and user_id = #{userId}
+  </select>
+  <select id="getByUid" resultMap="BaseResultMap">
+    select username, `password`, create_ip,
+           `status`, sys_type, user_id, tenant_id, is_admin from auth_account where uid = #{uid}
+  </select>
+
+  <update id="updatePassword">
+    update auth_account set password = #{newPassWord} where sys_type = #{sysType} and user_id = #{userId}
+  </update>
+  <insert id="save">
+    insert into auth_account (`uid`,`username`,`password`,`create_ip`,`status`,`sys_type`,`user_id`,`tenant_id`,`is_admin`)
+    values (#{authAccount.uid},#{authAccount.username},#{authAccount.password},#{authAccount.createIp},#{authAccount.status},#{authAccount.sysType},#{authAccount.userId},#{authAccount.tenantId},#{authAccount.isAdmin});
+  </insert>
+  <update id="updateAccountInfo">
+    update auth_account
+    <set>
+      <if test="authAccount.username != null">
+        username = #{authAccount.username},
+      </if>
+      <if test="authAccount.password != null">
+        password = #{authAccount.password},
+      </if>
+      <if test="authAccount.status != null">
+        status = #{authAccount.status},
+      </if>
+    </set>
+    where user_id = #{authAccount.userId} and sys_type = #{authAccount.sysType}
+  </update>
+  <update id="deleteByUserIdAndSysType">
+    update auth_account set status = -1 where user_id = #{userId} and sys_type = #{sysType}
+  </update>
+  <update id="updateUserInfoByUserId">
+    update auth_account
+    <set>
+      <if test="authAccount.tenantId != null">
+        tenant_id = #{authAccount.tenantId},
+      </if>
+    </set>
+    where user_id = #{userId} and sys_type = #{sysType} and status != -1 limit 1
+  </update>
+
+  <select id="getAccountByInputUserName" resultType="com.mall4j.cloud.auth.model.AuthAccount">
+    select uid,sys_type,user_id from auth_account where username = #{validAccount} and sys_type = #{systemType}
+  </select>
+  <select id="getByUsernameAndSysType" resultType="com.mall4j.cloud.api.auth.vo.AuthAccountVO">
+    select uid, username from auth_account where status != 1
+    <if test="sysType != null">
+      and sys_type = #{sysType}
+    </if>
+    <if test="userName != null and userName != ''">
+      and username = #{userName}
+    </if>
+  </select>
+  <select id="getMerchantInfoByTenantId" resultType="com.mall4j.cloud.api.auth.vo.AuthAccountVO">
+    select user_id, sys_type, uid, username, password, is_admin, tenant_id, status from auth_account
+    where sys_type = 1 and is_admin = 1 and tenant_id = #{tenantId} limit 1
+  </select>
+</mapper>

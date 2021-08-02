@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.user.mapper.UserAddrMapper">
+    <resultMap id="userAddrMap" type="com.mall4j.cloud.user.model.UserAddr">
+        <id column="addr_id" property="addrId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="user_id" property="userId"/>
+        <result column="mobile" property="mobile"/>
+        <result column="is_default" property="isDefault"/>
+        <result column="consignee" property="consignee"/>
+        <result column="province_id" property="provinceId"/>
+        <result column="province" property="province"/>
+        <result column="city_id" property="cityId"/>
+        <result column="city" property="city"/>
+        <result column="area_id" property="areaId"/>
+        <result column="area" property="area"/>
+        <result column="post_code" property="postCode"/>
+        <result column="addr" property="addr"/>
+        <result column="lng" property="lng"/>
+        <result column="lat" property="lat"/>
+    </resultMap>
+    <sql id="Vo_Column_List">
+        `addr_id`,
+        `create_time`,
+        `update_time`,
+        `mobile`,
+        `is_default`,
+        `consignee`,
+        `province_id`,
+        `province`,
+        `city_id`,
+        `city`,
+        `area_id`,
+        `area`,
+        `post_code`,
+        `addr`,
+        `lng`,
+        `lat`
+    </sql>
+    <select id="list" resultType="com.mall4j.cloud.common.order.vo.UserAddrVO">
+        select
+        <include refid="Vo_Column_List"/>
+        from user_addr
+        where user_id = #{userId}
+        order by addr_id desc
+    </select>
+    <select id="getByAddrId" resultType="com.mall4j.cloud.common.order.vo.UserAddrVO">
+        select
+        <include refid="Vo_Column_List"/>
+        from user_addr
+        where addr_id = #{addrId}
+          and user_id = #{userId}
+    </select>
+    <insert id="save">
+        insert into user_addr (`user_id`, `mobile`, `is_default`, `consignee`, `province_id`, `province`, `city_id`,
+                               `city`, `area_id`, `area`, `post_code`, `addr`, `lng`, `lat`)
+        values (#{userAddr.userId}, #{userAddr.mobile}, #{userAddr.isDefault}, #{userAddr.consignee},
+                #{userAddr.provinceId}, #{userAddr.province}, #{userAddr.cityId}, #{userAddr.city}, #{userAddr.areaId},
+                #{userAddr.area}, #{userAddr.postCode}, #{userAddr.addr}, #{userAddr.lng}, #{userAddr.lat});
+    </insert>
+    <update id="update">
+        update user_addr
+        <set>
+            <if test="userAddr.userId != null">
+                `user_id` = #{userAddr.userId},
+            </if>
+            <if test="userAddr.mobile != null">
+                `mobile` = #{userAddr.mobile},
+            </if>
+            <if test="userAddr.isDefault != null">
+                `is_default` = #{userAddr.isDefault},
+            </if>
+            <if test="userAddr.consignee != null">
+                `consignee` = #{userAddr.consignee},
+            </if>
+            <if test="userAddr.provinceId != null">
+                `province_id` = #{userAddr.provinceId},
+            </if>
+            <if test="userAddr.province != null">
+                `province` = #{userAddr.province},
+            </if>
+            <if test="userAddr.cityId != null">
+                `city_id` = #{userAddr.cityId},
+            </if>
+            <if test="userAddr.city != null">
+                `city` = #{userAddr.city},
+            </if>
+            <if test="userAddr.areaId != null">
+                `area_id` = #{userAddr.areaId},
+            </if>
+            <if test="userAddr.area != null">
+                `area` = #{userAddr.area},
+            </if>
+            <if test="userAddr.postCode != null">
+                `post_code` = #{userAddr.postCode},
+            </if>
+            <if test="userAddr.addr != null">
+                `addr` = #{userAddr.addr},
+            </if>
+            <if test="userAddr.lng != null">
+                `lng` = #{userAddr.lng},
+            </if>
+            <if test="userAddr.lat != null">
+                `lat` = #{userAddr.lat},
+            </if>
+        </set>
+        where addr_id = #{userAddr.addrId}
+    </update>
+    <delete id="deleteById">
+        delete
+        from user_addr
+        where addr_id = #{addrId}
+          and user_id = #{userId}
+    </delete>
+
+    <update id="removeDefaultUserAddr">
+        update user_addr
+        set is_default = 0
+        where user_id = #{userId} and is_default = 1
+    </update>
+
+    <update id="setDefaultUserAddr">
+        update user_addr
+        set is_default = 1
+        where user_id = #{userId}
+          and addr_id = #{addrId}
+    </update>
+    <select id="countByUserId" resultType="int">
+        select count(*)
+        from user_addr
+        where user_id = #{userId}
+    </select>
+    <select id="getUserDefaultAddrByUserId" resultType="com.mall4j.cloud.common.order.vo.UserAddrVO">
+        select
+        <include refid="Vo_Column_List"/>
+        from user_addr
+        where user_id = #{userId} and is_default = 1
+    </select>
+</mapper>

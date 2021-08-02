@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.multishop.mapper.IndexImgMapper">
+  <resultMap id="indexImgMap" type="com.mall4j.cloud.multishop.model.IndexImg">
+    <id column="img_id" property="imgId" />
+    <result column="shop_id" property="shopId"/>
+    <result column="img_url" property="imgUrl"/>
+    <result column="status" property="status"/>
+    <result column="seq" property="seq"/>
+    <result column="spu_id" property="spuId"/>
+    <result column="img_type" property="imgType"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `img_id`,`shop_id`,`img_url`,`status`,`seq`,`spu_id`,`img_type`,`create_time`,`update_time`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.multishop.vo.IndexImgVO">
+    select `img_id`,`img_url`,`status`,`seq`,`img_type` from index_img
+      <where>
+        <if test="indexImg.imgType != null">
+          and img_type = #{indexImg.imgType}
+        </if>
+        <if test="indexImg.status != null">
+          and `status` = #{indexImg.status}
+        </if>
+        <if test="indexImg.shopId != null">
+          and `shop_id` = #{indexImg.shopId}
+        </if>
+      </where>
+    order by seq desc,img_id desc
+  </select>
+  <select id="getByImgId" resultType="com.mall4j.cloud.multishop.vo.IndexImgVO">
+    select `img_id`,`shop_id`,`img_url`,`status`,`seq`,`spu_id`,`img_type` from index_img where img_id = #{imgId}
+  </select>
+  <insert id="save">
+    insert into index_img (`shop_id`,`img_url`,`status`,`seq`,`spu_id`,`img_type`)
+    values (#{indexImg.shopId},#{indexImg.imgUrl},#{indexImg.status},#{indexImg.seq},#{indexImg.spuId},#{indexImg.imgType});
+  </insert>
+  <update id="update">
+    update index_img
+    set `spu_id` = #{indexImg.spuId}, `img_url` = #{indexImg.imgUrl}, `status` = #{indexImg.status},`seq` = #{indexImg.seq},`img_type` = #{indexImg.imgType}
+    where img_id = #{indexImg.imgId} and shop_id = #{indexImg.shopId}
+  </update>
+  <update id="clearSpuIdBySpuId">
+    update index_img
+    set `spu_id` = null
+    where `spu_id` = #{spuId}
+  </update>
+  <delete id="deleteByIdAndShopId">
+    delete from index_img where img_id = #{imgId} and shop_id = #{shopId}
+  </delete>
+
+    <select id="getListByShopId" resultType="com.mall4j.cloud.multishop.vo.IndexImgVO">
+    select `img_id`,`img_url`,`seq`,`spu_id`,`img_type` from index_img
+    where `status` = 1 and shop_id = #{shopId}
+    order by seq desc,img_id desc
+  </select>
+</mapper>

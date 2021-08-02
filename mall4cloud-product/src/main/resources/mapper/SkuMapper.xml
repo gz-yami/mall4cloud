@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.SkuMapper">
+  <resultMap id="skuMap" type="com.mall4j.cloud.product.model.Sku">
+    <id column="sku_id" property="skuId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="spu_id" property="spuId"/>
+    <result column="sku_name" property="skuName"/>
+    <result column="attrs" property="attrs"/>
+    <result column="img_url" property="imgUrl"/>
+    <result column="price_fee" property="priceFee"/>
+    <result column="market_price_fee" property="marketPriceFee"/>
+    <result column="status" property="status"/>
+    <result column="party_code" property="partyCode"/>
+    <result column="model_id" property="modelId"/>
+    <result column="weight" property="weight"/>
+    <result column="volume" property="volume"/>
+  </resultMap>
+
+  <resultMap id="skuAndAttrMap" type="com.mall4j.cloud.api.product.vo.SkuVO" extends="com.mall4j.cloud.product.mapper.SkuMapper.skuMap">
+    <result column="stock" property="stock"/>
+    <collection property="spuSkuAttrValues" ofType="com.mall4j.cloud.api.product.vo.SpuSkuAttrValueVO">
+      <id column="spu_sku_attr_id" property="spuSkuAttrId" />
+      <result column="create_time" property="createTime"/>
+      <result column="update_time" property="updateTime"/>
+      <result column="spu_id" property="spuId"/>
+      <result column="sku_id" property="skuId"/>
+      <result column="attr_id" property="attrId"/>
+      <result column="attr_name" property="attrName"/>
+      <result column="attr_value_id" property="attrValueId"/>
+      <result column="attr_value_name" property="attrValueName"/>
+      <result column="status" property="status"/>
+    </collection>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    sku.`sku_id`,sku.`create_time`,sku.`update_time`,sku.sku_name,sku.`spu_id`,sku.`attrs`,sku.`img_url`,sku.`price_fee`,sku.`market_price_fee`,sku.`status`
+    ,sku.weight,sku.volume,sku.party_code,sku.model_id
+  </sql>
+
+  <select id="listBySpuIdAndExtendInfo" resultMap="skuAndAttrMap">
+    select <include refid="Vo_Column_List"/>,ss.spu_sku_attr_id,ss.`attr_id`,ss.`attr_name`,
+    ss.`attr_value_id`,ss.`attr_value_name`,st.`stock`
+    from sku
+    LEFT JOIN `sku_stock` st ON st.`sku_id` = sku.`sku_id`
+    LEFT JOIN `spu_sku_attr_value` ss ON ss.`sku_id` = sku.`sku_id`
+    WHERE sku.`spu_id` = #{spuId} and sku.status <![CDATA[<>]]> -1
+  </select>
+
+  <select id="listBySpuId" resultMap="skuAndAttrMap">
+    SELECT <include refid="Vo_Column_List"/>,sav.spu_sku_attr_id,sav.`attr_id`,sav.`attr_name`,sav.`attr_value_id`,sav.`attr_value_name`,stock
+    FROM sku sku
+    LEFT JOIN `spu_sku_attr_value` sav ON sav.`sku_id` = sku.`sku_id`
+    LEFT JOIN `sku_stock` ss ON ss.`sku_id` = sku.`sku_id`
+    WHERE sku.`spu_id` = #{spuId} and sku.status <![CDATA[<>]]> -1
+  </select>
+
+  <insert id="save">
+    insert into sku (`spu_id`,`attrs`,`img_url`,`price_fee`,`market_price_fee`,`status`)
+    values (#{sku.spuId},#{sku.attrs},#{sku.imgUrl},#{sku.priceFee},#{sku.marketPriceFee},#{sku.status});
+  </insert>
+
+  <insert id="saveBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="skuId">
+    insert into sku (`spu_id`,`sku_name`,`attrs`,`img_url`,`price_fee`,`market_price_fee`,`party_code`,`model_id`,`status`) values
+    <foreach collection="skuList" item="sku" separator=",">
+      (#{sku.spuId},#{sku.skuName},#{sku.attrs},#{sku.imgUrl},#{sku.priceFee},#{sku.marketPriceFee},#{sku.partyCode},#{sku.modelId},#{sku.status})
+    </foreach>
+  </insert>
+
+  <update id="update">
+    update sku
+    <set>
+      <if test="sku.spuId != null">
+        `spu_id` = #{sku.spuId},
+      </if>
+      <if test="sku.attrs != null">
+        `attrs` = #{sku.attrs},
+      </if>
+      <if test="sku.imgUrl != null">
+        `img_url` = #{sku.imgUrl},
+      </if>
+      <if test="sku.priceFee != null">
+        `price_fee` = #{sku.priceFee},
+      </if>
+      <if test="sku.marketPriceFee != null">
+        `market_price_fee` = #{sku.marketPriceFee},
+      </if>
+      <if test="sku.status != null">
+        `status` = #{sku.status},
+      </if>
+    </set>
+    where sku_id = #{sku.skuId}
+  </update>
+  <delete id="deleteById">
+    delete from sku where sku_id = #{skuId}
+  </delete>
+
+  <update id="updateBySpuId">
+    update sku set status = -1 where spu_id = #{spuId}
+  </update>
+
+  <update id="updateBatch">
+    <foreach collection="skus" separator=";" item="sku">
+      update sku
+      <set>
+        <if test="sku.attrs != null">
+          `attrs` = #{sku.attrs},
+        </if>
+        <if test="sku.imgUrl != null">
+          `img_url` = #{sku.imgUrl},
+        </if>
+        <if test="sku.priceFee != null">
+          `price_fee` = #{sku.priceFee},
+        </if>
+        <if test="sku.marketPriceFee != null">
+          `market_price_fee` = #{sku.marketPriceFee},
+        </if>
+        <if test="sku.partyCode != null">
+          `party_code` = #{sku.partyCode},
+        </if>
+        <if test="sku.modelId != null">
+          `model_id` = #{sku.modelId},
+        </if>
+        <if test="sku.status != null">
+          `status` = #{sku.status},
+        </if>
+      </set>
+      where sku_id = #{sku.skuId}
+    </foreach>
+  </update>
+  <select id="getSkuBySkuId" resultType="com.mall4j.cloud.api.product.vo.SkuVO">
+    select <include refid="Vo_Column_List"/> from sku  where sku_id = #{skuId}
+  </select>
+  <select id="getSkuBySpuId" resultMap="skuAndAttrMap">
+    SELECT <include refid="Vo_Column_List"/>,sav.spu_sku_attr_id,sav.`attr_id`,sav.`attr_name`,sav.`attr_value_id`,sav.`attr_value_name`,stock
+    FROM sku sku
+    LEFT JOIN `spu_sku_attr_value` sav ON sav.`sku_id` = sku.`sku_id`
+    LEFT JOIN `sku_stock` ss ON ss.`sku_id` = sku.`sku_id`
+    WHERE sku.`spu_id` = #{spuId} and sku.status = 1
+  </select>
+</mapper>

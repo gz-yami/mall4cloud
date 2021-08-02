@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.user.mapper.AreaMapper">
+  <resultMap id="areaMap" type="com.mall4j.cloud.user.model.Area">
+    <id column="area_id" property="areaId" />
+    <result column="area_name" property="areaName"/>
+    <result column="parent_id" property="parentId"/>
+    <result column="level" property="level"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+  </resultMap>
+
+  <resultMap id="areaListMap" type="com.mall4j.cloud.api.user.vo.AreaVO">
+    <id column="pid" property="areaId"/>
+    <result column="pname"  property="areaName"/>
+    <result column="ppid"  property="parentId"/>
+    <result column="plevel"  property="level"/>
+    <collection property="areas" ofType="com.mall4j.cloud.api.user.vo.AreaVO">
+      <id column="cid" property="areaId"/>
+      <result column="cname"  property="areaName"/>
+      <result column="cpid"  property="parentId"/>
+      <result column="clevel"  property="level"/>
+      <collection property="areas" ofType="com.mall4j.cloud.api.user.vo.AreaVO">
+        <id column="area_id"  property="areaId"/>
+        <result column="area_name"  property="areaName"/>
+        <result column="parent_id"  property="parentId"/>
+        <result column="level"  property="level"/>
+      </collection>
+    </collection>
+  </resultMap>
+
+  <sql id="Vo_Column_List">
+    `area_id`,`area_name`,`parent_id`,`level`,`create_time`,`update_time`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.api.user.vo.AreaVO">
+    select `area_id`,`area_name`,`parent_id`,`level` from area
+    order by area_id asc
+  </select>
+  <select id="getByAreaId" resultType="com.mall4j.cloud.api.user.vo.AreaVO">
+    select `area_id`,`area_name`,`parent_id`,`level` from area where area_id = #{areaId}
+  </select>
+  <insert id="save">
+    insert into area (`area_name`,`parent_id`,`level`)
+    values (#{area.areaName},#{area.parentId},#{area.level});
+  </insert>
+  <update id="update">
+    update area
+    <set>
+      <if test="area.areaName != null">
+        `area_name` = #{area.areaName},
+      </if>
+      <if test="area.parentId != null">
+        `parent_id` = #{area.parentId},
+      </if>
+      <if test="area.level != null">
+        `level` = #{area.level},
+      </if>
+    </set>
+    where area_id = #{area.areaId}
+  </update>
+  <delete id="deleteById">
+    delete from area where area_id = #{areaId}
+  </delete>
+
+  <select id="countByAreaId" resultType="int">
+    SELECT COUNT(*) FROM `area` WHERE parent_id = #{areaId}
+  </select>
+
+  <select id="listByPid" resultType="com.mall4j.cloud.api.user.vo.AreaVO">
+    SELECT `area_id`,`area_name`,`parent_id`,`level` FROM `area` WHERE parent_id = #{pid}
+  </select>
+
+  <select id="getAreaListInfo" resultMap="areaListMap">
+        SELECT * FROM
+            (
+            SELECT r.area_id rid,r.area_name rname,r.parent_id rpid,r.level rlevel,
+            p.area_id pid,p.area_name pname,p.parent_id ppid,p.level plevel,
+            c.area_id cid,c.area_name cname,c.parent_id cpid,c.level clevel
+            FROM `area` r
+		    JOIN `area` p  ON r.parent_id=0 AND p.parent_id=r.area_id
+	    JOIN `area` c  ON c.parent_id=p.area_id
+            ) tal
+        LEFT  JOIN `area` a ON tal.cid=a.parent_id;
+  </select>
+  <select id="listAreaOfEnable" resultMap="areaListMap">
+    SELECT * FROM
+        (
+      SELECT
+        p.area_id pid,p.area_name pname,p.parent_id ppid,p.level plevel,
+        c.area_id cid,c.area_name cname,c.parent_id cpid,c.level clevel
+      FROM
+        `area` p
+         JOIN `area` c ON p.level = 1 AND c.parent_id = p.area_id
+        ) tal
+       JOIN `area` a  ON tal.cid = a.parent_id
+  </select>
+</mapper>

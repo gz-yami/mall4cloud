@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.CategoryMapper">
+  <resultMap id="categoryMap" type="com.mall4j.cloud.product.model.Category">
+    <id column="category_id" property="categoryId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="shop_id" property="shopId"/>
+    <result column="parent_id" property="parentId"/>
+    <result column="name" property="name"/>
+    <result column="desc" property="desc"/>
+    <result column="path" property="path"/>
+    <result column="status" property="status"/>
+    <result column="icon" property="icon"/>
+    <result column="img_url" property="imgUrl"/>
+    <result column="img_url" property="imgUrl"/>
+    <result column="level" property="level"/>
+    <result column="seq" property="seq"/>
+  </resultMap>
+
+  <sql id="Vo_Column_List">
+    `category_id`,`create_time`,`update_time`,`shop_id`,`parent_id`,`name`,`desc`,`path`,`status`,`icon`,`img_url`,`level`,`seq`
+  </sql>
+  <select id="getById" resultType="com.mall4j.cloud.api.product.vo.CategoryVO">
+    select <include refid="Vo_Column_List"/> from category where category_id = #{categoryId}
+  </select>
+  <insert id="save">
+    insert into category (`shop_id`,`parent_id`,`name`,`desc`,`path`,`status`,`icon`,`img_url`,`level`,`seq`)
+    values (#{category.shopId},#{category.parentId},#{category.name},#{category.desc},#{category.path},#{category.status},#{category.icon},#{category.imgUrl},#{category.level},#{category.seq});
+  </insert>
+  <update id="update">
+    update category
+    <set>
+      <if test="category.name != null">
+        `name` = #{category.name},
+      </if>
+      <if test="category.desc != null">
+        `desc` = #{category.desc},
+      </if>
+      <if test="category.icon != null">
+        `icon` = #{category.icon},
+      </if>
+      <if test="category.imgUrl != null">
+        `img_url` = #{category.imgUrl},
+      </if>
+      <if test="category.seq != null">
+        `seq` = #{category.seq},
+      </if>
+    </set>
+    where category_id = #{category.categoryId}
+  </update>
+  <delete id="deleteById">
+    delete from category where category_id = #{categoryId}
+  </delete>
+
+  <select id="getCategoryUseNum" parameterType="java.lang.Long" resultType="int">
+    SELECT SUM(c.num) FROM
+    (
+      SELECT COUNT(*) AS num FROM category WHERE parent_id = #{categoryId}
+      UNION ALL
+      SELECT COUNT(*) AS num FROM attr_category WHERE category_id = #{categoryId}
+      UNION ALL
+      SELECT COUNT(*) AS num FROM category_brand WHERE category_id = #{categoryId}
+      UNION ALL
+      SELECT COUNT(*) AS num FROM spu WHERE category_id = #{categoryId}
+    ) AS c
+  </select>
+
+  <select id="list" resultType="com.mall4j.cloud.api.product.vo.CategoryVO">
+    SELECT <include refid="Vo_Column_List"/> FROM `category` WHERE shop_id = #{shopId} AND `status` != -1
+  </select>
+
+  <select id="listByShopIdAndParenId" resultType="com.mall4j.cloud.api.product.vo.CategoryVO">
+    SELECT <include refid="Vo_Column_List"/> FROM `category` WHERE shop_id = #{shopId} AND `status` = 1
+    <if test="parentId != null">
+      AND parent_id = #{parentId}
+    </if>
+  </select>
+
+  <select id="getChildCategory" resultType="com.mall4j.cloud.product.model.Category">
+    SELECT `category_id`,`level` FROM category WHERE parent_id = #{categoryId}
+    UNION
+    SELECT `category_id`,`level` FROM category
+    WHERE parent_id IN (SELECT category_id FROM category WHERE parent_id = #{categoryId})
+  </select>
+
+  <update id="updateBatchOfStatus">
+    UPDATE category SET `status` = #{status} WHERE `category_id` in
+    <foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+      #{categoryId}
+    </foreach>
+  </update>
+
+  <select id="getCountByName" resultType="int">
+    SELECT COUNT(*) FROM category WHERE `name` = #{name}
+    <if test="categoryId != null">
+      AND category_id != #{categoryId}
+    </if>
+  </select>
+
+  <select id="getListByCategoryIds" resultMap="categoryMap">
+    SELECT category_id,`name`  FROM category WHERE category_id IN
+    <foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+      #{categoryId}
+    </foreach>
+  </select>
+  <select id="listCategoryId" resultType="java.lang.Long">
+    SELECT category_id FROM category WHERE parent_id IN (SELECT category_id FROM category WHERE parent_id = 2)
+    <where>
+        <if test="shopId == 0 and parentId ==0">
+         parent_id IN (SELECT category_id FROM category WHERE parent_id = #{parentId})
+        </if>
+        <if test="parentId != 0">
+         AND parent_id = #{parentId}
+        </if>
+    </where>
+  </select>
+  <select id="getCategoryAndChildCatogory" resultType="com.mall4j.cloud.api.product.vo.CategoryVO">
+    SELECT `category_id`,`shop_id`,`parent_id`,`name`,`icon`,`img_url` FROM category WHERE status = 1 AND (parent_id = #{parentId} OR parent_id IN (SELECT category_id FROM category WHERE status = 1 AND parent_id = #{parentId}))
+  </select>
+</mapper>
+

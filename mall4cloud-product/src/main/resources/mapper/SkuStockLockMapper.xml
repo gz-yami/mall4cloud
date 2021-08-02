@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.SkuStockLockMapper">
+    <resultMap id="skuStockLockMap" type="com.mall4j.cloud.product.model.SkuStockLock">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="count" property="count"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="Vo_Column_List">
+        `id`,
+        `create_time`,
+        `update_time`,
+        `spu_id`,
+        `sku_id`,
+        `order_id`,
+        `count`,
+        `status`
+    </sql>
+    <select id="list" resultMap="skuStockLockMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from sku_stock_lock
+        order by id desc
+    </select>
+    <select id="getById" resultMap="skuStockLockMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from sku_stock_lock
+        where id = #{id}
+    </select>
+    <insert id="save">
+        insert into sku_stock_lock (`spu_id`, `sku_id`, `order_id`, `count`, `status`)
+        values (#{skuStockLock.spuId}, #{skuStockLock.skuId}, #{skuStockLock.orderId}, #{skuStockLock.count},
+                #{skuStockLock.status});
+    </insert>
+    <update id="update">
+        update sku_stock_lock
+        <set>
+            <if test="skuStockLock.spuId != null">
+                `spu_id` = #{skuStockLock.spuId},
+            </if>
+            <if test="skuStockLock.skuId != null">
+                `sku_id` = #{skuStockLock.skuId},
+            </if>
+            <if test="skuStockLock.orderId != null">
+                `order_id` = #{skuStockLock.orderId},
+            </if>
+            <if test="skuStockLock.count != null">
+                `count` = #{skuStockLock.count},
+            </if>
+            <if test="skuStockLock.status != null">
+                `status` = #{skuStockLock.status},
+            </if>
+        </set>
+        where id = #{skuStockLock.id}
+    </update>
+    <delete id="deleteById">
+        delete
+        from sku_stock_lock
+        where id = #{id}
+    </delete>
+    <insert id="saveBatch">
+        insert into sku_stock_lock (`spu_id`, `sku_id`, `order_id`, `count`, `status`)
+                values
+        <foreach collection="skuStockLocks" item="skuStockLock" separator=",">
+            (#{skuStockLock.spuId}, #{skuStockLock.skuId}, #{skuStockLock.orderId}, #{skuStockLock.count},
+             #{skuStockLock.status})
+        </foreach>
+    </insert>
+    <select id="listByOrderIds" resultType="com.mall4j.cloud.product.bo.SkuWithStockBO">
+        select id, sku_id, spu_id, count
+        from sku_stock_lock where order_id in
+        <foreach collection="orderIds" item="orderId" separator="," open="(" close=")">
+            #{orderId}
+        </foreach>
+        and `status` = 0
+    </select>
+    <update id="unLockByIds">
+        update sku_stock_lock
+        set `status` = -1 where id in
+        <foreach collection="lockIds" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="markerStockUse">
+        update sku_stock_lock
+        set `status` = 1 where order_id in
+        <foreach collection="orderIds" item="orderId" open="(" close=")" separator=",">
+            #{orderId}
+        </foreach>
+    </update>
+
+    <select id="listUnLockByOrderIds" resultType="com.mall4j.cloud.product.bo.SkuWithStockBO">
+        select id, sku_id, spu_id, count
+        from sku_stock_lock where order_id in
+        <foreach collection="orderIds" item="orderId" separator="," open="(" close=")">
+            #{orderId}
+        </foreach>
+        and `status` = -1
+    </select>
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.user.mapper.UserMapper">
+  <resultMap id="userMap" type="com.mall4j.cloud.user.model.User">
+    <id column="user_id" property="userId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="nick_name" property="nickName"/>
+    <result column="pic" property="pic"/>
+    <result column="status" property="status"/>
+  </resultMap>
+
+  <resultMap id="userAndOpenIdsMap" type="com.mall4j.cloud.api.user.vo.UserApiVO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <collection property="bizUserIdList"  javaType="java.util.List" ofType="string">
+      <id column="bizUserIdList" />
+    </collection>
+  </resultMap>
+
+  <sql id="Vo_Column_List">
+    `user_id`,`create_time`,`update_time`,`nick_name`,`pic`,`status`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.user.vo.UserVO">
+    select <include refid="Vo_Column_List"/> from user order by user_id desc
+  </select>
+  <select id="getByUserId" resultType="com.mall4j.cloud.api.user.vo.UserApiVO">
+    select <include refid="Vo_Column_List"/> from user where user_id = #{userId}
+  </select>
+
+  <select id="getUserAndOpenIdsByUserId" resultMap="userAndOpenIdsMap">
+    select <include refid="Vo_Column_List"/>,ac.biz_user_id as bizUserIdList from user u
+    left JOIN tz_app_connect ac ON u.user_id = ac.user_id and biz_user_id is not null
+    WHERE u.user_id =  #{userId}
+  </select>
+
+
+  <insert id="save">
+    insert into user (`user_id`,`nick_name`,`pic`,`status`)
+    values (#{user.userId},#{user.nickName},#{user.pic},#{user.status});
+  </insert>
+  <update id="update">
+    update user
+    <set>
+      <if test="user.nickName != null">
+        `nick_name` = #{user.nickName},
+      </if>
+      <if test="user.pic != null">
+        `pic` = #{user.pic},
+      </if>
+      <if test="user.status != null">
+        `status` = #{user.status},
+      </if>
+    </set>
+    where user_id = #{user.userId}
+  </update>
+
+  <select id="getUserByUserIds" resultType="com.mall4j.cloud.api.user.vo.UserApiVO">
+    select `user_id`,`nick_name`,`pic` from user
+    where user_id in
+      <foreach collection="userIds" item="userId" separator="," open="(" close=")">
+        #{userId}
+      </foreach>
+    order by user_id desc
+  </select>
+</mapper>

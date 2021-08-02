@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.rbac.mapper.RoleMapper">
+  <resultMap id="roleMap" type="com.mall4j.cloud.rbac.model.Role">
+    <id column="role_id" property="roleId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="role_name" property="roleName"/>
+    <result column="remark" property="remark"/>
+    <result column="create_user_id" property="createUserId"/>
+    <result column="biz_type" property="bizType"/>
+    <result column="tenant_id" property="tenantId"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `role_id`,`create_time`,`update_time`,`role_name`,`remark`,`create_user_id`,`biz_type`, `tenant_id`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.rbac.vo.RoleVO">
+    select <include refid="Vo_Column_List"/> from role where biz_type = #{sysType} and `tenant_id` = #{tenantId} order by role_id desc
+  </select>
+  <select id="getByRoleId" resultType="com.mall4j.cloud.rbac.vo.RoleVO">
+    select <include refid="Vo_Column_List"/> from role where role_id = #{roleId}
+  </select>
+  <insert id="save" useGeneratedKeys="true" keyProperty="roleId">
+    insert into role (`role_name`,`remark`,`create_user_id`,`biz_type`, `tenant_id`)
+    values (#{role.roleName},#{role.remark},#{role.createUserId},#{role.bizType}, #{role.tenantId});
+  </insert>
+  <update id="update">
+    update role
+    <set>
+      <if test="role.roleName != null">
+        role_name = #{role.roleName},
+      </if>
+      <if test="role.remark != null">
+        remark = #{role.remark},
+      </if>
+      <if test="role.createUserId != null">
+        create_user_id = #{role.createUserId},
+      </if>
+      <if test="role.bizType != null">
+        biz_type = #{role.bizType},
+      </if>
+    </set>
+    where role_id = #{role.roleId}
+  </update>
+  <delete id="deleteById">
+    delete from role where role_id = #{roleId} and biz_type = #{sysType}
+  </delete>
+  <select id="getBizType" resultType="java.lang.Integer">
+    select biz_type from role where role_id = #{roleId}
+  </select>
+
+</mapper>

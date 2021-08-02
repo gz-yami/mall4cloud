@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.order.mapper.OrderPayInfoMapper">
+  <resultMap id="orderPayInfoMap" type="com.mall4j.cloud.order.model.OrderPayInfo">
+    <id column="pay_id" property="payId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="user_id" property="userId"/>
+    <result column="biz_pay_no" property="bizPayNo"/>
+    <result column="sys_type" property="sysType"/>
+    <result column="pay_status" property="payStatus"/>
+    <result column="pay_amount" property="payAmount"/>
+    <result column="version" property="version"/>
+    <result column="callback_content" property="callbackContent"/>
+    <result column="callback_time" property="callbackTime"/>
+    <result column="confirm_time" property="confirmTime"/>
+  </resultMap>
+  <insert id="save">
+    insert into order_pay_info (`user_id`,`biz_pay_no`,`sys_type`,`pay_type`,`pay_status`,`pay_score`,`pay_amount`,`version`,`callback_content`,`callback_time`,`confirm_time`)
+    values (#{orderPayInfo.userId},#{orderPayInfo.bizPayNo},#{orderPayInfo.sysType},#{orderPayInfo.payType},#{orderPayInfo.payStatus},#{orderPayInfo.payScore},#{orderPayInfo.payAmount},#{orderPayInfo.version},#{orderPayInfo.callbackContent},#{orderPayInfo.callbackTime},#{orderPayInfo.confirmTime});
+  </insert>
+  <update id="update">
+    update order_pay_info
+    <set>
+      <if test="orderPayInfo.userId != null">
+        `user_id` = #{orderPayInfo.userId},
+      </if>
+      <if test="orderPayInfo.bizPayNo != null">
+        `biz_pay_no` = #{orderPayInfo.bizPayNo},
+      </if>
+      <if test="orderPayInfo.sysType != null">
+        `sys_type` = #{orderPayInfo.sysType},
+      </if>
+      <if test="orderPayInfo.payStatus != null">
+        `pay_status` = #{orderPayInfo.payStatus},
+      </if>
+      <if test="orderPayInfo.payAmount != null">
+        `pay_amount` = #{orderPayInfo.payAmount},
+      </if>
+      <if test="orderPayInfo.version != null">
+        `version` = #{orderPayInfo.version},
+      </if>
+      <if test="orderPayInfo.callbackContent != null">
+        `callback_content` = #{orderPayInfo.callbackContent},
+      </if>
+      <if test="orderPayInfo.callbackTime != null">
+        `callback_time` = #{orderPayInfo.callbackTime},
+      </if>
+      <if test="orderPayInfo.confirmTime != null">
+        `confirm_time` = #{orderPayInfo.confirmTime},
+      </if>
+    </set>
+    where pay_id = #{orderPayInfo.payId}
+  </update>
+  <delete id="deleteById">
+    delete from order_pay_info where pay_id = #{payId}
+  </delete>
+</mapper>

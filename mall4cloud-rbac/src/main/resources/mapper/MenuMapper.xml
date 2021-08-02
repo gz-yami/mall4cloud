@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall4j.cloud.rbac.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.mall4j.cloud.rbac.model.Menu">
+        <!--@Table menu-->
+        <id column="menu_id" jdbcType="BIGINT" property="menuId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="biz_type" jdbcType="TINYINT" property="bizType"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="component" jdbcType="VARCHAR" property="component"/>
+        <result column="redirect" jdbcType="VARCHAR" property="redirect"/>
+        <result column="always_show" jdbcType="TINYINT" property="alwaysShow"/>
+        <result column="hidden" jdbcType="TINYINT" property="hidden"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="no_cache" jdbcType="TINYINT" property="noCache"/>
+        <result column="breadcrumb" jdbcType="TINYINT" property="breadcrumb"/>
+        <result column="affix" jdbcType="TINYINT" property="affix"/>
+        <result column="active_menu" jdbcType="VARCHAR" property="activeMenu"/>
+        <result column="seq" jdbcType="VARCHAR" property="seq"/>
+    </resultMap>
+    <resultMap id="MenuSimpleVOMap" type="com.mall4j.cloud.rbac.vo.MenuSimpleVO">
+        <id column="menu_id" jdbcType="BIGINT" property="menuId"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <collection property="menuPermissions" ofType="com.mall4j.cloud.rbac.vo.MenuPermissionSimpleVO">
+            <id column="menu_permission_id" property="menuPermissionId"/>
+            <result column="permission_menu_id" property="menuId"/>
+            <result column="name" property="name"/>
+        </collection>
+    </resultMap>
+    <sql id="Vo_Column_List">
+
+    `menu_id`,`create_time`,`update_time`,`parent_id`,`biz_type`,`permission`,`path`,`component`,`redirect`,`always_show`,`hidden`,`name`,`title`,`icon`,`no_cache`,`breadcrumb`,`affix`,`active_menu`,`seq`
+
+    </sql>
+
+    <select id="getByMenuId" resultType="com.mall4j.cloud.rbac.vo.MenuVO">
+
+    select
+        <include refid="Vo_Column_List"/>
+         from menu where menu_id = #{menuId}
+
+    </select>
+    <insert id="save">
+
+    insert into menu (`parent_id`,`biz_type`,`permission`,`path`,`component`,`redirect`,`always_show`,`hidden`,`name`,`title`,`icon`,`no_cache`,`breadcrumb`,`affix`,`active_menu`,seq)
+    values (#{menu.parentId},#{menu.bizType},#{menu.permission},#{menu.path},#{menu.component},#{menu.redirect},#{menu.alwaysShow},#{menu.hidden},#{menu.name},#{menu.title},#{menu.icon},#{menu.noCache},#{menu.breadcrumb},#{menu.affix},#{menu.activeMenu},#{menu.seq});
+
+    </insert>
+    <update id="update">
+
+    update menu
+
+        <set>
+            <if test="menu.parentId != null">
+                parent_id = #{menu.parentId},
+            </if>
+            <if test="menu.bizType != null">
+                biz_type = #{menu.bizType},
+            </if>
+            <if test="menu.permission != null">
+               permission = #{menu.permission},
+            </if>
+            <if test="menu.path != null">
+                path = #{menu.path},
+            </if>
+            <if test="menu.component != null">
+                component = #{menu.component},
+            </if>
+            <if test="menu.redirect != null">
+                redirect = #{menu.redirect},
+            </if>
+            <if test="menu.alwaysShow != null">
+                always_show = #{menu.alwaysShow},
+            </if>
+            <if test="menu.hidden != null">
+                hidden = #{menu.hidden},
+            </if>
+            <if test="menu.name != null">
+                `name` = #{menu.name},
+            </if>
+            <if test="menu.title != null">
+                title = #{menu.title},
+            </if>
+            <if test="menu.icon != null">
+                icon = #{menu.icon},
+            </if>
+            <if test="menu.noCache != null">
+                no_cache = #{menu.noCache},
+            </if>
+            <if test="menu.breadcrumb != null">
+                breadcrumb = #{menu.breadcrumb},
+            </if>
+            <if test="menu.affix != null">
+                affix = #{menu.affix},
+            </if>
+            <if test="menu.activeMenu != null">
+                active_menu = #{menu.activeMenu},
+            </if>
+            <if test="menu.seq != null">
+                seq = #{menu.seq},
+            </if>
+        </set>
+        where menu_id = #{menu.menuId}
+
+    </update>
+    <delete id="deleteById">
+    delete from menu where menu_id = #{menuId} and biz_type = #{sysType}
+    </delete>
+    <select id="listBySysType" resultMap="BaseResultMap">
+    select
+        <include refid="Vo_Column_List"/>
+         from menu where biz_type =#{sysType} order by seq asc, create_time desc
+    </select>
+
+    <select id="listSimpleMenuBySytType" resultType="com.mall4j.cloud.rbac.vo.MenuSimpleVO">
+    select menu_id,parent_id,title from menu where biz_type =#{sysType} order by seq asc, create_time desc
+    </select>
+
+    <select id="listWithPermissions" resultMap="MenuSimpleVOMap">
+
+    select m.menu_id,m.parent_id,m.title,mp.name,mp.menu_permission_id, mp.menu_id permission_menu_id
+    from menu m
+    left join menu_permission mp on m.menu_id = mp.menu_id
+    where m.biz_type = #{sysType}
+
+    </select>
+
+    <select id="listMenuIds" resultType="java.lang.Long">
+
+    SELECT menu_id FROM user_role ur
+    JOIN role_menu rm ON  ur.`user_id` = #{userId} AND ur.`role_id` = rm.`role_id` AND menu_id IS NOT NULL
+    </select>
+</mapper>

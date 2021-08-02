@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.platform.mapper.SysConfigMapper">
+  <resultMap id="sysConfigMap" type="com.mall4j.cloud.platform.model.SysConfig">
+    <id column="id" property="id" />
+    <result column="param_key" property="paramKey"/>
+    <result column="param_value" property="paramValue"/>
+    <result column="remark" property="remark"/>
+  </resultMap>
+  <sql id="Vo_Column_List">
+    `id`,`param_key`,`param_value`,`remark`
+  </sql>
+  <select id="list" resultType="com.mall4j.cloud.platform.vo.SysConfigVO">
+    select <include refid="Vo_Column_List"/> from sys_config order by id desc
+  </select>
+  <select id="getById" resultType="com.mall4j.cloud.platform.vo.SysConfigVO">
+    select <include refid="Vo_Column_List"/> from sys_config where id = #{id}
+  </select>
+
+  <select id="countByKey" resultType="int">
+    select ifnull(count(*),0) from sys_config where param_key = #{paramKey}
+  </select>
+
+  <insert id="save">
+    insert into sys_config (`param_key`,`param_value`,`remark`)
+    values (#{sysConfig.paramKey},#{sysConfig.paramValue},#{sysConfig.remark});
+  </insert>
+  <update id="update">
+    update sys_config
+    <set>
+      <if test="sysConfig.paramKey != null">
+        `param_key` = #{sysConfig.paramKey},
+      </if>
+      <if test="sysConfig.paramValue != null">
+        `param_value` = #{sysConfig.paramValue},
+      </if>
+      <if test="sysConfig.remark != null">
+        `remark` = #{sysConfig.remark},
+      </if>
+    </set>
+    where param_key = #{sysConfig.paramKey}
+  </update>
+  <delete id="deleteById">
+    delete from sys_config where param_key = #{paramKey}
+  </delete>
+
+  <!-- 根据key，查询value -->
+  <select id="queryByKey" resultType="com.mall4j.cloud.platform.model.SysConfig">
+	  select * from sys_config where param_key = #{key}
+  </select>
+
+</mapper>

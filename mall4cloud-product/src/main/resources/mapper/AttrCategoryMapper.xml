@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.AttrCategoryMapper">
+  <resultMap id="attrCategoryMap" type="com.mall4j.cloud.product.model.AttrCategory">
+    <id column="attr_category_id" property="attrCategoryId" />
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="category_id" property="categoryId"/>
+    <result column="attr_id" property="attrId"/>
+  </resultMap>
+  <select id="getCategoryIdsByAttrId" resultType="java.lang.Long">
+    SELECT category_id FROM `attr_category` WHERE attr_id = #{attrId}
+  </select>
+  <insert id="saveBatch">
+    <foreach collection="categoryIds" item="categoryId">
+      insert into attr_category (`category_id`,`attr_id`) values (#{categoryId},#{attrId});
+    </foreach>
+  </insert>
+  <delete id="deleteBatch">
+    delete from attr_category where attr_id = #{attrId} and category_id IN
+    <foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+       #{categoryId}
+    </foreach>
+  </delete>
+  <select id="listByAttrId" resultType="com.mall4j.cloud.api.product.vo.CategoryVO">
+    SELECT c.category_id,c.parent_id,c.path,c.name FROM `attr_category` ac
+    JOIN `category` c ON ac.category_id = c.category_id
+    WHERE ac.attr_id = #{attrId}
+  </select>
+
+</mapper>

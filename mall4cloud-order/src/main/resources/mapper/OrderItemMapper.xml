@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.order.mapper.OrderItemMapper">
+    <resultMap id="orderItemMap" type="com.mall4j.cloud.order.model.OrderItem">
+        <id column="order_item_id" property="orderItemId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="user_id" property="userId"/>
+        <result column="count" property="count"/>
+        <result column="spu_name" property="spuName"/>
+        <result column="sku_name" property="skuName"/>
+        <result column="pic" property="pic"/>
+        <result column="delivery_type" property="deliveryType"/>
+        <result column="shop_cart_time" property="shopCartTime"/>
+        <result column="price" property="price"/>
+        <result column="spu_total_amount" property="spuTotalAmount"/>
+    </resultMap>
+    <sql id="Vo_Column_List">
+        `order_item_id`
+        ,
+        `create_time`,
+        `update_time`,
+        `shop_id`,
+        `order_id`,
+        `spu_id`,
+        `sku_id`,
+        `user_id`,
+        `count`,
+        `spu_name`,
+        `sku_name`,
+        `pic`,
+        `delivery_type`,
+        `shop_cart_time`,
+        `price`,
+        `spu_total_amount`
+    </sql>
+    <insert id="save">
+        insert into order_item (`shop_id`, `order_id`, `spu_id`, `sku_id`, `user_id`, `count`,
+                                `spu_name`, `sku_name`, `pic`,  `delivery_type`,
+                                `shop_cart_time`, `price`, `spu_total_amount`)
+        values (#{orderItem.shopId}, #{orderItem.orderId}, #{orderItem.spuId}, #{orderItem.skuId}, #{orderItem.userId},
+                #{orderItem.count}, #{orderItem.spuName}, #{orderItem.skuName}, #{orderItem.pic},
+                #{orderItem.deliveryType}, #{orderItem.shopCartTime}, #{orderItem.price}, #{orderItem.spuTotalAmount});
+    </insert>
+    <update id="update">
+        update order_item
+        <set>
+            <if test="orderItem.shopId != null">
+                `shop_id` = #{orderItem.shopId},
+            </if>
+            <if test="orderItem.orderId != null">
+                `order_id` = #{orderItem.orderId},
+            </if>
+            <if test="orderItem.spuId != null">
+                `spu_id` = #{orderItem.spuId},
+            </if>
+            <if test="orderItem.skuId != null">
+                `sku_id` = #{orderItem.skuId},
+            </if>
+            <if test="orderItem.userId != null">
+                `user_id` = #{orderItem.userId},
+            </if>
+            <if test="orderItem.count != null">
+                `count` = #{orderItem.count},
+            </if>
+            <if test="orderItem.spuName != null">
+                `spu_name` = #{orderItem.spuName},
+            </if>
+            <if test="orderItem.skuName != null">
+                `sku_name` = #{orderItem.skuName},
+            </if>
+            <if test="orderItem.pic != null">
+                `pic` = #{orderItem.pic},
+            </if>
+            <if test="orderItem.deliveryType != null">
+                `delivery_type` = #{orderItem.deliveryType},
+            </if>
+            <if test="orderItem.shopCartTime != null">
+                `shop_cart_time` = #{orderItem.shopCartTime},
+            </if>
+            <if test="orderItem.price != null">
+                `price` = #{orderItem.price},
+            </if>
+            <if test="orderItem.spuTotalAmount != null">
+                `spu_total_amount` = #{orderItem.spuTotalAmount}
+            </if>
+        </set>
+        where order_item_id = #{orderItem.orderItemId}
+    </update>
+    <delete id="deleteById">
+        delete
+        from order_item
+        where order_item_id = #{orderItemId}
+    </delete>
+    <insert id="saveBatch">
+        insert into order_item (`shop_id`, `order_id`, `spu_id`, `sku_id`, `user_id`, `count`, `spu_name`,
+        `sku_name`, `pic`,`delivery_type`, `shop_cart_time`,
+        `price`,`spu_total_amount`)
+        values
+        <foreach collection="orderItems" item="orderItem" separator=",">
+            (#{orderItem.shopId}, #{orderItem.orderId}, #{orderItem.spuId}, #{orderItem.skuId}, #{orderItem.userId},
+            #{orderItem.count}, #{orderItem.spuName},#{orderItem.skuName}, #{orderItem.pic},
+            #{orderItem.deliveryType}, #{orderItem.shopCartTime}, #{orderItem.price},#{orderItem.spuTotalAmount})
+        </foreach>
+    </insert>
+    <select id="listOrderItemsByOrderId" resultMap="orderItemMap">
+        select toi.*
+        from order_item toi
+        where toi.order_id = #{orderId}
+    </select>
+    <select id="getSpuNameListByOrderIds" resultType="java.lang.String">
+        select spu_name from order_item where order_id in
+        <foreach collection="orderIdList" item="orderId" separator="," close=")" open="(">
+            #{orderId}
+        </foreach>
+    </select>
+    <select id="countByOrderId" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM order_item
+        WHERE order_id = #{orderId}
+    </select>
+</mapper>

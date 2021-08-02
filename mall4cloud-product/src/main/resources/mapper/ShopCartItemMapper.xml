@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall4j.cloud.product.mapper.ShopCartItemMapper">
+    <resultMap id="shopCartItemMap" type="com.mall4j.cloud.product.model.ShopCartItem">
+        <id column="cart_item_id" property="cartItemId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="user_id" property="userId"/>
+        <result column="count" property="count"/>
+        <result column="price_fee" property="priceFee"/>
+        <result column="distribution_user_id" property="distributionUserId"/>
+        <result column="is_checked" property="isChecked"/>
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        `cart_item_id`,
+        `create_time`,
+        `update_time`,
+        `shop_id`,
+        `spu_id`,
+        `sku_id`,
+        `user_id`,
+        `count`,
+        `price_fee`,
+        `distribution_user_id`,
+        is_checked
+    </sql>
+    <select id="list" resultType="com.mall4j.cloud.common.order.vo.ShopCartItemVO">
+        select
+        <include refid="Vo_Column_List"/>
+        from shop_cart_item
+        order by cart_item_id desc
+    </select>
+    <select id="getByCartId" resultType="com.mall4j.cloud.common.order.vo.ShopCartItemVO">
+        select
+        <include refid="Vo_Column_List"/>
+        from shop_cart_item
+        where cart_item_id = #{cartItemId}
+    </select>
+    <insert id="save">
+        insert into shop_cart_item (`shop_id`, `spu_id`, `sku_id`, `user_id`, `count`, `price_fee`, is_checked)
+        values (#{shopCartItem.shopId}, #{shopCartItem.spuId}, #{shopCartItem.skuId}, #{shopCartItem.userId},
+                #{shopCartItem.count}, #{shopCartItem.priceFee}, #{shopCartItem.isChecked});
+    </insert>
+    <update id="update">
+        update shop_cart_item
+        <set>
+            <if test="shopCartItem.shopId != null">
+                `shop_id` = #{shopCartItem.shopId},
+            </if>
+            <if test="shopCartItem.spuId != null">
+                `spu_id` = #{shopCartItem.spuId},
+            </if>
+            <if test="shopCartItem.skuId != null">
+                `sku_id` = #{shopCartItem.skuId},
+            </if>
+            <if test="shopCartItem.userId != null">
+                `user_id` = #{shopCartItem.userId},
+            </if>
+            <if test="shopCartItem.count != null">
+                `count` = #{shopCartItem.count},
+            </if>
+            <if test="shopCartItem.priceFee != null">
+                `price_fee` = #{shopCartItem.priceFee},
+            </if>
+            <if test="shopCartItem.isChecked != null">
+                `is_checked` = #{shopCartItem.isChecked},
+            </if>
+        </set>
+        where cart_item_id = #{shopCartItem.cartItemId} and user_id =#{shopCartItem.userId}
+    </update>
+    <delete id="deleteById">
+        delete
+        from shop_cart_item
+        where cart_item_id = #{cartItemId}
+    </delete>
+
+    <select id="getShopCartItems" resultType="com.mall4j.cloud.common.order.vo.ShopCartItemVO">
+        SELECT sci.*,
+               spu.name  spuName,
+               spu.category_id,
+               IFNULL(spu.main_img_url,sku.img_url)AS imgUrl,
+               sku.price_fee             skuPriceFee,
+               sku.sku_name
+        FROM shop_cart_item sci
+                     JOIN spu ON spu.spu_id = sci.spu_id
+                     JOIN sku ON sku.sku_id = sci.sku_id
+                WHERE sci.user_id = #{userId}
+
+        <if test="!isExpiry">
+            AND spu.status = 1
+            AND sku.status = 1
+        </if>
+        <if test="isExpiry">
+            AND (spu.status != 1 or sku.status = 1)
+        </if>
+        <if test="isChecked != null and isChecked">
+            AND sci.is_checked = 1
+        </if>
+        ORDER BY sci.cart_item_id DESC
+    </select>
+
+
+    <delete id="deleteShopCartItemsByShopCartItemIds">
+        delete
+        from shop_cart_item where user_id = #{userId}
+                              and cart_item_id in
+        <foreach collection="shopCartItemIds" item="shopCartItemId" open="(" separator="," close=")">
+            #{shopCartItemId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteAllShopCartItems">
+        delete
+        from shop_cart_item
+        where user_id = #{userId}
+    </delete>
+
+    <select id="listUserIdBySpuId" resultType="java.lang.String">
+        select user_id
+        from shop_cart_item
+        where spu_id = #{spuId}
+    </select>
+
+    <select id="getShopCartItemCount" resultType="java.lang.Integer">
+        select sum(`count`)
+        from shop_cart_item
+        where user_id = #{userId}
+    </select>
+
+    <update id="checkShopCartItems">
+        <foreach collection="checkShopCartItems" separator=";" item="item">
+            update shop_cart_item set is_checked = #{item.isChecked} where cart_item_id = #{item.shopCartItemId} and user_id = #{userId}
+        </foreach>
+    </update>
+</mapper>
