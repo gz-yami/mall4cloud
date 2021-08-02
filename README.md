@@ -75,22 +75,25 @@ H5端：https://h5.mall4j.com/cloud
 
 ### 开源系统架构图
 
-![image-20210705152010036](doc/img/readme/image-20210705152010036.png)
+![架构图](doc/img/架构图.png)
+
+### 商城部署后 API 地址
+
+| 服务                                                 | 地址                  |
+| ---------------------------------------------------- | --------------------- |
+| mall4cloud-gatway 网关服务                           | http://127.0.0.1:9000 |
+| mall4cloud-auth  授权校验服务                        | http://127.0.0.1:9101 |
+| mall4cloud-biz     业务代码服务（如图片上传/短信等） | http://127.0.0.1:9000 |
+| mall4cloud-leaf   基于美团leaf的生成id服务           | http://127.0.0.1:9100 |
+| mall4cloud-multishop 商家服务                        | http://127.0.0.1:9103 |
+| mall4cloud-order         订单服务                    | http://127.0.0.1:9106 |
+| mall4cloud-payment   支付服务                        | http://127.0.0.1:9113 |
+| mall4cloud-product    商品服务                       | http://127.0.0.1:9112 |
+| mall4cloud-rbac          用户角色服务                | http://127.0.0.1:9102 |
+| mall4cloud-search      搜索服务                      | http://127.0.0.1:9108 |
+| mall4cloud-user          用户服务                    | http://127.0.0.1:9105 |
 
 
-### 商城部署后 API/UI 地址
-API	地址
-
-
-商城买家API	http://127.0.0.1:8888
-商城商家API	http://127.0.0.1:8889
-商城管理端API	http://127.0.0.1:8887
-商城基础API	http://127.0.0.1:8890
-前端演示	地址
-商城PC端	http://127.0.0.1:10000
-商城WAP端	http://127.0.0.1:10001
-商城卖家端	http://127.0.0.1:10002
-商城管理端	http://127.0.0.1:10003
 
 ### 部署教程
 
