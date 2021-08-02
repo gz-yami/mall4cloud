@@ -92,10 +92,13 @@
     </foreach>
   </update>
 
-  <select id="getCountByName" resultType="int">
-    SELECT COUNT(*) FROM category WHERE `name` = #{name}
-    <if test="categoryId != null">
-      AND category_id != #{categoryId}
+  <select id="existCategoryName" resultType="int">
+    SELECT COUNT(*) FROM category WHERE `name` = #{category.name} AND parent_id = #{category.parentId}
+    <if test="category.categoryId != null">
+      AND category_id != #{category.categoryId}
+    </if>
+    <if test="category.shopId != null">
+      AND shop_id = #{category.shopId}
     </if>
   </select>
 
