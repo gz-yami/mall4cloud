@@ -23,7 +23,7 @@ gitee：https://gitee.com/gz-yami/mall4cloud/tree/master/doc
 
 ### 授权
 
-除开源版本外，本商城还提供商业版本的B2B2C商城，采用PC+小程序+APP，欲知详情，请访问官网。
+除开源版本外，本商城还提供商业版本的商城，欲知详情，请访问官网。
 
 商城官网：https://www.mall4j.com
 
