@@ -89,13 +89,12 @@ public interface CategoryMapper {
 	int updateBatchOfStatus(@Param("categoryIds") List<Long> categoryIds, @Param("status") Integer status);
 
 	/**
-	 * 根据分类名获取分类的数量
+	 * 查询分类名是否存在
 	 *
-	 * @param categoryId
-	 * @param name
+	 * @param category
 	 * @return
 	 */
-	int getCountByName(@Param("categoryId") Long categoryId, @Param("name") String name);
+	int existCategoryName(@Param("category") Category category);
 
 	/**
 	 * 根据分类id列表，获取分类列表
