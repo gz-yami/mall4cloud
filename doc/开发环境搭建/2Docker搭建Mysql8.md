@@ -94,4 +94,4 @@ FLUSH PRIVILEGES;
 
 输入exit退出容器
 
-使用数据库连接工具连接上mysql数据库后，执行`db/mall4cloud.sql`文件，确保之后服务运行正常。
+使用数据库连接工具连接上mysql数据库后，执行`db/mall4cloud-all.sql`文件，确保之后服务运行正常。

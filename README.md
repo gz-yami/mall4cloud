@@ -105,8 +105,6 @@ H5端：https://h5.mall4j.com/cloud
 
 - 平台端
 
-  ![image-20210705152010036](doc/img/readme/image-20210705152010036.png)
-
   ![image-20210705152109738](doc/img/readme/image-20210705152109738.png)
 
 - 商家端
