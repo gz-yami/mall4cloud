@@ -73,7 +73,7 @@ H5端：https://h5.mall4j.com/cloud
 | Element UI | 2.13 | UI框架 |
 | vue、uni-app | vue2.6 | JS框架 |
 
-### 开源系统架构图
+### 系统架构图
 
 ![架构图](doc/img/架构图.png)
 
@@ -99,7 +99,7 @@ H5端：https://h5.mall4j.com/cloud
 
 部署教程请参考该文件夹下的`/基本开发文档/mall4cloud开发环境搭建.md`以及`/开发环境搭建`目录下的中间件安装。
 
-### 开源版相关截图
+### 代码运行相关截图
 
 #### 1.后台截图
 
