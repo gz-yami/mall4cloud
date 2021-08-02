@@ -76,7 +76,6 @@ mall4cloud
 │  ├─mall4cloud-common-rocketmq  -- rocketmq相关公共代码
 │  └─mall4cloud-common-security  -- 安全相关公共代码
 ├─mall4cloud-gateway  -- 网关
-├─mall4cloud-group  -- 团购服务
 ├─mall4cloud-leaf  -- 基于美团leaf的生成id服务
 ├─mall4cloud-multishop  -- 商家端
 ├─mall4cloud-order  -- 订单服务
