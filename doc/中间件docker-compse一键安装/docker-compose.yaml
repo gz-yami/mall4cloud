@@ -1,0 +1,200 @@
+version: "3.5"
+
+services:
+  mall4cloud-mysql:
+    image: mysql:8.0
+    container_name: mall4cloud-mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/initdb:/docker-entrypoint-initdb.d
+      - ./mysql/mysql-files:/var/lib/mysql-files
+
+  mall4cloud-minio:
+    image: minio/minio
+    container_name: mall4cloud-minio
+    restart: always
+    command: server /data
+    ports:
+      - 9000:9000
+    volumes:
+      - ./minio/data:/data
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=admin123456
+
+  mall4cloud-redis:
+    image: redis:6.2
+    container_name: mall4cloud-redis
+    restart: always
+    ports:
+      - 6379:6379
+
+  mall4cloud-nacos:
+    image: nacos/nacos-server:2.0.2
+    container_name: mall4cloud-nacos
+    restart: always
+    depends_on:
+      - mall4cloud-mysql
+    ports:
+      - 8848:8848
+      - 9848:9848
+      - 9849:9849
+    environment:
+      - JVM_XMS=256m
+      - JVM_XMX=256m
+      - MODE=standalone
+      - PREFER_HOST_MODE=hostname
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=192.168.1.46
+      - MYSQL_SERVICE_DB_NAME=mall4cloud_nacos
+      - MYSQL_SERVICE_USER=root
+      - MYSQL_SERVICE_PASSWORD=root
+    volumes:
+      - ./nacos/logs:/home/nacos/logs
+
+
+  mall4cloud-seata:
+    image: seataio/seata-server:1.4.2
+    container_name: mall4cloud-seata
+    restart: always
+    depends_on:
+      - mall4cloud-mysql
+      - mall4cloud-nacos
+    ports:
+      - 8091:8091
+    environment:
+      - SEATA_IP=192.168.1.46
+      - SEATA_CONFIG_NAME=file:/root/seata-config/registry
+    volumes:
+      - ./seata:/root/seata-config
+
+  mall4cloud-job:
+    image: xuxueli/xxl-job-admin:2.3.0
+    container_name: mall4cloud-job
+    restart: always
+    depends_on:
+      - mall4cloud-mysql
+    ports:
+      - 8080:8080
+    environment:
+      - PARAMS=--spring.datasource.url=jdbc:mysql://192.168.1.46:3306/mall4cloud_job?Unicode=true&characterEncoding=UTF-8 \
+        --spring.datasource.username=root \
+        --spring.datasource.password=root \
+        --spring.mail.host=smtp.qq.com \
+        --spring.mail.port=25 \
+        --spring.mail.username=xxxx@qq.com \
+        --spring.mail.password=xxxx \
+        --spring.mail.properties.mail.smtp.auth=true \
+        --spring.mail.properties.mail.smtp.starttls.enable=true \
+        --spring.mail.properties.mail.smtp.starttls.required=true \
+        --spring.mail.properties.mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory \
+        --xxl.job.accessToken=
+
+  mall4cloud-elasticsearch:
+    image: elasticsearch:7.13.2
+    container_name: mall4cloud-elasticsearch
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
+
+  mall4cloud-kibana:
+    image: kibana:7.13.2
+    container_name: mall4cloud-kibana
+    restart: always
+    ports:
+      - 5601:5601
+    links:
+      - mall4cloud-elasticsearch:elasticsearch
+    depends_on:
+      - mall4cloud-elasticsearch
+
+  mall4cloud-canal:
+    image: canal/canal-server:v1.1.5
+    container_name: mall4cloud-canal
+    restart: always
+    ports:
+      - 11111:11111
+    environment:
+      - SEATA_IP=192.168.1.46
+    volumes:
+      - ./canal/conf/example:/home/admin/canal-server/conf/example
+      - ./canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties
+      - ./canal/logs:/home/admin/canal-server/logs
+
+
+
+
+  mall4cloud-rocketmq-namesrv:
+    image: foxiswho/rocketmq:4.8.0
+    container_name: mall4cloud-rocketmq-namesrv
+    restart: always
+    ports:
+      - 9876:9876
+    volumes:
+      - ./rocketmq/namesrv/logs:/home/rocketmq/logs
+      - ./rocketmq/namesrv/store:/home/rocketmq/store
+    environment:
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128m"
+    command: ["sh","mqnamesrv"]
+    networks:
+      rocketmq:
+        aliases:
+          - mall4cloud-rocketmq-namesrv
+
+
+  mall4cloud-rocketmq-broker:
+    image: foxiswho/rocketmq:4.8.0
+    container_name: mall4cloud-rocketmq-broker
+    restart: always
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - ./rocketmq/broker/logs:/home/rocketmq/logs
+      - ./rocketmq/broker/store:/home/rocketmq/store
+      - ./rocketmq/broker/conf/broker.conf:/etc/rocketmq/broker.conf
+    environment:
+      JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128m"
+    command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","mall4cloud-rocketmq-namesrv:9876","autoCreateTopicEnable=true"]
+    depends_on:
+      - mall4cloud-rocketmq-namesrv
+    networks:
+      rocketmq:
+        aliases:
+          - mall4cloud-rocketmq-broker
+
+
+  mall4cloud-rocketmq-console:
+    image: styletang/rocketmq-console-ng
+    container_name: mall4cloud-rocketmq-console
+    restart: always
+    ports:
+      - 8180:8080
+    environment:
+      JAVA_OPTS: "-Drocketmq.namesrv.addr=mall4cloud-rocketmq-namesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+    depends_on:
+      - mall4cloud-rocketmq-namesrv
+    networks:
+      rocketmq:
+        aliases:
+          - mall4cloud-rocketmq-console
+
+
+networks:
+  rocketmq:
+    name: rocketmq
+    driver: bridge
