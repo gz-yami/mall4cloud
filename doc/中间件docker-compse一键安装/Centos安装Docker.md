@@ -79,7 +79,7 @@ sudo systemctl enable docker
 
 （没有该文件的话，请先建一个）
 
-```javascript
+```json
 {
   "registry-mirrors": ["https://7qyk8phi.mirror.aliyuncs.com"]
 }
