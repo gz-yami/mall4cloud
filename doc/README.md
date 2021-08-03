@@ -44,7 +44,7 @@
 
 ![editvm](img/开发环境搭建/editvm.png)
 
-![idea配置](img/开发环境搭建/idea编辑.png)
+![idea配置](img/开发环境搭建/idea配置.png)
 
 配置完毕，重启idea，此时可以启动所有项目。
 
