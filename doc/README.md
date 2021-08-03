@@ -42,9 +42,9 @@
 -XX:SoftRefLRUPolicyMSPerMB=100
 ```
 
-![edit vm](./img/开发环境搭建/edit vm.png)
+![editvm](img/开发环境搭建/editvm.png)
 
-![idea配置](./img/开发环境搭建/idea配置.png)
+![idea配置](img/开发环境搭建/idea编辑.png)
 
 配置完毕，重启idea，此时可以启动所有项目。
 
