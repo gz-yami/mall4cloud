@@ -68,7 +68,6 @@ H5端：https://h5.mall4j.com/cloud
   - 2） 对 Service 层通用能力的下沉，如缓存方案、中间件通用处理。
   - 3） 与 DAO 层交互，对多个 DAO 的组合复用。
 - Mapper持久层：数据访问层，与底层 MySQL进行数据交互。
-- Task层：由于每个服务之间会存在定时任务，比如定时确认收货，定时将活动失效等情况，这里面的Task实际上连接的是`xxl-job`（具体可以查看 https://github.com/xuxueli/xxl-job ）进行任务调度。
 - Listener：监听 `RocketMQ` 进行处理，有时候会监听`easyexcel`相关数据。
 
 关于`FeignClient`，由于微服务之间存在互相调用，`Feign` 是http协议，理论上是为了解耦，而实际上提供方接口进行修改，调用方却没有进行修改的时候，会造成异常，所以我们抽取出来。还有就是对内暴露的接口，是很多地方都公用的，所以我们还将接口抽取了出了一个模块，方便引用。可以看到`mall4cloud-api`这个模块下是所有对内`feign`接口的信息。

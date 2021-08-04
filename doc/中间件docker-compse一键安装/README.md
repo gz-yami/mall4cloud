@@ -32,7 +32,6 @@ docker-compose up -d --build
  - minio: http://192.168.1.46:9000 账号及密码 admin/admin123456
  - redis: 端口6379，没有密码
  - nacos: http://192.168.1.46:8848/nacos 账号及密码 nacos/nacos
- - xxl-job: http://192.168.1.46:8080/xxl-job-admin 账号及密码 admin/123456
  - kibana: http://192.168.1.46:5601
  - rocketmq-console：http://192.168.1.46:8180
 
