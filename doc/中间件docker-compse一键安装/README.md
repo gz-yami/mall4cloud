@@ -59,35 +59,3 @@ http://192.168.1.46:5601/app/dev_tools#/console
 ![image-20210621131013166](../img/中间件安装/es新建索引-2.png)
 
 
-8. canal创建mysql账号
-
-创建并授权用户 canal;
-
-```mysql
-CREATE USER canal IDENTIFIED BY 'canal';
-
-GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'canal'@'%';
-
-FLUSH PRIVILEGES;
-```
-
-mysql查询binglog位置
-
-```mysql
-SHOW MASTER STATUS
-```
-
-编辑`./canal/conf/example/instance.properties`
-
-```properties
-# 填写执行命令`SHOW MASTER STATUS`后的File内容
-canal.instance.master.journal.name=mysql-binlog.000001
-# 填写执行命令`SHOW MASTER STATUS`后的POSITION内容
-canal.instance.master.position=0
-```
-
-重启`canal`
-
-```shell
-docker restart mall4cloud-canal
-```
