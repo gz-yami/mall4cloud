@@ -111,25 +111,7 @@ mall4cloud
 
 ## 技术选型
 
-| 技术        | 版本  | 说明        |
-| :-----------: | :-----: | :-----------: |
-| Spring Boot | 2.4 | MVC核心框架 |
-|        Feign         | 3.0 | 服务调用 |
-| Nacos | 2.0 | 服务注册与发现 |
-| Seata | 1.4 | 分布式事务 |
-| Mybatis | 2.1 | 持久层框架 |
-| hutool | 5.5 | JAVA工具集 |
-| pagehelper | 1.3 | Mybatis分页插件 |
-| Redis | 2.4 | 分布式缓存 |
-| RocketMQ | 2.2 | 消息队列 |
-| canal | 1.1 | 数据库同步 |
-| Spring Cloud Gateway | 3.0 | 网关 |
-| Spring Cloud LoadBalancer | 3.0 | 负载均衡 |
-| ElasticSearch | 7.9 | 数据搜索 |
-| minio | 8.0 | 文件上传 |
-| Knife4j | 3.0 | MVC框架集成Swagger生成Api文档 |
-| Element UI | 2.13 | UI框架 |
-| vue、uni-app | vue2.6 | JS框架 |
+![技术框架](doc/img/readme/技术框架.png)
 
 ## 系统架构图
 
