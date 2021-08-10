@@ -137,7 +137,7 @@ public class SkuStockLockServiceImpl implements SkuStockLockService {
             return;
         }
 
-        List<SkuWithStockBO> allSkuWithStocks = skuStockLockMapper.listByOrderIds(orderIds);
+        List<SkuWithStockBO> allSkuWithStocks = skuStockLockMapper.listByOrderIds(needUnLockOrderId);
         if (CollectionUtil.isEmpty(allSkuWithStocks)) {
             return;
         }
