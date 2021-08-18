@@ -24,7 +24,7 @@ public class CaptchaConfig {
 		config.put(Const.CAPTCHA_WATER_MARK, "");
 		// 滑动验证
 		config.put(Const.CAPTCHA_TYPE, CaptchaTypeEnum.BLOCKPUZZLE.getCodeValue());
-		config.put(Const.ORIGINAL_PATH_JIGSAW, FileUtil.getAbsolutePath("classpath:captcha"));
+	//	config.put(Const.ORIGINAL_PATH_JIGSAW, FileUtil.getAbsolutePath("classpath:captcha"));
 		return CaptchaServiceFactory.getInstance(config);
 	}
 
