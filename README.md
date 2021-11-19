@@ -169,7 +169,7 @@ mall4cloud
 
 - mall4cloud开源技术QQ群：561496886
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/1119/133527_e5b8bc2f_5094767.jpeg "微信图片_20211119133434.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1119/134157_dd977d46_5094767.png "微信图片_20211119134107.png")
 
 ## springboot版本商城请点击
 https://gitee.com/gz-yami/mall4j
