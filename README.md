@@ -167,9 +167,9 @@ mall4cloud
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0703/131508_13858876_5094767.jpeg "法宝微信2.jpg")
 
 
-- mall4j开源技术QQ群：722835385
+- mall4cloud开源技术QQ群：561496886
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0703/110919_835cf484_5094767.jpeg "mall4j群.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1119/133527_e5b8bc2f_5094767.jpeg "微信图片_20211119133434.jpg")
 
 ## springboot版本商城请点击
 https://gitee.com/gz-yami/mall4j
