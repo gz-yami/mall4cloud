@@ -788,7 +788,8 @@ CREATE TABLE `sys_user`  (
   PRIMARY KEY (`sys_user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '平台用户';
 
-INSERT INTO `sys_user` VALUES (1, '2021-06-24 16:59:33', '2021-07-03 11:17:41', 'admin', '/2021/07/02/dd9ff362454d43d184c6d722dc14d7f6', '9527', '12345678910', 1);
+insert  into `sys_user`(`sys_user_id`,`create_time`,`update_time`,`nick_name`,`avatar`,`code`,`phone_num`,`has_account`) values
+(1, '2021-06-24 16:59:33', '2021-07-03 11:17:41', 'admin', '/2021/07/02/dd9ff362454d43d184c6d722dc14d7f6', '9527', '12345678910', 1);
 
 -- ----------------------------
 -- Table structure for undo_log
