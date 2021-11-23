@@ -46,6 +46,10 @@ CREATE TABLE `sys_user` (
   `has_account` tinyint DEFAULT NULL COMMENT '是否已经设置账号',
   PRIMARY KEY (`sys_user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='平台用户';
+/*Data for the table `sys_user` */
+
+insert  into `sys_user`(`sys_user_id`,`create_time`,`update_time`,`nick_name`,`avatar`,`code`,`phone_num`,`has_account`) values
+(1,'2021-06-15 11:32:33','2021-06-15 13:05:42','admin','http://mall4cloud.oss-cn-shenzhen.aliyuncs.com/2021/02/22/7384f505c5514403b43f16b7540d33d1',NULL,'13800138000',1);
 
 /*Table structure for table `undo_log` */
 
