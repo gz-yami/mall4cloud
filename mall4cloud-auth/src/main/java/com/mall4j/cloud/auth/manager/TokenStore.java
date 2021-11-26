@@ -44,8 +44,8 @@ public class TokenStore {
 	/**
 	 * 用于aes签名的key，16位
 	 */
-	@Value("${auth.token.signKey}")
-	public String tokenSignKey;
+//	@Value("${auth.token.signKey}")
+	public static final String tokenSignKey = "-mall4j--mall4j-";
 
 	private final RedisTemplate<Object, Object> redisTemplate;
 
