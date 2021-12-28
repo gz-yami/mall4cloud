@@ -1,5 +1,6 @@
 package com.mall4j.cloud.auth.manager;
 
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.IdUtil;
@@ -40,12 +41,6 @@ import java.util.concurrent.TimeUnit;
 public class TokenStore {
 
 	private static final Logger logger = LoggerFactory.getLogger(TokenStore.class);
-
-	/**
-	 * 用于aes签名的key，16位
-	 */
-//	@Value("${auth.token.signKey}")
-	public static final String tokenSignKey = "-mall4j--mall4j-";
 
 	private final RedisTemplate<Object, Object> redisTemplate;
 
@@ -245,16 +240,14 @@ public class TokenStore {
 	}
 
 	private String encryptToken(String accessToken,Integer sysType) {
-		AES aes = new AES(tokenSignKey.getBytes(StandardCharsets.UTF_8));
-		return aes.encryptBase64(accessToken + System.currentTimeMillis() + sysType);
+		return Base64.encode(accessToken + System.currentTimeMillis() + sysType);
 	}
 
 	private ServerResponseEntity<String> decryptToken(String data) {
-		AES aes = new AES(tokenSignKey.getBytes(StandardCharsets.UTF_8));
 		String decryptStr;
 		String decryptToken;
 		try {
-			decryptStr = aes.decryptStr(data);
+			decryptStr = Base64.decodeStr(data);
 			decryptToken = decryptStr.substring(0,32);
 			// 创建token的时间，token使用时效性，防止攻击者通过一堆的尝试找到aes的密码，虽然aes是目前几乎最好的加密算法
 			long createTokenTime = Long.parseLong(decryptStr.substring(32,45));
