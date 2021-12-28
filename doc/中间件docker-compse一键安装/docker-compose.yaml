@@ -16,7 +16,7 @@ services:
       - ./mysql/mysql-files:/var/lib/mysql-files
 
   mall4cloud-minio:
-    image: minio/minio
+    image: minio/minio:RELEASE.2021-06-17T00-10-46Z
     container_name: mall4cloud-minio
     restart: always
     command: server /data
