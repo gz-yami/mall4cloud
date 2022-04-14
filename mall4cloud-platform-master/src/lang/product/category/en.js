@@ -1,0 +1,20 @@
+export default {
+  categoryId: 'category id',
+  shopId: 'shop id',
+  parentId: 'parent id',
+  name: 'name',
+  desc: 'desc',
+  path: 'path',
+  status: 'status',
+  icon: 'icon',
+  imgUrl: 'img url',
+  level: 'level',
+  seq: 'seq',
+  normal: 'normal',
+  offline: 'Off shelf',
+  recommImgSize: 'Carousel pictures',
+  categoryParent: 'Category parent',
+  categoryNoNull: 'Category name cannot be empty',
+  imageNoNull: 'Image cannot be empty',
+  enterCateName: 'Please enter the category name'
+}
