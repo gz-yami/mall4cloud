@@ -4,10 +4,16 @@ import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.response.ResponseEnum;
 import io.minio.*;
 import io.minio.http.Method;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,6 +26,8 @@ public class MinioTemplate implements InitializingBean {
     private OssConfig ossConfig;
 
     private MinioClient minioClient;
+
+    static  final Logger logger = LoggerFactory.getLogger(MinioTemplate.class);
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -50,6 +58,27 @@ public class MinioTemplate implements InitializingBean {
         } catch (Exception e) {
             e.printStackTrace();
             throw new Mall4cloudException(ResponseEnum.EXCEPTION);
+        }
+    }
+
+    public void uploadMinio(byte[] bytes, String filePath, String contentType) throws IOException {
+        InputStream input = null;
+        try {
+            input = new ByteArrayInputStream(bytes);
+            minioClient.putObject(
+                    PutObjectArgs.builder()
+                            .bucket(ossConfig.getBucket())
+                            .contentType(contentType)
+                            .stream(input, input.available(), -1)
+                            .object(filePath)
+                            .build()
+            );
+        } catch (Exception e) {
+            logger.error("minio上传文件错误：", e);
+        } finally {
+            if (Objects.nonNull(input)) {
+                input.close();
+            }
         }
     }
 }
