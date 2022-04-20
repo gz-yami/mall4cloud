@@ -1,0 +1,94 @@
+
+.animation-element-wrapper {
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 0;
+  width: 100%;
+  border-color: transparent;
+  z-index: -1;
+  transition: all .3s;
+}
+.animation-element-wrapper.show {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+
+.animation-element {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 1);
+  transition: all .3s;
+}
+.animation-element.show {
+  height: 530rpx;
+}
+
+.animation-button {
+  top: 20rpx;
+  width: 290rpx;
+  height: 100rpx;
+  align-items: center;
+}
+
+/* 地区picker弹窗 */
+picker-view {
+  background-color: white;
+  padding: 0;
+  width: 100%;
+  height: 0;
+  bottom: 0;
+  position: fixed;
+  transition: all .3s;
+}
+picker-view.show {
+  height: 440rpx;
+}
+
+picker-view-column view {
+  vertical-align: middle;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+picker-view text {
+  color: #999;
+  display: inline-flex;
+  position: fixed;
+  margin-top: 20rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  font-size: 34rpx;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.left-bt {
+  left: 30rpx;
+  top: 28rpx;
+  position: absolute;
+}
+
+.right-bt {
+  right: 40rpx;
+  top: 28rpx;
+  position: absolute;
+}
+
+.line {
+  display: block;
+  position: fixed;
+  height: 2rpx;
+  width: 100%;
+  margin-top: 89rpx;
+  background-color: #eee;
+}

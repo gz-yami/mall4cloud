@@ -1,0 +1,165 @@
+
+.category {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 750rpx;
+  margin: auto;
+}
+
+/* 搜索框 */
+.category .search-box {
+  background: #fff;
+  padding: 20rpx;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 2rpx 6rpx rgba(0,0,0,.03);
+}
+
+.category .search-box .search {
+  height: 60rpx;
+  background: #f2f3f7;
+  border-radius: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+.category .search-box .search .icon {
+  width: 24rpx;
+  height: 24rpx;
+  font-size: 0;
+  margin-left: 20rpx;
+}
+
+.category .search-box .search .text {
+  color: #999;
+  margin-left: 10rpx;
+}
+
+/* 内容区 */
+.category .main {
+  display: flex;
+  height: calc(100% - 200rpx - env(safe-area-inset-bottom));
+  background: #fff;
+}
+
+/* #ifdef MP-WEIXIN*/
+.category .main {
+  height: calc(100% - 30rpx - env(safe-area-inset-bottom));
+}
+/* #endif */
+
+.category .main .first-menu {
+  width: 180rpx;
+  background: #f2f3f7;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+.category .main .first-menu::after {
+  min-height: calc(100% + 2rpx);
+}
+
+.category .main .first-menu .item {
+  padding: 20rpx 10rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #666;
+  position: relative;
+}
+
+.category .main .first-menu .item.active {
+  color: #333;
+  font-size: 28rpx;
+  font-weight: 600;
+  background: #fff;
+}
+
+.category .main .first-menu .item.active::before {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  display: block;
+  width: 6rpx;
+  height: 28rpx;
+  content: " ";
+  font-size: 0;
+  background: #fc1b35;
+  border-radius: 0 6rpx 6rpx 0;
+  transform: translateY(-50%);
+}
+
+.category .main .subclass {
+  flex: 1;
+  padding: 30rpx 30rpx 0;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+.category .main .subclass::after {
+  min-height: calc(100% + 2rpx)
+}
+
+.category .main .subclass .adv-img {
+  width: 100%;
+  height: 200rpx;
+  font-size: 0;
+  margin-bottom: 40rpx;
+}
+
+.category .main .subclass .sub-con {
+  margin-bottom: 40rpx;
+}
+
+.category .main .subclass .sub-con:last-child {
+  margin-bottom: 30rpx;
+}
+
+.category .main .subclass .sub-con .second-menu {
+  font-weight: 600;
+}
+
+.category .main .subclass .sub-con .third-menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.category .main .subclass .sub-con .third-menu .item {
+  width: 33.33%;
+  margin-top: 20rpx;
+}
+
+.category .main .subclass .sub-con .third-menu .item:nth-child(3n+1) .img,
+.category .main .subclass .sub-con .third-menu .item:nth-child(3n+1) .text {
+  margin-left: 0;
+}
+
+.category .main .subclass .sub-con .third-menu .item:nth-child(3n) .img,
+.category .main .subclass .sub-con .third-menu .item:nth-child(3n) .text {
+  margin-right: 0;
+}
+
+.category .main .subclass .sub-con .third-menu .item .img {
+  width: 150rpx;
+  height: 150rpx;
+  font-size: 0;
+  border-radius: 10rpx;
+  overflow: hidden;
+  margin: auto;
+}
+
+.category .main .subclass .sub-con .third-menu .item .text {
+  width: 150rpx;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0 auto;
+  margin-top: 10rpx;
+}

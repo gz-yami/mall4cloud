@@ -1,0 +1,377 @@
+
+/* 页面共用样式 */
+page {
+  min-width: 320rpx;
+  max-width: 750rpx;
+  margin: auto;
+  font-size: 24rpx;
+  color: #333;
+  font-family: -apple-system, Helvetica, sans-serif;
+}
+
+page image {
+  width: 100%;
+  height: 100%;
+}
+
+page input {
+  font-size: 24rpx;
+}
+
+body, html {
+  height: auto!important;
+}
+
+/* tabbar高度 */
+uni-tabbar .uni-tabbar__bd {
+  height: 100rpx;
+  max-width: 750rpx;
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+/* 价格 */
+.price {
+  color: #fc1b35;
+  display: flex;
+  align-items: baseline;
+  font-family: PingFangSC-Medium, tahoma;
+  line-height: 1;
+}
+
+.price .big {
+  font-size: 32rpx;
+}
+
+
+/* 横排产品列表 */
+.prods {
+  display: flex;
+  padding: 12rpx 30rpx 0;
+  flex-wrap: wrap;
+}
+
+.prods .item {
+  width: 336rpx;
+  margin-top: 18rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.prods .item:nth-child(2n) {
+  margin-left: 18rpx;
+}
+
+.prods .item .img {
+  width: 336rpx;
+  height: 336rpx;
+  font-size: 0;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.prods .item .text-box {
+  padding: 0 20rpx 20rpx;
+  position: relative;
+}
+
+.prods .item .text-box .name {
+  margin-top: 16rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prods .item .text-box .sku {
+  color: #999;
+  font-size: 20rpx;
+  margin-top: 6rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prods .item .text-box .discount-box {
+  margin-top: 10rpx;
+  font-size: 18rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prods .item .text-box .discount-box .discount,
+.prods .item .text-box .discount-box .coupons {
+  display: inline-block;
+  margin-right: 10rpx;
+  background: #fc1b35;
+  color: #fff;
+  height: 36rpx;
+  line-height: 36rpx;
+  border-radius: 4rpx;
+  vertical-align: top;
+  padding: 0 8rpx;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+.prods .item .text-box .discount-box .coupons {
+  background: #fff;
+  border: 2rpx solid #fc1b35;
+  color: #fc1b35;
+}
+
+.prods .item .text-box .price-box {
+  margin-top: 16rpx;
+  font-weight: 600;
+}
+
+/* 竖排产品列表 */
+.line-prods {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 10rpx;
+}
+
+.line-prods .item {
+  display: flex;
+  padding-top: 30rpx;
+}
+
+.line-prods .item:first-child {
+  padding-top: 0;
+}
+
+.line-prods .item .img {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  font-size: 0;
+}
+
+.line-prods .item .text-box {
+  flex: 1;
+  margin-left: 20rpx;
+  position: relative;
+  height: 180rpx;
+}
+
+.line-prods .item .text-box .name {
+  max-height: 64rpx;
+  line-height: 32rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;  /* 英文强制断开换行 */
+}
+
+.line-prods .item .text-box .sku {
+  color: #999;
+  font-size: 20rpx;
+  margin-top: 10rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;  /* 英文强制断开换行 */
+}
+
+.line-prods .item .text-box .discount-box {
+  margin-top: 10rpx;
+  font-size: 18rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-prods .item .text-box .discount-box .discount,
+.line-prods .item .text-box .discount-box .coupons {
+  display: inline-block;
+  margin-right: 10rpx;
+  background: #fc1b35;
+  color: #fff;
+  height: 36rpx;
+  line-height: 36rpx;
+  border-radius: 4rpx;
+  vertical-align: top;
+  padding: 0 8rpx;
+  box-sizing: border-box;
+  font-size: 12px;
+}
+
+.line-prods .item .text-box .discount-box .coupons {
+  background: #fff;
+  border: 2rpx solid #fc1b35;
+  color: #fc1b35;
+}
+
+.line-prods .item .text-box .price-box {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  font-weight: 600;
+}
+
+/* 到底提示 */
+.nomore {
+  padding: 40rpx 0;
+  text-align: center;
+  color: #999;
+}
+
+/* 单选、多选框样式 */
+uni-radio .uni-radio-input,
+uni-checkbox .uni-checkbox-input {
+  margin-right: 0 !important;
+  border-radius: 50%;
+  width: 32rpx !important;
+  height: 32rpx !important;
+  border-color: #d1d1d1;
+}
+
+uni-radio:not([disabled]) .uni-radio-input:hover,
+uni-checkbox:not([disabled]) .uni-checkbox-input:hover {
+  border-color: #d1d1d1;
+}
+
+uni-radio .uni-radio-input.uni-radio-input-checked,
+uni-checkbox .uni-checkbox-input.uni-checkbox-input-checked {
+  background: #fc1b35 !important;
+  border-color: #fc1b35 !important;
+}
+
+uni-radio .uni-radio-input.uni-radio-input-checked::before,
+uni-checkbox .uni-checkbox-input.uni-checkbox-input-checked::before {
+  font-size: 24rpx;
+}
+
+/* input、textarea提示文字颜色 */
+.uni-input-placeholder,
+.uni-textarea-placeholder {
+  color: #999;
+}
+
+/* 箭头样式 */
+.text-arrow {
+  position: relative;
+  padding-right: 16rpx;
+}
+
+.text-arrow::after {
+  position: absolute;
+  top: 50%;
+  right: 6rpx;
+  display: block;
+  width: 8rpx;
+  height: 8rpx;
+  content: " ";
+  font-size: 0;
+  border-top: 2rpx solid #333;
+  border-right: 2rpx solid #333;
+  transform: rotate(45deg) translateY(-50%);
+}
+
+/* 猜你喜欢 */
+.guess-like {
+  margin-top: 30rpx;
+}
+
+.guess-like .tit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.guess-like .tit .bg {
+  width: 30rpx;
+  height: 14rpx;
+  font-size: 0;
+}
+
+.guess-like .tit .bg:last-child {
+  transform: rotateX(180deg);
+  transform: rotateY(180deg);
+}
+
+.guess-like .tit .text {
+  margin: 0 20rpx 0 26rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+
+/* 空 */
+.empty {
+  padding: 100rpx 0;
+  text-align: cneter;
+}
+
+.empty .img {
+  display: block;
+  width: 200rpx;
+  height: 200rpx;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+
+.empty .text {
+  text-align: center;
+  color: #999;
+  line-height: 40rpx;
+  margin-top: 10rpx;
+}
+
+
+/* 上传图片 */
+.imgbox-pop {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.uni-placeholder {
+  display: none;
+}
+
+
+/* #ifdef MP-WEIXIN */
+/*checkbox / radio 选项框大小  */
+radio .wx-radio-input,
+checkbox .wx-checkbox-input {
+  border-radius: 50%;
+  width: 35rpx;
+  height: 35rpx;
+}
+/*checkbox选中后样式  */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #fc1b35;
+  border-color: #fc1b35;
+}
+/*checkbox选中后图标样式  */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+/* #endif */

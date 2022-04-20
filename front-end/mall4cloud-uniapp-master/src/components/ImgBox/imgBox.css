@@ -1,0 +1,92 @@
+.upload-img {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+}
+.upload-img .mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .3);
+}
+.upload-img .content {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  width: 70%;
+  height: auto;
+  box-sizing: border-box;
+  background: #fff;
+}
+.upload-img .content .tit-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  background: #eee;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.upload-img .content .tit-top .close {
+  font-size: 24px;
+  font-weight: 300;
+  color: #aaa;
+}
+.upload-img .content .upload {
+  display: block;
+  padding: 15px;
+}
+.upload-img .content .upload  .preview,
+.upload-img .content .upload .upload-chequer {
+  display: block;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  margin-top: 10px;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+}
+.upload-img .content .upload  .preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.upload-img .content .upload .upload-chequer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.upload-img .content .upload .upload-chequer .cross {
+  font-size: 48px;
+  font-weight: 200;
+  color: #ccc;
+}
+
+.foot-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.btn {
+  display: inline-block;
+  padding: 8px 15px;
+  background: #1286f4;
+  color: #fff;
+  letter-spacing: 1px;
+  border-radius: 3px;
+}
+.gray {
+  background: #ddd;
+}
