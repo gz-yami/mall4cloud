@@ -59,6 +59,10 @@ CREATE TABLE `undo_log` (
   UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=397 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+INSERT INTO `mall4cloud_auth`.`auth_account` (`uid`, `create_time`, `update_time`, `username`, `password`, `create_ip`, `status`, `sys_type`, `user_id`, `tenant_id`, `is_admin`) VALUES (2, '2021-07-01 11:07:38', '2022-04-25 14:47:40', 'hyg123', '$2a$10$EiwfzqsAVUtuJ0Ry5YPMPOeyc/4shzSUcqMBRInKTijzir48LLkM.', '127.0.0.1', 1, 1, 1, 0, 1);
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

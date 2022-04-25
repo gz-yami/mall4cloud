@@ -106,6 +106,12 @@ CREATE TABLE `undo_log` (
   UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=388 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+INSERT INTO `mall4cloud_multishop`.`shop_detail` (`shop_id`, `create_time`, `update_time`, `shop_name`, `intro`, `shop_logo`, `mobile_background_pic`, `shop_status`, `business_license`, `identity_card_front`, `identity_card_later`, `type`) VALUES (0, '2022-04-25 14:49:45', '2022-04-25 14:50:35', 'lanhai', NULL, NULL, NULL, 1, '123456789123', '123456789123', NULL, 1);
+
+INSERT INTO `mall4cloud_multishop`.`shop_user` (`shop_user_id`, `create_time`, `update_time`, `shop_id`, `nick_name`, `code`, `phone_num`, `has_account`) VALUES (2, '2022-04-25 14:07:57', '2022-04-25 14:53:38', 0, 'hyg123', '', '18470778787', 1);
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
