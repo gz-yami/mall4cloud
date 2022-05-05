@@ -105,7 +105,7 @@
     <update id="reduceActualStockByOrder">
         <foreach collection="skuWithStocks" item="skuWithStock" separator=";">
             update sku_stock
-            set `actual_stock` = `actual_stock` + #{skuWithStock.count},
+            set `actual_stock` = `actual_stock` - #{skuWithStock.count},
             `lock_stock` = `lock_stock` - #{skuWithStock.count}
             where sku_id = #{skuWithStock.skuId}
         </foreach>
@@ -115,7 +115,7 @@
 
         <foreach collection="skuWithStocks" item="skuWithStock" separator=";">
             update sku_stock
-            set `actual_stock` = `actual_stock` + #{skuWithStock.count},
+            set `actual_stock` = `actual_stock` - #{skuWithStock.count},
             `lock_stock` = `lock_stock` - #{skuWithStock.count},
             stock = stock - #{skuWithStock.count}
             where sku_id = #{skuWithStock.skuId}
