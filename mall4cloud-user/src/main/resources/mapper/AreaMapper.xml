@@ -72,16 +72,13 @@
   </select>
 
   <select id="getAreaListInfo" resultMap="areaListMap">
-        SELECT * FROM
-            (
-            SELECT r.area_id rid,r.area_name rname,r.parent_id rpid,r.level rlevel,
-            p.area_id pid,p.area_name pname,p.parent_id ppid,p.level plevel,
-            c.area_id cid,c.area_name cname,c.parent_id cpid,c.level clevel
-            FROM `area` r
-		    JOIN `area` p  ON r.parent_id=0 AND p.parent_id=r.area_id
-	    JOIN `area` c  ON c.parent_id=p.area_id
-            ) tal
-        LEFT  JOIN `area` a ON tal.cid=a.parent_id;
+    SELECT  p.area_id pid,p.area_name pname,p.parent_id ppid,p.level plevel,
+            c.area_id cid,c.area_name cname,c.parent_id cpid,c.level clevel,
+            r.area_id ,r.area_name,r.parent_id,r.level
+    FROM `area` p
+    JOIN `area` c  ON c.parent_id=p.area_id
+    JOIN `area` r  ON r.parent_id=c.area_id
+    WHERE p.parent_id=0
   </select>
   <select id="listAreaOfEnable" resultMap="areaListMap">
     SELECT * FROM
