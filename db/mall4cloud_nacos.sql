@@ -324,6 +324,8 @@ CREATE TABLE `tenant_info` (
   KEY `idx_tenant_id` (`tenant_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin COMMENT='tenant_info';
 
+insert  into `tenant_info`(`id`,`kp`,`tenant_id`,`tenant_name`,`tenant_desc`,`create_source`,`gmt_create`,`gmt_modified`) values (2,'1','4b70485d-72dd-44df-a76a-7a3f578a3001','seata','seata','nacos',1653615223670,1653615223670);
+
 /*Table structure for table `users` */
 
 DROP TABLE IF EXISTS `users`;
