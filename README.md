@@ -164,9 +164,9 @@ mall4cloud
 
 ## 提交反馈
 - Mall4j官网 https://www.mall4j.com
-- 商务合作微信
+- 如需购买商业版源码，请联系商务微信
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0703/131508_13858876_5094767.jpeg "法宝微信2.jpg")
+  ![输入图片说明](https://19838323.s21i.faiusr.com/4/4/ABUIABAEGAAgksmNlAYojomK2gIwrAI4rAI!160x160.png)
 
 
 - mall4cloud开源技术QQ群：561496886
