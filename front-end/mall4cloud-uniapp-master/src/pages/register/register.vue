@@ -15,7 +15,7 @@
       </view>
       <view v-if="errorTips == 5" class="error"><text class="error-icon">!</text>密码由字母加数字或符号至少两种以上字符组成6-20位半角字符，区分大小写</view>
       <view class="item">
-        <input v-model="confirmPwd" type="password" class="text" placeholder="再次输入密码">
+        <input v-model="confirmPwd" type="password" class="text" placeholder="再次输入密码" @input="validate">
       </view>
       <view v-if="errorTips == 6" class="error"><text class="error-icon">!</text>确认密码不能为空</view>
       <view v-if="errorTips == 7" class="error"><text class="error-icon">!</text>两次输入的密码不一致，请重新输入</view>
@@ -59,7 +59,6 @@ export default {
 
     }
   },
-
   onLoad() {
     // #ifdef H5
     this.isWechat = Wechat.isWechat()
@@ -80,6 +79,32 @@ export default {
   },
 
   methods: {
+    validate() {
+      var reg = new RegExp('^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z\\W]{6,20}$')
+      const passwordResult = reg.test(this.password)
+      if (!util.checkUserName(this.userName)) {
+        this.errorTips = 4
+        return false
+      }
+      if (!this.password) {
+        this.errorTips = 5
+        return false
+      }
+      if (!passwordResult) {
+        this.errorTips = 5
+        return false
+      }
+      if (!this.confirmPwd) {
+        this.errorTips = 6
+        return false
+      }
+      if (this.confirmPwd !== this.password) {
+        this.errorTips = 7
+        return false
+      }
+      this.errorTips = 0
+      return true
+    },
 
     // 去登录
     toLogin() {
@@ -96,28 +121,8 @@ export default {
      * 注册
      */
     getRegister() {
-      var reg = new RegExp('^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z\\W]{6,20}$')
-      const passwordResult = reg.test(this.password)
-      if (!util.checkUserName(this.userName)) {
-        this.errorTips = 4
-        return
-      }
-      if (!this.password) {
-        this.errorTips = 5
-        return
-      }
-      if (!passwordResult) {
-        this.errorTips = 5
-        return
-      }
-      if (!this.confirmPwd) {
-        this.errorTips = 6
-        return
-      }
-      if (this.confirmPwd !== this.password) {
-        this.errorTips = 7
-        return
-      }
+      const isvalid = this.validate()
+      if (!isvalid) { return }
       var params = {
         url: '/mall4cloud_user/ua/user/register',
         method: 'POST',
