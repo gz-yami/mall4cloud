@@ -29,7 +29,7 @@
       <el-button @click="visible = false">
         {{ $t('table.cancel') }}
       </el-button>
-      <el-button type="primary" @click="dataFormSubmit()">
+      <el-button type="primary" :disabled="!isCanSubmit" @click="dataFormSubmit()">
         {{ $t('table.confirm') }}
       </el-button>
     </div>
@@ -42,6 +42,7 @@ import * as api from '@/api/platform/hot-search'
 export default {
   data() {
     return {
+      isCanSubmit: true,
       visible: false,
       dataForm: {
         hotSearchId: 0,
@@ -63,6 +64,7 @@ export default {
   methods: {
     init(hotSearchId) {
       this.dataForm.hotSearchId = hotSearchId || 0
+      this.isCanSubmit = true
       this.visible = true
       this.$nextTick(() => {
         this.$refs['dataForm'].resetFields()
@@ -80,6 +82,7 @@ export default {
         if (!valid) {
           return
         }
+        this.isCanSubmit = false
         const request = this.dataForm.hotSearchId ? api.update(this.dataForm) : api.save(this.dataForm)
         request.then(data => {
           this.$message({
