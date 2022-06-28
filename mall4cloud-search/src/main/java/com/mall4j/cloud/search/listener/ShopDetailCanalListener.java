@@ -46,7 +46,7 @@ public class ShopDetailCanalListener extends BaseCanalBinlogEventProcessor<ShopD
     @Override
     protected void processUpdateInternal(CanalBinLogResult<ShopDetailBO> result) {
         ShopDetailBO beforeData = result.getBeforeData();
-        if (Objects.isNull(beforeData.getShopName()) && StrUtil.isBlank(beforeData.getShopLogo()) && !Objects.equals(beforeData.getShopId(), StatusEnum.ENABLE.value())) {
+        if (Objects.isNull(beforeData.getShopName()) && StrUtil.isBlank(beforeData.getShopLogo()) && !Objects.equals(beforeData.getShopStatus(), StatusEnum.ENABLE.value())) {
             return;
         }
         ShopDetailBO afterData = result.getAfterData();
