@@ -52,7 +52,7 @@
         <el-button @click="visible = false">
           {{ $t('table.cancel') }}
         </el-button>
-        <el-button type="primary" @click="dataFormSubmit()">
+        <el-button type="primary" :disabled="!canSubmit" @click="dataFormSubmit()">
           {{ $t('table.confirm') }}
         </el-button>
       </div>
@@ -71,6 +71,7 @@ export default {
   },
   data() {
     return {
+      canSubmit: true,
       visible: false,
       dataForm: {
         imgId: 0,
@@ -103,6 +104,7 @@ export default {
   },
   methods: {
     init(imgId) {
+      this.canSubmit = true
       this.visible = true
       this.dataForm.imgId = imgId || 0
       this.$nextTick(() => {
@@ -146,6 +148,7 @@ export default {
      * 表单提交
      */
     dataFormSubmit() {
+      this.canSubmit = false
       this.$refs.dataForm.validate(valid => {
         if (!valid) {
           return
