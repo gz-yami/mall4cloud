@@ -225,6 +225,9 @@ public class SpuController {
         if (!Objects.equals(Constant.PLATFORM_SHOP_ID, AuthUserContext.get().getTenantId()) && Objects.isNull(spuDTO.getShopCategoryId())) {
             throw new Mall4cloudException("店铺分类不能为空");
         }
+        if (Objects.isNull(spuDTO.getCategoryId())) {
+            throw new Mall4cloudException("平台分类不能为空");
+        }
         if (Objects.isNull(spuDTO.getSeq())) {
             spuDTO.setSeq(0);
         }
