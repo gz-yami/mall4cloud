@@ -292,11 +292,6 @@ public class SpuServiceImpl implements SpuService {
     }
 
     @Override
-    public SpuVO getSpuDetailData(Long spuId) {
-        return null;
-    }
-
-    @Override
     public PageVO<SpuVO> pageByLangAndTagId(PageDTO pageDTO, SpuDTO spuDTO, Integer isContain) {
         return PageUtil.doPage(pageDTO, () -> spuMapper.pageByLangAndTagId(pageDTO,spuDTO,isContain));
     }

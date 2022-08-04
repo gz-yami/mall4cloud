@@ -127,13 +127,6 @@ public interface SpuService {
 	PageVO<SpuVO> platformPage(PageDTO pageDTO, SpuPageSearchDTO spuDTO);
 
 	/**
-	 * u
-	 * @param spuId
-	 * @return
-	 */
-    SpuVO getSpuDetailData(Long spuId);
-
-	/**
 	 * 根据分组id和是否为当前分组，返回商品列表
 	 * @param pageDTO 分页信息
 	 * @param spuDTO 分组信息
