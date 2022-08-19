@@ -98,8 +98,13 @@ export default {
      * TODO 提交账号管理
      */
     dataFormSubmit() {
-      api.savaAccountAndPassword(this.dataForm).then((data) => {
-
+       this.$refs.dataForm.validate((valid) => {
+        if (valid) {
+          api.savaAccountAndPassword(this.dataForm).then((data) => {
+          })
+        } else {
+          this.$message.error('请输入密码')
+        }
       })
     },
 
