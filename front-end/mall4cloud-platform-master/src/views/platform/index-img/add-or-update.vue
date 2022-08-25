@@ -151,6 +151,7 @@ export default {
       this.canSubmit = false
       this.$refs.dataForm.validate(valid => {
         if (!valid) {
+          this.canSubmit = true
           return
         }
         if (!this.dataForm.imgUrl) {
@@ -159,6 +160,7 @@ export default {
             type: 'warning',
             duration: 1500
           })
+          this.canSubmit = true
           return
         }
         // if (this.relatedSpu === 1 && !this.datatForm.spuId) {
@@ -187,6 +189,8 @@ export default {
               this.$refs['dataForm'].resetFields()
             }
           })
+        }).finally(() => {
+          this.canSubmit = true
         })
       })
     }
