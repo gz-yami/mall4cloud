@@ -81,7 +81,7 @@ public class BrandServiceImpl implements BrandService {
     @CacheEvict(cacheNames = CacheNames.BRAND_TOP)
     public void updateBrandStatus(BrandDTO brandDTO) {
         BrandVO dbBrand = getByBrandId(brandDTO.getBrandId());
-        if (Objects.isNull(dbBrand) || dbBrand.getStatus().equals(brandDTO.getStatus())) {
+        if (Objects.isNull(dbBrand) || Objects.equals(dbBrand.getStatus(), brandDTO.getStatus())) {
             return;
         }
         brandMapper.updateBrandStatus(brandDTO);
