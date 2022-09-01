@@ -12,6 +12,7 @@ export default {
   seq: '排序',
   normal: '正常',
   offline: '下架',
+  disable: '禁用',
   recommImgSize: '建议图片尺寸为',
   categoryParent: '上级分类',
   categoryNoNull: '分类名称不能为空',
