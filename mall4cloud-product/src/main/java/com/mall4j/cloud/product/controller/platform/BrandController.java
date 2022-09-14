@@ -1,6 +1,7 @@
 package com.mall4j.cloud.product.controller.platform;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import com.mall4j.cloud.api.product.vo.BrandVO;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.vo.PageVO;
@@ -64,6 +65,8 @@ public class BrandController {
     public ServerResponseEntity<Void> save(@Valid @RequestBody BrandDTO brandDTO) {
         if (CollUtil.isEmpty(brandDTO.getCategoryIds())) {
             throw new Mall4cloudException("分类不能为空");
+        }if (StrUtil.isEmpty(brandDTO.getName())) {
+            throw new Mall4cloudException("品牌名称不能为空");
         }
         Brand brand = mapperFacade.map(brandDTO, Brand.class);
         brandService.save(brand, brandDTO.getCategoryIds());
