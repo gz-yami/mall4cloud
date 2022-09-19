@@ -229,9 +229,16 @@ export default {
           url: '/pages/free-shop/free-shop'
         })
       } else {
-        uni.navigateTo({
-          url: '/'
+         uni.showToast({
+          title: '请登录账号',
+          duration: 2000,
+          icon: 'error'
         })
+        setTimeout(() => {
+          uni.navigateTo({
+            url: '/'
+          })
+        }, 2000)
       }
     },
     notOpen(title) {
