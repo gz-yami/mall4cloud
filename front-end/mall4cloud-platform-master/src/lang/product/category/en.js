@@ -12,6 +12,7 @@ export default {
   seq: 'seq',
   normal: 'normal',
   offline: 'Off shelf',
+  disable: 'disable',
   recommImgSize: 'Carousel pictures',
   categoryParent: 'Category parent',
   categoryNoNull: 'Category name cannot be empty',
