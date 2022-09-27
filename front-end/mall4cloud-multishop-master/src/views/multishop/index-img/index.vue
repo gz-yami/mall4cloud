@@ -38,7 +38,7 @@
       <!-- 平台 -->
       <el-table-column label="平台" prop="icon" align="center">
         <template slot-scope="{row}">
-          <span>{{ ['小程序', 'PC端'][row.imgType] }}</span>
+          <span>{{ ['移动端', 'PC端'][row.imgType] }}</span>
         </template>
       </el-table-column>
       <!-- 操作 -->
