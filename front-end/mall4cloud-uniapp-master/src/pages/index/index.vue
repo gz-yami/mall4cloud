@@ -144,12 +144,12 @@ export default {
       indexImgs: [], // 轮播图
       categoryList: [], // 分类列表
       selectedIndex: 0, // 选中的分类项(默认为第一个分类)
-      selectedCategoryId: null,
+      selectedCategoryId: '',
       // 分类商品列表的请求参数
       searchListQuery: {
         pageSize: 10,
         pageNum: 1,
-        primaryCategoryId: null,
+        primaryCategoryId: '',
         sort: 1 // 新品 1:新品
       },
       // 分类商品列表返回的参数
@@ -174,11 +174,6 @@ export default {
 
     // #ifdef MP-WEIXIN
     if (!tempuid && !token) {
-      wx.login({
-        success: res => {
-          this.login('/mall4cloud_auth/ua/social/ma', res.code) // 小程序-先请求微信小程序登录接口
-        }
-      })
     } else {
       this.queryDataGroup()
     }
