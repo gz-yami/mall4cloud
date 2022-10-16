@@ -16,8 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -74,26 +73,27 @@ public class GeneratedKeyInterceptor implements Interceptor {
 
         // 获取参数
         Object parameter = invocation.getArgs()[one];
+        String mappedStatementId = mappedStatement.getId();
 
         // 找数据库中的对象
         Object dbObject = findDbObject(parameter);
 
-        if (dbObject == null) {
-            return invocation.proceed();
+        if (dbObject != null) {
+            if (mappedStatementId.contains(INSERT) || mappedStatementId.contains(SAVE)) {
+                generatedKey(dbObject);
+                return invocation.proceed();
+            }
         }
 
-        // 插入
-        if (mappedStatement.getId().contains(INSERT) || mappedStatement.getId().contains(SAVE)){
-            generatedKey(dbObject);
-        }
-        // 批量插入
-        else if (mappedStatement.getId().contains(BATCH_INSERT) || mappedStatement.getId().contains(BATCH_SAVE)){
-            // 获取批量查询的参数并生成主键
-            if (parameter instanceof HashMap){
-                Object list = ((Map)parameter).get("list");
-                if (list instanceof ArrayList) {
-                    for (Object o : (ArrayList) list) {
-                        generatedKey(dbObject);
+        if (mappedStatementId.contains(BATCH_INSERT) || mappedStatementId.contains(BATCH_SAVE)) {
+            if (parameter instanceof Map<?,?>) {
+                Object list = ((Map<?, ?>) parameter).get("list");
+                if (list instanceof List<?>) {
+                    for (Object o : (List<?>)list) {
+                        Object itemDbObject = findDbObject(o);
+                        if (itemDbObject != null) {
+                            generatedKey(itemDbObject);
+                        }
                     }
                 }
             }
@@ -126,17 +126,17 @@ public class GeneratedKeyInterceptor implements Interceptor {
         for (Field field : fieldList) {
 
             if (!field.getType().isAssignableFrom(Long.class)) {
-                break;
+                continue;
             }
 
             DistributedId annotation = field.getAnnotation(DistributedId.class);
             if (annotation == null) {
-                break;
+                continue;
             }
 
             field.setAccessible(true);
             if (field.get(parameter) != null) {
-                break;
+                continue;
             }
             ServerResponseEntity<Long> segmentIdResponseEntity = segmentFeignClient.getSegmentId(annotation.value());
             if (segmentIdResponseEntity.isSuccess()) {
