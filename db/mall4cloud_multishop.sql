@@ -71,6 +71,9 @@ CREATE TABLE `shop_detail` (
   `type` tinyint DEFAULT NULL COMMENT '店铺类型1自营店 2普通店',
   PRIMARY KEY (`shop_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=324 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='店铺详情';
+insert into `shop_detail` (`shop_id`, `create_time`, `update_time`, `shop_name`, `intro`, `shop_logo`, `mobile_background_pic`, `shop_status`, `business_license`, `identity_card_front`, `identity_card_later`, `type`) values
+    ('324','2022-04-14 16:36:13','2022-04-14 16:36:13','商家','商家店铺','/2022/04/14/2bdd14bd15094b15907dfe6c2b86c536','/2022/04/14/791fb3e04fca4fc79adeb79378436068','1','/2022/04/14/136d531dfa9b4cbdb17f555a73b0f7b4','/2022/04/14/50f9525a2b86434e98d97f4df017fcb4','/2022/04/14/dcc4c3c9f44b420a995c292d6df93f2c','2');
+
 
 /*Table structure for table `shop_user` */
 
@@ -90,6 +93,10 @@ CREATE TABLE `shop_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='商家用户';
 
 /*Table structure for table `undo_log` */
+insert into `shop_user` (`shop_user_id`, `create_time`, `update_time`, `shop_id`, `nick_name`, `code`, `phone_num`, `has_account`) values
+('110400','2022-04-14 16:36:13','2022-04-14 16:36:13','324','商家',NULL,NULL,'1');
+
+
 
 DROP TABLE IF EXISTS `undo_log`;
 
