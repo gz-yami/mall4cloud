@@ -75,6 +75,15 @@ export default {
       selectedCategories: [],
       categorySelectorVisible: false, // 分类弹窗显隐
       rules: {
+        name: [
+          { required: true, message: '品牌名称不能为空', trigger: 'blur' }
+        ],
+        imgUrl: [
+          { required: true, message: 'logo图片不能为空', trigger: 'blur' }
+        ],
+        firstLetter: [
+          { required: true, message: '首字母不能为空', trigger: 'blur' }
+        ]
       }
     }
   },
