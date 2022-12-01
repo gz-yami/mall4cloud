@@ -24,6 +24,7 @@
               v-model="loginInfo.password"
               type="password"
               :placeholder="$t('login.password')"
+              @keyup.enter="handleLogin"
               @focus="inputFocus('password')"
               @blur="inputDefocus('password')"
             >
