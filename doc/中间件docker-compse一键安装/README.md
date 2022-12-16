@@ -40,6 +40,12 @@ docker-compose up -d --build
 
 ![image-20210616090042502](../img/中间件安装/minio新建桶.png)
 
+若要前端可以读取图片，需要设置权限
+
+![image-20210629112059876](../img/中间件安装/minio设置权限.png)
+
+![](../img/中间件安装/minio设置权限-2.png)
+
 7.创建es索引
 
 新建索引
