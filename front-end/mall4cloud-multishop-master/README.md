@@ -31,6 +31,26 @@ JAVA后台：https://gitee.com/gz-yami/mall4cloud
 uni-app：https://gitee.com/gz-yami/mall4cloud-uniapp
 
 
+### 1.启动
+
+- 安装node模块 (推荐使用淘宝镜像，`cnpm install`)
+
+```
+npm install
+```
+
+- 运行
+
+```
+npm run dev
+```
+
+- 部署
+
+```
+npm run build:prod
+```
+
 
 ## 技术介绍
 
