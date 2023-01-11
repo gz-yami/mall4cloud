@@ -14,6 +14,10 @@
 
 gitee：https://gitee.com/gz-yami/mall4cloud/tree/master/doc
 
+**开发环境搭建视频（推荐先看下文档再看视频）：https://www.bilibili.com/video/BV1TK411C7aV** 
+
+本来是一个小姐姐录制的带声音的，后来小姐姐害羞，就删除声音了。如果视频对你有用，记得点赞投币噢。
+
 本项目是一个极度遵守阿里巴巴代码规约的项目，以下是代码规约扫描结果
 
 
