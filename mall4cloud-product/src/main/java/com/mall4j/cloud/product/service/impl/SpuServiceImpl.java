@@ -250,7 +250,7 @@ public class SpuServiceImpl implements SpuService {
         if (Objects.nonNull(shopCategory)) {
             esProductBO.setShopSecondaryCategoryName(shopCategory.getName());
             esProductBO.setShopPrimaryCategoryId(shopCategory.getParentId());
-            esProductBO.setShopPrimaryCategoryName(shopCategory.getPathNames().get(0));
+//            esProductBO.setShopPrimaryCategoryName(shopCategory.getPathNames().get(0));
         }
         // 获取属性
         List<SpuAttrValueVO> spuAttrsBySpuId = spuAttrValueService.getSpuAttrsBySpuId(spuId);
