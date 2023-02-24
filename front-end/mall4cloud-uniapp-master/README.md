@@ -31,6 +31,26 @@ JAVA后台：https://gitee.com/gz-yami/mall4cloud
 uni-app：https://gitee.com/gz-yami/mall4cloud-uniapp
 
 
+## 启动
+
+- 安装node模块
+
+```
+npm install
+```
+
+- 运行
+
+```
+npm run dev:h5
+```
+
+- 部署
+
+```
+npm run build:h5
+```
+
 
 ## 技术介绍
 
