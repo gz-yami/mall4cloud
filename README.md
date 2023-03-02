@@ -57,7 +57,7 @@ H5端：https://h5.mall4j.com/cloud
 
 我们也有自己的目录结构
 
-![img](https://gitee.com/gz-yami/mall4cloud/raw/master/doc/img/%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%92%8C%E8%A7%84%E8%8C%83/%E5%BA%94%E7%94%A8%E5%88%86%E5%B1%82.png)
+![img](./doc/img/%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%92%8C%E8%A7%84%E8%8C%83/%E5%BA%94%E7%94%A8%E5%88%86%E5%B1%82.png)
 
 - VO（View Object）：显示层对象，通常是 Web 向模板渲染引擎层传输的对象。
 - DTO（Data Transfer Object）：数据传输对象，前端像后台进行传输的对象，类似于param。

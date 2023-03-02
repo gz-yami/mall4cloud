@@ -1,0 +1,36 @@
+server:
+  port: 7091
+
+console:
+  user:
+    username: seata
+    password: seata
+
+seata:
+  config:
+    # support: nacos, consul, apollo, zk, etcd3
+    type: nacos
+    nacos:
+      server-addr: 192.168.1.46:8848
+      namespace: 4b70485d-72dd-44df-a76a-7a3f578a3001
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+  registry:
+    # support: nacos, eureka, redis, zk, consul, etcd3, sofa
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 192.168.1.46:8848
+      group: SEATA_GROUP
+      cluster: default
+      namespace: 4b70485d-72dd-44df-a76a-7a3f578a3001
+      username: nacos
+      password: nacos
+  #  server:
+  #    service-port: 8091 #If not configured, the default is '${server.port} + 1000'
+  security:
+    secretKey: SeataSecretKey0c382ef121d778043159209298fd40bf3850a017
+    tokenValidityInMilliseconds: 1800000
+    ignore:
+      urls: /,/**/*.css,/**/*.js,/**/*.html,/**/*.map,/**/*.svg,/**/*.png,/**/*.ico,/console-fe/public/**,/api/v1/auth/login
