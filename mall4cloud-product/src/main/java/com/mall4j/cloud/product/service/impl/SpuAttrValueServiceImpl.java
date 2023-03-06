@@ -1,7 +1,10 @@
 package com.mall4j.cloud.product.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import com.mall4j.cloud.common.cache.constant.CacheNames;
+import com.mall4j.cloud.common.cache.util.RedisUtil;
 import com.mall4j.cloud.product.mapper.SpuAttrValueMapper;
+import com.mall4j.cloud.product.mapper.SpuMapper;
 import com.mall4j.cloud.product.model.SpuAttrValue;
 import com.mall4j.cloud.product.service.SpuAttrValueService;
 import com.mall4j.cloud.api.product.vo.SpuAttrValueVO;
@@ -26,7 +29,7 @@ public class SpuAttrValueServiceImpl implements SpuAttrValueService {
     @Autowired
     private SpuAttrValueMapper spuAttrValueMapper;
     @Autowired
-    private SpuServiceImpl spuService;
+    private SpuMapper spuMapper;
 
     @Override
     public void update(Long spuId, List<SpuAttrValue> spuAttrValues, List<SpuAttrValueVO> spuAttrValuesDb) {
@@ -103,14 +106,15 @@ public class SpuAttrValueServiceImpl implements SpuAttrValueService {
         List<Long> spuIds = null;
         if (CollUtil.isNotEmpty(attrValueIds)) {
             spuIds = spuAttrValueMapper.getShopIdByAttrValueIds(attrValueIds);
-            spuService.updateSpuUpdateTime(spuIds, null);
+            spuMapper.updateSpuUpdateTime(spuIds, null);
         } else if (CollUtil.isNotEmpty(categoryIds)) {
-            spuIds = spuService.getSpuIdsBySpuUpdateDTO(null, categoryIds, null, null);
-            spuService.updateSpuUpdateTime(null, categoryIds);
+            spuIds = spuMapper.getSpuIdsBySpuUpdateDTO(null, categoryIds, null, null);
+            spuMapper.updateSpuUpdateTime(null, categoryIds);
         }
         if (CollUtil.isEmpty(spuIds)) {
             return ;
         }
-        spuService.batchRemoveSpuCacheBySpuId(spuIds);
+        RedisUtil.deleteBatch(CacheNames.SPU_KEY, spuIds);
+        RedisUtil.deleteBatch(CacheNames.SPU_EXTENSION_KEY, spuIds);
     }
 }

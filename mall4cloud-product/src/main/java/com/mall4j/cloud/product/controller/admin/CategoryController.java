@@ -8,6 +8,7 @@ import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.security.AuthUserContext;
 import com.mall4j.cloud.product.dto.CategoryDTO;
 import com.mall4j.cloud.product.model.Category;
+import com.mall4j.cloud.product.service.CategoryAndSpuService;
 import com.mall4j.cloud.product.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -34,6 +35,9 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private CategoryAndSpuService categoryAndSpuService;
 
     @Autowired
     private MapperFacade mapperFacade;
@@ -98,8 +102,7 @@ public class CategoryController {
     @PutMapping(value = "/category_enable_or_disable")
     @ApiOperation(value = "分类的启用或禁用", notes = "分类的启用或禁用")
     public ServerResponseEntity<Boolean> categoryEnableOrDisable(@RequestBody CategoryDTO categoryDTO) {
-        Boolean isSuccess = categoryService.categoryEnableOrDisable(categoryDTO);
-        categoryService.removeCategoryCache(AuthUserContext.get().getTenantId(), null);
+        Boolean isSuccess = categoryAndSpuService.categoryEnableOrDisable(categoryDTO);
         return ServerResponseEntity.success(isSuccess);
     }
 }

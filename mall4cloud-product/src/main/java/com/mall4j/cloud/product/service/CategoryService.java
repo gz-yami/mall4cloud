@@ -63,13 +63,6 @@ public interface CategoryService {
 	void removeCategoryCache(Long shopId, Long parentId);
 
 	/**
-	 * 分类的启用和禁用
-	 * @param categoryDTO
-	 * @return
-	 */
-    Boolean categoryEnableOrDisable(CategoryDTO categoryDTO);
-
-	/**
 	 *  获取分类的pathName集合
 	 * @param categorys 分类集合
 	 */
@@ -104,4 +97,18 @@ public interface CategoryService {
 	 * @return
 	 */
 	List<CategoryVO> shopCategoryList(Long shopId);
+
+	/**
+	 * 获取子分类
+	 * @param categoryId
+	 * @return
+	 */
+	List<Category> getChildCategory(Long categoryId);
+
+	/**
+	 * 批量更新状态
+	 * @param updateList
+	 * @param status
+	 */
+	void updateBatchOfStatus(List<Long> updateList, Integer status);
 }

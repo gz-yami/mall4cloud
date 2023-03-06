@@ -22,9 +22,6 @@ import javax.servlet.DispatcherType;
 @Configuration
 public class AuthConfig {
 
-	@Autowired
-	private AuthFilter authFilter;
-
 	@Bean
 	@ConditionalOnMissingBean
 	public AuthConfigAdapter authConfigAdapter() {
@@ -33,7 +30,7 @@ public class AuthConfig {
 
 	@Bean
 	@Lazy
-	public FilterRegistrationBean<AuthFilter> filterRegistration(AuthConfigAdapter authConfigAdapter) {
+	public FilterRegistrationBean<AuthFilter> filterRegistration(AuthConfigAdapter authConfigAdapter, AuthFilter authFilter) {
 		FilterRegistrationBean<AuthFilter> registration = new FilterRegistrationBean<>();
 		// 添加过滤器
 		registration.setFilter(authFilter);

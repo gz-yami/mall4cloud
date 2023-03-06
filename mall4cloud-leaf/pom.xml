@@ -40,6 +40,11 @@
             <artifactId>mall4cloud-api-leaf</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.mall4j.cloud</groupId>
+            <artifactId>mall4cloud-common-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

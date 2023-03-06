@@ -36,9 +36,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
-    @Autowired
-    private SpuService spuService;
-
     @Override
     public CategoryVO getById(Long categoryId) {
         CategoryVO category = categoryMapper.getById(categoryId);
@@ -106,48 +103,6 @@ public class CategoryServiceImpl implements CategoryService {
             @CacheEvict(cacheNames = CacheNames.CATEGORY_LIST, key = "#shopId + ':' + #parentId")
     })
     public void removeCategoryCache(Long shopId, Long parentId) {
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Boolean categoryEnableOrDisable(CategoryDTO categoryDTO) {
-        CategoryVO categoryDb = getById(categoryDTO.getCategoryId());
-        // 如果是重复提交，则直接返回
-        if (Objects.equals(categoryDb.getStatus(), categoryDTO.getStatus())) {
-            return Boolean.TRUE;
-        }
-        List<Long> updateList = new ArrayList<>();
-        List<Long> thirdIdList = new ArrayList<>();
-        if (!categoryDb.getLevel().equals(CategoryLevel.THIRD.value())) {
-            // 如果是店铺的二级分类需要将分类id放进去
-            if (!Objects.equals(categoryDb.getShopId(), Constant.PLATFORM_SHOP_ID) && Objects.equals(categoryDb.getLevel(), CategoryLevel.SECOND.value())) {
-                thirdIdList.add(categoryDb.getCategoryId());
-            }
-
-            List<Category> categoryList = categoryMapper.getChildCategory(categoryDb.getCategoryId());
-            categoryList.forEach(category -> {
-                updateList.add(category.getCategoryId());
-                if (Objects.equals(categoryDb.getShopId(), Constant.PLATFORM_SHOP_ID) && Objects.equals(category.getLevel(), CategoryLevel.THIRD.value())) {
-                    thirdIdList.add(category.getCategoryId());
-                } else if (!Objects.equals(categoryDb.getShopId(), Constant.PLATFORM_SHOP_ID) && Objects.equals(category.getLevel(), CategoryLevel.SECOND.value())) {
-                    thirdIdList.add(category.getCategoryId());
-                }
-            });
-        } else {
-            updateList.add(categoryDb.getCategoryId());
-            thirdIdList.add(categoryDb.getCategoryId());
-        }
-        updateList.add(categoryDb.getCategoryId());
-        categoryMapper.updateBatchOfStatus(updateList, categoryDTO.getStatus());
-
-        // 分类下架后，下架分类中的商品
-        if (Objects.equals(categoryDTO.getStatus(), StatusEnum.DISABLE.value())) {
-            if (CollUtil.isEmpty(thirdIdList)) {
-                return Boolean.TRUE;
-            }
-            spuService.batchChangeSpuStatusByCids(thirdIdList, categoryDb.getShopId(), StatusEnum.DISABLE.value());
-        }
-        return Boolean.TRUE;
     }
 
     @Override
@@ -236,6 +191,19 @@ public class CategoryServiceImpl implements CategoryService {
         List<CategoryVO> firstCategories = categoryMap.get(CategoryLevel.First.value());
         setChildCategory(firstCategories, secondCategories);
         return firstCategories;
+    }
+
+    @Override
+    public List<Category> getChildCategory(Long categoryId) {
+        return categoryMapper.getChildCategory(categoryId);
+    }
+
+    @Override
+    public void updateBatchOfStatus(List<Long> updateList, Integer status) {
+        if (CollUtil.isEmpty(updateList) || Objects.isNull(status)) {
+            return;
+        }
+        categoryMapper.updateBatchOfStatus(updateList, status);
     }
 
     private void setChildCategory(List<CategoryVO> categories, List<CategoryVO> childCategories) {
