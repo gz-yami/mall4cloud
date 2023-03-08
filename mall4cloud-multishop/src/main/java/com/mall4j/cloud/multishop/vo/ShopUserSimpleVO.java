@@ -2,7 +2,7 @@ package com.mall4j.cloud.multishop.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mall4j.cloud.common.serializer.ImgJsonSerializer;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
@@ -13,13 +13,13 @@ public class ShopUserSimpleVO {
 	/**
 	 * 昵称
 	 */
-	@ApiModelProperty("昵称")
+	@Schema(description = "昵称" )
 	private String nickName;
 
 	/**
 	 * 头像
 	 */
-	@ApiModelProperty("头像")
+	@Schema(description = "头像" )
 	@JsonSerialize(using = ImgJsonSerializer.class)
 	private String avatar;
 

@@ -7,8 +7,8 @@ import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.search.constant.SearchTypeEnum;
 import com.mall4j.cloud.search.manager.ProductSearchManager;
 import com.mall4j.cloud.search.vo.SpuAdminVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +22,14 @@ import javax.validation.Valid;
  */
 @RestController("platformSearchSpuController")
 @RequestMapping("/p/search")
-@Api(tags = "platform-spu列表接口")
+@Tag(name = "platform-spu列表接口")
 public class ProductSearchController {
 
     @Autowired
     private ProductSearchManager productSearchManager;
 
     @GetMapping("/page")
-    @ApiOperation(value = "商品管理信息列表（平台端）", notes = "商品管理信息列表（平台端）")
+    @Operation(summary = "商品管理信息列表（平台端）" , description = "商品管理信息列表（平台端）")
     public ServerResponseEntity<EsPageVO<SpuAdminVO>> adminPage(@Valid EsPageDTO pageDTO, ProductSearchDTO productSearchDTO) {
         productSearchDTO.setSearchType(SearchTypeEnum.PLATFORM.value());
         EsPageVO<SpuAdminVO> searchPage =  productSearchManager.adminPage(pageDTO, productSearchDTO);

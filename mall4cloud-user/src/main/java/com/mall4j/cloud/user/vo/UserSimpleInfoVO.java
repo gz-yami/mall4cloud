@@ -1,6 +1,6 @@
 package com.mall4j.cloud.user.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
@@ -8,10 +8,10 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class UserSimpleInfoVO {
 
-    @ApiModelProperty(value = "用户昵称",required=true)
+    @Schema(description = "用户昵称" ,required=true)
     private String nickName;
 
-    @ApiModelProperty(value = "用户头像",required=true)
+    @Schema(description = "用户头像" ,required=true)
     private String pic;
 
     public String getNickName() {

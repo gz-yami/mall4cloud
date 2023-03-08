@@ -11,8 +11,8 @@ import com.mall4j.cloud.common.security.AuthUserContext;
 import com.mall4j.cloud.multishop.dto.ShopDetailDTO;
 import com.mall4j.cloud.multishop.model.ShopDetail;
 import com.mall4j.cloud.multishop.service.ShopDetailService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +27,7 @@ import java.util.Objects;
  */
 @RestController("platformShopDetailController")
 @RequestMapping("/platform/shop_detail")
-@Api(tags = "platform-店铺信息")
+@Tag(name = "platform-店铺信息")
 public class ShopDetailController {
 
     @Autowired
@@ -37,7 +37,7 @@ public class ShopDetailController {
     private MapperFacade mapperFacade;
 
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @Operation(summary = "分页查询" , description = "分页查询")
     public ServerResponseEntity<PageVO<ShopDetailVO>> getShopAuditingPage(PageDTO pageDTO, ShopDetailDTO shopDetailDTO) {
         if (!Objects.equals(Constant.PLATFORM_SHOP_ID, AuthUserContext.get().getTenantId())) {
             throw new Mall4cloudException(ResponseEnum.UNAUTHORIZED);
@@ -46,7 +46,7 @@ public class ShopDetailController {
     }
 
     @GetMapping("/info")
-    @ApiOperation(value = "店铺详情", notes = "店铺详情")
+    @Operation(summary = "店铺详情" , description = "店铺详情")
     public ServerResponseEntity<ShopDetailVO> getInfo(@RequestParam Long shopId) {
         ShopDetailVO shopDetailVO = shopDetailService.getByShopId(shopId);
         return ServerResponseEntity.success(shopDetailVO);
@@ -56,14 +56,14 @@ public class ShopDetailController {
      * 新建店铺
      */
     @PostMapping("/create_shop")
-    @ApiOperation(value = "新建店铺", notes = "新建店铺")
+    @Operation(summary = "新建店铺" , description = "新建店铺")
     public ServerResponseEntity<Void> createShop(@RequestBody ShopDetailDTO shopDetailDTO) {
         shopDetailService.createShop(shopDetailDTO);
         return ServerResponseEntity.success();
     }
 
     @PutMapping("/update_shop")
-    @ApiOperation(value = "更新店铺", notes = "更新店铺")
+    @Operation(summary = "更新店铺" , description = "更新店铺")
     public ServerResponseEntity<Void> updateShop(@RequestBody ShopDetailDTO shopDetailDTO) {
         shopDetailService.update(mapperFacade.map(shopDetailDTO, ShopDetail.class));
         return ServerResponseEntity.success();

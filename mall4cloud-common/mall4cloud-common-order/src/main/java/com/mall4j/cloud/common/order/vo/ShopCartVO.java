@@ -1,6 +1,6 @@
 package com.mall4j.cloud.common.order.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -12,21 +12,21 @@ import java.util.List;
  */
 public class ShopCartVO {
 
-	@ApiModelProperty(value = "店铺ID", required = true)
+	@Schema(description = "店铺ID" , required = true)
 	private Long shopId;
 
-	@ApiModelProperty(value = "店铺名称", required = true)
+	@Schema(description = "店铺名称" , required = true)
 	private String shopName;
 
-	@ApiModelProperty("店铺类型1自营店 2普通店")
+	@Schema(description = "店铺类型1自营店 2普通店" )
 	private Integer shopType;
 
-	@ApiModelProperty("购物车商品信息")
+	@Schema(description = "购物车商品信息" )
 	private List<ShopCartItemVO> shopCartItem;
 
-	@ApiModelProperty(value = "商品总值", required = true)
+	@Schema(description = "商品总值" , required = true)
 	private Long total;
-	@ApiModelProperty(value = "数量", required = true)
+	@Schema(description = "数量" , required = true)
 	private Integer totalCount;
 
 	public Long getShopId() {

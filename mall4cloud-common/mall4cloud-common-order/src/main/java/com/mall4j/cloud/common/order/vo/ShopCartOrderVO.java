@@ -1,6 +1,6 @@
 package com.mall4j.cloud.common.order.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,19 +11,19 @@ import java.util.List;
  */
 public class ShopCartOrderVO implements Serializable{
 
-    @ApiModelProperty(value = "店铺id", required = true)
+    @Schema(description = "店铺id" , required = true)
     private Long shopId;
 
-    @ApiModelProperty(value = "店铺名称", required = true)
+    @Schema(description = "店铺名称" , required = true)
     private String shopName;
 
-    @ApiModelProperty(value = "商品总值", required = true)
+    @Schema(description = "商品总值" , required = true)
     private Long total;
 
-    @ApiModelProperty(value = "购物车商品", required = true)
+    @Schema(description = "购物车商品" , required = true)
     private List<ShopCartItemVO> shopCartItemVO;
 
-    @ApiModelProperty(value = "商品总数", required = true)
+    @Schema(description = "商品总数" , required = true)
     private Integer totalCount;
 
 

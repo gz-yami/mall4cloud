@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.vo.search;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
@@ -8,31 +8,31 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class SpuSearchVO {
 
-    @ApiModelProperty(value = "商品id")
+    @Schema(description = "商品id" )
     private Long spuId;
 
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description = "商品名称" )
     private String spuName;
 
-    @ApiModelProperty(value = "卖点")
+    @Schema(description = "卖点" )
     private String sellingPoint;
 
-    @ApiModelProperty("店铺id")
+    @Schema(description = "店铺id" )
     private Long shopId;
 
-    @ApiModelProperty(value = "商品售价")
+    @Schema(description = "商品售价" )
     private Long priceFee;
 
-    @ApiModelProperty(value = "市场价，整数方式保存")
+    @Schema(description = "市场价，整数方式保存" )
     private Long marketPriceFee;
 
-    @ApiModelProperty(value = "是否有库存")
+    @Schema(description = "是否有库存" )
     private Boolean hasStock;
 
-    @ApiModelProperty(value = "销量")
+    @Schema(description = "销量" )
     private Integer saleNum;
 
-    @ApiModelProperty("商品介绍主图")
+    @Schema(description = "商品介绍主图" )
     private String mainImgUrl;
 
     public String getMainImgUrl() {

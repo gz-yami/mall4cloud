@@ -1,6 +1,6 @@
 package com.mall4j.cloud.common.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -20,45 +20,45 @@ public class OrderSearchDTO {
      */
     private Long shopId;
 
-    @ApiModelProperty("订单状态")
+    @Schema(description = "订单状态" )
     private Integer status;
 
-    @ApiModelProperty("是否已经支付，1：已经支付过，0：没有支付过")
+    @Schema(description = "是否已经支付，1：已经支付过，0：没有支付过" )
     private Integer isPayed;
 
     /**
      * 订购流水号
      */
-    @ApiModelProperty("订单号")
+    @Schema(description = "订单号" )
     private Long orderId;
 
-    @ApiModelProperty("下单的时间范围:开始时间")
+    @Schema(description = "下单的时间范围:开始时间" )
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
-    @ApiModelProperty("下单的时间范围:结束时间")
+    @Schema(description = "下单的时间范围:结束时间" )
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
-    @ApiModelProperty("店铺名称")
+    @Schema(description = "店铺名称" )
     private String shopName;
 
-    @ApiModelProperty("商品名称")
+    @Schema(description = "商品名称" )
     private String spuName;
 
-    @ApiModelProperty("收货人姓名")
+    @Schema(description = "收货人姓名" )
     private String consignee;
 
-    @ApiModelProperty("收货人手机号")
+    @Schema(description = "收货人手机号" )
     private String mobile;
 
-    @ApiModelProperty("物流类型 3：无需快递")
+    @Schema(description = "物流类型 3：无需快递" )
     private Integer deliveryType;
 
-    @ApiModelProperty("开始页")
+    @Schema(description = "开始页" )
     private Integer pageNum;
 
-    @ApiModelProperty("每页大小")
+    @Schema(description = "每页大小" )
     private Integer pageSize;
 
     public Long getUserId() {

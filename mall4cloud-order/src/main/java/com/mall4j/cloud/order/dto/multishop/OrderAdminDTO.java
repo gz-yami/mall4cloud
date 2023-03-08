@@ -1,6 +1,6 @@
 package com.mall4j.cloud.order.dto.multishop;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,14 +12,14 @@ import javax.validation.constraints.NotNull;
  */
 public class OrderAdminDTO {
 
-    @ApiModelProperty(value = "订单id")
+    @Schema(description = "订单id" )
     private Long orderId;
 
-    @ApiModelProperty(value = "店铺id")
+    @Schema(description = "店铺id" )
     private Long shopId;
 
     @NotNull(message = "配送类型不能为空")
-    @ApiModelProperty(value = "配送类型 3：无需快递")
+    @Schema(description = "配送类型 3：无需快递" )
     private Integer dvyType;
 
     public Long getOrderId() {

@@ -1,24 +1,23 @@
 package com.mall4j.cloud.product.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
  */
-@ApiModel("购物车合计")
+@Schema(description = "购物车合计")
 public class ShopCartAmountVO {
 
-    @ApiModelProperty("总额")
+    @Schema(description = "总额" )
     private Long totalMoney;
 
-    @ApiModelProperty("总计")
+    @Schema(description = "总计" )
     private Long finalMoney;
 
-    @ApiModelProperty("减额")
+    @Schema(description = "减额" )
     private Long subtractMoney;
 
-    @ApiModelProperty("商品数量")
+    @Schema(description = "商品数量" )
     private Integer count;
 
     public Long getTotalMoney() {

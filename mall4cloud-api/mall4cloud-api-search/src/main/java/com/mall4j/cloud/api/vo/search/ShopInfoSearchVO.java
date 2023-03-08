@@ -2,7 +2,7 @@ package com.mall4j.cloud.api.vo.search;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mall4j.cloud.common.serializer.ImgJsonSerializer;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
@@ -10,17 +10,17 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class ShopInfoSearchVO {
 
-    @ApiModelProperty(value = "店铺名称 搜索华为的时候，可以把华为的旗舰店搜索出来")
+    @Schema(description = "店铺名称 搜索华为的时候，可以把华为的旗舰店搜索出来" )
     private String shopName;
 
-    @ApiModelProperty(value = "店铺id")
+    @Schema(description = "店铺id" )
     private Long shopId;
 
-    @ApiModelProperty(value = "店铺logo")
+    @Schema(description = "店铺logo" )
     @JsonSerialize(using =ImgJsonSerializer.class)
     private String shopLogo;
 
-    @ApiModelProperty("店铺类型1自营店 2普通店")
+    @Schema(description = "店铺类型1自营店 2普通店" )
     private Integer type;
 
     public String getShopName() {

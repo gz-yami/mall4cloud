@@ -1,6 +1,6 @@
 package com.mall4j.cloud.common.order.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -11,22 +11,22 @@ import java.util.List;
  */
 public class ShopCartOrderMergerVO {
 
-    @ApiModelProperty(value = "商品总值", required = true)
+    @Schema(description = "商品总值" , required = true)
     private Long total;
 
-    @ApiModelProperty(value = "商品总数", required = true)
+    @Schema(description = "商品总数" , required = true)
     private Integer totalCount;
 
-    @ApiModelProperty(value = "配送类型 ：无需快递")
+    @Schema(description = "配送类型 ：无需快递" )
     private Integer dvyType;
 
-    @ApiModelProperty(value = "过滤掉的商品项", required = true)
+    @Schema(description = "过滤掉的商品项" , required = true)
     private List<ShopCartItemVO> filterShopItems;
 
-    @ApiModelProperty(value = "每个店铺的订单信息", required = true)
+    @Schema(description = "每个店铺的订单信息" , required = true)
     List<ShopCartOrderVO> shopCartOrders;
 
-    @ApiModelProperty(value = "用户地址")
+    @Schema(description = "用户地址" )
     private UserAddrVO userAddr;
 
 

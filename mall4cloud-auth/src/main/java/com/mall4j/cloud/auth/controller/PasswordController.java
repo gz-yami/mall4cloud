@@ -8,8 +8,8 @@ import com.mall4j.cloud.auth.model.AuthAccount;
 import com.mall4j.cloud.auth.service.AuthAccountService;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.security.AuthUserContext;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
  * @date 2021/01/29
  */
 @RestController
-@Api(tags = "密码")
+@Tag(name = "密码")
 public class PasswordController {
 
 	@Autowired
@@ -36,7 +36,7 @@ public class PasswordController {
 	private PasswordEncoder passwordEncoder;
 
 	@PutMapping("/update_password")
-	@ApiOperation(value = "更新密码", notes = "更新当前用户的密码, 更新密码之后要退出登录，清理token")
+	@Operation(summary = "更新密码" , description = "更新当前用户的密码, 更新密码之后要退出登录，清理token")
 	public ServerResponseEntity<TokenInfoVO> updatePassword(@Valid @RequestBody UpdatePasswordDTO updatePasswordDTO) {
 		UserInfoInTokenBO userInfoInToken = AuthUserContext.get();
 		AuthAccount authAccount = authAccountService.getByUserIdAndType(userInfoInToken.getUserId(), userInfoInToken.getSysType());

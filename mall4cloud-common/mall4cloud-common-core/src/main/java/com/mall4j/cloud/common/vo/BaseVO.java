@@ -1,6 +1,6 @@
 package com.mall4j.cloud.common.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 
@@ -16,13 +16,13 @@ public class BaseVO {
 	/**
 	 * 创建时间
 	 */
-	@ApiModelProperty("创建时间")
+	@Schema(description = "创建时间" )
 	protected Date createTime;
 
 	/**
 	 * 更新时间
 	 */
-	@ApiModelProperty("更新时间")
+	@Schema(description = "更新时间" )
 	protected Date updateTime;
 
 	public Date getCreateTime() {

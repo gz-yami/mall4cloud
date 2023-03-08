@@ -1,6 +1,6 @@
 package com.mall4j.cloud.product.dto.shopcart;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotNull;
 
@@ -11,11 +11,11 @@ import javax.validation.constraints.NotNull;
 public class CheckShopCartItemDTO {
 
     @NotNull
-    @ApiModelProperty(value = "购物车ID", required = true)
+    @Schema(description = "购物车ID" , required = true)
     private Long shopCartItemId;
 
     @NotNull
-    @ApiModelProperty(value = "商品是否勾选 1:勾选 0:未勾选")
+    @Schema(description = "商品是否勾选 1:勾选 0:未勾选" )
     private Integer isChecked;
 
     public Long getShopCartItemId() {

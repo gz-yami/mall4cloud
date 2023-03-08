@@ -7,8 +7,8 @@ import com.mall4j.cloud.platform.dto.ChangeAccountDTO;
 import com.mall4j.cloud.platform.service.SysUserAccountService;
 import com.mall4j.cloud.platform.service.SysUserService;
 import com.mall4j.cloud.platform.vo.SysUserVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 @RequestMapping(value = "/sys_user/account")
 @RestController
-@Api(tags = "平台用户账号信息")
+@Tag(name = "平台用户账号信息")
 public class SysUserAccountController {
 
 	private final SysUserAccountService SysUserAccountService;
@@ -34,14 +34,14 @@ public class SysUserAccountController {
 
 
 	@GetMapping
-	@ApiOperation(value = "获取账号信息", notes = "获取账号信息")
+	@Operation(summary = "获取账号信息" , description = "获取账号信息")
 	public ServerResponseEntity<AuthAccountVO> getAccount(Long userId) {
 		return SysUserAccountService.getByUserIdAndSysType(userId, AuthUserContext.get().getSysType());
 	}
 
 
 	@PostMapping
-	@ApiOperation(value = "添加账号", notes = "添加账号")
+	@Operation(summary = "添加账号" , description = "添加账号")
 	public ServerResponseEntity<Void> addAccount(@Valid @RequestBody ChangeAccountDTO changeAccountDTO) {
 		SysUserVO sysUserVO = SysUserService.getByUserId(changeAccountDTO.getUserId());
 		if (sysUserVO == null) {
@@ -54,7 +54,7 @@ public class SysUserAccountController {
 	}
 
 	@PutMapping
-	@ApiOperation(value = "修改账号", notes = "修改账号")
+	@Operation(summary = "修改账号" , description = "修改账号")
 	public ServerResponseEntity<Void> updateAccount(@Valid @RequestBody ChangeAccountDTO changeAccountDTO) {
 		SysUserVO sysUserVO = SysUserService.getByUserId(changeAccountDTO.getUserId());
 		if (sysUserVO == null || Objects.equals(sysUserVO.getHasAccount(), 0)) {

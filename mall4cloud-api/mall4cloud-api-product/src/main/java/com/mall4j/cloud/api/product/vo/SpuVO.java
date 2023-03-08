@@ -3,7 +3,7 @@ package com.mall4j.cloud.api.product.vo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mall4j.cloud.common.serializer.ImgJsonSerializer;
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -16,78 +16,78 @@ import java.util.List;
 public class SpuVO extends BaseVO {
 	private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty("spu id")
+	@Schema(description = "spu id" )
 	private Long spuId;
 
-	@ApiModelProperty("品牌ID")
+	@Schema(description = "品牌ID" )
 	private Long brandId;
 
-	@ApiModelProperty("分类ID")
+	@Schema(description = "分类ID" )
 	private Long categoryId;
 
-	@ApiModelProperty("店铺分类ID")
+	@Schema(description = "店铺分类ID" )
 	private Long shopCategoryId;
 
-	@ApiModelProperty("店铺id")
+	@Schema(description = "店铺id" )
 	private Long shopId;
 
-	@ApiModelProperty("spu名称")
+	@Schema(description = "spu名称" )
 	private String name;
 
-	@ApiModelProperty("卖点")
+	@Schema(description = "卖点" )
 	private String sellingPoint;
 
-	@ApiModelProperty("商品介绍主图")
+	@Schema(description = "商品介绍主图" )
 	@JsonSerialize(using = ImgJsonSerializer.class)
 	private String mainImgUrl;
 
-	@ApiModelProperty("商品介绍主图 多个图片逗号分隔")
+	@Schema(description = "商品介绍主图 多个图片逗号分隔" )
 	@JsonSerialize(using = ImgJsonSerializer.class)
 	private String imgUrls;
 
-	@ApiModelProperty("售价，整数方式保存")
+	@Schema(description = "售价，整数方式保存" )
 	private Long priceFee;
 
-	@ApiModelProperty("市场价，整数方式保存")
+	@Schema(description = "市场价，整数方式保存" )
 	private Long marketPriceFee;
 
-	@ApiModelProperty("状态 1:enable, 0:disable, -1:deleted")
+	@Schema(description = "状态 1:enable, 0:disable, -1:deleted" )
 	private Integer status;
 
-	@ApiModelProperty("sku是否含有图片 0无 1有")
+	@Schema(description = "sku是否含有图片 0无 1有" )
 	private Integer hasSkuImg;
 
-	@ApiModelProperty("商品详情")
+	@Schema(description = "商品详情" )
 	private String detail;
 
-	@ApiModelProperty("总库存")
+	@Schema(description = "总库存" )
 	private Integer totalStock;
 
-	@ApiModelProperty("规格属性")
+	@Schema(description = "规格属性" )
 	private List<SpuAttrValueVO> spuAttrValues;
 
-	@ApiModelProperty("sku列表")
+	@Schema(description = "sku列表" )
 	private List<SkuVO> skus;
 
-	@ApiModelProperty("序号")
+	@Schema(description = "序号" )
 	private Integer seq;
 
-	@ApiModelProperty("品牌信息")
+	@Schema(description = "品牌信息" )
 	private BrandVO brand;
 
-	@ApiModelProperty("商品销量")
+	@Schema(description = "商品销量" )
 	private Integer saleNum;
 
-	@ApiModelProperty("店铺名称")
+	@Schema(description = "店铺名称" )
 	private String shopName;
 
-	@ApiModelProperty("分类信息")
+	@Schema(description = "分类信息" )
 	private CategoryVO category;
 
-	@ApiModelProperty("店铺分类信息")
+	@Schema(description = "店铺分类信息" )
 	private CategoryVO shopCategory;
 
-	@ApiModelProperty("分组商品关联id")
+	@Schema(description = "分组商品关联id" )
 	private Long referenceId;
 
 	public Long getReferenceId() {

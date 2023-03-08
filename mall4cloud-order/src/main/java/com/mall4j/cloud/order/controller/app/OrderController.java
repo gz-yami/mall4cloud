@@ -20,9 +20,9 @@ import com.mall4j.cloud.order.service.OrderAddrService;
 import com.mall4j.cloud.order.service.OrderItemService;
 import com.mall4j.cloud.order.service.OrderService;
 import com.mall4j.cloud.order.vo.SubmitOrderPayInfoVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +38,7 @@ import java.util.*;
  */
 @RestController("appOrderController")
 @RequestMapping("/a/order")
-@Api(tags = "app-订单信息")
+@Tag(name = "app-订单信息")
 public class OrderController {
 
     @Autowired
@@ -63,7 +63,7 @@ public class OrderController {
      * 生成订单
      */
     @PostMapping("/confirm")
-    @ApiOperation(value = "结算，生成订单信息", notes = "传入下单所需要的参数进行下单")
+    @Operation(summary = "结算，生成订单信息" , description = "传入下单所需要的参数进行下单")
     public ServerResponseEntity<ShopCartOrderMergerVO> confirm(@Valid @RequestBody OrderDTO orderParam){
         Long userId = AuthUserContext.get().getUserId();
         // 将要返回给前端的完整的订单信息
@@ -94,7 +94,7 @@ public class OrderController {
      * 购物车/立即购买  提交订单,根据店铺拆单
      */
     @PostMapping("/submit")
-    @ApiOperation(value = "提交订单，返回支付流水号", notes = "根据传入的参数判断是否为购物车提交订单，同时对购物车进行删除，用户开始进行支付")
+    @Operation(summary = "提交订单，返回支付流水号" , description = "根据传入的参数判断是否为购物车提交订单，同时对购物车进行删除，用户开始进行支付")
     public ServerResponseEntity<List<Long>> submitOrders() {
         Long userId = AuthUserContext.get().getUserId();
         ShopCartOrderMergerVO mergerOrder = cacheManagerUtil.getCache(OrderCacheNames.ORDER_CONFIRM_KEY, String.valueOf(userId));
@@ -113,8 +113,8 @@ public class OrderController {
 
 
     @GetMapping("/order_pay_info")
-    @ApiOperation(value = "获取订单支付信息", notes = "获取订单支付的商品/地址信息")
-    @ApiImplicitParam(name = "orderIds", value = "订单流水号", required = true, dataType = "String")
+    @Operation(summary = "获取订单支付信息" , description = "获取订单支付的商品/地址信息")
+    @Parameter(name = "orderIds", description = "订单流水号" , required = true)
     public ServerResponseEntity<SubmitOrderPayInfoVO> getOrderPayInfoByOrderNumber(@RequestParam("orderIds") String orderIds) {
         long[] orderIdList = StrUtil.splitToLong(orderIds, ",");
         List<String> spuNameList = orderItemService.getSpuNameListByOrderIds(orderIdList);

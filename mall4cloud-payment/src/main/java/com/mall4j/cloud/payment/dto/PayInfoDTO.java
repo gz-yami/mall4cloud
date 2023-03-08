@@ -1,6 +1,6 @@
 package com.mall4j.cloud.payment.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -17,10 +17,10 @@ import java.util.List;
 public class PayInfoDTO{
 
 	@NotEmpty(message = "订单号不能为空")
-	@ApiModelProperty(value = "订单号", required = true)
+	@Schema(description = "订单号" , required = true)
 	private List<Long> orderIds;
 
-	@ApiModelProperty(value = "支付完成回跳地址", required = true)
+	@Schema(description = "支付完成回跳地址" , required = true)
 	private String returnUrl;
 
 	public List<Long> getOrderIds() {

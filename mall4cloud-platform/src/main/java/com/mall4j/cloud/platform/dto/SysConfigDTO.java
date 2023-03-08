@@ -1,6 +1,6 @@
 package com.mall4j.cloud.platform.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 
 /**
@@ -12,16 +12,16 @@ import java.util.Date;
 public class SysConfigDTO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("")
+    @Schema()
     private Long id;
 
-    @ApiModelProperty("key")
+    @Schema(description = "key" )
     private String paramKey;
 
-    @ApiModelProperty("value")
+    @Schema(description = "value" )
     private String paramValue;
 
-    @ApiModelProperty("备注")
+    @Schema(description = "备注" )
     private String remark;
 
 	public Long getId() {

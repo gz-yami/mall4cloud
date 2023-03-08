@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.vo.search;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
@@ -8,13 +8,13 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class BrandSearchVO {
 
-    @ApiModelProperty(value = "品牌名称")
+    @Schema(description = "品牌名称" )
     private String brandName;
 
-    @ApiModelProperty(value = "品牌id")
+    @Schema(description = "品牌id" )
     private Long brandId;
 
-    @ApiModelProperty(value = "品牌图片")
+    @Schema(description = "品牌图片" )
     private String brandImg;
 
     public String getBrandName() {

@@ -1,7 +1,7 @@
 package com.mall4j.cloud.order.dto.multishop;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 订单项VO
@@ -12,10 +12,10 @@ import io.swagger.annotations.ApiModelProperty;
 public class OrderItemDTO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("订单项ID")
+    @Schema(description = "订单项ID" )
     private Long orderItemId;
 
-	@ApiModelProperty(value = "变化金额", required = true)
+	@Schema(description = "变化金额" , required = true)
 	private Long changeAmount;
 
 	public Long getOrderItemId() {

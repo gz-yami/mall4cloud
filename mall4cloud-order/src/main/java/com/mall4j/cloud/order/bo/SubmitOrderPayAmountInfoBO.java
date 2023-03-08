@@ -1,6 +1,6 @@
 package com.mall4j.cloud.order.bo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 
@@ -11,13 +11,13 @@ import java.util.Date;
 public class SubmitOrderPayAmountInfoBO {
 
 
-    @ApiModelProperty(value = "创建时间")
+    @Schema(description = "创建时间" )
     private Date createTime;
 
-    @ApiModelProperty(value = "总共需要支付金额")
+    @Schema(description = "总共需要支付金额" )
     private Long totalFee;
 
-    @ApiModelProperty(value = "订单地址id")
+    @Schema(description = "订单地址id" )
     private Long orderAddrId;
 
     public Long getTotalFee() {

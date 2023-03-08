@@ -7,9 +7,9 @@ import com.mall4j.cloud.biz.config.OssConfig;
 import com.mall4j.cloud.biz.constant.OssType;
 import com.mall4j.cloud.biz.vo.OssVO;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import java.util.Objects;
  */
 @RequestMapping(value = "/oss")
 @RestController
-@Api(tags = "文件管理")
+@Tag(name = "文件管理")
 public class OssController {
 
     private static final Logger log = LoggerFactory.getLogger(OssController.class);
@@ -45,8 +45,8 @@ public class OssController {
 
 
     @GetMapping(value = "/info")
-    @ApiOperation(value = "token", notes = "获取文件上传需要的token")
-    @ApiImplicitParam(name = "fileNum", value = "需要获取token的文件数量", defaultValue = "0")
+    @Operation(summary = "token" , description = "获取文件上传需要的token")
+    @Parameter(name = "fileNum", description = "需要获取token的文件数量")
     public ServerResponseEntity<OssVO> info(@RequestParam("fileNum") Integer fileNum) {
         OssVO ossVO = new OssVO();
         // minio文件上传
@@ -77,7 +77,7 @@ public class OssController {
 
 
     @PostMapping("/upload_minio")
-    @ApiOperation(value = "文件上传接口", notes = "上传文件，返回文件路径与域名")
+    @Operation(summary = "文件上传接口" , description = "上传文件，返回文件路径与域名")
     public ServerResponseEntity<OssVO> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         if (file.isEmpty()) {
             return ServerResponseEntity.success();

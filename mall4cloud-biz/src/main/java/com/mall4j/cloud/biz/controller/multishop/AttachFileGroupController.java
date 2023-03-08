@@ -5,8 +5,8 @@ import com.mall4j.cloud.biz.model.AttachFileGroup;
 import com.mall4j.cloud.biz.service.AttachFileGroupService;
 import com.mall4j.cloud.biz.vo.AttachFileGroupVO;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RestController("multishopAttachFileGroupController")
 @RequestMapping("/m/attach_file_group")
-@Api(tags = "店铺-文件分组")
+@Tag(name = "店铺-文件分组")
 public class AttachFileGroupController {
     @Autowired
     private AttachFileGroupService attachFileGroupService;
@@ -29,20 +29,20 @@ public class AttachFileGroupController {
 	private MapperFacade mapperFacade;
 
 	@GetMapping("/list")
-	@ApiOperation(value = "获取列表", notes = "分页获取列表")
+	@Operation(summary = "获取列表" , description = "分页获取列表")
 	public ServerResponseEntity<List<AttachFileGroupVO>> list() {
 		List<AttachFileGroupVO> attachFileGroupPage = attachFileGroupService.list();
 		return ServerResponseEntity.success(attachFileGroupPage);
 	}
 
 	@GetMapping
-    @ApiOperation(value = "获取", notes = "根据attachFileGroupId获取")
+    @Operation(summary = "获取" , description = "根据attachFileGroupId获取")
     public ServerResponseEntity<AttachFileGroupVO> getByAttachFileGroupId(@RequestParam Long attachFileGroupId) {
         return ServerResponseEntity.success(attachFileGroupService.getByAttachFileGroupId(attachFileGroupId));
     }
 
     @PostMapping
-    @ApiOperation(value = "保存", notes = "保存")
+    @Operation(summary = "保存" , description = "保存")
     public ServerResponseEntity<Void> save(@Valid @RequestBody AttachFileGroupDTO attachFileGroupDTO) {
         AttachFileGroup attachFileGroup = mapperFacade.map(attachFileGroupDTO, AttachFileGroup.class);
         attachFileGroup.setAttachFileGroupId(null);
@@ -51,7 +51,7 @@ public class AttachFileGroupController {
     }
 
     @PutMapping
-    @ApiOperation(value = "更新", notes = "更新")
+    @Operation(summary = "更新" , description = "更新")
     public ServerResponseEntity<Void> update(@Valid @RequestBody AttachFileGroupDTO attachFileGroupDTO) {
         AttachFileGroup attachFileGroup = mapperFacade.map(attachFileGroupDTO, AttachFileGroup.class);
         attachFileGroupService.update(attachFileGroup);
@@ -59,7 +59,7 @@ public class AttachFileGroupController {
     }
 
     @DeleteMapping
-    @ApiOperation(value = "删除", notes = "根据id删除")
+    @Operation(summary = "删除" , description = "根据id删除")
     public ServerResponseEntity<Void> delete(@RequestParam Long attachFileGroupId) {
         attachFileGroupService.deleteById(attachFileGroupId);
         return ServerResponseEntity.success();

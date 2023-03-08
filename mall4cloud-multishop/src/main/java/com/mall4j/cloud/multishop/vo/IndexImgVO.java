@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mall4j.cloud.api.product.vo.SpuVO;
 import com.mall4j.cloud.common.serializer.ImgJsonSerializer;
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 轮播图VO
@@ -15,29 +15,29 @@ import io.swagger.annotations.ApiModelProperty;
 public class IndexImgVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键")
+    @Schema(description = "主键" )
     private Long imgId;
 
-    @ApiModelProperty("店铺ID")
+    @Schema(description = "店铺ID" )
     private Long shopId;
 
-    @ApiModelProperty("图片")
+    @Schema(description = "图片" )
 	@JsonSerialize(using = ImgJsonSerializer.class)
     private String imgUrl;
 
-    @ApiModelProperty("状态")
+    @Schema(description = "状态" )
     private Integer status;
 
-    @ApiModelProperty("顺序")
+    @Schema(description = "顺序" )
     private Integer seq;
 
-    @ApiModelProperty("关联商品id")
+    @Schema(description = "关联商品id" )
     private Long spuId;
 
-    @ApiModelProperty("图片类型 0:小程序 1:pc")
+    @Schema(description = "图片类型 0:小程序 1:pc" )
     private Integer imgType;
 
-    @ApiModelProperty("spu信息")
+    @Schema(description = "spu信息" )
 	private SpuVO spu;
 
 	public Long getImgId() {

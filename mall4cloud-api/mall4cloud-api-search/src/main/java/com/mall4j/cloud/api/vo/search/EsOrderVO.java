@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.vo.search;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 import java.util.List;
@@ -11,37 +11,37 @@ import java.util.List;
  */
 public class EsOrderVO {
 
-    @ApiModelProperty(value = "订单项",required=true)
+    @Schema(description = "订单项" ,required=true)
     private List<EsOrderItemVO> orderItems;
 
-    @ApiModelProperty(value = "订单号",required=true)
+    @Schema(description = "订单号" ,required=true)
     private Long orderId;
 
-    @ApiModelProperty(value = "总价",required=true)
+    @Schema(description = "总价" ,required=true)
     private Long actualTotal;
 
-    @ApiModelProperty(value = "订单状态",required=true)
+    @Schema(description = "订单状态" ,required=true)
     private Integer status;
 
-    @ApiModelProperty(value = "配送类型 3：无需快递",required=true)
+    @Schema(description = "配送类型 3：无需快递" ,required=true)
     private Integer deliveryType;
 
-    @ApiModelProperty(value = "店铺名称",required=true)
+    @Schema(description = "店铺名称" ,required=true)
     private String shopName;
 
-    @ApiModelProperty(value = "店铺id",required=true)
+    @Schema(description = "店铺id" ,required=true)
     private Long shopId;
 
-    @ApiModelProperty(value = "订单创建时间",required=true)
+    @Schema(description = "订单创建时间" ,required=true)
     private Date createTime;
 
-    @ApiModelProperty(value = "商品总数",required=true)
+    @Schema(description = "商品总数" ,required=true)
     private Integer allCount;
 
-    @ApiModelProperty(value = "收货人姓名")
+    @Schema(description = "收货人姓名" )
     private String consignee;
 
-    @ApiModelProperty(value = "收货人手机号")
+    @Schema(description = "收货人手机号" )
     private String mobile;
 
     /**

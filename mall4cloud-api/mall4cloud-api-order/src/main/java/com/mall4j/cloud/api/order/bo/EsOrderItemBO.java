@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.order.bo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 
@@ -9,28 +9,28 @@ import java.util.Date;
  * @date 2021/2/5
  */
 public class EsOrderItemBO {
-    @ApiModelProperty(value = "商品图片", required = true)
+    @Schema(description = "商品图片" , required = true)
     private String pic;
 
-    @ApiModelProperty(value = "商品名称", required = true)
+    @Schema(description = "商品名称" , required = true)
     private String spuName;
 
-    @ApiModelProperty(value = "商品数量", required = true)
+    @Schema(description = "商品数量" , required = true)
     private Integer count;
 
-    @ApiModelProperty(value = "商品价格", required = true)
+    @Schema(description = "商品价格" , required = true)
     private Long price;
 
-    @ApiModelProperty(value = "skuId", required = true)
+    @Schema(description = "skuId" , required = true)
     private Long skuId;
 
-    @ApiModelProperty(value = "skuName", required = true)
+    @Schema(description = "skuName" , required = true)
     private String skuName;
 
-    @ApiModelProperty(value = "订单项id", required = true)
+    @Schema(description = "订单项id" , required = true)
     private Long orderItemId;
 
-    @ApiModelProperty(value = "商品id", required = true)
+    @Schema(description = "商品id" , required = true)
     private Long spuId;
 
     /**

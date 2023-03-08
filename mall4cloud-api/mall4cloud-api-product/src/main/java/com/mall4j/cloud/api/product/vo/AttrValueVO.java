@@ -1,7 +1,7 @@
 package com.mall4j.cloud.api.product.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 属性值信息VO
@@ -12,13 +12,13 @@ import io.swagger.annotations.ApiModelProperty;
 public class AttrValueVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("属性id")
+    @Schema(description = "属性id" )
     private Long attrValueId;
 
-    @ApiModelProperty("属性ID")
+    @Schema(description = "属性ID" )
     private Long attrId;
 
-    @ApiModelProperty("属性值")
+    @Schema(description = "属性值" )
     private String value;
 
 	public Long getAttrValueId() {

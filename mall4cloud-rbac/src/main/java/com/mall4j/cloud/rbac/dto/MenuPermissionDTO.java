@@ -1,6 +1,6 @@
 package com.mall4j.cloud.rbac.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -14,26 +14,26 @@ import javax.validation.constraints.NotNull;
 public class MenuPermissionDTO {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("菜单资源用户id")
+    @Schema(description = "菜单资源用户id" )
     private Long menuPermissionId;
 
     @NotNull(message = "menuId NotNull")
-    @ApiModelProperty("资源关联菜单")
+    @Schema(description = "资源关联菜单" )
     private Long menuId;
 
 	@NotBlank(message = "permission NotBlank")
-    @ApiModelProperty("权限对应的编码")
+    @Schema(description = "权限对应的编码" )
     private String permission;
 
-    @ApiModelProperty("资源名称")
+    @Schema(description = "资源名称" )
     private String name;
 
-    @ApiModelProperty("资源对应服务器路径")
+    @Schema(description = "资源对应服务器路径" )
 	@NotBlank(message = "uri NotBlank")
     private String uri;
 
 	@NotNull(message = "method NotNull")
-    @ApiModelProperty("请求方法 1.GET 2.POST 3.PUT 4.DELETE")
+    @Schema(description = "请求方法 1.GET 2.POST 3.PUT 4.DELETE" )
     private Integer method;
 
 	public Long getMenuPermissionId() {

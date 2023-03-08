@@ -1,6 +1,6 @@
 package com.mall4j.cloud.multishop.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -13,34 +13,34 @@ public class ShopUserVO {
 	/**
 	 * shopUserId
 	 */
-	@ApiModelProperty("店铺用户id")
+	@Schema(description = "店铺用户id" )
 	private Long shopUserId;
 
 	/**
 	 * 昵称
 	 */
-	@ApiModelProperty("昵称")
+	@Schema(description = "昵称" )
 	private String nickName;
 
 	/**
 	 * 员工编号
 	 */
-	@ApiModelProperty("员工编号")
+	@Schema(description = "员工编号" )
 	private String code;
 
 	/**
 	 * 联系方式
 	 */
-	@ApiModelProperty("联系方式")
+	@Schema(description = "联系方式" )
 	private String phoneNum;
 
-	@ApiModelProperty("是否已经有账号了")
+	@Schema(description = "是否已经有账号了" )
 	private Integer hasAccount;
 
-	@ApiModelProperty("店铺id")
+	@Schema(description = "店铺id" )
 	private Long shopId;
 
-	@ApiModelProperty("角色id列表")
+	@Schema(description = "角色id列表" )
 	private List<Long> roleIds;
 
 	public String getNickName() {

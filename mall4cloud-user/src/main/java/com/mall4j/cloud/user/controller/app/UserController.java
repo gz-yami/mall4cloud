@@ -8,8 +8,8 @@ import com.mall4j.cloud.common.security.AuthUserContext;
 import com.mall4j.cloud.user.model.User;
 import com.mall4j.cloud.user.service.UserService;
 import com.mall4j.cloud.user.vo.UserSimpleInfoVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,14 +23,14 @@ import java.util.Objects;
  */
 @RestController("appUserController")
 @RequestMapping("/a/user")
-@Api(tags = "app-用户信息")
+@Tag(name = "app-用户信息")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @GetMapping("/simple_info")
-    @ApiOperation(value="用户头像昵称", notes="用户头像昵称")
+    @Operation(summary = "用户头像昵称" , description = "用户头像昵称")
     public ServerResponseEntity<UserSimpleInfoVO> getByAddrId() {
         Long userId = AuthUserContext.get().getUserId();
 
@@ -44,7 +44,7 @@ public class UserController {
 
 
     @GetMapping("/ma/user_detail_info")
-    @ApiOperation(value = "获取用户详细信息", notes = "返回用户详细信息")
+    @Operation(summary = "获取用户详细信息" , description = "返回用户详细信息")
     public ServerResponseEntity<UserApiVO> getUserDetailInfo() {
         UserInfoInTokenBO userInfoInTokenBO = AuthUserContext.get();
         if (userInfoInTokenBO == null) {
@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @PostMapping ("/ma/update_user")
-    @ApiOperation(value = "更新用户信息")
+    @Operation(summary = "更新用户信息")
     public ServerResponseEntity<Void> updateUser(@RequestBody UserApiVO userApiVO) {
         Long userId = AuthUserContext.get().getUserId();
         UserApiVO byUserId = userService.getByUserId(userId);

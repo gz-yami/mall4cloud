@@ -12,8 +12,8 @@ import com.mall4j.cloud.api.dto.ProductSearchDTO;
 import com.mall4j.cloud.search.manager.ProductSearchManager;
 import com.mall4j.cloud.api.vo.EsPageVO;
 import com.mall4j.cloud.api.vo.search.ProductSearchVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +30,7 @@ import java.util.Objects;
  */
 @RestController("appSearchSpuController")
 @RequestMapping("/ua/search")
-@Api(tags = "app-spu搜索接口")
+@Tag(name = "app-spu搜索接口")
 public class ProductSearchController {
 
     @Autowired
@@ -40,7 +40,7 @@ public class ProductSearchController {
     private ShopDetailFeignClient shopDetailFeignClient;
 
     @GetMapping("/page")
-    @ApiOperation(value = "商品信息列表-包含spu、品牌、分类、属性和店铺信息", notes = "spu列表-包含spu、品牌、分类、属性和店铺信息")
+    @Operation(summary = "商品信息列表-包含spu、品牌、分类、属性和店铺信息" , description = "spu列表-包含spu、品牌、分类、属性和店铺信息")
     public ServerResponseEntity<EsPageVO<ProductSearchVO>> page(@Valid EsPageDTO pageDTO, ProductSearchDTO productSearchDTO) {
         productSearchDTO.setSpuStatus(StatusEnum.ENABLE.value());
         EsPageVO<ProductSearchVO> searchPage = productSearchManager.page(pageDTO, productSearchDTO);
@@ -49,7 +49,7 @@ public class ProductSearchController {
     }
 
     @GetMapping("/simple_page")
-    @ApiOperation(value = "商品信息列表-包含spu信息", notes = "商品信息列表-包含spu信息")
+    @Operation(summary = "商品信息列表-包含spu信息" , description = "商品信息列表-包含spu信息")
     public ServerResponseEntity<EsPageVO<ProductSearchVO>> simplePage(@Valid EsPageDTO pageDTO, ProductSearchDTO productSearchDTO) {
         productSearchDTO.setSpuStatus(StatusEnum.ENABLE.value());
         EsPageVO<ProductSearchVO> searchPage =  productSearchManager.simplePage(pageDTO, productSearchDTO);

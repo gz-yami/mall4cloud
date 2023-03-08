@@ -1,7 +1,7 @@
 package com.mall4j.cloud.multishop.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 热搜VO
@@ -12,22 +12,22 @@ import io.swagger.annotations.ApiModelProperty;
 public class HotSearchVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("主键")
+    @Schema(description = "主键" )
     private Long hotSearchId;
 
-    @ApiModelProperty("店铺ID 0为全局热搜")
+    @Schema(description = "店铺ID 0为全局热搜" )
     private Long shopId;
 
-    @ApiModelProperty("内容")
+    @Schema(description = "内容" )
     private String content;
 
-    @ApiModelProperty("顺序")
+    @Schema(description = "顺序" )
     private Integer seq;
 
-    @ApiModelProperty("状态 0下线 1上线")
+    @Schema(description = "状态 0下线 1上线" )
     private Integer status;
 
-    @ApiModelProperty("热搜标题")
+    @Schema(description = "热搜标题" )
     private String title;
 
 	public Long getHotSearchId() {

@@ -1,6 +1,6 @@
 package com.mall4j.cloud.multishop.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -11,20 +11,20 @@ import java.util.List;
  */
 public class ShopUserDTO {
 
-    @ApiModelProperty("店铺用户id")
+    @Schema(description = "店铺用户id" )
     private Long shopUserId;
 
     @NotBlank(message = "昵称不能为空")
-    @ApiModelProperty("昵称")
+    @Schema(description = "昵称" )
     private String nickName;
 
-    @ApiModelProperty("员工编号")
+    @Schema(description = "员工编号" )
     private String code;
 
-    @ApiModelProperty("联系方式")
+    @Schema(description = "联系方式" )
     private String phoneNum;
 
-    @ApiModelProperty("角色id列表")
+    @Schema(description = "角色id列表" )
     private List<Long> roleIds;
 
     public String getNickName() {

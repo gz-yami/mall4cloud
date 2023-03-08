@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.vo.search;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -11,19 +11,19 @@ import java.util.List;
 public class ProductSearchVO {
 
 
-    @ApiModelProperty(value = "店铺信息")
+    @Schema(description = "店铺信息" )
     private ShopInfoSearchVO shopInfo;
 
-    @ApiModelProperty(value = "规格属性列表")
+    @Schema(description = "规格属性列表" )
     private List<AttrSearchVO> attrs;
 
-    @ApiModelProperty(value = "品牌列表信息")
+    @Schema(description = "品牌列表信息" )
     private List<BrandSearchVO> brands;
 
-    @ApiModelProperty(value = "spu列表信息")
+    @Schema(description = "spu列表信息" )
     private List<SpuSearchVO> spus;
 
-    @ApiModelProperty(value = "分类列表信息")
+    @Schema(description = "分类列表信息" )
     private List<CategorySearchVO> categorys;
 
     public ShopInfoSearchVO getShopInfo() {

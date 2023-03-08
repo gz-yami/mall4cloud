@@ -2,7 +2,7 @@ package com.mall4j.cloud.common.order.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mall4j.cloud.common.serializer.ImgJsonSerializer;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,59 +14,59 @@ import java.util.Date;
  */
 public class ShopCartItemVO implements Serializable {
 
-    @ApiModelProperty(value = "加入购物车时间", required = true)
+    @Schema(description = "加入购物车时间" , required = true)
     private Date createTime;
 
-    @ApiModelProperty(value = "购物车ID", required = true)
+    @Schema(description = "购物车ID" , required = true)
     private Long cartItemId;
 
-    @ApiModelProperty("店铺ID")
+    @Schema(description = "店铺ID" )
     private Long shopId;
 
-    @ApiModelProperty("产品ID")
+    @Schema(description = "产品ID" )
     private Long spuId;
 
-    @ApiModelProperty("SkuID")
+    @Schema(description = "SkuID" )
     private Long skuId;
 
-    @ApiModelProperty("用户ID")
+    @Schema(description = "用户ID" )
     private Long userId;
 
-    @ApiModelProperty("购物车产品个数")
+    @Schema(description = "购物车产品个数" )
     private Integer count;
 
-    @ApiModelProperty("是否已经勾选")
+    @Schema(description = "是否已经勾选" )
     private Integer isChecked;
 
-    @ApiModelProperty("售价，加入购物车时的商品价格")
+    @Schema(description = "售价，加入购物车时的商品价格" )
     private Long priceFee;
 
-    @ApiModelProperty("当前商品价格")
+    @Schema(description = "当前商品价格" )
     private Long skuPriceFee;
 
-    @ApiModelProperty("当前总价格(商品价格 * 数量)")
+    @Schema(description = "当前总价格(商品价格 * 数量)" )
     private Long totalPriceFee;
 
-    @ApiModelProperty("当前总价格(商品价格 * 数量)(带小数)")
+    @Schema(description = "当前总价格(商品价格 * 数量)(带小数)" )
     private Long totalPrice;
 
-    @ApiModelProperty("商品重量")
+    @Schema(description = "商品重量" )
     private BigDecimal weight;
 
-    @ApiModelProperty("商品体积")
+    @Schema(description = "商品体积" )
     private BigDecimal volume;
 
-    @ApiModelProperty("商品图片")
+    @Schema(description = "商品图片" )
     @JsonSerialize(using = ImgJsonSerializer.class)
     private String imgUrl;
 
-    @ApiModelProperty(value = "总金额", required = true)
+    @Schema(description = "总金额" , required = true)
     private Long totalAmount;
 
-    @ApiModelProperty("sku规格信息")
+    @Schema(description = "sku规格信息" )
     private String skuName;
 
-    @ApiModelProperty("spu名称")
+    @Schema(description = "spu名称" )
     private String spuName;
 
     public Long getCartItemId() {

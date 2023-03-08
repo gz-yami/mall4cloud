@@ -1,6 +1,5 @@
 package com.mall4j.cloud.user.service.impl;
 
-import com.google.common.collect.Lists;
 import com.mall4j.cloud.api.user.vo.AreaVO;
 import com.mall4j.cloud.common.cache.constant.CacheNames;
 import com.mall4j.cloud.common.exception.Mall4cloudException;
@@ -13,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,10 +37,10 @@ public class AreaServiceImpl implements AreaService {
     public List<AreaVO> getAreaListInfo() {
         List<AreaVO> areaList = areaMapper.getAreaListInfo();
         for (AreaVO province:areaList){
-            List<Long> cityAll = Lists.newArrayList();
+            List<Long> cityAll = new ArrayList<>();
             for (AreaVO city:province.getAreas()){
                 cityAll.add(city.getAreaId());
-                List<Long> areaAll = Lists.newArrayList();
+                List<Long> areaAll = new ArrayList<>();
                 for (AreaVO area:city.getAreas()){
                     areaAll.add(area.getAreaId());
                 }

@@ -3,7 +3,7 @@ package com.mall4j.cloud.api.user.vo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mall4j.cloud.common.serializer.ImgJsonSerializer;
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -16,20 +16,20 @@ import java.util.List;
 public class UserApiVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("ID")
+    @Schema(description = "ID" )
     private Long userId;
 
-    @ApiModelProperty("用户昵称")
+    @Schema(description = "用户昵称" )
     private String nickName;
 
-    @ApiModelProperty("头像图片路径")
+    @Schema(description = "头像图片路径" )
 	@JsonSerialize(using = ImgJsonSerializer.class)
     private String pic;
 
-    @ApiModelProperty("状态 1 正常 0 无效")
+    @Schema(description = "状态 1 正常 0 无效" )
     private Integer status;
 
-    @ApiModelProperty("是否创建过店铺")
+    @Schema(description = "是否创建过店铺" )
 
 	/**
 	 * openId list

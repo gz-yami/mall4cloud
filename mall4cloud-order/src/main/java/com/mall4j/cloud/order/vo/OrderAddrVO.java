@@ -1,7 +1,7 @@
 package com.mall4j.cloud.order.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 用户订单配送地址VO
@@ -12,40 +12,40 @@ import io.swagger.annotations.ApiModelProperty;
 public class OrderAddrVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("ID")
+    @Schema(description = "ID" )
     private Long orderAddrId;
 
-    @ApiModelProperty("用户ID")
+    @Schema(description = "用户ID" )
     private Long userId;
 
-    @ApiModelProperty("收货人")
+    @Schema(description = "收货人" )
     private String consignee;
 
-    @ApiModelProperty("省ID")
+    @Schema(description = "省ID" )
     private Long provinceId;
 
-    @ApiModelProperty("省")
+    @Schema(description = "省" )
     private String province;
 
-    @ApiModelProperty("城市ID")
+    @Schema(description = "城市ID" )
     private Long cityId;
 
-    @ApiModelProperty("城市")
+    @Schema(description = "城市" )
     private String city;
 
-    @ApiModelProperty("区域ID")
+    @Schema(description = "区域ID" )
     private Long areaId;
 
-    @ApiModelProperty("区")
+    @Schema(description = "区" )
     private String area;
 
-    @ApiModelProperty("地址")
+    @Schema(description = "地址" )
     private String addr;
 
-    @ApiModelProperty("邮编")
+    @Schema(description = "邮编" )
     private String postCode;
 
-    @ApiModelProperty("手机")
+    @Schema(description = "手机" )
     private String mobile;
 
 	public Long getOrderAddrId() {

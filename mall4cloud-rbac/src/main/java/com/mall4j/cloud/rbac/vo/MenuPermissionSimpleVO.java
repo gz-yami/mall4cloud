@@ -1,6 +1,6 @@
 package com.mall4j.cloud.rbac.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 菜单资源简易VO
@@ -11,13 +11,13 @@ import io.swagger.annotations.ApiModelProperty;
 public class MenuPermissionSimpleVO {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("菜单资源用户id")
+    @Schema(description = "菜单资源用户id" )
     private Long menuPermissionId;
 
-    @ApiModelProperty("资源关联菜单")
+    @Schema(description = "资源关联菜单" )
     private Long menuId;
 
-    @ApiModelProperty("资源名称")
+    @Schema(description = "资源名称" )
     private String name;
 
 	public Long getMenuPermissionId() {

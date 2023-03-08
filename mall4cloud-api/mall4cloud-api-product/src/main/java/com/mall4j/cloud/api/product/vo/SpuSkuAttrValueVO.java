@@ -1,7 +1,7 @@
 package com.mall4j.cloud.api.product.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 商品sku销售属性关联信息VO
@@ -12,28 +12,28 @@ import io.swagger.annotations.ApiModelProperty;
 public class SpuSkuAttrValueVO extends BaseVO {
 	private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty("商品sku销售属性关联信息id")
+	@Schema(description = "商品sku销售属性关联信息id" )
 	private Integer spuSkuAttrId;
 
-	@ApiModelProperty("SPU ID")
+	@Schema(description = "SPU ID" )
 	private Long spuId;
 
-	@ApiModelProperty("SKU ID")
+	@Schema(description = "SKU ID" )
 	private Long skuId;
 
-	@ApiModelProperty("销售属性ID")
+	@Schema(description = "销售属性ID" )
 	private Integer attrId;
 
-	@ApiModelProperty("销售属性名称")
+	@Schema(description = "销售属性名称" )
 	private String attrName;
 
-	@ApiModelProperty("销售属性值ID")
+	@Schema(description = "销售属性值ID" )
 	private Integer attrValueId;
 
-	@ApiModelProperty("销售属性值")
+	@Schema(description = "销售属性值" )
 	private String attrValueName;
 
-	@ApiModelProperty("状态 1:enable, 0:disable, -1:deleted")
+	@Schema(description = "状态 1:enable, 0:disable, -1:deleted" )
 	private Integer status;
 
 	public Integer getSpuSkuAttrId() {

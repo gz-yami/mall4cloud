@@ -1,6 +1,6 @@
 package com.mall4j.cloud.rbac.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
 /**
@@ -12,19 +12,19 @@ import java.util.List;
 public class RoleDTO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("角色id")
+    @Schema(description = "角色id" )
     private Long roleId;
 
-    @ApiModelProperty("角色名称")
+    @Schema(description = "角色名称" )
     private String roleName;
 
-    @ApiModelProperty("备注")
+    @Schema(description = "备注" )
     private String remark;
 
-	@ApiModelProperty("菜单id列表")
+	@Schema(description = "菜单id列表" )
 	private List<Long> menuIds;
 
-	@ApiModelProperty("菜单资源id列表")
+	@Schema(description = "菜单资源id列表" )
 	private List<Long> menuPermissionIds;
 
 	public Long getRoleId() {

@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.auth.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * token信息，该信息用户返回给前端，前端请求携带accessToken进行用户校验
@@ -10,13 +10,13 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class TokenInfoVO {
 
-	@ApiModelProperty("accessToken")
+	@Schema(description = "accessToken" )
 	private String accessToken;
 
-	@ApiModelProperty("refreshToken")
+	@Schema(description = "refreshToken" )
 	private String refreshToken;
 
-	@ApiModelProperty("在多少秒后过期")
+	@Schema(description = "在多少秒后过期" )
 	private Integer expiresIn;
 
 	public String getAccessToken() {

@@ -1,7 +1,7 @@
 package com.mall4j.cloud.order.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 import java.util.List;
@@ -14,55 +14,55 @@ import java.util.List;
  */
 public class OrderVO extends BaseVO {
 
-	@ApiModelProperty(value = "订单ID")
+	@Schema(description = "订单ID" )
     private Long orderId;
 
-	@ApiModelProperty(value = "店铺id")
+	@Schema(description = "店铺id" )
     private Long shopId;
 
-	@ApiModelProperty(value = "用户ID")
+	@Schema(description = "用户ID" )
     private Long userId;
 
-	@ApiModelProperty(value = "店铺名称")
+	@Schema(description = "店铺名称" )
 	private String shopName;
 
-	@ApiModelProperty(value = "总值")
+	@Schema(description = "总值" )
     private Long total;
 
-	@ApiModelProperty(value = "订单状态 1:待付款 2:待发货 3:待收货(已发货) 5:成功 6:失败")
+	@Schema(description = "订单状态 1:待付款 2:待发货 3:待收货(已发货) 5:成功 6:失败" )
     private Integer status;
 
-	@ApiModelProperty(value = "配送类型 3：无需快递")
+	@Schema(description = "配送类型 3：无需快递" )
     private Integer deliveryType;
 
-	@ApiModelProperty(value = "订单关闭原因 1-超时未支付 4-买家取消 15-已通过货到付款交易")
+	@Schema(description = "订单关闭原因 1-超时未支付 4-买家取消 15-已通过货到付款交易" )
     private Integer closeType;
 
-	@ApiModelProperty(value = "订单商品总数")
+	@Schema(description = "订单商品总数" )
     private Integer allCount;
 
-	@ApiModelProperty(value = "付款时间")
+	@Schema(description = "付款时间" )
     private Date payTime;
 
-	@ApiModelProperty(value = "发货时间")
+	@Schema(description = "发货时间" )
     private Date deliveryTime;
 
-	@ApiModelProperty(value = "完成时间")
+	@Schema(description = "完成时间" )
     private Date finallyTime;
 
-	@ApiModelProperty(value = "取消时间")
+	@Schema(description = "取消时间" )
     private Date cancelTime;
 
-	@ApiModelProperty(value = "是否已支付，1.已支付0.未支付")
+	@Schema(description = "是否已支付，1.已支付0.未支付" )
     private Integer isPayed;
 
-	@ApiModelProperty(value = "用户订单删除状态，0：没有删除， 1：回收站， 2：永久删除")
+	@Schema(description = "用户订单删除状态，0：没有删除， 1：回收站， 2：永久删除" )
     private Integer deleteStatus;
 
-	@ApiModelProperty(value = "订单项")
+	@Schema(description = "订单项" )
 	private List<OrderItemVO> orderItems;
 
-	@ApiModelProperty(value = "订单地址")
+	@Schema(description = "订单地址" )
 	private OrderAddrVO orderAddr;
 
 	public Long getOrderId() {

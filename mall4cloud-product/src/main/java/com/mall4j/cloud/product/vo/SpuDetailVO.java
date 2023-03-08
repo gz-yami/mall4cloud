@@ -1,7 +1,7 @@
 package com.mall4j.cloud.product.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 商品详情信息VO
@@ -12,10 +12,10 @@ import io.swagger.annotations.ApiModelProperty;
 public class SpuDetailVO extends BaseVO {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("商品id")
+    @Schema(description = "商品id" )
     private Long spuId;
 
-    @ApiModelProperty("商品详情")
+    @Schema(description = "商品详情" )
     private String detail;
 
 	public Long getSpuId() {

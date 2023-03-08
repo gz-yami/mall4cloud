@@ -1,6 +1,6 @@
 package com.mall4j.cloud.auth.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 验证码登陆
@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class CaptchaAuthenticationDTO extends AuthenticationDTO {
 
-	@ApiModelProperty(value = "验证码", required = true)
+	@Schema(description = "验证码" , required = true)
 	private String captchaVerification;
 
 	public String getCaptchaVerification() {

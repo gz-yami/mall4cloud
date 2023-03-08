@@ -9,8 +9,8 @@ import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.api.auth.vo.TokenInfoVO;
 import com.mall4j.cloud.user.dto.UserRegisterDTO;
 import com.mall4j.cloud.user.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +25,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/ua/user/register")
-@Api(tags="app-用户注册接口")
+@Tag(name = "app-用户注册接口")
 public class UserRegisterController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class UserRegisterController {
     @Autowired
     private AccountFeignClient accountFeignClient;
 
-    @ApiOperation(value="注册")
+    @Operation(summary = "注册")
     @PostMapping
     public ServerResponseEntity<TokenInfoVO> register(@Valid @RequestBody UserRegisterDTO param) {
 

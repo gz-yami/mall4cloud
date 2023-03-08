@@ -1,7 +1,7 @@
 package com.mall4j.cloud.product.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 库存锁定信息VO
@@ -12,22 +12,22 @@ import io.swagger.annotations.ApiModelProperty;
 public class SkuStockLockVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("id")
+    @Schema(description = "id" )
     private Long id;
 
-    @ApiModelProperty("商品id")
+    @Schema(description = "商品id" )
     private Long spuId;
 
-    @ApiModelProperty("sku id")
+    @Schema(description = "sku id" )
     private Long skuId;
 
-    @ApiModelProperty("订单id")
+    @Schema(description = "订单id" )
     private Long orderId;
 
-    @ApiModelProperty("锁定库存数量")
+    @Schema(description = "锁定库存数量" )
     private Integer count;
 
-    @ApiModelProperty("状态-1已解锁 0待确定 1已锁定")
+    @Schema(description = "状态-1已解锁 0待确定 1已锁定" )
     private Integer status;
 
 	public Long getId() {

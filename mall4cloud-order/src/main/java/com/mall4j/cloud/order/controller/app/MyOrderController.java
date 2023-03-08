@@ -19,9 +19,9 @@ import com.mall4j.cloud.order.vo.OrderAddrVO;
 import com.mall4j.cloud.order.vo.OrderCountVO;
 import com.mall4j.cloud.order.vo.OrderItemVO;
 import com.mall4j.cloud.order.vo.OrderShopVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Operation;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +37,7 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping("/p/myOrder")
-@Api(tags = "app-我的订单接口")
+@Tag(name = "app-我的订单接口")
 public class MyOrderController {
 
     @Autowired
@@ -56,8 +56,8 @@ public class MyOrderController {
      * 订单详情信息接口
      */
     @GetMapping("/order_detail")
-    @ApiOperation(value = "订单详情信息", notes = "根据订单号获取订单详情信息")
-    @ApiImplicitParam(name = "orderId", value = "订单号", required = true, dataType = "Long")
+    @Operation(summary = "订单详情信息" , description = "根据订单号获取订单详情信息")
+    @Parameter(name = "orderId", description = "订单号" , required = true)
     public ServerResponseEntity<OrderShopVO> orderDetail(@RequestParam(value = "orderId") Long orderId) {
         Long userId = AuthUserContext.get().getUserId();
         OrderShopVO orderShopDto = new OrderShopVO();
@@ -88,7 +88,7 @@ public class MyOrderController {
     }
 
     @GetMapping("/order_count")
-    @ApiOperation(value = "计算各个订单数量", notes = "根据订单状态计算各个订单数量")
+    @Operation(summary = "计算各个订单数量" , description = "根据订单状态计算各个订单数量")
     public ServerResponseEntity<OrderCountVO> orderCount() {
         Long userId = AuthUserContext.get().getUserId();
         OrderCountVO orderCount = orderService.countNumberOfStatus(userId);
@@ -99,7 +99,7 @@ public class MyOrderController {
      * 分页获取
      */
     @GetMapping("/search_order")
-    @ApiOperation(value = "订单列表信息查询", notes = "根据订单编号或者订单中商品名称搜索")
+    @Operation(summary = "订单列表信息查询" , description = "根据订单编号或者订单中商品名称搜索")
     public ServerResponseEntity<EsPageVO<EsOrderVO>> searchOrder(OrderSearchDTO orderSearchDTO) {
         Long userId = AuthUserContext.get().getUserId();
         orderSearchDTO.setUserId(userId);
@@ -110,8 +110,8 @@ public class MyOrderController {
      * 取消订单
      */
     @PutMapping("/cancel/{orderId}")
-    @ApiOperation(value = "根据订单号取消订单", notes = "根据订单号取消订单")
-    @ApiImplicitParam(name = "orderId", value = "订单号", required = true, dataType = "String")
+    @Operation(summary = "根据订单号取消订单" , description = "根据订单号取消订单")
+    @Parameter(name = "orderId", description = "订单号" , required = true)
     public ServerResponseEntity<String> cancel(@PathVariable("orderId") Long orderId) {
         Long userId = AuthUserContext.get().getUserId();
         Order order = orderService.getOrderByOrderIdAndUserId(orderId, userId);
@@ -129,7 +129,7 @@ public class MyOrderController {
      * 确认收货
      */
     @PutMapping("/receipt/{orderId}")
-    @ApiOperation(value = "根据订单号确认收货", notes = "根据订单号确认收货")
+    @Operation(summary = "根据订单号确认收货" , description = "根据订单号确认收货")
     public ServerResponseEntity<String> receipt(@PathVariable("orderId") Long orderId) {
         Long userId = AuthUserContext.get().getUserId();
         Order order = orderService.getOrderByOrderIdAndUserId(orderId, userId);
@@ -148,8 +148,8 @@ public class MyOrderController {
      * 删除订单
      */
     @DeleteMapping("/{orderId}")
-    @ApiOperation(value = "根据订单号删除订单", notes = "根据订单号删除订单")
-    @ApiImplicitParam(name = "orderId", value = "订单号", required = true, dataType = "String")
+    @Operation(summary = "根据订单号删除订单" , description = "根据订单号删除订单")
+    @Parameter(name = "orderId", description = "订单号" , required = true)
     public ServerResponseEntity<String> delete(@PathVariable("orderId") Long orderId) {
         Long userId = AuthUserContext.get().getUserId();
         Order order = orderService.getOrderByOrderIdAndUserId(orderId, userId);

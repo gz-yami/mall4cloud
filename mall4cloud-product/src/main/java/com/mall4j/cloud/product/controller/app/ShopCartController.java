@@ -18,8 +18,8 @@ import com.mall4j.cloud.api.product.vo.SkuVO;
 import com.mall4j.cloud.api.product.vo.SpuVO;
 import com.mall4j.cloud.common.order.vo.ShopCartItemVO;
 import com.mall4j.cloud.product.vo.ShopCartAmountVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +37,7 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping("/a/shop_cart")
-@Api(tags = "app-购物车")
+@Tag(name = "app-购物车")
 public class ShopCartController {
 
     @Autowired
@@ -61,7 +61,7 @@ public class ShopCartController {
      * @return
      */
     @GetMapping("/info")
-    @ApiOperation(value = "获取用户购物车信息", notes = "获取用户购物车信息")
+    @Operation(summary = "获取用户购物车信息" , description = "获取用户购物车信息")
     public ServerResponseEntity<ShopCartWithAmountVO> info() {
         // 拿到购物车的所有item
         List<ShopCartItemVO> shopCartItems = shopCartService.getShopCartItems();
@@ -84,7 +84,7 @@ public class ShopCartController {
      * @return
      */
     @GetMapping("/amount_info")
-    @ApiOperation(value = "获取用户购物车金额信息", notes = "获取用户购物车金额信息")
+    @Operation(summary = "获取用户购物车金额信息" , description = "获取用户购物车金额信息")
     public ServerResponseEntity<ShopCartAmountVO> amountInfo() {
         // 拿到购物车的所有item
         List<ShopCartItemVO> shopCartItems = shopCartService.getShopCartItems();
@@ -98,7 +98,7 @@ public class ShopCartController {
 
 
     @DeleteMapping("/delete_item")
-    @ApiOperation(value = "删除用户购物车物品", notes = "通过购物车id删除用户购物车物品")
+    @Operation(summary = "删除用户购物车物品" , description = "通过购物车id删除用户购物车物品")
     public ServerResponseEntity<Void> deleteItem(@RequestBody List<Long> shopCartItemIds) {
         Long userId = AuthUserContext.get().getUserId();
         shopCartService.deleteShopCartItemsByShopCartItemIds(userId,shopCartItemIds);
@@ -106,7 +106,7 @@ public class ShopCartController {
     }
 
     @DeleteMapping("/delete_all")
-    @ApiOperation(value = "清空用户购物车所有物品", notes = "清空用户购物车所有物品")
+    @Operation(summary = "清空用户购物车所有物品" , description = "清空用户购物车所有物品")
     public ServerResponseEntity<String> deleteAll() {
         Long userId = AuthUserContext.get().getUserId();
         shopCartService.deleteAllShopCartItems(userId);
@@ -115,7 +115,7 @@ public class ShopCartController {
     }
 
     @PostMapping("/check_items")
-    @ApiOperation(value = "勾选购物车", notes = "")
+    @Operation(summary = "", description = "")
     public ServerResponseEntity<Void> checkItems(@Valid @RequestBody List<CheckShopCartItemDTO> params) {
         if(CollectionUtil.isEmpty(params)) {
             return ServerResponseEntity.success();
@@ -127,7 +127,7 @@ public class ShopCartController {
 
 
     @PostMapping("/change_item")
-    @ApiOperation(value = "添加、修改用户购物车物品", notes = "通过商品id(prodId)、skuId、店铺Id(shopId),添加/修改用户购物车商品，并传入改变的商品个数(count)，" +
+    @Operation(summary = "添加、修改用户购物车物品", description = "通过商品id(prodId)、skuId、店铺Id(shopId),添加/修改用户购物车商品，并传入改变的商品个数(count)，" +
             "当count为正值时，增加商品数量，当count为负值时，将减去商品的数量，当最终count值小于0时，会将商品从购物车里面删除")
     public ServerResponseEntity<Void> addItem(@Valid @RequestBody ChangeShopCartItemDTO param) {
 
@@ -203,13 +203,13 @@ public class ShopCartController {
     }
 
     @GetMapping("/prod_count")
-    @ApiOperation(value = "获取购物车商品数量", notes = "获取购物车商品数量")
+    @Operation(summary = "获取购物车商品数量" , description = "获取购物车商品数量")
     public ServerResponseEntity<Integer> prodCount() {
         return ServerResponseEntity.success(shopCartService.getShopCartItemCount(AuthUserContext.get().getUserId()));
     }
 
     @GetMapping("/expiry_prod_list")
-    @ApiOperation(value = "获取购物车失效商品信息", notes = "获取购物车失效商品列表")
+    @Operation(summary = "获取购物车失效商品信息" , description = "获取购物车失效商品列表")
     public ServerResponseEntity<List<ShopCartItemVO>> expiryProdList() {
         return ServerResponseEntity.success(shopCartService.getShopCartExpiryItems());
     }

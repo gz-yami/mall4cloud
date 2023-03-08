@@ -1,7 +1,7 @@
 package com.mall4j.cloud.product.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 品牌分类关联信息VO
@@ -12,13 +12,13 @@ import io.swagger.annotations.ApiModelProperty;
 public class CategoryBrandVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty()
+    @Schema()
     private Long id;
 
-    @ApiModelProperty("品牌id")
+    @Schema(description = "品牌id" )
     private Long brandId;
 
-    @ApiModelProperty("分类id")
+    @Schema(description = "分类id" )
     private Long categoryId;
 
 	public Long getId() {

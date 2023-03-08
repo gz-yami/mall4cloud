@@ -1,6 +1,6 @@
 package com.mall4j.cloud.product.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 属性与属性分组关联信息DTO
@@ -11,13 +11,13 @@ import io.swagger.annotations.ApiModelProperty;
 public class AttrCategoryDTO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("属性与分类关联id")
+    @Schema(description = "属性与分类关联id" )
     private Long attrCategoryId;
 
-    @ApiModelProperty("分类id")
+    @Schema(description = "分类id" )
     private Long categoryId;
 
-    @ApiModelProperty("属性id")
+    @Schema(description = "属性id" )
     private Long attrId;
 
 	public Long getAttrCategoryId() {

@@ -1,16 +1,12 @@
 package com.mall4j.cloud.biz.config;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * Swagger文档，只有在测试环境才会使用
@@ -18,21 +14,25 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author FrozenWatermelon
  */
 @Configuration
-@EnableSwagger2
 @EnableKnife4j
 public class SwaggerConfiguration {
 
+
 	@Bean
-	public Docket baseRestApi() {
-		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
-				.apis(RequestHandlerSelectors.basePackage("com.mall4j.cloud.biz.controller")).paths(PathSelectors.any())
+	public GroupedOpenApi publicApi() {
+		return GroupedOpenApi.builder()
+				.group("biz服务")
+				.packagesToScan("com.mall4j.cloud.biz.controller")
+				.pathsToMatch("/**")
 				.build();
 	}
 
 	@Bean
-	public ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("mall4cloud商城接口文档").description("mall4cloud商城接口文档Swagger版").termsOfServiceUrl("")
-				.contact(new Contact("广州市蓝海创新科技有限公司", "", "")).version("1.0").build();
+	public OpenAPI springShopOpenAPI() {
+		return new OpenAPI()
+				.info(new Info().title("mall4cloud商城接口文档")
+						.description("mall4cloud商城接口文档Swagger版")
+						.version("v0.0.1")
+						.license(new License().name("使用请遵守商用授权协议").url("https://www.mall4j.com")));
 	}
-
 }

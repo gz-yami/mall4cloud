@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.order.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 物流订单项信息DTO
@@ -10,16 +10,16 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class DeliveryOrderItemDTO{
 
-    @ApiModelProperty("id")
+    @Schema(description = "id" )
     private Long orderItemId;
 
-    @ApiModelProperty("商品图片")
+    @Schema(description = "商品图片" )
     private String pic;
 
-    @ApiModelProperty("商品名称")
+    @Schema(description = "商品名称" )
     private String spuName;
 
-    @ApiModelProperty("发货改变的数量")
+    @Schema(description = "发货改变的数量" )
     private Integer changeNum;
 
 	public Long getOrderItemId() {

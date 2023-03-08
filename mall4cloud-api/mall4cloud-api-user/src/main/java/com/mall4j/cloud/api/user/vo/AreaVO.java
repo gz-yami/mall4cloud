@@ -1,7 +1,7 @@
 package com.mall4j.cloud.api.user.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -14,16 +14,16 @@ import java.util.List;
 public class AreaVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty()
+	@Schema()
 	private Long areaId;
 
-	@ApiModelProperty("地址")
+	@Schema(description = "地址" )
 	private String areaName;
 
-	@ApiModelProperty("上级地址")
+	@Schema(description = "上级地址" )
 	private Long parentId;
 
-	@ApiModelProperty("等级（从1开始）")
+	@Schema(description = "等级（从1开始）" )
 	private Integer level;
 
 	private Integer check;

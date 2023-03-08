@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.product.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
@@ -8,10 +8,10 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class SpuAndSkuVO {
 
-    @ApiModelProperty("spu信息")
+    @Schema(description = "spu信息" )
     private SpuVO spu;
 
-    @ApiModelProperty("sku信息")
+    @Schema(description = "sku信息" )
     private SkuVO sku;
 
     public SpuVO getSpu() {

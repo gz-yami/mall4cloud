@@ -1,7 +1,7 @@
 package com.mall4j.cloud.api.product.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 商品规格属性关联信息VO
@@ -12,25 +12,25 @@ import io.swagger.annotations.ApiModelProperty;
 public class SpuAttrValueVO extends BaseVO {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("商品属性值关联信息id")
+    @Schema(description = "商品属性值关联信息id" )
     private Long spuAttrValueId;
 
-    @ApiModelProperty("商品id")
+    @Schema(description = "商品id" )
     private Long spuId;
 
-    @ApiModelProperty("规格属性id")
+    @Schema(description = "规格属性id" )
     private Long attrId;
 
-    @ApiModelProperty("规格属性名称")
+    @Schema(description = "规格属性名称" )
     private String attrName;
 
-    @ApiModelProperty("规格属性值id")
+    @Schema(description = "规格属性值id" )
     private Long attrValueId;
 
-	@ApiModelProperty("规格属性值名称")
+	@Schema(description = "规格属性值名称" )
 	private String attrValueName;
 
-	@ApiModelProperty("搜索类型 0:不需要，1:需要")
+	@Schema(description = "搜索类型 0:不需要，1:需要" )
 	private Integer searchType;
 
 	public Long getSpuAttrValueId() {

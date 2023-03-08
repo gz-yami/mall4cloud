@@ -1,7 +1,6 @@
 package com.mall4j.cloud.api.product.manager;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.google.common.collect.Lists;
 import com.mall4j.cloud.api.multishop.feign.ShopDetailFeignClient;
 import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.api.product.dto.ShopCartItemDTO;
@@ -104,7 +103,7 @@ public class ShopCartAdapter {
         Map<Long, List<ShopCartItemVO>> shopCartMap = shopCartItems.stream().collect(Collectors.groupingBy(ShopCartItemVO::getShopId));
 
         // 返回一个店铺的所有信息
-        List<ShopCartVO> shopCarts = Lists.newArrayList();
+        List<ShopCartVO> shopCarts = new ArrayList<>();
         for (Long shopId : shopCartMap.keySet()) {
             // 构建每个店铺的购物车信息
             ShopCartVO shopCart = buildShopCart(shopId,shopCartMap.get(shopId));

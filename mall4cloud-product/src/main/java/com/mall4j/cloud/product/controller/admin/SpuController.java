@@ -15,8 +15,8 @@ import com.mall4j.cloud.product.dto.SpuPageSearchDTO;
 import com.mall4j.cloud.product.model.SpuExtension;
 import com.mall4j.cloud.product.service.*;
 import com.mall4j.cloud.api.product.vo.*;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  */
 @RestController("platformSpuController")
 @RequestMapping("/admin/spu")
-@Api(tags = "admin-spu信息")
+@Tag(name = "admin-spu信息")
 public class SpuController {
 
     @Autowired
@@ -47,21 +47,21 @@ public class SpuController {
     private BrandService brandService;
 
     @GetMapping("/platform_page")
-    @ApiOperation(value = "获取平台spu信息列表", notes = "分页获取平台spu信息列表")
+    @Operation(summary = "获取平台spu信息列表" , description = "分页获取平台spu信息列表")
     public ServerResponseEntity<PageVO<SpuVO>> platformPage(PageDTO pageDTO, SpuPageSearchDTO spuDTO) {
         PageVO<SpuVO> spuPage = spuService.platformPage(pageDTO, spuDTO);
         return ServerResponseEntity.success(spuPage);
     }
 
     @GetMapping("/page")
-    @ApiOperation(value = "获取spu信息列表", notes = "分页获取spu信息列表")
+    @Operation(summary = "获取spu信息列表" , description = "分页获取spu信息列表")
     public ServerResponseEntity<PageVO<SpuVO>> page(PageDTO pageDTO, SpuPageSearchDTO spuDTO) {
         PageVO<SpuVO> spuPage = spuService.page(pageDTO, spuDTO);
         return ServerResponseEntity.success(spuPage);
     }
 
     @GetMapping
-    @ApiOperation(value = "获取spu信息", notes = "根据spuId获取spu信息")
+    @Operation(summary = "获取spu信息" , description = "根据spuId获取spu信息")
     public ServerResponseEntity<SpuVO> getBySpuId(@RequestParam Long spuId) {
         // 获取spu信息
         SpuVO spuVO = spuService.getBySpuId(spuId);
@@ -81,7 +81,7 @@ public class SpuController {
 
 
     @PostMapping
-    @ApiOperation(value = "保存spu信息", notes = "保存spu信息")
+    @Operation(summary = "保存spu信息" , description = "保存spu信息")
     public ServerResponseEntity<Void> save(@Valid @RequestBody SpuDTO spuDTO) {
         checkSaveOrUpdateInfo(spuDTO);
         spuService.save(spuDTO);
@@ -89,7 +89,7 @@ public class SpuController {
     }
 
     @PutMapping
-    @ApiOperation(value = "更新spu信息", notes = "更新spu信息")
+    @Operation(summary = "更新spu信息" , description = "更新spu信息")
     public ServerResponseEntity<Void> update(@Valid @RequestBody SpuDTO spuDTO) {
         checkSaveOrUpdateInfo(spuDTO);
         List<Long> skuIds = spuDTO.getSkuList().stream().filter(sku -> Objects.nonNull(sku.getSkuId())).map(SkuDTO::getSkuId).collect(Collectors.toList());
@@ -102,7 +102,7 @@ public class SpuController {
 
 
     @DeleteMapping
-    @ApiOperation(value = "删除spu信息", notes = "根据spu信息id删除spu信息")
+    @Operation(summary = "删除spu信息" , description = "根据spu信息id删除spu信息")
     public ServerResponseEntity<Void> delete(@RequestParam Long spuId) {
         spuService.deleteById(spuId);
         // 清除缓存
@@ -112,7 +112,7 @@ public class SpuController {
     }
 
     @PutMapping("/update_spu_data")
-    @ApiOperation(value = "修改spu（名称、价格、库存、序号）信息", notes = "更新spu信息")
+    @Operation(summary = "修改spu（名称、价格、库存、序号）信息" , description = "更新spu信息")
     public ServerResponseEntity<Void> updateSpuData(@RequestBody SpuDTO spuDTO) {
         spuService.updateSpuOrSku(spuDTO);
         // 清除缓存
@@ -126,7 +126,7 @@ public class SpuController {
      * 更新商品状态
      */
     @PutMapping("/prod_status")
-    @ApiOperation(value = "商品上下架", notes = "商品上下架")
+    @Operation(summary = "商品上下架" , description = "商品上下架")
     public ServerResponseEntity<Void> spuChangeStatus(@RequestBody SpuDTO spuDTO) {
         if (Objects.nonNull(spuDTO.getSpuId())) {
             spuUpdateStatus(spuDTO);

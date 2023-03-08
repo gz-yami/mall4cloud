@@ -1,6 +1,6 @@
 package com.mall4j.cloud.product.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
 /**
@@ -11,58 +11,58 @@ import java.util.List;
  */
 public class SpuPageSearchDTO {
 
-	@ApiModelProperty("spuId")
+	@Schema(description = "spuId" )
 	private Long spuId;
 
-	@ApiModelProperty("品牌ID")
+	@Schema(description = "品牌ID" )
 	private Long brandId;
 
-	@ApiModelProperty("分类ID")
+	@Schema(description = "分类ID" )
 	private Long categoryId;
 
-	@ApiModelProperty("spu名称")
+	@Schema(description = "spu名称" )
 	private String name;
 
-	@ApiModelProperty("状态 1:enable, 0:disable, -1:deleted")
+	@Schema(description = "状态 1:enable, 0:disable, -1:deleted" )
 	private Integer status;
 
-	@ApiModelProperty("spuId列表(商品上下架：批量操作时，用此参数)(批量处理参数)")
+	@Schema(description = "spuId列表(商品上下架：批量操作时，用此参数)(批量处理参数)" )
 	private List<Long> spuIds;
 
-	@ApiModelProperty("商品状态： 0.全部  1.销售中  2.已售罄  3.已下架 ")
+	@Schema(description = "商品状态： 0.全部  1.销售中  2.已售罄  3.已下架 " )
 	private Integer spuStatus;
 
-	@ApiModelProperty("最低价")
+	@Schema(description = "最低价" )
 	private Long minPrice;
 
-	@ApiModelProperty("最高价")
+	@Schema(description = "最高价" )
 	private Long maxPrice;
 
-	@ApiModelProperty("最低销量")
+	@Schema(description = "最低销量" )
 	private Long minSaleNum;
 
-	@ApiModelProperty("最高销量")
+	@Schema(description = "最高销量" )
 	private Long maxSaleNum;
 
-	@ApiModelProperty("商品编码")
+	@Schema(description = "商品编码" )
 	private String partyCode;
 
-	@ApiModelProperty("当前价排序 0：倒序 1：顺序")
+	@Schema(description = "当前价排序 0：倒序 1：顺序" )
 	private Integer priceFeeSort;
 
-	@ApiModelProperty("市场价排序 0：倒序 1：顺序")
+	@Schema(description = "市场价排序 0：倒序 1：顺序" )
 	private Integer marketPriceFeeSort;
 
-	@ApiModelProperty("销量排序 0：倒序 1：顺序")
+	@Schema(description = "销量排序 0：倒序 1：顺序" )
 	private Integer saleNumSort;
 
-	@ApiModelProperty("库存排序 0：倒序 1：顺序")
+	@Schema(description = "库存排序 0：倒序 1：顺序" )
 	private Integer stockSort;
 
-	@ApiModelProperty("序号排序 0：倒序 1：顺序")
+	@Schema(description = "序号排序 0：倒序 1：顺序" )
 	private Integer seqSort;
 
-	@ApiModelProperty("创建时间排序 0：倒序 1：顺序")
+	@Schema(description = "创建时间排序 0：倒序 1：顺序" )
 	private Integer createTimeSort;
 
 

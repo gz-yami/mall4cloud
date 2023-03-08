@@ -1,7 +1,7 @@
 package com.mall4j.cloud.order.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 
 /**
@@ -13,49 +13,49 @@ import java.util.Date;
 public class OrderItemVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("订单项ID")
+    @Schema(description = "订单项ID" )
     private Long orderItemId;
 
-    @ApiModelProperty("店铺id")
+    @Schema(description = "店铺id" )
     private Long shopId;
 
-    @ApiModelProperty("订单id")
+    @Schema(description = "订单id" )
     private Long orderId;
 
-    @ApiModelProperty("产品ID")
+    @Schema(description = "产品ID" )
     private Long spuId;
 
-    @ApiModelProperty("产品SkuID")
+    @Schema(description = "产品SkuID" )
     private Long skuId;
 
-    @ApiModelProperty("用户Id")
+    @Schema(description = "用户Id" )
     private Long userId;
 
-    @ApiModelProperty("购物车产品个数")
+    @Schema(description = "购物车产品个数" )
     private Integer count;
 
-    @ApiModelProperty("产品名称")
+    @Schema(description = "产品名称" )
     private String spuName;
 
-    @ApiModelProperty("sku名称")
+    @Schema(description = "sku名称" )
     private String skuName;
 
-    @ApiModelProperty("产品主图片路径")
+    @Schema(description = "产品主图片路径" )
     private String pic;
 
-    @ApiModelProperty("单个orderItem的配送类型 3：无需快递")
+    @Schema(description = "单个orderItem的配送类型 3：无需快递" )
     private Integer deliveryType;
 
-    @ApiModelProperty("加入购物车时间")
+    @Schema(description = "加入购物车时间" )
     private Date shopCartTime;
 
-    @ApiModelProperty("产品价格")
+    @Schema(description = "产品价格" )
     private Long price;
 
-    @ApiModelProperty("商品总金额")
+    @Schema(description = "商品总金额" )
     private Long spuTotalAmount;
 
-	@ApiModelProperty("发货改变的数量")
+	@Schema(description = "发货改变的数量" )
 	private Integer changeNum;
 
 	public Long getOrderItemId() {

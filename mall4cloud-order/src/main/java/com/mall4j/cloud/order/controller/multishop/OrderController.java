@@ -15,8 +15,8 @@ import com.mall4j.cloud.order.service.OrderAddrService;
 import com.mall4j.cloud.order.service.OrderService;
 import com.mall4j.cloud.order.vo.OrderAddrVO;
 import com.mall4j.cloud.order.vo.OrderVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ import java.util.Objects;
 @RestController("multishopOrderController")
 @Controller
 @RequestMapping("/m/order")
-@Api(tags = "multishop-订单接口")
+@Tag(name = "multishop-订单接口")
 public class OrderController {
 
     @Autowired
@@ -49,7 +49,7 @@ public class OrderController {
      * 分页获取
      */
     @GetMapping("/page")
-    @ApiOperation(value = "分页获取订单详情")
+    @Operation(summary = "分页获取订单详情")
     public ServerResponseEntity<EsPageVO<EsOrderVO>> page(OrderSearchDTO orderSearchDTO) {
         Long shopId = AuthUserContext.get().getTenantId();
         orderSearchDTO.setShopId(shopId);
@@ -60,7 +60,7 @@ public class OrderController {
      * 获取信息
      */
     @GetMapping("/order_info/{orderId}")
-    @ApiOperation(value = "根据id获取订单详情")
+    @Operation(summary = "根据id获取订单详情")
     public ServerResponseEntity<OrderVO> info(@PathVariable("orderId") Long orderId) {
         // 订单和订单项
         Order order = orderService.getOrderAndOrderItemData(orderId, AuthUserContext.get().getTenantId());
@@ -74,7 +74,7 @@ public class OrderController {
      * 获取订单用户下单地址
      */
     @GetMapping("/order_addr/{orderAddrId}")
-    @ApiOperation(value = "获取订单用户下单地址")
+    @Operation(summary = "获取订单用户下单地址")
     public ServerResponseEntity<OrderAddrVO> getOrderAddr(@PathVariable("orderAddrId") Long orderAddrId) {
         OrderAddr orderAddr = orderAddrService.getByOrderAddrId(orderAddrId);
         return ServerResponseEntity.success(mapperFacade.map(orderAddr, OrderAddrVO.class));
@@ -84,7 +84,7 @@ public class OrderController {
      * 订单项待发货数量查询
      */
     @GetMapping("/order_item_and_address/{orderId}")
-    @ApiOperation(value = "订单项待发货数量查询")
+    @Operation(summary = "订单项待发货数量查询")
     public ServerResponseEntity<OrderVO> getOrderItemAndAddress(@PathVariable("orderId") Long orderId) {
         // 订单和订单项
         Order order = orderService.getOrderAndOrderItemData(orderId, AuthUserContext.get().getTenantId());
@@ -99,7 +99,7 @@ public class OrderController {
      * 发货
      */
     @PostMapping("/delivery")
-    @ApiOperation(value = "发货")
+    @Operation(summary = "发货")
     public ServerResponseEntity<Void> delivery(@Valid @RequestBody DeliveryOrderDTO deliveryOrderParam) {
         OrderVO order = orderService.getOrderByOrderId(deliveryOrderParam.getOrderId());
         // 订单不在支付状态

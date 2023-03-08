@@ -1,6 +1,6 @@
 package com.mall4j.cloud.common.database.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import java.util.List;
  */
 public class PageVO<T> {
 
-    @ApiModelProperty("总页数")
+    @Schema(description = "总页数" )
     private Integer pages;
 
-    @ApiModelProperty("总条目数")
+    @Schema(description = "总条目数" )
     private Long total;
 
-    @ApiModelProperty("结果集")
+    @Schema(description = "结果集" )
     private List<T> list;
 
     public Integer getPages() {

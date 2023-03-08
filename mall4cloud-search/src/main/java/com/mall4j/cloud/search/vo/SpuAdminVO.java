@@ -1,43 +1,43 @@
 package com.mall4j.cloud.search.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @Author lth
  * @Date 2021/6/21 10:38
  */
 public class SpuAdminVO {
-    @ApiModelProperty(value = "商品id")
+    @Schema(description = "商品id" )
     private Long spuId;
 
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description = "商品名称" )
     private String spuName;
 
-    @ApiModelProperty("商品介绍主图")
+    @Schema(description = "商品介绍主图" )
     private String mainImgUrl;
 
-    @ApiModelProperty("店铺id")
+    @Schema(description = "店铺id" )
     private Long shopId;
 
-    @ApiModelProperty("店铺名称")
+    @Schema(description = "店铺名称" )
     private String shopName;
 
-    @ApiModelProperty(value = "商品售价")
+    @Schema(description = "商品售价" )
     private Long priceFee;
 
-    @ApiModelProperty(value = "市场价，整数方式保存")
+    @Schema(description = "市场价，整数方式保存" )
     private Long marketPriceFee;
 
-    @ApiModelProperty(value = "销量")
+    @Schema(description = "销量" )
     private Integer saleNum;
 
-    @ApiModelProperty(value = "状态")
+    @Schema(description = "状态" )
     private Integer spuStatus;
 
-    @ApiModelProperty(value = "库存")
+    @Schema(description = "库存" )
     private Integer stock;
 
-    @ApiModelProperty(value = "序号")
+    @Schema(description = "序号" )
     private Integer seq;
 
     public Long getSpuId() {

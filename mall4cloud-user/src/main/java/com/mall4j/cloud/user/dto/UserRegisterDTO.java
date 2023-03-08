@@ -1,7 +1,6 @@
 package com.mall4j.cloud.user.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotBlank;
 
@@ -9,27 +8,27 @@ import javax.validation.constraints.NotBlank;
  * @author lhd
  * @date 2020/12/30
  */
-@ApiModel(value= "用户注册信息")
+@Schema(description = "用户注册信息")
 public class UserRegisterDTO {
 
 	@NotBlank
-	@ApiModelProperty(value = "密码")
+	@Schema(description = "密码" )
 	private String password;
 
-	@ApiModelProperty(value = "头像")
+	@Schema(description = "头像" )
 	private String img;
 
-	@ApiModelProperty(value = "昵称")
+	@Schema(description = "昵称" )
 	private String nickName;
 
 	@NotBlank
-	@ApiModelProperty(value = "用户名")
+	@Schema(description = "用户名" )
 	private String userName;
 
-	@ApiModelProperty(value = "当账户未绑定时，临时的uid")
+	@Schema(description = "当账户未绑定时，临时的uid" )
 	private String tempUid;
 
-	@ApiModelProperty(value = "用户id")
+	@Schema(description = "用户id" )
 	private Long userId;
 
 	public String getPassword() {

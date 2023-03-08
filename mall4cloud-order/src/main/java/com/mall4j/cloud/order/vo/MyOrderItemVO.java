@@ -2,41 +2,40 @@ package com.mall4j.cloud.order.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mall4j.cloud.common.serializer.ImgJsonSerializer;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
  */
-@ApiModel("我的订单-订单项")
+@Schema(description = "我的订单-订单项")
 public class MyOrderItemVO {
 
-    @ApiModelProperty(value = "商品图片", required = true)
+    @Schema(description = "商品图片" , required = true)
     @JsonSerialize(using = ImgJsonSerializer.class)
     private String pic;
 
-    @ApiModelProperty(value = "商品名称", required = true)
+    @Schema(description = "商品名称" , required = true)
     private String spuName;
 
-    @ApiModelProperty(value = "订单号",required=true)
+    @Schema(description = "订单号" ,required=true)
     private Long orderId;
 
-    @ApiModelProperty(value = "商品数量", required = true)
+    @Schema(description = "商品数量" , required = true)
     private Integer count;
 
-    @ApiModelProperty(value = "商品价格", required = true)
+    @Schema(description = "商品价格" , required = true)
     private Long price;
 
-    @ApiModelProperty(value = "skuId", required = true)
+    @Schema(description = "skuId" , required = true)
     private Long skuId;
 
-    @ApiModelProperty(value = "skuName", required = true)
+    @Schema(description = "skuName" , required = true)
     private String skuName;
 
-    @ApiModelProperty(value = "订单项id", required = true)
+    @Schema(description = "订单项id" , required = true)
     private Long orderItemId;
 
-    @ApiModelProperty(value = "商品id", required = true)
+    @Schema(description = "商品id" , required = true)
     private Long spuId;
 
     public String getPic() {

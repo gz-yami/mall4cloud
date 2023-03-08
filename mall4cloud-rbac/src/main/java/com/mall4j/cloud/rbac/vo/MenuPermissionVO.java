@@ -1,6 +1,6 @@
 package com.mall4j.cloud.rbac.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 菜单资源VO
@@ -11,25 +11,25 @@ import io.swagger.annotations.ApiModelProperty;
 public class MenuPermissionVO {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("菜单资源用户id")
+    @Schema(description = "菜单资源用户id" )
     private Long menuPermissionId;
 
-    @ApiModelProperty("资源关联菜单")
+    @Schema(description = "资源关联菜单" )
     private Long menuId;
 
-	@ApiModelProperty("菜单标题")
+	@Schema(description = "菜单标题" )
 	private String menuTitle;
 
-    @ApiModelProperty("权限对应的编码")
+    @Schema(description = "权限对应的编码" )
     private String permission;
 
-    @ApiModelProperty("资源名称")
+    @Schema(description = "资源名称" )
     private String name;
 
-    @ApiModelProperty("资源对应服务器路径")
+    @Schema(description = "资源对应服务器路径" )
     private String uri;
 
-    @ApiModelProperty("请求方法 1.GET 2.POST 3.PUT 4.DELETE")
+    @Schema(description = "请求方法 1.GET 2.POST 3.PUT 4.DELETE" )
     private Integer method;
 
 	public Long getMenuPermissionId() {

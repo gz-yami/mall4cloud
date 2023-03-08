@@ -1,6 +1,6 @@
 package com.mall4j.cloud.order.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 import java.util.List;
@@ -12,22 +12,22 @@ import java.util.List;
  */
 public class SubmitOrderPayInfoVO {
 
-    @ApiModelProperty(value = "商品名称")
+    @Schema(description = "商品名称" )
     private List<String> spuNameList;
 
-    @ApiModelProperty(value = "收货人姓名")
+    @Schema(description = "收货人姓名" )
     private String consignee;
 
-    @ApiModelProperty(value = "收货地址")
+    @Schema(description = "收货地址" )
     private String userAddr;
 
-    @ApiModelProperty(value = "收货人手机号")
+    @Schema(description = "收货人手机号" )
     private String mobile;
 
-    @ApiModelProperty(value = "订单过期时间")
+    @Schema(description = "订单过期时间" )
     private Date endTime;
 
-    @ApiModelProperty(value = "总共需要支付金额")
+    @Schema(description = "总共需要支付金额" )
     private Long totalFee;
 
     public String getConsignee() {

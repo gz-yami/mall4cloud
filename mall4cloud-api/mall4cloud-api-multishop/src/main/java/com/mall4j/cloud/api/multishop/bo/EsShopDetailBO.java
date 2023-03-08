@@ -1,7 +1,7 @@
 package com.mall4j.cloud.api.multishop.bo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 店铺详情VO
@@ -12,19 +12,19 @@ import io.swagger.annotations.ApiModelProperty;
 public class EsShopDetailBO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("店铺id")
+    @Schema(description = "店铺id" )
     private Long shopId;
 
-    @ApiModelProperty("店铺类型1自营店 2普通店")
+    @Schema(description = "店铺类型1自营店 2普通店" )
     private Integer type;
 
-    @ApiModelProperty("店铺名称")
+    @Schema(description = "店铺名称" )
     private String shopName;
 
-    @ApiModelProperty("店铺logo")
+    @Schema(description = "店铺logo" )
     private String shopLogo;
 
-    @ApiModelProperty("店铺状态(-1:未开通 0: 停业中 1:营业中)")
+    @Schema(description = "店铺状态(-1:未开通 0: 停业中 1:营业中)" )
     private Integer shopStatus;
 
 	public Long getShopId() {

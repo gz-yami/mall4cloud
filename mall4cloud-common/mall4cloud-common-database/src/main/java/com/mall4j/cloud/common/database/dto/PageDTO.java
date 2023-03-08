@@ -2,7 +2,7 @@ package com.mall4j.cloud.common.database.dto;
 
 import com.github.pagehelper.IPage;
 import com.mall4j.cloud.common.util.PrincipalUtil;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
@@ -26,17 +26,17 @@ public class PageDTO implements IPage {
      * 当前页
      */
     @NotNull(message = "pageNum 不能为空")
-    @ApiModelProperty(value = "当前页", required = true)
+    @Schema(description = "当前页" , required = true)
     private Integer pageNum;
 
     @NotNull(message = "pageSize 不能为空")
-    @ApiModelProperty(value = "每页大小", required = true)
+    @Schema(description = "每页大小" , required = true)
     private Integer pageSize;
 
-    @ApiModelProperty(value = "排序字段数组，用逗号分割")
+    @Schema(description = "排序字段数组，用逗号分割" )
     private String[] columns;
 
-    @ApiModelProperty(value = "排序字段方式，用逗号分割，ASC正序，DESC倒序")
+    @Schema(description = "排序字段方式，用逗号分割，ASC正序，DESC倒序" )
     private String[] orders;
 
     @Override

@@ -1,27 +1,26 @@
 package com.mall4j.cloud.order.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
  */
-@ApiModel("我的订单数量")
+@Schema(description = "我的订单数量")
 public class OrderCountVO {
 
-    @ApiModelProperty(value = "所有订单数量")
+    @Schema(description = "所有订单数量" )
     private Integer allCount;
 
-    @ApiModelProperty(value = "待付款")
+    @Schema(description = "待付款" )
     private Integer unPay;
 
-    @ApiModelProperty(value = "待发货")
+    @Schema(description = "待发货" )
     private Integer payed;
 
-    @ApiModelProperty(value = "待收货")
+    @Schema(description = "待收货" )
     private Integer consignment;
 
-    @ApiModelProperty(value = "已完成")
+    @Schema(description = "已完成" )
     private Integer success;
 
     public Integer getAllCount() {

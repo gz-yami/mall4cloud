@@ -1,6 +1,6 @@
 package com.mall4j.cloud.user.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -12,47 +12,47 @@ import org.hibernate.validator.constraints.Length;
 public class UserAddrDTO {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("ID")
+    @Schema(description = "ID" )
     private Long addrId;
 
-    @ApiModelProperty("手机")
+    @Schema(description = "手机" )
     private String mobile;
 
-    @ApiModelProperty("是否默认地址 1是")
+    @Schema(description = "是否默认地址 1是" )
     private Integer isDefault;
 
-    @ApiModelProperty("收货人")
+    @Schema(description = "收货人" )
 	@Length(min = 2, max = 20, message = "收货人姓名需要在2到20个字符之间")
     private String consignee;
 
-    @ApiModelProperty("省ID")
+    @Schema(description = "省ID" )
     private Long provinceId;
 
-    @ApiModelProperty("省")
+    @Schema(description = "省" )
     private String province;
 
-    @ApiModelProperty("城市ID")
+    @Schema(description = "城市ID" )
     private Long cityId;
 
-    @ApiModelProperty("城市")
+    @Schema(description = "城市" )
     private String city;
 
-    @ApiModelProperty("区ID")
+    @Schema(description = "区ID" )
     private Long areaId;
 
-    @ApiModelProperty("区")
+    @Schema(description = "区" )
     private String area;
 
-    @ApiModelProperty("邮编")
+    @Schema(description = "邮编" )
     private String postCode;
 
-    @ApiModelProperty("地址")
+    @Schema(description = "地址" )
     private String addr;
 
-    @ApiModelProperty("经度")
+    @Schema(description = "经度" )
     private Double lng;
 
-    @ApiModelProperty("纬度")
+    @Schema(description = "纬度" )
     private Double lat;
 
 	public Long getAddrId() {

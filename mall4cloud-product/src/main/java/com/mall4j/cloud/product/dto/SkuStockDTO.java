@@ -1,6 +1,6 @@
 package com.mall4j.cloud.product.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 库存信息DTO
@@ -11,13 +11,13 @@ import io.swagger.annotations.ApiModelProperty;
 public class SkuStockDTO {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("库存id")
+    @Schema(description = "库存id" )
     private Long stockId;
 
-    @ApiModelProperty("SKU ID")
+    @Schema(description = "SKU ID" )
     private Long skuId;
 
-    @ApiModelProperty("库存")
+    @Schema(description = "库存" )
     private Integer stock;
 
 	public Long getStockId() {

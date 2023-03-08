@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.vo.search;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
@@ -8,10 +8,10 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class AttrValueSearchVO {
 
-    @ApiModelProperty(value = "规格值id")
+    @Schema(description = "规格值id" )
     private Long attrValueId;
 
-    @ApiModelProperty(value = "规格值名称")
+    @Schema(description = "规格值名称" )
     private String attrValueName;
 
     public Long getAttrValueId() {

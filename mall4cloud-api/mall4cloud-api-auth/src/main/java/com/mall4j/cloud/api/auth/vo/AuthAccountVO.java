@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.auth.vo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author FrozenWatermelon
@@ -12,16 +12,16 @@ public class AuthAccountVO {
      */
     private Long uid;
 
-    @ApiModelProperty("用户id")
+    @Schema(description = "用户id" )
     private Long userId;
 
-    @ApiModelProperty("用户名")
+    @Schema(description = "用户名" )
     private String username;
 
-    @ApiModelProperty("状态 1:启用 0:禁用 -1:删除")
+    @Schema(description = "状态 1:启用 0:禁用 -1:删除" )
     private Integer status;
 
-    @ApiModelProperty("创建ip")
+    @Schema(description = "创建ip" )
     private String createIp;
 
     public Long getUid() {

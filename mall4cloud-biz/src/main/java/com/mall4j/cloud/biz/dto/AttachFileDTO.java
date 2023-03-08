@@ -1,6 +1,6 @@
 package com.mall4j.cloud.biz.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 上传文件记录表DTO
@@ -11,28 +11,28 @@ import io.swagger.annotations.ApiModelProperty;
 public class AttachFileDTO {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty()
+    @Schema()
     private Long fileId;
 
-    @ApiModelProperty("文件路径")
+    @Schema(description = "文件路径" )
     private String filePath;
 
-    @ApiModelProperty("文件类型")
+    @Schema(description = "文件类型" )
     private String fileType;
 
-    @ApiModelProperty("文件名")
+    @Schema(description = "文件名" )
     private String fileName;
 
-    @ApiModelProperty("文件大小")
+    @Schema(description = "文件大小" )
     private Integer fileSize;
 
-    @ApiModelProperty("店铺id")
+    @Schema(description = "店铺id" )
     private Long shopId;
 
-    @ApiModelProperty("文件 1:图片 2:视频 3:文件")
+    @Schema(description = "文件 1:图片 2:视频 3:文件" )
     private Integer type;
 
-    @ApiModelProperty("文件分组id")
+    @Schema(description = "文件分组id" )
     private Long attachFileGroupId;
 
 	public Long getFileId() {

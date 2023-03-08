@@ -3,7 +3,7 @@ package com.mall4j.cloud.api.product.vo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mall4j.cloud.common.serializer.ImgJsonSerializer;
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -16,29 +16,29 @@ import java.util.List;
 public class BrandVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("brand_id")
+    @Schema(description = "brand_id" )
     private Long brandId;
 
-    @ApiModelProperty("品牌名称")
+    @Schema(description = "品牌名称" )
     private String name;
 
-    @ApiModelProperty("品牌描述")
+    @Schema(description = "品牌描述" )
     private String desc;
 
-    @ApiModelProperty("品牌logo图片")
+    @Schema(description = "品牌logo图片" )
 	@JsonSerialize(using = ImgJsonSerializer.class)
     private String imgUrl;
 
-    @ApiModelProperty("检索首字母")
+    @Schema(description = "检索首字母" )
     private String firstLetter;
 
-    @ApiModelProperty("排序")
+    @Schema(description = "排序" )
     private Integer seq;
 
-    @ApiModelProperty("状态 1:enable, 0:disable, -1:deleted")
+    @Schema(description = "状态 1:enable, 0:disable, -1:deleted" )
     private Integer status;
 
-	@ApiModelProperty("分类")
+	@Schema(description = "分类" )
 	private List<CategoryVO> categories;
 
 	public Long getBrandId() {

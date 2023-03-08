@@ -2,7 +2,7 @@ package com.mall4j.cloud.platform.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mall4j.cloud.common.serializer.ImgJsonSerializer;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
@@ -15,41 +15,41 @@ public class SysUserVO {
 	/**
 	 * sysUserId
 	 */
-	@ApiModelProperty("平台用户id")
+	@Schema(description = "平台用户id" )
 	private Long sysUserId;
 
 	/**
 	 * 昵称
 	 */
-	@ApiModelProperty("昵称")
+	@Schema(description = "昵称" )
 	private String nickName;
 
 	/**
 	 * 头像
 	 */
-	@ApiModelProperty("头像")
+	@Schema(description = "头像" )
 	@JsonSerialize(using = ImgJsonSerializer.class)
 	private String avatar;
 
 	/**
 	 * 员工编号
 	 */
-	@ApiModelProperty("员工编号")
+	@Schema(description = "员工编号" )
 	private String code;
 
 	/**
 	 * 联系方式
 	 */
-	@ApiModelProperty("联系方式")
+	@Schema(description = "联系方式" )
 	private String phoneNum;
 
-	@ApiModelProperty("是否已经有账号了")
+	@Schema(description = "是否已经有账号了" )
 	private Integer hasAccount;
 
-	@ApiModelProperty("平台id")
+	@Schema(description = "平台id" )
 	private Long shopId;
 
-	@ApiModelProperty("角色id列表")
+	@Schema(description = "角色id列表" )
 	private List<Long> roleIds;
 
 	public String getNickName() {

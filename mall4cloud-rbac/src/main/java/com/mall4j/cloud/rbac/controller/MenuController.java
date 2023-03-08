@@ -12,8 +12,8 @@ import com.mall4j.cloud.rbac.vo.MenuSimpleVO;
 import com.mall4j.cloud.rbac.vo.MenuVO;
 import com.mall4j.cloud.rbac.vo.RouteMetaVO;
 import com.mall4j.cloud.rbac.vo.RouteVO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +29,7 @@ import java.util.Objects;
  */
 @RequestMapping(value = "/menu")
 @RestController
-@Api(tags = "菜单接口")
+@Tag(name = "菜单接口")
 public class MenuController {
 
 	@Autowired
@@ -39,7 +39,7 @@ public class MenuController {
 	private MapperFacade mapperFacade;
 
 	@GetMapping(value = "/route")
-	@ApiOperation(value = "路由菜单", notes = "获取当前登陆用户可用的路由菜单列表")
+	@Operation(summary = "路由菜单" , description = "获取当前登陆用户可用的路由菜单列表")
 	public ServerResponseEntity<List<RouteVO>> route(Integer sysType) {
 		sysType = Objects.isNull(sysType) ? AuthUserContext.get().getSysType(): sysType;
 		List<Menu> menus = menuService.listBySysType(sysType);
@@ -75,13 +75,13 @@ public class MenuController {
 	}
 
 	@GetMapping
-	@ApiOperation(value = "获取菜单管理", notes = "根据menuId获取菜单管理")
+	@Operation(summary = "获取菜单管理" , description = "根据menuId获取菜单管理")
 	public ServerResponseEntity<MenuVO> getByMenuId(@RequestParam Long menuId) {
 		return ServerResponseEntity.success(menuService.getByMenuId(menuId));
 	}
 
 	@PostMapping
-	@ApiOperation(value = "保存菜单管理", notes = "保存菜单管理")
+	@Operation(summary = "保存菜单管理" , description = "保存菜单管理")
 	public ServerResponseEntity<Void> save(@Valid @RequestBody MenuDTO menuDTO) {
 		Menu menu = checkAndGenerate(menuDTO);
 		menu.setMenuId(null);
@@ -103,7 +103,7 @@ public class MenuController {
 	}
 
 	@PutMapping
-	@ApiOperation(value = "更新菜单管理", notes = "更新菜单管理")
+	@Operation(summary = "更新菜单管理" , description = "更新菜单管理")
 	public ServerResponseEntity<Void> update(@Valid @RequestBody MenuDTO menuDTO) {
 		Menu menu = checkAndGenerate(menuDTO);
 		menuService.update(menu);
@@ -111,7 +111,7 @@ public class MenuController {
 	}
 
 	@DeleteMapping
-	@ApiOperation(value = "删除菜单管理", notes = "根据菜单管理id删除菜单管理")
+	@Operation(summary = "删除菜单管理" , description = "根据菜单管理id删除菜单管理")
 	public ServerResponseEntity<Void> delete(@RequestParam("menuId") Long menuId,@RequestParam("sysType") Integer sysType) {
 		UserInfoInTokenBO userInfoInTokenBO = AuthUserContext.get();
 		if(!Objects.equals(userInfoInTokenBO.getTenantId(),0L)){
@@ -123,7 +123,7 @@ public class MenuController {
 	}
 
 	@GetMapping(value = "/list_with_permissions")
-	@ApiOperation(value = "菜单列表和按钮列表", notes = "根据系统类型获取该系统的菜单列表 + 菜单下的权限列表")
+	@Operation(summary = "菜单列表和按钮列表" , description = "根据系统类型获取该系统的菜单列表 + 菜单下的权限列表")
 	public ServerResponseEntity<List<MenuSimpleVO>> listWithPermissions() {
 		UserInfoInTokenBO userInfoInTokenBO = AuthUserContext.get();
 		List<MenuSimpleVO> menuList = menuService.listWithPermissions(userInfoInTokenBO.getSysType());
@@ -131,7 +131,7 @@ public class MenuController {
 	}
 
 	@GetMapping(value = "/list_menu_ids")
-	@ApiOperation(value = "获取当前用户可见的菜单ids", notes = "获取当前用户可见的菜单id")
+	@Operation(summary = "获取当前用户可见的菜单ids" , description = "获取当前用户可见的菜单id")
 	public ServerResponseEntity<List<Long>> listMenuIds() {
 		UserInfoInTokenBO userInfoInTokenBO = AuthUserContext.get();
 		List<Long> menuList = menuService.listMenuIds(userInfoInTokenBO.getUserId());

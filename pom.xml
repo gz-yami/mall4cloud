@@ -49,7 +49,8 @@
         <jsoup.version>1.13.1</jsoup.version>
         <orika.version>1.5.4</orika.version>
         <captcha.version>1.2.5</captcha.version>
-        <knife4j.version>3.0.2</knife4j.version>
+        <knife4j.version>4.0.0</knife4j.version>
+        <springdoc.version>1.6.9</springdoc.version>
         <elasticsearch.version>7.17.5</elasticsearch.version>
         <minio.version>8.2.2</minio.version>
         <rocketmq-springboot.version>2.2.2</rocketmq-springboot.version>
@@ -76,7 +77,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-dependencies</artifactId>
+                <version>${knife4j.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!--spring cloud alibaba-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -154,13 +161,18 @@
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+                <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <artifactId>knife4j-openapi3-ui</artifactId>
                 <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-webflux-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>

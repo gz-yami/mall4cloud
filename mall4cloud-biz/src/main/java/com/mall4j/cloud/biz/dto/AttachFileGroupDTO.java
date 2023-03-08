@@ -1,6 +1,6 @@
 package com.mall4j.cloud.biz.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * DTO
@@ -11,13 +11,13 @@ import io.swagger.annotations.ApiModelProperty;
 public class AttachFileGroupDTO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty()
+    @Schema()
     private Long attachFileGroupId;
 
-    @ApiModelProperty("店铺id")
+    @Schema(description = "店铺id" )
     private Long shopId;
 
-    @ApiModelProperty("分组名称")
+    @Schema(description = "分组名称" )
     private String name;
 
 	public Long getAttachFileGroupId() {

@@ -1,6 +1,6 @@
 package com.mall4j.cloud.rbac.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
 /**
@@ -10,10 +10,10 @@ import java.util.List;
  */
 public class MenuWithPermissionIdDTO {
 
-    @ApiModelProperty("菜单id")
+    @Schema(description = "菜单id" )
     private Long menuId;
 
-    @ApiModelProperty("菜单下的权限id列表")
+    @Schema(description = "菜单下的权限id列表" )
     private List<Long> permissionIds;
 
     public Long getMenuId() {

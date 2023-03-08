@@ -2,7 +2,7 @@ package com.mall4j.cloud.api.product.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
 /**
@@ -14,28 +14,28 @@ import java.util.List;
 public class AttrVO extends BaseVO{
 	private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty("attr id")
+	@Schema(description = "attr id" )
 	private Long attrId;
 
-	@ApiModelProperty("店铺id")
+	@Schema(description = "店铺id" )
 	private Long shopId;
 
-	@ApiModelProperty("属性名称")
+	@Schema(description = "属性名称" )
 	private String name;
 
-	@ApiModelProperty("属性描述")
+	@Schema(description = "属性描述" )
 	private String desc;
 
-	@ApiModelProperty("作为搜索参数 0:不需要，1:需要")
+	@Schema(description = "作为搜索参数 0:不需要，1:需要" )
 	private Integer searchType;
 
-	@ApiModelProperty("属性类型 0:销售属性，1:基本属性")
+	@Schema(description = "属性类型 0:销售属性，1:基本属性" )
 	private Integer attrType;
 
-	@ApiModelProperty("属性值列表")
+	@Schema(description = "属性值列表" )
 	private List<AttrValueVO> attrValues;
 
-	@ApiModelProperty("分类列表")
+	@Schema(description = "分类列表" )
 	private List<CategoryVO> categories;
 
 	public Long getAttrId() {

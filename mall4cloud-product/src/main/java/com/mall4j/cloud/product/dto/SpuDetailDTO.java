@@ -1,6 +1,6 @@
 package com.mall4j.cloud.product.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 商品详情信息DTO
@@ -11,10 +11,10 @@ import io.swagger.annotations.ApiModelProperty;
 public class SpuDetailDTO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("商品id")
+    @Schema(description = "商品id" )
     private Long spuId;
 
-    @ApiModelProperty("商品详情")
+    @Schema(description = "商品详情" )
     private String detail;
 
 	public Long getSpuId() {

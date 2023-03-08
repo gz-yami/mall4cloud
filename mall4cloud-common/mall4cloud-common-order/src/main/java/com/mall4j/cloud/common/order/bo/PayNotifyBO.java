@@ -1,6 +1,6 @@
 package com.mall4j.cloud.common.order.bo;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.mall4j.cloud.multishop.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -16,43 +16,43 @@ import javax.validation.constraints.Size;
 public class ShopDetailDTO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("店铺id")
+    @Schema(description = "店铺id" )
     private Long shopId;
 
-    @ApiModelProperty("店铺类型1自营店 2普通店")
+    @Schema(description = "店铺类型1自营店 2普通店" )
     private Integer type;
 
-    @ApiModelProperty("店铺名称")
+    @Schema(description = "店铺名称" )
     private String shopName;
 
-    @ApiModelProperty("店铺简介")
+    @Schema(description = "店铺简介" )
     private String intro;
 
-    @ApiModelProperty("店铺logo(可修改)")
+    @Schema(description = "店铺logo(可修改)" )
     private String shopLogo;
 
-    @ApiModelProperty("店铺状态(-1:已删除 0: 停业中 1:营业中)")
+    @Schema(description = "店铺状态(-1:已删除 0: 停业中 1:营业中)" )
     private Integer shopStatus;
 
-    @ApiModelProperty("营业执照")
+    @Schema(description = "营业执照" )
     private String businessLicense;
 
-    @ApiModelProperty("身份证正面")
+    @Schema(description = "身份证正面" )
     private String identityCardFront;
 
-    @ApiModelProperty("身份证反面")
+    @Schema(description = "身份证反面" )
     private String identityCardLater;
 
     @Size(max = 30)
-    @ApiModelProperty(value = "用户名",required=true)
+    @Schema(description = "用户名" ,required=true)
     private String username;
     @Size(max = 30)
 
     @Size(max = 64)
-    @ApiModelProperty(value = "密码",required=true)
+    @Schema(description = "密码" ,required=true)
     private String password;
 
-	@ApiModelProperty("移动端背景图")
+	@Schema(description = "移动端背景图" )
 	@NotBlank(message="移动端背景图不能为空")
 	private String mobileBackgroundPic;
 

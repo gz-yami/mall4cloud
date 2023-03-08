@@ -2,7 +2,7 @@ package com.mall4j.cloud.product.vo.app;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mall4j.cloud.common.serializer.ImgJsonSerializer;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * sku信息VO
@@ -12,29 +12,29 @@ import io.swagger.annotations.ApiModelProperty;
  */
 public class SkuAppVO{
 
-	@ApiModelProperty("属性id")
+	@Schema(description = "属性id" )
 	private Long skuId;
 
-	@ApiModelProperty("SPU id")
+	@Schema(description = "SPU id" )
 	private Long spuId;
 
-	@ApiModelProperty("sku名称")
+	@Schema(description = "sku名称" )
 	private String skuName;
 
 	@JsonSerialize(using = ImgJsonSerializer.class)
-	@ApiModelProperty("banner图片")
+	@Schema(description = "banner图片" )
 	private String imgUrl;
 
-	@ApiModelProperty("售价，整数方式保存")
+	@Schema(description = "售价，整数方式保存" )
 	private Long priceFee;
 
-	@ApiModelProperty("市场价，整数方式保存")
+	@Schema(description = "市场价，整数方式保存" )
 	private Long marketPriceFee;
 
-	@ApiModelProperty("库存")
+	@Schema(description = "库存" )
 	private Integer stock;
 
-	@ApiModelProperty("属性")
+	@Schema(description = "属性" )
 	private String properties;
 
 	public Long getSkuId() {

@@ -1,6 +1,6 @@
 package com.mall4j.cloud.api.vo.search;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 分类信息VO
@@ -11,10 +11,10 @@ import io.swagger.annotations.ApiModelProperty;
 public class CategorySearchVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("分类id")
+    @Schema(description = "分类id" )
     private Long categoryId;
 
-    @ApiModelProperty("分类名称")
+    @Schema(description = "分类名称" )
     private String name;
 
 	public Long getCategoryId() {

@@ -1,7 +1,7 @@
 package com.mall4j.cloud.order.vo;
 
 import com.mall4j.cloud.common.vo.BaseVO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 
 /**
@@ -13,34 +13,34 @@ import java.util.Date;
 public class OrderPayInfoVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("支付单号")
+    @Schema(description = "支付单号" )
     private Long payId;
 
-    @ApiModelProperty("用户id")
+    @Schema(description = "用户id" )
     private Long userId;
 
-    @ApiModelProperty("外部订单流水号")
+    @Schema(description = "外部订单流水号" )
     private String bizPayNo;
 
-    @ApiModelProperty("系统类型 见SysTypeEnum")
+    @Schema(description = "系统类型 见SysTypeEnum" )
     private Integer sysType;
 
-    @ApiModelProperty("支付状态")
+    @Schema(description = "支付状态" )
     private Integer payStatus;
 
-    @ApiModelProperty("支付金额")
+    @Schema(description = "支付金额" )
     private Long payAmount;
 
-    @ApiModelProperty("版本号")
+    @Schema(description = "版本号" )
     private Integer version;
 
-    @ApiModelProperty("回调内容")
+    @Schema(description = "回调内容" )
     private String callbackContent;
 
-    @ApiModelProperty("回调时间")
+    @Schema(description = "回调时间" )
     private Date callbackTime;
 
-    @ApiModelProperty("确认时间")
+    @Schema(description = "确认时间" )
     private Date confirmTime;
 
 	public Long getPayId() {

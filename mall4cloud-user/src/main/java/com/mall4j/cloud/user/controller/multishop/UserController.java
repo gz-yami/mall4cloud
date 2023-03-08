@@ -7,8 +7,8 @@ import com.mall4j.cloud.user.service.UserService;
 import com.mall4j.cloud.user.dto.UserDTO;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ import javax.validation.Valid;
  */
 @RestController("multishopUserController")
 @RequestMapping("/m/user")
-@Api(tags = "店铺-用户表")
+@Tag(name = "店铺-用户表")
 public class UserController {
 
     @Autowired
@@ -32,14 +32,14 @@ public class UserController {
 	private MapperFacade mapperFacade;
 
 	@GetMapping("/page")
-	@ApiOperation(value = "获取用户表列表", notes = "分页获取用户表列表")
+	@Operation(summary = "获取用户表列表" , description = "分页获取用户表列表")
 	public ServerResponseEntity<PageVO<UserApiVO>> page(@Valid PageDTO pageDTO) {
 		PageVO<UserApiVO> userPage = userService.page(pageDTO);
 		return ServerResponseEntity.success(userPage);
 	}
 
 	@GetMapping
-    @ApiOperation(value = "获取用户表", notes = "根据userId获取用户表")
+    @Operation(summary = "获取用户表" , description = "根据userId获取用户表")
     public ServerResponseEntity<UserApiVO> getByUserId(@RequestParam Long userId) {
         UserApiVO userVO = mapperFacade.map(userService.getByUserId(userId), UserApiVO.class);
         return ServerResponseEntity.success(userVO);
@@ -47,7 +47,7 @@ public class UserController {
 
 
     @PutMapping
-    @ApiOperation(value = "更新用户表", notes = "更新用户表")
+    @Operation(summary = "更新用户表" , description = "更新用户表")
     public ServerResponseEntity<Void> update(@Valid @RequestBody UserDTO userDTO) {
         User user = mapperFacade.map(userDTO, User.class);
         userService.update(user);
