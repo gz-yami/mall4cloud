@@ -51,7 +51,9 @@ pc端：https://cloud-pc.mall4j.com
 
 H5端：https://h5.mall4j.com/cloud
 
-小程序：微信搜索 “mall4j微服务版”
+商业版小程序演示
+
+![输入图片说明](doc/img/readme/%E7%99%BD%E6%B4%9E%E7%89%88%E5%B0%8F%E7%A8%8B%E5%BA%8F.png)
 
 ## 目录结构规范
 
@@ -181,3 +183,5 @@ https://gitee.com/gz-yami/mall4j
 ## 你的点赞鼓励，是我们前进的动力~
 ## 你的点赞鼓励，是我们前进的动力~
 ## 你的点赞鼓励，是我们前进的动力~
+
+更多信息请查看官网 https://www.mall4j.com
