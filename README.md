@@ -184,4 +184,4 @@ https://gitee.com/gz-yami/mall4j
 ## 你的点赞鼓励，是我们前进的动力~
 ## 你的点赞鼓励，是我们前进的动力~
 
-更多信息请查看官网 https://www.mall4j.com
+## 更多信息请查看官网 https://www.mall4j.com
