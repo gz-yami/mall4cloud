@@ -70,7 +70,7 @@ services:
       - 8091:8091
       - 7091:7091
     environment:
-      - SEATA_IP=192.168.1.41
+      - SEATA_IP=192.168.1.46
     volumes:
       - ./seata/application.yml:/seata-server/resources/application.yml
 
