@@ -33,7 +33,7 @@ uni-app：https://gitee.com/gz-yami/mall4cloud-uniapp
 
 ## 启动
 
-- 安装node模块
+- 安装node模块 （不要用cnpm，否则会出现不可预知的后果）
 
 ```
 npm install
