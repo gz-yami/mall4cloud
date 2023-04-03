@@ -125,16 +125,16 @@ mall4cloud
 
 ## 商城部署后 API 地址
 
-| 服务                                                 | 地址                  |
-| ---------------------------------------------------- | --------------------- |
-| mall4cloud-gatway 网关服务                           | http://127.0.0.1:9000 |
+| 服务                                                 | 地址                    |
+| ---------------------------------------------------- |-----------------------|
+| mall4cloud-gatway 网关服务                           | http://127.0.0.1:8000 |
 | mall4cloud-auth  授权校验服务                        | http://127.0.0.1:9101 |
 | mall4cloud-biz     业务代码服务（如图片上传/短信等） | http://127.0.0.1:9000 |
 | mall4cloud-leaf   基于美团leaf的生成id服务           | http://127.0.0.1:9100 |
 | mall4cloud-multishop 商家服务                        | http://127.0.0.1:9103 |
 | mall4cloud-order         订单服务                    | http://127.0.0.1:9106 |
 | mall4cloud-payment   支付服务                        | http://127.0.0.1:9113 |
-| mall4cloud-product    商品服务                       | http://127.0.0.1:9112 |
+| mall4cloud-product    商品服务                       | http://127.0.0.1:9114 |
 | mall4cloud-rbac          用户角色服务                | http://127.0.0.1:9102 |
 | mall4cloud-search      搜索服务                      | http://127.0.0.1:9108 |
 | mall4cloud-user          用户服务                    | http://127.0.0.1:9105 |
