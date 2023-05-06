@@ -61,7 +61,8 @@ public class LoginController {
 		clearUserPermissionsCacheDTO.setSysType(data.getSysType());
 		clearUserPermissionsCacheDTO.setUserId(data.getUserId());
 		// 将以前的权限清理了,以免权限有缓存
-		ServerResponseEntity<Void> clearResponseEntity = permissionFeignClient.clearUserPermissionsCache(clearUserPermissionsCacheDTO);
+		ServerResponseEntity<Void> clearResponseEntity =
+				permissionFeignClient.clearUserPermissionsCache(clearUserPermissionsCacheDTO);
 
 		if (!clearResponseEntity.isSuccess()) {
 			return ServerResponseEntity.fail(ResponseEnum.UNAUTHORIZED);

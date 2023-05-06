@@ -40,7 +40,7 @@ public class PayNoticeController {
         payInfoResult.setBizPayNo(payInfo.getBizPayNo());
         payInfoResult.setCallbackContent(payInfo.getCallbackContent());
         // 支付成功
-        payInfoService.paySuccess(payInfoResult,orderIdList);
+        payInfoService.paySuccess(payInfoResult, orderIdList);
         return ResponseEntity.ok("");
     }
 }

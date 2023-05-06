@@ -100,7 +100,7 @@ public class AuthAccountServiceImpl implements AuthAccountService {
 
     @Override
     public AuthAccount getAccountByInputUserName(String mobile, Integer systemType) {
-        return authAccountMapper.getAccountByInputUserName(mobile,systemType);
+        return authAccountMapper.getAccountByInputUserName(mobile, systemType);
     }
 
     /**

@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  */
 public class RedisUtil {
 
-	private static final Logger logger = LoggerFactory.getLogger(RedisUtil.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RedisUtil.class);
 
 	@SuppressWarnings("unchecked")
 	private static final RedisTemplate<String, Object> REDIS_TEMPLATE = SpringContextUtils.getBean("redisTemplate",
@@ -47,9 +47,8 @@ public class RedisUtil {
 				REDIS_TEMPLATE.expire(key, time, TimeUnit.SECONDS);
 			}
 			return Boolean.TRUE;
-		}
-		catch (Exception e) {
-			logger.error("Set expire error: {}", e.getMessage());
+		} catch (Exception e) {
+			LOGGER.error("Set expire error: {}", e.getMessage());
 			return Boolean.FALSE;
 		}
 	}
@@ -77,9 +76,8 @@ public class RedisUtil {
 		}
 		try {
 			return REDIS_TEMPLATE.hasKey(key);
-		}
-		catch (Exception e) {
-			logger.error("Error getting hasKey: {}", e.getMessage());
+		} catch (Exception e) {
+			LOGGER.error("Error getting hasKey: {}", e.getMessage());
 			return Boolean.FALSE;
 		}
 	}
@@ -88,7 +86,6 @@ public class RedisUtil {
 	 * 删除缓存
 	 * @param key 可以传一个值 或多个
 	 */
-	@SuppressWarnings("unchecked")
 	public static void del(String... key) {
 		if (key != null && key.length > 0) {
 			for (String s : key) {
@@ -96,11 +93,9 @@ public class RedisUtil {
 					throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 				}
 			}
-
 			if (key.length == 1) {
 				REDIS_TEMPLATE.delete(key[0]);
-			}
-			else {
+			} else {
 				REDIS_TEMPLATE.delete(Arrays.asList(key));
 			}
 		}
@@ -134,14 +129,12 @@ public class RedisUtil {
 		try {
 			if (time > 0) {
 				REDIS_TEMPLATE.opsForValue().set(key, value, time, TimeUnit.SECONDS);
-			}
-			else {
+			} else {
 				REDIS_TEMPLATE.opsForValue().set(key, value);
 			}
 			return true;
-		}
-		catch (Exception e) {
-			logger.error("Redis opsForValue error: {}", e.getMessage());
+		} catch (Exception e) {
+			LOGGER.error("Redis opsForValue error: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -185,14 +178,12 @@ public class RedisUtil {
 		try {
 			if (time > 0) {
 				STRING_REDIS_TEMPLATE.opsForValue().set(key, String.valueOf(value), time, TimeUnit.SECONDS);
-			}
-			else {
+			} else {
 				STRING_REDIS_TEMPLATE.opsForValue().set(key, String.valueOf(value));
 			}
 			return true;
-		}
-		catch (Exception e) {
-			logger.error("setLongValue() error: {}", e.getMessage());
+		} catch (Exception e) {
+			LOGGER.error("setLongValue() error: {}", e.getMessage());
 			return false;
 		}
 	}
@@ -218,7 +209,7 @@ public class RedisUtil {
 
 	/**
 	 * 批量删除缓存
-	 * @param keys
+	 * @param keys 缓存key
 	 */
 	public static void deleteBatch(List<String> keys) {
 		if (CollUtil.isEmpty(keys)) {
@@ -258,17 +249,14 @@ public class RedisUtil {
 	 * @return 是否成功
 	 */
 	public static boolean cad(String key, String value) {
-
 		if (key.contains(StrUtil.SPACE) || value.contains(StrUtil.SPACE)) {
 			throw new Mall4cloudException(ResponseEnum.EXCEPTION);
 		}
-
 		String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
 
 		//通过lure脚本原子验证令牌和删除令牌
-		Long result = STRING_REDIS_TEMPLATE.execute(new DefaultRedisScript<Long>(script, Long.class),
-				Collections.singletonList(key),
-				value);
+		Long result = STRING_REDIS_TEMPLATE.execute(new DefaultRedisScript<>(script, Long.class),
+				Collections.singletonList(key), value);
 
 		return !Objects.equals(result, 0L);
 	}

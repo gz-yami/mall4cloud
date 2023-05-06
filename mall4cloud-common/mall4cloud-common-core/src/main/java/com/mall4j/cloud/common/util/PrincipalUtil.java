@@ -34,7 +34,8 @@ public class PrincipalUtil {
 	/**
 	 * 邮箱正则
 	 */
-	public static final String EMAIL_REGEXP = "[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?";
+	public static final String EMAIL_REGEXP =
+			"[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?";
 
 	/**
 	 * http协议正则
@@ -108,7 +109,7 @@ public class PrincipalUtil {
 		if (StrUtil.isBlank(value)) {
 			return false;
 		}
-		Pattern pattern= Pattern.compile(regexp);
+		Pattern pattern = Pattern.compile(regexp);
 		return pattern.matcher(value).find();
 	}
 }

@@ -9,12 +9,13 @@ import java.util.Objects;
 /**
  * 统一的返回数据
  *
+ * @param <T> 统一返回值
  * @author FrozenWatermelon
  * @date 2020/7/3
  */
 public class ServerResponseEntity<T> implements Serializable {
 
-	private static final Logger log = LoggerFactory.getLogger(ServerResponseEntity.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ServerResponseEntity.class);
 
 	/**
 	 * 状态码
@@ -81,10 +82,10 @@ public class ServerResponseEntity<T> implements Serializable {
 	/**
 	 * 前端显示失败消息
 	 * @param msg 失败消息
-	 * @return
+	 * @return 前端显示消息
 	 */
 	public static <T> ServerResponseEntity<T> showFailMsg(String msg) {
-		log.error(msg);
+		LOG.error(msg);
 		ServerResponseEntity<T> serverResponseEntity = new ServerResponseEntity<>();
 		serverResponseEntity.setMsg(msg);
 		serverResponseEntity.setCode(ResponseEnum.SHOW_FAIL.value());
@@ -92,7 +93,7 @@ public class ServerResponseEntity<T> implements Serializable {
 	}
 
 	public static <T> ServerResponseEntity<T> fail(ResponseEnum responseEnum) {
-		log.error(responseEnum.toString());
+		LOG.error(responseEnum.toString());
 		ServerResponseEntity<T> serverResponseEntity = new ServerResponseEntity<>();
 		serverResponseEntity.setMsg(responseEnum.getMsg());
 		serverResponseEntity.setCode(responseEnum.value());
@@ -100,7 +101,7 @@ public class ServerResponseEntity<T> implements Serializable {
 	}
 
 	public static <T> ServerResponseEntity<T> fail(ResponseEnum responseEnum, T data) {
-		log.error(responseEnum.toString());
+		LOG.error(responseEnum.toString());
 		ServerResponseEntity<T> serverResponseEntity = new ServerResponseEntity<>();
 		serverResponseEntity.setMsg(responseEnum.getMsg());
 		serverResponseEntity.setCode(responseEnum.value());
@@ -112,7 +113,7 @@ public class ServerResponseEntity<T> implements Serializable {
 		ServerResponseEntity<T> serverResponseEntity = new ServerResponseEntity<>();
 		serverResponseEntity.setMsg(oldServerResponseEntity.getMsg());
 		serverResponseEntity.setCode(oldServerResponseEntity.getCode());
-		log.error(serverResponseEntity.toString());
+		LOG.error(serverResponseEntity.toString());
 		return serverResponseEntity;
 	}
 
