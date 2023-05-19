@@ -47,7 +47,6 @@
         <pagehelper-spring-boot-starter.version>1.4.3</pagehelper-spring-boot-starter.version>
         <orika.version>1.5.4</orika.version>
         <jsoup.version>1.13.1</jsoup.version>
-        <orika.version>1.5.4</orika.version>
         <captcha.version>1.2.5</captcha.version>
         <knife4j.version>4.0.0</knife4j.version>
         <springdoc.version>1.6.9</springdoc.version>
