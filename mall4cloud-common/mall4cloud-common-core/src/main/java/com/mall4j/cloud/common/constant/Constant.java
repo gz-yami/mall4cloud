@@ -51,12 +51,12 @@ public class Constant {
 	/**
 	 * 订单如果未支付，30分钟后取消
 	 */
-	public static final int ORDER_CANCEL_TIME = 60 * 1000 * 30;
+	public static final int ORDER_CANCEL_TIME = 30;
 
 	/**
 	 * 如果因为网络原因，导致无法清楚订单是否已经下单成功，那么处理的时间应该要比订单取消时间晚一点
 	 */
-	public static final int ORDER_CANCEL_WAIT_TIME = ORDER_CANCEL_TIME + 60 * 1000 * 10;
+	public static final int ORDER_CANCEL_WAIT_TIME = 10 + ORDER_CANCEL_TIME;
 
 	/**
 	 * 默认金额
