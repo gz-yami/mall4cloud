@@ -109,10 +109,6 @@
                 <version>${seata.version}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>com.google.guava</groupId>
-                        <artifactId>guava</artifactId>
-                    </exclusion>
-                    <exclusion>
                         <groupId>com.alibaba</groupId>
                         <artifactId>druid</artifactId>
                     </exclusion>
