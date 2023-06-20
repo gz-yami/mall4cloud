@@ -34,13 +34,6 @@
     select <include refid="Vo_Column_List"/> from user where user_id = #{userId}
   </select>
 
-  <select id="getUserAndOpenIdsByUserId" resultMap="userAndOpenIdsMap">
-    select <include refid="Vo_Column_List"/>,ac.biz_user_id as bizUserIdList from user u
-    left JOIN tz_app_connect ac ON u.user_id = ac.user_id and biz_user_id is not null
-    WHERE u.user_id =  #{userId}
-  </select>
-
-
   <insert id="save">
     insert into user (`user_id`,`nick_name`,`pic`,`status`)
     values (#{user.userId},#{user.nickName},#{user.pic},#{user.status});

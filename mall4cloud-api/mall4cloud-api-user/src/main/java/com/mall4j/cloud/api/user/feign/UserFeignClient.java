@@ -26,14 +26,6 @@ public interface UserFeignClient {
     ServerResponseEntity<List<UserApiVO>> getUserByUserIds(@RequestParam("userId") List<Long> userIds);
 
     /**
-     * 根据用户id获取用户详细信息
-     * @param userId 用户id
-     * @return 用户详细信息
-     */
-    @GetMapping(value = FeignInsideAuthConfig.FEIGN_INSIDE_URL_PREFIX + "/user/getUserAndOpenIdsByUserId")
-    ServerResponseEntity<UserApiVO> getUserAndOpenIdsByUserId(@RequestParam("userId") Long userId);
-
-    /**
      * 获取用户数据
      * @param userId
      * @return

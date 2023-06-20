@@ -45,13 +45,6 @@ public interface UserService {
 	List<UserApiVO> getUserByUserIds(List<Long> userIds);
 
 	/**
-	 * 根据用户id获取用户详细信息
-	 * @param userId 用户id
-	 * @return 用户详细信息
-	 */
-	UserApiVO getUserAndOpenIdsByUserId(Long userId);
-
-	/**
 	 * 保存用户
 	 * @param param 注册信息
 	 * @return uid

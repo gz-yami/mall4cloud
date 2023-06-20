@@ -51,11 +51,4 @@ public interface UserMapper {
 	 * @return
 	 */
 	List<UserApiVO> getUserByUserIds(@Param("userIds") List<Long> userIds);
-
-	/**
-	 * 根据用户id获取用户详细信息
-	 * @param userId 用户id
-	 * @return 用户详细信息
-	 */
-	UserApiVO getUserAndOpenIdsByUserId(@Param("userId") Long userId);
 }

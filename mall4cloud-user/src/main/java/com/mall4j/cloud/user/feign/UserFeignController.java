@@ -35,8 +35,4 @@ public class UserFeignController implements UserFeignClient {
         return ServerResponseEntity.success(user);
     }
 
-    @Override
-    public ServerResponseEntity<UserApiVO> getUserAndOpenIdsByUserId(Long userId) {
-        return ServerResponseEntity.success(userService.getUserAndOpenIdsByUserId(userId));
-    }
 }

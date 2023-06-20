@@ -76,11 +76,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserApiVO getUserAndOpenIdsByUserId(Long userId) {
-        return userMapper.getUserAndOpenIdsByUserId(userId);
-    }
-
-    @Override
     @GlobalTransactional(rollbackFor = Exception.class)
     @Transactional(rollbackFor = Exception.class)
     public Long save(UserRegisterDTO param) {
