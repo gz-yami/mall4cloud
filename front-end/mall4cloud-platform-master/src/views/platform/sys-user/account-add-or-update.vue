@@ -51,6 +51,7 @@ export default {
           { pattern: USER_NAME_REGEXP, message: '用户名不能为纯数字且由数字字母下划线 4-16位组成' }
         ],
         password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 1, max: 6, message: '密码由6-16位组成' }
         ]
       }
