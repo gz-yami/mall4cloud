@@ -96,12 +96,12 @@ public class SkuStockLockServiceImpl implements SkuStockLockService {
             // 减sku库存
             int skuStockUpdateIsSuccess = skuStockMapper.reduceStockByOrder(skuStockLockDTO.getSkuId(), skuStockLockDTO.getCount());
             if (skuStockUpdateIsSuccess < 1) {
-                throw new Mall4cloudException(ResponseEnum.NOT_STOCK, skuStockLockDTO.getSkuId());
+                throw new Mall4cloudException(ResponseEnum.NOT_STOCK, "商品skuId: " + skuStockLockDTO.getSkuId());
             }
             // 减商品库存
             int spuStockUpdateIsSuccess = spuExtensionMapper.reduceStockByOrder(skuStockLockDTO.getSpuId(), skuStockLockDTO.getCount());
             if (spuStockUpdateIsSuccess < 1) {
-                throw new Mall4cloudException(ResponseEnum.NOT_STOCK, skuStockLockDTO.getSkuId());
+                throw new Mall4cloudException(ResponseEnum.NOT_STOCK, "商品spuId: " + skuStockLockDTO.getSpuId());
             }
         }
         // 保存库存锁定信息
