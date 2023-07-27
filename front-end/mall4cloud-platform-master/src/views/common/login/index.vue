@@ -80,14 +80,14 @@ export default {
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
-        callback(new Error('请输入正确的用户名'))
+        callback(new Error(this.$t('login.validateUsername')))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('密码不能少于6位'))
+        callback(new Error(this.$t('login.validatePassword')))
       } else {
         callback()
       }
