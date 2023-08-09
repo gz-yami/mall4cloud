@@ -25,13 +25,13 @@ CREATE TABLE `attr` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `shop_id` bigint NOT NULL DEFAULT '0' COMMENT '店铺Id',
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '属性名称',
-  `desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '属性描述',
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '属性名称',
+  `desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '属性描述',
   `search_type` tinyint NOT NULL DEFAULT '0' COMMENT '0:不需要，1:需要',
   `attr_type` tinyint NOT NULL DEFAULT '0' COMMENT '0:销售属性，1:基本属性',
   PRIMARY KEY (`attr_id`) USING BTREE,
   KEY `idx_shop_id` (`shop_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7149 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='属性信息';
+) ENGINE=InnoDB AUTO_INCREMENT=7149 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='属性信息';
 
 /*Table structure for table `attr_category` */
 
@@ -46,7 +46,7 @@ CREATE TABLE `attr_category` (
   PRIMARY KEY (`attr_category_id`) USING BTREE,
   UNIQUE KEY `uni_attrgroup_id` (`category_id`,`attr_id`) USING BTREE,
   KEY `idx_attr_id` (`attr_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19019 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='属性与分类关联信息';
+) ENGINE=InnoDB AUTO_INCREMENT=19019 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='属性与分类关联信息';
 
 /*Table structure for table `attr_value` */
 
@@ -57,10 +57,10 @@ CREATE TABLE `attr_value` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `attr_id` bigint unsigned NOT NULL COMMENT '属性ID',
-  `value` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '属性值',
+  `value` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '属性值',
   PRIMARY KEY (`attr_value_id`) USING BTREE,
   KEY `idx_attr` (`attr_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=58244 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='属性值信息';
+) ENGINE=InnoDB AUTO_INCREMENT=58244 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='属性值信息';
 
 /*Table structure for table `brand` */
 

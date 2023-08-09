@@ -26,23 +26,23 @@ CREATE TABLE `menu` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `parent_id` bigint unsigned NOT NULL COMMENT '父菜单ID，一级菜单为0',
   `biz_type` tinyint DEFAULT NULL COMMENT '业务类型 1 店铺菜单 2平台菜单',
-  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '权限，需要有哪个权限才能访问该菜单',
-  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '路径 就像uri',
-  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '1.''Layout'' 为布局，不会跳页面 2.''components-demo/tinymce'' 跳转到该页面',
-  `redirect` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '当设置 noRedirect 的时候该路由在面包屑导航中不可被点击',
+  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '权限，需要有哪个权限才能访问该菜单',
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '路径 就像uri',
+  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '1.''Layout'' 为布局，不会跳页面 2.''components-demo/tinymce'' 跳转到该页面',
+  `redirect` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '当设置 noRedirect 的时候该路由在面包屑导航中不可被点击',
   `always_show` tinyint DEFAULT NULL COMMENT '一直显示根路由',
   `hidden` tinyint DEFAULT NULL COMMENT '当设置 true 的时候该路由不会在侧边栏出现 如401，login等页面，或者如一些编辑页面/edit/1',
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题',
-  `title` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '设置该路由在侧边栏和面包屑中展示的名字',
-  `icon` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '设置该路由的图标，支持 svg-class，也支持 el-icon-x element-ui 的 icon',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题',
+  `title` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设置该路由在侧边栏和面包屑中展示的名字',
+  `icon` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '设置该路由的图标，支持 svg-class，也支持 el-icon-x element-ui 的 icon',
   `no_cache` tinyint DEFAULT NULL COMMENT '如果设置为true，则不会被 <keep-alive> 缓存(默认 false)',
   `breadcrumb` tinyint DEFAULT NULL COMMENT '如果设置为false，则不会在breadcrumb面包屑中显示(默认 true)',
   `affix` tinyint DEFAULT NULL COMMENT '若果设置为true，它则会固定在tags-view中(默认 false)',
-  `active_menu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '当路由设置了该属性，则会高亮相对应的侧边栏。',
+  `active_menu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '当路由设置了该属性，则会高亮相对应的侧边栏。',
   `seq` int DEFAULT NULL COMMENT '排序，越小越靠前',
   PRIMARY KEY (`menu_id`) USING BTREE,
   KEY `idx_pid` (`parent_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=328 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=328 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of menu
@@ -88,14 +88,14 @@ CREATE TABLE `menu_permission` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `menu_id` bigint NOT NULL COMMENT '资源关联菜单',
   `biz_type` tinyint NOT NULL COMMENT '业务类型 1 店铺菜单 2平台菜单',
-  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '权限对应的编码',
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '资源名称',
-  `uri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '资源对应服务器路径',
+  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '权限对应的编码',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '资源名称',
+  `uri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '资源对应服务器路径',
   `method` tinyint NOT NULL COMMENT '请求方法 1.GET 2.POST 3.PUT 4.DELETE',
   PRIMARY KEY (`menu_permission_id`) USING BTREE,
   UNIQUE KEY `uk_permission` (`permission`,`biz_type`) USING BTREE,
   KEY `idx_menuid` (`menu_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='菜单资源';
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='菜单资源';
 
 /*Table structure for table `role` */
 
@@ -105,14 +105,14 @@ CREATE TABLE `role` (
   `role_id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '角色id',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `role_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色名称',
-  `remark` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '备注',
+  `role_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色名称',
+  `remark` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '备注',
   `create_user_id` bigint unsigned NOT NULL COMMENT '创建者ID',
   `biz_type` tinyint DEFAULT NULL COMMENT '业务类型 1 店铺菜单 2平台菜单',
   `tenant_id` bigint DEFAULT NULL COMMENT '所属租户',
   PRIMARY KEY (`role_id`) USING BTREE,
   KEY `idx_tenant_id` (`tenant_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='角色';
 
 /*Table structure for table `role_menu` */
 
@@ -127,7 +127,7 @@ CREATE TABLE `role_menu` (
   `menu_permission_id` bigint unsigned DEFAULT NULL COMMENT '菜单资源用户id',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `uk_roleid_menu_permission_id` (`role_id`,`menu_id`,`menu_permission_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1924 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=1924 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='角色与菜单对应关系';
 
 /*Table structure for table `undo_log` */
 
@@ -136,15 +136,15 @@ DROP TABLE IF EXISTS `undo_log`;
 CREATE TABLE `undo_log` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `branch_id` bigint NOT NULL,
-  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rollback_info` longblob NOT NULL,
   `log_status` int NOT NULL,
   `log_created` datetime NOT NULL,
   `log_modified` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Table structure for table `user_role` */
 
@@ -158,7 +158,7 @@ CREATE TABLE `user_role` (
   `role_id` bigint unsigned NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `uk_userid_roleid` (`user_id`,`role_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=254 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户与角色对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=254 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='用户与角色对应关系';
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

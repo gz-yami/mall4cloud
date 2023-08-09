@@ -22,9 +22,9 @@ CREATE TABLE `auth_account`  (
   `uid` bigint UNSIGNED NOT NULL COMMENT '全平台用户唯一id',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '用户名',
-  `password` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '密码',
-  `create_ip` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '创建ip',
+  `username` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
+  `password` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '密码',
+  `create_ip` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '创建ip',
   `status` tinyint NOT NULL COMMENT '状态 1:启用 0:禁用 -1:删除',
   `sys_type` tinyint NOT NULL COMMENT '用户类型见SysTypeEnum 0.普通用户系统 1.商家端 2平台端',
   `user_id` bigint NOT NULL COMMENT '用户id',
@@ -48,15 +48,15 @@ DROP TABLE IF EXISTS `undo_log`;
 CREATE TABLE `undo_log`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `branch_id` bigint NOT NULL,
-  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rollback_info` longblob NOT NULL,
   `log_status` int NOT NULL,
   `log_created` datetime NOT NULL,
   `log_modified` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 385 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 385 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
 
@@ -101,15 +101,15 @@ DROP TABLE IF EXISTS `undo_log`;
 CREATE TABLE `undo_log`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `branch_id` bigint NOT NULL,
-  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rollback_info` longblob NOT NULL,
   `log_status` int NOT NULL,
   `log_created` datetime NOT NULL,
   `log_modified` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
 USE mall4cloud_leaf;
@@ -119,14 +119,14 @@ USE mall4cloud_leaf;
 -- ----------------------------
 DROP TABLE IF EXISTS `leaf_alloc`;
 CREATE TABLE `leaf_alloc`  (
-  `biz_tag` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '区分业务',
+  `biz_tag` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '区分业务',
   `max_id` bigint UNSIGNED NOT NULL DEFAULT 1 COMMENT '该biz_tag目前所被分配的ID号段的最大值',
   `step` int NOT NULL COMMENT '每次分配的号段长度',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `description` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '描述',
+  `description` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
   `random_step` int UNSIGNED NOT NULL DEFAULT 1 COMMENT '每次getid时随机增加的长度，这样就不会有连续的id了',
   PRIMARY KEY (`biz_tag`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of leaf_alloc
@@ -167,7 +167,7 @@ CREATE TABLE `index_img`  (
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `shop_id` bigint NOT NULL COMMENT '店铺ID',
-  `img_url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '图片',
+  `img_url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图片',
   `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '状态 1:enable, 0:disable',
   `seq` int NOT NULL DEFAULT 0 COMMENT '顺序',
   `spu_id` bigint NULL DEFAULT NULL COMMENT '关联商品id',
@@ -175,7 +175,7 @@ CREATE TABLE `index_img`  (
   PRIMARY KEY (`img_id`) USING BTREE,
   INDEX `idx_shop_id`(`shop_id`) USING BTREE,
   INDEX `idx_spu_id`(`spu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '轮播图';
+) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '轮播图';
 
 -- ----------------------------
 -- Table structure for shop_detail
@@ -185,17 +185,17 @@ CREATE TABLE `shop_detail`  (
   `shop_id` bigint NOT NULL AUTO_INCREMENT COMMENT '店铺id',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `shop_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '店铺名称',
-  `intro` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '店铺简介',
-  `shop_logo` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '店铺logo(可修改)',
-  `mobile_background_pic` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '店铺移动端背景图',
+  `shop_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '店铺名称',
+  `intro` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '店铺简介',
+  `shop_logo` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '店铺logo(可修改)',
+  `mobile_background_pic` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '店铺移动端背景图',
   `shop_status` tinyint NOT NULL COMMENT '店铺状态(-1:已删除 0: 停业中 1:营业中)',
-  `business_license` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '营业执照',
-  `identity_card_front` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '身份证正面',
-  `identity_card_later` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '身份证反面',
+  `business_license` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '营业执照',
+  `identity_card_front` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证正面',
+  `identity_card_later` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证反面',
   `type` tinyint NULL DEFAULT NULL COMMENT '店铺类型1自营店 2普通店',
   PRIMARY KEY (`shop_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 322 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '店铺详情';
+) ENGINE = InnoDB AUTO_INCREMENT = 322 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '店铺详情';
 insert into `shop_detail` (`shop_id`, `create_time`, `update_time`, `shop_name`, `intro`, `shop_logo`, `mobile_background_pic`, `shop_status`, `business_license`, `identity_card_front`, `identity_card_later`, `type`) values
 ('324','2022-04-14 16:36:13','2022-04-14 16:36:13','商家','商家店铺','/2022/04/14/2bdd14bd15094b15907dfe6c2b86c536','/2022/04/14/791fb3e04fca4fc79adeb79378436068','1','/2022/04/14/136d531dfa9b4cbdb17f555a73b0f7b4','/2022/04/14/50f9525a2b86434e98d97f4df017fcb4','/2022/04/14/dcc4c3c9f44b420a995c292d6df93f2c','2');
 -- ----------------------------
@@ -207,13 +207,13 @@ CREATE TABLE `shop_user`  (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `shop_id` bigint NULL DEFAULT NULL COMMENT '关联店铺id',
-  `nick_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '昵称',
-  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '员工编号',
-  `phone_num` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '联系方式',
+  `nick_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '昵称',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '员工编号',
+  `phone_num` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '联系方式',
   `has_account` tinyint NULL DEFAULT NULL COMMENT '是否已经设置账号 0:未设置 1:已设置',
   PRIMARY KEY (`shop_user_id`) USING BTREE,
   INDEX `idx_shopid`(`shop_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商家用户';
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商家用户';
 insert into `shop_user` (`shop_user_id`, `create_time`, `update_time`, `shop_id`, `nick_name`, `code`, `phone_num`, `has_account`) values
 ('110400','2022-04-14 16:36:13','2022-04-14 16:36:13','324','商家',NULL,NULL,'1');
 -- ----------------------------
@@ -223,15 +223,15 @@ DROP TABLE IF EXISTS `undo_log`;
 CREATE TABLE `undo_log`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `branch_id` bigint NOT NULL,
-  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rollback_info` longblob NOT NULL,
   `log_status` int NOT NULL,
   `log_created` datetime NOT NULL,
   `log_modified` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 387 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 387 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
 
@@ -413,21 +413,21 @@ CREATE TABLE `his_config_info` (
 DROP TABLE IF EXISTS `permissions`;
 
 CREATE TABLE `permissions` (
-    `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-    `resource` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-    `action` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+    `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `resource` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `action` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
     UNIQUE KEY `uk_role_permission` (`role`,`resource`,`action`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Table structure for table `roles` */
 
 DROP TABLE IF EXISTS `roles`;
 
 CREATE TABLE `roles` (
-                         `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-                         `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+                         `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+                         `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
                          UNIQUE KEY `idx_user_role` (`username`,`role`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Table structure for table `tenant_capacity` */
 
@@ -474,11 +474,11 @@ insert  into `tenant_info`(`id`,`kp`,`tenant_id`,`tenant_name`,`tenant_desc`,`cr
 DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
-    `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-    `password` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+    `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `password` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
     `enabled` tinyint(1) NOT NULL,
     PRIMARY KEY (`username`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 /*Data for the table `users` */
@@ -583,15 +583,15 @@ DROP TABLE IF EXISTS `undo_log`;
 CREATE TABLE `undo_log`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `branch_id` bigint NOT NULL,
-  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rollback_info` longblob NOT NULL,
   `log_status` int NOT NULL,
   `log_created` datetime NOT NULL,
   `log_modified` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
 USE mall4cloud_payment;
@@ -628,15 +628,15 @@ DROP TABLE IF EXISTS `undo_log`;
 CREATE TABLE `undo_log`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `branch_id` bigint NOT NULL,
-  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rollback_info` longblob NOT NULL,
   `log_status` int NOT NULL,
   `log_created` datetime NOT NULL,
   `log_modified` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
 USE mall4cloud_platform;
@@ -665,13 +665,13 @@ CREATE TABLE `sys_user`  (
   `sys_user_id` bigint UNSIGNED NOT NULL COMMENT '平台用户id',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `nick_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '昵称',
-  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '头像',
-  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '员工编号',
-  `phone_num` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '联系方式',
+  `nick_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '昵称',
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '头像',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '员工编号',
+  `phone_num` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '联系方式',
   `has_account` tinyint NULL DEFAULT NULL COMMENT '是否已经设置账号',
   PRIMARY KEY (`sys_user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '平台用户';
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '平台用户';
 
 insert  into `sys_user`(`sys_user_id`,`create_time`,`update_time`,`nick_name`,`avatar`,`code`,`phone_num`,`has_account`) values
 (1, '2021-06-24 16:59:33', '2021-07-03 11:17:41', 'admin', '/2021/07/02/dd9ff362454d43d184c6d722dc14d7f6', '9527', '12345678910', 1);
@@ -683,15 +683,15 @@ DROP TABLE IF EXISTS `undo_log`;
 CREATE TABLE `undo_log`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `branch_id` bigint NOT NULL,
-  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rollback_info` longblob NOT NULL,
   `log_status` int NOT NULL,
   `log_created` datetime NOT NULL,
   `log_modified` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 325 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 325 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 
 USE mall4cloud_product;
@@ -706,13 +706,13 @@ CREATE TABLE `attr`  (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `shop_id` bigint NOT NULL DEFAULT 0 COMMENT '店铺Id',
-  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '属性名称',
-  `desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '属性描述',
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '属性名称',
+  `desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '属性描述',
   `search_type` tinyint NOT NULL DEFAULT 0 COMMENT '0:不需要，1:需要',
   `attr_type` tinyint NOT NULL DEFAULT 0 COMMENT '0:销售属性，1:基本属性',
   PRIMARY KEY (`attr_id`) USING BTREE,
   INDEX `idx_shop_id`(`shop_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7145 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '属性信息';
+) ENGINE = InnoDB AUTO_INCREMENT = 7145 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '属性信息';
 
 -- ----------------------------
 -- Table structure for attr_category
@@ -727,7 +727,7 @@ CREATE TABLE `attr_category`  (
   PRIMARY KEY (`attr_category_id`) USING BTREE,
   UNIQUE INDEX `uni_attrgroup_id`(`category_id`, `attr_id`) USING BTREE,
   INDEX `idx_attr_id`(`attr_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19015 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '属性与分类关联信息';
+) ENGINE = InnoDB AUTO_INCREMENT = 19015 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '属性与分类关联信息';
 
 -- ----------------------------
 -- Table structure for attr_value
@@ -738,10 +738,10 @@ CREATE TABLE `attr_value`  (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `attr_id` bigint UNSIGNED NOT NULL COMMENT '属性ID',
-  `value` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '属性值',
+  `value` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '属性值',
   PRIMARY KEY (`attr_value_id`) USING BTREE,
   INDEX `idx_attr`(`attr_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 58234 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '属性值信息';
+) ENGINE = InnoDB AUTO_INCREMENT = 58234 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '属性值信息';
 
 -- ----------------------------
 -- Table structure for brand
@@ -1041,23 +1041,23 @@ CREATE TABLE `menu`  (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `parent_id` bigint UNSIGNED NOT NULL COMMENT '父菜单ID，一级菜单为0',
   `biz_type` tinyint NULL DEFAULT NULL COMMENT '业务类型 1 店铺菜单 2平台菜单',
-  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '权限，需要有哪个权限才能访问该菜单',
-  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '路径 就像uri',
-  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '1.\'Layout\' 为布局，不会跳页面 2.\'components-demo/tinymce\' 跳转到该页面',
-  `redirect` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '当设置 noRedirect 的时候该路由在面包屑导航中不可被点击',
+  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限，需要有哪个权限才能访问该菜单',
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路径 就像uri',
+  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '1.\'Layout\' 为布局，不会跳页面 2.\'components-demo/tinymce\' 跳转到该页面',
+  `redirect` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '当设置 noRedirect 的时候该路由在面包屑导航中不可被点击',
   `always_show` tinyint NULL DEFAULT NULL COMMENT '一直显示根路由',
   `hidden` tinyint NULL DEFAULT NULL COMMENT '当设置 true 的时候该路由不会在侧边栏出现 如401，login等页面，或者如一些编辑页面/edit/1',
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题',
-  `title` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设置该路由在侧边栏和面包屑中展示的名字',
-  `icon` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '设置该路由的图标，支持 svg-class，也支持 el-icon-x element-ui 的 icon',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题',
+  `title` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '设置该路由在侧边栏和面包屑中展示的名字',
+  `icon` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '设置该路由的图标，支持 svg-class，也支持 el-icon-x element-ui 的 icon',
   `no_cache` tinyint NULL DEFAULT NULL COMMENT '如果设置为true，则不会被 <keep-alive> 缓存(默认 false)',
   `breadcrumb` tinyint NULL DEFAULT NULL COMMENT '如果设置为false，则不会在breadcrumb面包屑中显示(默认 true)',
   `affix` tinyint NULL DEFAULT NULL COMMENT '若果设置为true，它则会固定在tags-view中(默认 false)',
-  `active_menu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '当路由设置了该属性，则会高亮相对应的侧边栏。',
+  `active_menu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '当路由设置了该属性，则会高亮相对应的侧边栏。',
   `seq` int NULL DEFAULT NULL COMMENT '排序，越小越靠前',
   PRIMARY KEY (`menu_id`) USING BTREE,
   INDEX `idx_pid`(`parent_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 328 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单管理';
+) ENGINE = InnoDB AUTO_INCREMENT = 328 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单管理';
 
 -- ----------------------------
 -- Records of menu
@@ -1103,14 +1103,14 @@ CREATE TABLE `menu_permission`  (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `menu_id` bigint NOT NULL COMMENT '资源关联菜单',
   `biz_type` tinyint NOT NULL COMMENT '业务类型 1 店铺菜单 2平台菜单',
-  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '权限对应的编码',
-  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '资源名称',
-  `uri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '资源对应服务器路径',
+  `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '权限对应的编码',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '资源名称',
+  `uri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '资源对应服务器路径',
   `method` tinyint NOT NULL COMMENT '请求方法 1.GET 2.POST 3.PUT 4.DELETE',
   PRIMARY KEY (`menu_permission_id`) USING BTREE,
   UNIQUE INDEX `uk_permission`(`permission`, `biz_type`) USING BTREE,
   INDEX `idx_menuid`(`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 230 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单资源';
+) ENGINE = InnoDB AUTO_INCREMENT = 230 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单资源';
 
 -- ----------------------------
 -- Records of menu_permission
@@ -1124,14 +1124,14 @@ CREATE TABLE `role`  (
   `role_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '角色id',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `role_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色名称',
-  `remark` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+  `role_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '角色名称',
+  `remark` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_user_id` bigint UNSIGNED NOT NULL COMMENT '创建者ID',
   `biz_type` tinyint NULL DEFAULT NULL COMMENT '业务类型 1 店铺菜单 2平台菜单',
   `tenant_id` bigint NULL DEFAULT NULL COMMENT '所属租户',
   PRIMARY KEY (`role_id`) USING BTREE,
   INDEX `idx_tenant_id`(`tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 66 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色';
+) ENGINE = InnoDB AUTO_INCREMENT = 66 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色';
 
 -- ----------------------------
 -- Records of role
@@ -1150,7 +1150,7 @@ CREATE TABLE `role_menu`  (
   `menu_permission_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '菜单资源用户id',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_roleid_menu_permission_id`(`role_id`, `menu_id`, `menu_permission_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1924 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色与菜单对应关系';
+) ENGINE = InnoDB AUTO_INCREMENT = 1924 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of role_menu
@@ -1164,15 +1164,15 @@ DROP TABLE IF EXISTS `undo_log`;
 CREATE TABLE `undo_log`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `branch_id` bigint NOT NULL,
-  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rollback_info` longblob NOT NULL,
   `log_status` int NOT NULL,
   `log_created` datetime NOT NULL,
   `log_modified` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 81 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 81 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of undo_log
@@ -1190,7 +1190,7 @@ CREATE TABLE `user_role`  (
   `role_id` bigint UNSIGNED NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_userid_roleid`(`user_id`, `role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 254 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户与角色对应关系';
+) ENGINE = InnoDB AUTO_INCREMENT = 254 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户与角色对应关系';
 
 -- ----------------------------
 -- Records of user_role
@@ -1296,15 +1296,15 @@ DROP TABLE IF EXISTS `undo_log`;
 CREATE TABLE `undo_log`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `branch_id` bigint NOT NULL,
-  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `xid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rollback_info` longblob NOT NULL,
   `log_status` int NOT NULL,
   `log_created` datetime NOT NULL,
   `log_modified` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- ----------------------------
 -- Table structure for user
