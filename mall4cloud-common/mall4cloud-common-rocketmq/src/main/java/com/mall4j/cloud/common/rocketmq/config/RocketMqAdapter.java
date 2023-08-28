@@ -1,12 +1,14 @@
 package com.mall4j.cloud.common.rocketmq.config;
 
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.support.RocketMQMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author FrozenWatermelon
@@ -14,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @RefreshScope
 @Configuration
+@Import({RocketMQAutoConfiguration.class})
 public class RocketMqAdapter {
 
     @Autowired
