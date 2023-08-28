@@ -49,10 +49,10 @@ public class ShopDetailVO extends BaseVO{
 	@JsonSerialize(using = ImgJsonSerializer.class)
 	private String mobileBackgroundPic;
 
-	@Schema(description = "用户名" ,required=true)
+	@Schema(description = "用户名" ,requiredMode = Schema.RequiredMode.REQUIRED)
 	private String username;
 
-	@Schema(description = "密码" ,required=true)
+	@Schema(description = "密码" ,requiredMode = Schema.RequiredMode.REQUIRED)
 	private String password;
 
 	public String getMobileBackgroundPic() {

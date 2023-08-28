@@ -2,7 +2,7 @@ package com.mall4j.cloud.order.dto.multishop;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * 订单参数

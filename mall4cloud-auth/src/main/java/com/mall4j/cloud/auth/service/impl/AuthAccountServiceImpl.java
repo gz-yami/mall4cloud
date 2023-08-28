@@ -10,12 +10,12 @@ import com.mall4j.cloud.auth.mapper.AuthAccountMapper;
 import com.mall4j.cloud.auth.service.AuthAccountService;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.util.PrincipalUtil;
-import ma.glasnost.orika.MapperFacade;
+import jakarta.annotation.Resource;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
@@ -31,8 +31,6 @@ public class AuthAccountServiceImpl implements AuthAccountService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private MapperFacade mapperFacade;
 
 	public static final String USER_NOT_FOUND_SECRET = "USER_NOT_FOUND_SECRET";
 
@@ -80,7 +78,7 @@ public class AuthAccountServiceImpl implements AuthAccountService {
 			return ServerResponseEntity.showFailMsg("用户名或密码不正确");
 		}
 
-		return ServerResponseEntity.success(mapperFacade.map(authAccountInVerifyBO, UserInfoInTokenBO.class));
+		return ServerResponseEntity.success(BeanUtil.map(authAccountInVerifyBO, UserInfoInTokenBO.class));
 	}
 
     @Override

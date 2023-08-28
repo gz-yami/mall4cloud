@@ -12,10 +12,10 @@ import com.mall4j.cloud.rbac.service.MenuPermissionService;
 import com.mall4j.cloud.rbac.vo.MenuPermissionVO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 /**
@@ -30,8 +30,6 @@ public class MenuPermissionController {
 	@Autowired
 	private MenuPermissionService menuPermissionService;
 
-	@Autowired
-	private MapperFacade mapperFacade;
 
 	@GetMapping("/list_by_menu")
 	@Operation(summary = "获取菜单资源列表" , description = "分页获取菜单资源列表")
@@ -49,7 +47,7 @@ public class MenuPermissionController {
 	@PostMapping
 	@Operation(summary = "保存菜单资源" , description = "保存菜单资源")
 	public ServerResponseEntity<Void> save(@Valid @RequestBody MenuPermissionDTO menuPermissionDTO) {
-		MenuPermission menuPermission = mapperFacade.map(menuPermissionDTO, MenuPermission.class);
+		MenuPermission menuPermission = BeanUtil.map(menuPermissionDTO, MenuPermission.class);
 		UserInfoInTokenBO userInfoInTokenBO = AuthUserContext.get();
 		menuPermission.setMenuPermissionId(null);
 		menuPermission.setBizType(userInfoInTokenBO.getSysType());
@@ -59,7 +57,7 @@ public class MenuPermissionController {
 	@PutMapping
 	@Operation(summary = "更新菜单资源" , description = "更新菜单资源")
 	public ServerResponseEntity<Void> update(@Valid @RequestBody MenuPermissionDTO menuPermissionDTO) {
-		MenuPermission menuPermission = mapperFacade.map(menuPermissionDTO, MenuPermission.class);
+		MenuPermission menuPermission = BeanUtil.map(menuPermissionDTO, MenuPermission.class);
 		UserInfoInTokenBO userInfoInTokenBO = AuthUserContext.get();
 		menuPermission.setBizType(userInfoInTokenBO.getSysType());
 		return menuPermissionService.update(menuPermission);

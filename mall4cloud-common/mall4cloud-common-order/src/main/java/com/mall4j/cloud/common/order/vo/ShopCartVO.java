@@ -12,10 +12,10 @@ import java.util.List;
  */
 public class ShopCartVO {
 
-	@Schema(description = "店铺ID" , required = true)
+	@Schema(description = "店铺ID" , requiredMode = Schema.RequiredMode.REQUIRED)
 	private Long shopId;
 
-	@Schema(description = "店铺名称" , required = true)
+	@Schema(description = "店铺名称" , requiredMode = Schema.RequiredMode.REQUIRED)
 	private String shopName;
 
 	@Schema(description = "店铺类型1自营店 2普通店" )
@@ -24,9 +24,9 @@ public class ShopCartVO {
 	@Schema(description = "购物车商品信息" )
 	private List<ShopCartItemVO> shopCartItem;
 
-	@Schema(description = "商品总值" , required = true)
+	@Schema(description = "商品总值" , requiredMode = Schema.RequiredMode.REQUIRED)
 	private Long total;
-	@Schema(description = "数量" , required = true)
+	@Schema(description = "数量" , requiredMode = Schema.RequiredMode.REQUIRED)
 	private Integer totalCount;
 
 	public Long getShopId() {

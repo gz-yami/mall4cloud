@@ -8,10 +8,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 public class UserSimpleInfoVO {
 
-    @Schema(description = "用户昵称" ,required=true)
+    @Schema(description = "用户昵称" ,requiredMode = Schema.RequiredMode.REQUIRED)
     private String nickName;
 
-    @Schema(description = "用户头像" ,required=true)
+    @Schema(description = "用户头像" ,requiredMode = Schema.RequiredMode.REQUIRED)
     private String pic;
 
     public String getNickName() {

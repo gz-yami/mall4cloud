@@ -2,8 +2,8 @@ package com.mall4j.cloud.api.product.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @author FrozenWatermelon
@@ -12,20 +12,20 @@ import javax.validation.constraints.NotNull;
 public class SkuStockLockDTO {
 
     @NotNull(message = "产品ID不能为空")
-    @Schema(description = "产品ID" ,required=true)
+    @Schema(description = "产品ID" ,requiredMode = Schema.RequiredMode.REQUIRED)
     private Long spuId;
 
     @NotNull(message = "skuId不能为空")
-    @Schema(description = "skuId" ,required=true)
+    @Schema(description = "skuId" ,requiredMode = Schema.RequiredMode.REQUIRED)
     private Long skuId;
 
     @NotNull(message = "orderId不能为空")
-    @Schema(description = "orderId" ,required=true)
+    @Schema(description = "orderId" ,requiredMode = Schema.RequiredMode.REQUIRED)
     private Long orderId;
 
     @NotNull(message = "商品数量不能为空")
     @Min(value = 1,message = "商品数量不能为空")
-    @Schema(description = "商品数量" ,required=true)
+    @Schema(description = "商品数量" ,requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer count;
 
     public SkuStockLockDTO() {

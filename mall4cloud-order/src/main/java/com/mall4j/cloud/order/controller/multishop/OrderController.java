@@ -17,12 +17,12 @@ import com.mall4j.cloud.order.vo.OrderAddrVO;
 import com.mall4j.cloud.order.vo.OrderVO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.Objects;
 
 /**
@@ -37,8 +37,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private MapperFacade mapperFacade;
+
 
     @Autowired
     private SearchOrderFeignClient searchOrderFeignClient;
@@ -66,8 +65,8 @@ public class OrderController {
         Order order = orderService.getOrderAndOrderItemData(orderId, AuthUserContext.get().getTenantId());
         // 详情用户收货地址
         OrderAddr orderAddr = orderAddrService.getByOrderAddrId(order.getOrderAddrId());
-        order.setOrderAddr(mapperFacade.map(orderAddr, OrderAddr.class));
-        OrderVO orderVO = mapperFacade.map(order, OrderVO.class);
+        order.setOrderAddr(BeanUtil.map(orderAddr, OrderAddr.class));
+        OrderVO orderVO = BeanUtil.map(order, OrderVO.class);
         return ServerResponseEntity.success(orderVO);
     }
     /**
@@ -77,7 +76,7 @@ public class OrderController {
     @Operation(summary = "获取订单用户下单地址")
     public ServerResponseEntity<OrderAddrVO> getOrderAddr(@PathVariable("orderAddrId") Long orderAddrId) {
         OrderAddr orderAddr = orderAddrService.getByOrderAddrId(orderAddrId);
-        return ServerResponseEntity.success(mapperFacade.map(orderAddr, OrderAddrVO.class));
+        return ServerResponseEntity.success(BeanUtil.map(orderAddr, OrderAddrVO.class));
     }
 
     /**
@@ -88,10 +87,10 @@ public class OrderController {
     public ServerResponseEntity<OrderVO> getOrderItemAndAddress(@PathVariable("orderId") Long orderId) {
         // 订单和订单项
         Order order = orderService.getOrderAndOrderItemData(orderId, AuthUserContext.get().getTenantId());
-        OrderVO orderVO = mapperFacade.map(order, OrderVO.class);
+        OrderVO orderVO = BeanUtil.map(order, OrderVO.class);
         // 用户收货地址
         OrderAddr orderAddr = orderAddrService.getByOrderAddrId(order.getOrderAddrId());
-        orderVO.setOrderAddr(mapperFacade.map(orderAddr, OrderAddrVO.class));
+        orderVO.setOrderAddr(BeanUtil.map(orderAddr, OrderAddrVO.class));
         return ServerResponseEntity.success(orderVO);
     }
 

@@ -15,7 +15,7 @@ public class OrderItemDTO extends BaseVO{
     @Schema(description = "订单项ID" )
     private Long orderItemId;
 
-	@Schema(description = "变化金额" , required = true)
+	@Schema(description = "变化金额" , requiredMode = Schema.RequiredMode.REQUIRED)
 	private Long changeAmount;
 
 	public Long getOrderItemId() {

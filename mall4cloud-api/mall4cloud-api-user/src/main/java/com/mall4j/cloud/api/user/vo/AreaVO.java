@@ -14,7 +14,7 @@ import java.util.List;
 public class AreaVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-	@Schema()
+	
 	private Long areaId;
 
 	@Schema(description = "地址" )

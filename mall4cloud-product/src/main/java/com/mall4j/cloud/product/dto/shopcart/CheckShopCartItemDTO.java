@@ -2,7 +2,7 @@ package com.mall4j.cloud.product.dto.shopcart;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @author FrozenWatermelon
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 public class CheckShopCartItemDTO {
 
     @NotNull
-    @Schema(description = "购物车ID" , required = true)
+    @Schema(description = "购物车ID" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Long shopCartItemId;
 
     @NotNull

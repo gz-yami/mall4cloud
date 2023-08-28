@@ -17,11 +17,11 @@ import com.mall4j.cloud.product.service.AttrService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Operation;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,8 +39,7 @@ public class AttrController {
     @Autowired
     private AttrService attrService;
 
-    @Autowired
-	private MapperFacade mapperFacade;
+
 
 	@GetMapping("/page")
 	@Operation(summary = "获取属性信息列表" , description = "分页获取属性信息列表")
@@ -62,8 +61,8 @@ public class AttrController {
             throw new Mall4cloudException("属性类型不能为空");
         }
 	    checkAttrInfo(attrDTO);
-        Attr attr = mapperFacade.map(attrDTO, Attr.class);
-        attr.setAttrValues(mapperFacade.mapAsList(attrDTO.getAttrValues(), AttrValue.class));
+        Attr attr = BeanUtil.map(attrDTO, Attr.class);
+        attr.setAttrValues(BeanUtil.mapAsList(attrDTO.getAttrValues(), AttrValue.class));
         attrService.save(attr, attrDTO.getCategoryIds());
         removeCacheAttrUnionCategory(attrDTO.getCategoryIds());
         return ServerResponseEntity.success();
@@ -73,9 +72,9 @@ public class AttrController {
     @Operation(summary = "更新属性信息" , description = "更新属性信息")
     public ServerResponseEntity<Void> update(@Valid @RequestBody AttrDTO attrDTO) {
         checkAttrInfo(attrDTO);
-        Attr attr = mapperFacade.map(attrDTO, Attr.class);
+        Attr attr = BeanUtil.map(attrDTO, Attr.class);
         if (CollUtil.isNotEmpty(attrDTO.getAttrValues())) {
-            attr.setAttrValues(mapperFacade.mapAsList(attrDTO.getAttrValues(), AttrValue.class));
+            attr.setAttrValues(BeanUtil.mapAsList(attrDTO.getAttrValues(), AttrValue.class));
         }
         List<Long> categoryIds = null;
         if (Objects.equals(AttrType.BASIC.value(), attr.getAttrType())) {

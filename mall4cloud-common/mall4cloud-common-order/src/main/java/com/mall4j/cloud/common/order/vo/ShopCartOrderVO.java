@@ -11,19 +11,19 @@ import java.util.List;
  */
 public class ShopCartOrderVO implements Serializable{
 
-    @Schema(description = "店铺id" , required = true)
+    @Schema(description = "店铺id" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Long shopId;
 
-    @Schema(description = "店铺名称" , required = true)
+    @Schema(description = "店铺名称" , requiredMode = Schema.RequiredMode.REQUIRED)
     private String shopName;
 
-    @Schema(description = "商品总值" , required = true)
+    @Schema(description = "商品总值" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Long total;
 
-    @Schema(description = "购物车商品" , required = true)
+    @Schema(description = "购物车商品" , requiredMode = Schema.RequiredMode.REQUIRED)
     private List<ShopCartItemVO> shopCartItemVO;
 
-    @Schema(description = "商品总数" , required = true)
+    @Schema(description = "商品总数" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer totalCount;
 
 

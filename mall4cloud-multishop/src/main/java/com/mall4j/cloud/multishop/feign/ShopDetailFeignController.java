@@ -6,7 +6,7 @@ import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.multishop.model.ShopDetail;
 import com.mall4j.cloud.multishop.service.ShopDetailService;
 import com.mall4j.cloud.api.multishop.vo.ShopDetailVO;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +22,7 @@ public class ShopDetailFeignController implements ShopDetailFeignClient {
 
     @Autowired
     private ShopDetailService shopDetailService;
-    @Autowired
-    private MapperFacade mapperFacade;
+
 
     @Override
     public ServerResponseEntity<String> getShopNameByShopId(Long shopId) {
@@ -40,14 +39,14 @@ public class ShopDetailFeignController implements ShopDetailFeignClient {
         if (Objects.isNull(shopDetail)) {
             return ServerResponseEntity.success(new EsShopDetailBO());
         }
-        return ServerResponseEntity.success(mapperFacade.map(shopDetail, EsShopDetailBO.class));
+        return ServerResponseEntity.success(BeanUtil.map(shopDetail, EsShopDetailBO.class));
     }
 
 
     @Override
     public ServerResponseEntity<List<ShopDetailVO>> listByShopIds(List<Long> shopIds) {
         List<ShopDetail> shopDetail = shopDetailService.listByShopIds(shopIds);
-        return ServerResponseEntity.success(mapperFacade.mapAsList(shopDetail, ShopDetailVO.class));
+        return ServerResponseEntity.success(BeanUtil.mapAsList(shopDetail, ShopDetailVO.class));
     }
 
     @Override

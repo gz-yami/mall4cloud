@@ -3,7 +3,7 @@ package com.mall4j.cloud.order.dto.app;
 import com.mall4j.cloud.api.product.dto.ShopCartItemDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * 订单参数

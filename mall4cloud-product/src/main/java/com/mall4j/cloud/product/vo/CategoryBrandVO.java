@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class CategoryBrandVO extends BaseVO{
     private static final long serialVersionUID = 1L;
 
-    @Schema()
+    
     private Long id;
 
     @Schema(description = "品牌id" )

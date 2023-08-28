@@ -35,7 +35,7 @@ import com.mall4j.cloud.api.multishop.vo.ShopDetailVO;
 import com.mall4j.cloud.multishop.service.ShopUserService;
 import com.mall4j.cloud.multishop.vo.ShopDetailAppVO;
 import io.seata.spring.annotation.GlobalTransactional;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -61,8 +61,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
     private SearchSpuFeignClient searchSpuFeignClient;
     @Autowired
     private ShopUserService shopUserService;
-    @Autowired
-    private MapperFacade mapperFacade;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -136,7 +135,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
     @GlobalTransactional
     public void applyShop(ShopDetailDTO shopDetailDTO) {
         checkShopInfo(shopDetailDTO);
-        ShopDetail newShopDetail = mapperFacade.map(shopDetailDTO, ShopDetail.class);
+        ShopDetail newShopDetail = BeanUtil.map(shopDetailDTO, ShopDetail.class);
         // 申请开店
         newShopDetail.setShopStatus(ShopStatus.OPEN.value());
         newShopDetail.setType(ShopType.STOP.value());
@@ -172,7 +171,7 @@ public class ShopDetailServiceImpl implements ShopDetailService {
             throw new Mall4cloudException("该用户已经创建过店铺");
         }
         // 保存店铺
-        ShopDetail shopDetail = mapperFacade.map(shopDetailDTO, ShopDetail.class);
+        ShopDetail shopDetail = BeanUtil.map(shopDetailDTO, ShopDetail.class);
         shopDetail.setShopStatus(ShopStatus.OPEN.value());
         shopDetailMapper.save(shopDetail);
         // 保存商家账号
