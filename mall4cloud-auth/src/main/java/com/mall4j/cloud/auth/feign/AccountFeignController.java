@@ -36,8 +36,6 @@ public class AccountFeignController implements AccountFeignClient {
     @Autowired
     private AuthAccountMapper authAccountMapper;
 
-
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 

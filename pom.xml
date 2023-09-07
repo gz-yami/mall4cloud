@@ -47,6 +47,8 @@
         <pagehelper-spring-boot-starter.version>1.4.7</pagehelper-spring-boot-starter.version>
         <captcha.version>1.3.0</captcha.version>
         <knife4j.version>4.3.0</knife4j.version>
+        <springdoc.version>2.2.0</springdoc.version>
+        <springdoc-webflux.version>2.0.4</springdoc-webflux.version>
         <elasticsearch.version>7.17.5</elasticsearch.version>
         <minio.version>8.2.2</minio.version>
         <rocketmq-springboot.version>2.2.3</rocketmq-springboot.version>
@@ -72,13 +74,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-dependencies</artifactId>
-                <version>${knife4j.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -147,11 +142,23 @@
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>
@@ -193,6 +200,21 @@
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2</artifactId>
                 <version>${fastjson2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-common</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+                <version>${springdoc-webflux.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

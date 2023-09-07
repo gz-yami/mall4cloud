@@ -34,7 +34,7 @@ public class DefaultAuthConfigAdapter implements AuthConfigAdapter {
 	/**
 	 * swagger
 	 */
-	private static final String DOC_URI = "/v3/api-docs";
+	private static final String DOC_URI = "/v3/api-docs/default";
 
 	@Override
 	public List<String> pathPatterns() {

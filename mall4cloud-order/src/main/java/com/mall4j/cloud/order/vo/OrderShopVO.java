@@ -35,19 +35,19 @@ public class OrderShopVO implements Serializable {
     @Schema(description = "订单创建时间" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Date createTime;
 
-    @Schema(description = "订单付款时间" ))
+    @Schema(description = "订单付款时间")
     private Date payTime;
 
-    @Schema(description = "订单发货时间" ))
+    @Schema(description = "订单发货时间")
     private Date deliveryTime;
 
-    @Schema(description = "订单完成时间" ))
+    @Schema(description = "订单完成时间")
     private Date finallyTime;
 
-    @Schema(description = "订单取消时间" ))
+    @Schema(description = "订单取消时间")
     private Date cancelTime;
 
-    @Schema(description = "订单更新时间" ))
+    @Schema(description = "订单更新时间")
     private Date updateTime;
 
     @Schema(description = "配送类型 3：无需快递" , requiredMode = Schema.RequiredMode.REQUIRED)
