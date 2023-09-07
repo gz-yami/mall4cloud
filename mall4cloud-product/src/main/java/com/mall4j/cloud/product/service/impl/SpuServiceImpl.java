@@ -28,7 +28,7 @@ import com.mall4j.cloud.product.model.SpuAttrValue;
 import com.mall4j.cloud.product.model.SpuDetail;
 import com.mall4j.cloud.product.model.SpuExtension;
 import io.seata.spring.annotation.GlobalTransactional;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -61,8 +61,7 @@ public class SpuServiceImpl implements SpuService {
     @Autowired
     private SpuAttrValueService spuAttrValueService;
 
-    @Autowired
-    private MapperFacade mapperFacade;
+
 
     @Autowired
     private SkuService skuService;
@@ -127,14 +126,14 @@ public class SpuServiceImpl implements SpuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(SpuDTO spuDTO) {
-        Spu spu = mapperFacade.map(spuDTO, Spu.class);
+        Spu spu = BeanUtil.map(spuDTO, Spu.class);
         spu.setShopId(AuthUserContext.get().getTenantId());
         spu.setStatus(StatusEnum.ENABLE.value());
         spu.setShopId(AuthUserContext.get().getTenantId());
         // 1.保存商品信息
         spuMapper.save(spu);
         // 2.保存商品其他信息，规格、详细、扩展信息
-        List<SpuAttrValue> spuAttrValues = mapperFacade.mapAsList(spuDTO.getSpuAttrValues(), SpuAttrValue.class);
+        List<SpuAttrValue> spuAttrValues = BeanUtil.mapAsList(spuDTO.getSpuAttrValues(), SpuAttrValue.class);
         for (SpuAttrValue spuAttrValue : spuAttrValues) {
             if (Objects.isNull(spuAttrValue.getAttrValueId())) {
                 spuAttrValue.setAttrValueId(0L);
@@ -160,12 +159,12 @@ public class SpuServiceImpl implements SpuService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(SpuDTO spuDTO) {
-        Spu spu = mapperFacade.map(spuDTO, Spu.class);
+        Spu spu = BeanUtil.map(spuDTO, Spu.class);
         SpuServiceImpl spuService = (SpuServiceImpl) AopContext.currentProxy();
         SpuVO dbSpu = spuService.getBySpuId(spu.getSpuId());
         // 1.修改商品信息
         spuMapper.update(spu);
-        List<SpuAttrValue> spuAttrValues = mapperFacade.mapAsList(spuDTO.getSpuAttrValues(), SpuAttrValue.class);
+        List<SpuAttrValue> spuAttrValues = BeanUtil.mapAsList(spuDTO.getSpuAttrValues(), SpuAttrValue.class);
         spuAttrValueService.update(spu.getSpuId(),spuAttrValues, dbSpu.getSpuAttrValues());
 
         // 2.修改商品详情
@@ -255,7 +254,7 @@ public class SpuServiceImpl implements SpuService {
         // 获取属性
         List<SpuAttrValueVO> spuAttrsBySpuId = spuAttrValueService.getSpuAttrsBySpuId(spuId);
         List<SpuAttrValueVO> attrs = spuAttrsBySpuId.stream().filter(spuAttrValueVO -> spuAttrValueVO.getSearchType().equals(1)).collect(Collectors.toList());
-        esProductBO.setAttrs(mapperFacade.mapAsList(attrs, EsAttrBO.class));
+        esProductBO.setAttrs(BeanUtil.mapAsList(attrs, EsAttrBO.class));
         return esProductBO;
     }
 

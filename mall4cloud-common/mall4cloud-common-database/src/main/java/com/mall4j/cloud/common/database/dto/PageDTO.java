@@ -4,7 +4,7 @@ import com.github.pagehelper.IPage;
 import com.mall4j.cloud.common.util.PrincipalUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Arrays;
 
 /**
@@ -26,11 +26,11 @@ public class PageDTO implements IPage {
      * 当前页
      */
     @NotNull(message = "pageNum 不能为空")
-    @Schema(description = "当前页" , required = true)
+    @Schema(description = "当前页" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer pageNum;
 
     @NotNull(message = "pageSize 不能为空")
-    @Schema(description = "每页大小" , required = true)
+    @Schema(description = "每页大小" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer pageSize;
 
     @Schema(description = "排序字段数组，用逗号分割" )

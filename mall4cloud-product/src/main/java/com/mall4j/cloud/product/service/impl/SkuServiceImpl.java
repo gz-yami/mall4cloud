@@ -16,7 +16,7 @@ import com.mall4j.cloud.product.service.SkuStockService;
 import com.mall4j.cloud.product.service.SpuSkuAttrValueService;
 import com.mall4j.cloud.api.product.vo.SkuVO;
 import com.mall4j.cloud.product.vo.app.SkuAppVO;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -44,8 +44,7 @@ public class SkuServiceImpl implements SkuService {
     private SpuSkuAttrValueService spuSkuAttrValueService;
     @Autowired
     private SkuStockService skuStockService;
-    @Autowired
-    private MapperFacade mapperFacade;
+
 
     @Override
     public void save(Long spuId, List<SkuDTO> skuList) {
@@ -64,7 +63,7 @@ public class SkuServiceImpl implements SkuService {
             skuStock.setActualStock(skuDTO.getStock());
             skuStock.setLockStock(0);
             skuStocks.add(skuStock);
-            List<SpuSkuAttrValue> spuSkuAttrValueList = mapperFacade.mapAsList(skuDTO.getSpuSkuAttrValues(), SpuSkuAttrValue.class);
+            List<SpuSkuAttrValue> spuSkuAttrValueList = BeanUtil.mapAsList(skuDTO.getSpuSkuAttrValues(), SpuSkuAttrValue.class);
             for (SpuSkuAttrValue spuSkuAttrValue : spuSkuAttrValueList) {
                 spuSkuAttrValue.setSpuId(spuId);
                 spuSkuAttrValue.setSkuId(skuDTO.getSkuId());
@@ -100,7 +99,7 @@ public class SkuServiceImpl implements SkuService {
         }
         // 已有的sku--更新
         if(CollUtil.isNotEmpty(updateSkus)){
-            List<Sku> skus = mapperFacade.mapAsList(updateSkus, Sku.class);
+            List<Sku> skus = BeanUtil.mapAsList(updateSkus, Sku.class);
             skuMapper.updateBatch(skus);
             skuStockService.updateBatch(updateSkus);
         }
@@ -186,7 +185,7 @@ public class SkuServiceImpl implements SkuService {
         List<SkuAppVO> skuAppList = new ArrayList<>();
         List<SkuVO> skuData = skuMapper.getSkuBySpuId(spuId);
         for (SkuVO sku : skuData) {
-            SkuAppVO skuAppVO = mapperFacade.map(sku, SkuAppVO.class);
+            SkuAppVO skuAppVO = BeanUtil.map(sku, SkuAppVO.class);
             String properties = "";
             for (SpuSkuAttrValueVO spuSkuAttrValue : sku.getSpuSkuAttrValues()) {
                 properties = properties + spuSkuAttrValue.getAttrName() + attrUnionAttrValue + spuSkuAttrValue.getAttrValueName() + attrUnionAttr;

@@ -2,7 +2,7 @@ package com.mall4j.cloud.auth.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * 刷新token
@@ -16,7 +16,7 @@ public class RefreshTokenDTO {
 	 * refreshToken
 	 */
 	@NotBlank(message = "refreshToken不能为空")
-	@Schema(description = "refreshToken" , required = true)
+	@Schema(description = "refreshToken" , requiredMode = Schema.RequiredMode.REQUIRED)
 	private String refreshToken;
 
 	public String getRefreshToken() {

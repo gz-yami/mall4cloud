@@ -30,31 +30,31 @@
         <project.encoding>UTF-8</project.encoding>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
 
         <!-- 核心依赖 -->
-        <spring-boot.version>2.7.7</spring-boot.version>
-        <spring-cloud.version>2021.0.5</spring-cloud.version>
-        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+        <spring-boot.version>3.1.2</spring-boot.version>
+        <spring-cloud.version>2022.0.4</spring-cloud.version>
+        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
 
         <!--分离出这两个东西，是为了能够在 spring cloud alibaba不更新的时候，及时更新-->
         <seata.version>1.6.1</seata.version>
-        <nacos.version>2.2.0</nacos.version>
+        <nacos.version>2.2.4</nacos.version>
 
         <!-- 次要依赖 -->
-        <hutool-version>5.8.11</hutool-version>
-        <mybatis-spring-boot-starter.version>2.3.0</mybatis-spring-boot-starter.version>
-        <pagehelper-spring-boot-starter.version>1.4.3</pagehelper-spring-boot-starter.version>
-        <orika.version>1.5.4</orika.version>
-        <jsoup.version>1.13.1</jsoup.version>
-        <orika.version>1.5.4</orika.version>
-        <captcha.version>1.2.5</captcha.version>
-        <knife4j.version>4.0.0</knife4j.version>
-        <springdoc.version>1.6.9</springdoc.version>
+        <hutool-version>5.8.20</hutool-version>
+        <mybatis-spring-boot-starter.version>3.0.2</mybatis-spring-boot-starter.version>
+        <pagehelper-spring-boot-starter.version>1.4.7</pagehelper-spring-boot-starter.version>
+        <captcha.version>1.3.0</captcha.version>
+        <knife4j.version>4.3.0</knife4j.version>
+        <springdoc.version>2.2.0</springdoc.version>
+        <springdoc-webflux.version>2.0.4</springdoc-webflux.version>
         <elasticsearch.version>7.17.5</elasticsearch.version>
         <minio.version>8.2.2</minio.version>
-        <rocketmq-springboot.version>2.2.2</rocketmq-springboot.version>
-        <weixin.version>4.0.0</weixin.version>
+        <rocketmq-springboot.version>2.2.3</rocketmq-springboot.version>
+        <weixin.version>4.5.0</weixin.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <fastjson2.version>2.0.38</fastjson2.version>
         <spring-javaformat.version>0.0.22</spring-javaformat.version>
     </properties>
 
@@ -74,13 +74,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-dependencies</artifactId>
-                <version>${knife4j.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -141,34 +134,31 @@
                 <version>${pagehelper-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.jsoup</groupId>
-                <artifactId>jsoup</artifactId>
-                <version>${jsoup.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ma.glasnost.orika</groupId>
-                <artifactId>orika-core</artifactId>
-                <version>${orika.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.anji-plus</groupId>
+                <groupId>com.anji-plus</groupId>
                 <artifactId>captcha</artifactId>
                 <version>${captcha.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-openapi3-ui</artifactId>
+                <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-webflux-ui</artifactId>
-                <version>${springdoc.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.elasticsearch.client</groupId>
@@ -200,6 +190,31 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-spring-boot-starter</artifactId>
                 <version>${rocketmq-springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-common</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+                <version>${springdoc-webflux.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

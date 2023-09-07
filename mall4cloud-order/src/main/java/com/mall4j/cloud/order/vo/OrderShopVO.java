@@ -13,47 +13,47 @@ import java.util.List;
  */
 public class OrderShopVO implements Serializable {
 
-    @Schema(description = "店铺id" , required = true)
+    @Schema(description = "店铺id" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Long shopId;
 
-    @Schema(description = "店铺名称" , required = true)
+    @Schema(description = "店铺名称" , requiredMode = Schema.RequiredMode.REQUIRED)
     private String shopName;
 
-    @Schema(description = "商品总值" , required = true)
+    @Schema(description = "商品总值" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Long total;
 
-    @Schema(description = "商品总数" , required = true)
+    @Schema(description = "商品总数" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer totalNum;
 
 
-    @Schema(description = "地址Dto" , required = true)
+    @Schema(description = "地址Dto" , requiredMode = Schema.RequiredMode.REQUIRED)
     private OrderAddrVO orderAddr;
 
-    @Schema(description = "产品信息" , required = true)
+    @Schema(description = "产品信息" , requiredMode = Schema.RequiredMode.REQUIRED)
     private List<OrderItemVO> orderItems;
 
-    @Schema(description = "订单创建时间" , required = true)
+    @Schema(description = "订单创建时间" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Date createTime;
 
-    @Schema(description = "订单付款时间" , required = false)
+    @Schema(description = "订单付款时间")
     private Date payTime;
 
-    @Schema(description = "订单发货时间" , required = false)
+    @Schema(description = "订单发货时间")
     private Date deliveryTime;
 
-    @Schema(description = "订单完成时间" , required = false)
+    @Schema(description = "订单完成时间")
     private Date finallyTime;
 
-    @Schema(description = "订单取消时间" , required = false)
+    @Schema(description = "订单取消时间")
     private Date cancelTime;
 
-    @Schema(description = "订单更新时间" , required = false)
+    @Schema(description = "订单更新时间")
     private Date updateTime;
 
-    @Schema(description = "配送类型 3：无需快递" , required = true)
+    @Schema(description = "配送类型 3：无需快递" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer deliveryType;
 
-    @Schema(description = "订单状态" , required = true)
+    @Schema(description = "订单状态" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer status;
 
     public Long getShopId() {

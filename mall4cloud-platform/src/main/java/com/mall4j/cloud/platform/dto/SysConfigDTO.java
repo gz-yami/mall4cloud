@@ -12,7 +12,7 @@ import java.util.Date;
 public class SysConfigDTO{
     private static final long serialVersionUID = 1L;
 
-    @Schema()
+    
     private Long id;
 
     @Schema(description = "key" )

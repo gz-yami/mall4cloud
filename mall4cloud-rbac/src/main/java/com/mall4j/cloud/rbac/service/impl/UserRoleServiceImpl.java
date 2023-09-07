@@ -1,7 +1,7 @@
 package com.mall4j.cloud.rbac.service.impl;
 
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import com.mall4j.cloud.rbac.mapper.UserRoleMapper;
 import com.mall4j.cloud.rbac.service.UserRoleService;
 

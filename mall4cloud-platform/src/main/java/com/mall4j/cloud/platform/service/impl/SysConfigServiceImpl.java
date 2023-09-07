@@ -6,12 +6,12 @@ import com.mall4j.cloud.common.util.Json;
 import com.mall4j.cloud.platform.model.SysConfig;
 import com.mall4j.cloud.platform.mapper.SysConfigMapper;
 import com.mall4j.cloud.platform.service.SysConfigService;
+import jakarta.annotation.Resource;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Objects;
 
 /**

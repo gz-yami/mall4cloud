@@ -10,11 +10,11 @@ import com.mall4j.cloud.user.model.UserAddr;
 import com.mall4j.cloud.user.service.UserAddrService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 /**
@@ -29,8 +29,7 @@ public class UserAddrController {
     @Autowired
     private UserAddrService userAddrService;
 
-    @Autowired
-    private MapperFacade mapperFacade;
+
 
     private static final Integer MAX_USER_ADDR = 10;
 
@@ -56,7 +55,7 @@ public class UserAddrController {
         if (userAddrCount >= MAX_USER_ADDR) {
             return ServerResponseEntity.showFailMsg("收货地址已达到上限，无法再新增地址");
         }
-        UserAddr userAddr = mapperFacade.map(userAddrDTO, UserAddr.class);
+        UserAddr userAddr = BeanUtil.map(userAddrDTO, UserAddr.class);
         if (userAddrCount == 0) {
             userAddr.setIsDefault(UserAddr.DEFAULT_ADDR);
         } else if (!UserAddr.DEFAULT_ADDR.equals(userAddr.getIsDefault())){
@@ -84,7 +83,7 @@ public class UserAddrController {
         else if (dbUserAddr.getIsDefault().equals(UserAddr.DEFAULT_ADDR) && userAddrDTO.getIsDefault().equals(UserAddr.NOT_DEFAULT_ADDR)) {
             throw new Mall4cloudException(ResponseEnum.DATA_ERROR);
         }
-        UserAddr userAddr = mapperFacade.map(userAddrDTO, UserAddr.class);
+        UserAddr userAddr = BeanUtil.map(userAddrDTO, UserAddr.class);
         userAddr.setUserId(userId);
         userAddrService.update(userAddr);
         // 清除默认地址缓存

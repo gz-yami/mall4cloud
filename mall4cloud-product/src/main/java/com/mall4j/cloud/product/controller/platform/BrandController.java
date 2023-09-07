@@ -14,11 +14,11 @@ import com.mall4j.cloud.product.service.CategoryBrandService;
 import com.mall4j.cloud.product.service.CategoryService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,8 +36,7 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
-    @Autowired
-	private MapperFacade mapperFacade;
+
 
     @Autowired
     private CategoryService categoryService;
@@ -68,7 +67,7 @@ public class BrandController {
         }if (StrUtil.isEmpty(brandDTO.getName())) {
             throw new Mall4cloudException("品牌名称不能为空");
         }
-        Brand brand = mapperFacade.map(brandDTO, Brand.class);
+        Brand brand = BeanUtil.map(brandDTO, Brand.class);
         brandService.save(brand, brandDTO.getCategoryIds());
         brandService.removeCache(brandDTO.getCategoryIds());
         return ServerResponseEntity.success();
@@ -80,7 +79,7 @@ public class BrandController {
         if (CollUtil.isEmpty(brandDTO.getCategoryIds())) {
             throw new Mall4cloudException("分类不能为空");
         }
-        Brand brand = mapperFacade.map(brandDTO, Brand.class);
+        Brand brand = BeanUtil.map(brandDTO, Brand.class);
         brandService.update(brand, brandDTO.getCategoryIds());
         // 清楚缓存
         List<Long> categoryIds = categoryBrandService.getCategoryIdBrandId(brand.getBrandId());

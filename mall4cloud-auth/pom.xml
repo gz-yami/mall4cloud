@@ -42,7 +42,7 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.anji-plus</groupId>
+            <groupId>com.anji-plus</groupId>
             <artifactId>captcha</artifactId>
         </dependency>
         <dependency>

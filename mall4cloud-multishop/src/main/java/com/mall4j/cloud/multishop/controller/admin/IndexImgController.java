@@ -13,11 +13,11 @@ import com.mall4j.cloud.multishop.service.IndexImgService;
 import com.mall4j.cloud.multishop.vo.IndexImgVO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.Objects;
 
 /**
@@ -33,8 +33,7 @@ public class IndexImgController {
 
     @Autowired
     private IndexImgService indexImgService;
-    @Autowired
-    private MapperFacade mapperFacade;
+
     @Autowired
     private SpuFeignClient spuFeignClient;
 
@@ -60,7 +59,7 @@ public class IndexImgController {
     @PostMapping
     @Operation(summary = "保存轮播图" , description = "保存轮播图")
     public ServerResponseEntity<Void> save(@Valid @RequestBody IndexImgDTO indexImgDTO) {
-        IndexImg indexImg = mapperFacade.map(indexImgDTO, IndexImg.class);
+        IndexImg indexImg = BeanUtil.map(indexImgDTO, IndexImg.class);
         indexImg.setImgId(null);
         indexImg.setShopId(AuthUserContext.get().getTenantId());
         indexImg.setStatus(StatusEnum.ENABLE.value());
@@ -71,7 +70,7 @@ public class IndexImgController {
     @PutMapping
     @Operation(summary = "更新轮播图" , description = "更新轮播图")
     public ServerResponseEntity<Void> update(@Valid @RequestBody IndexImgDTO indexImgDTO) {
-        IndexImg indexImg = mapperFacade.map(indexImgDTO, IndexImg.class);
+        IndexImg indexImg = BeanUtil.map(indexImgDTO, IndexImg.class);
         indexImg.setShopId(AuthUserContext.get().getTenantId());
         indexImgService.update(indexImg);
         return ServerResponseEntity.success();

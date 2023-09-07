@@ -4,7 +4,7 @@ import com.mall4j.cloud.api.user.feign.UserFeignClient;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.user.service.UserService;
 import com.mall4j.cloud.api.user.vo.UserApiVO;
-import ma.glasnost.orika.MapperFacade;
+import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,8 +20,7 @@ public class UserFeignController implements UserFeignClient {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private MapperFacade mapperFacade;
+
 
     @Override
     public ServerResponseEntity<List<UserApiVO>> getUserByUserIds(List<Long> userIds) {

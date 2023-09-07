@@ -14,10 +14,10 @@ import java.util.Date;
  */
 public class ShopCartItemVO implements Serializable {
 
-    @Schema(description = "加入购物车时间" , required = true)
+    @Schema(description = "加入购物车时间" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Date createTime;
 
-    @Schema(description = "购物车ID" , required = true)
+    @Schema(description = "购物车ID" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Long cartItemId;
 
     @Schema(description = "店铺ID" )
@@ -60,7 +60,7 @@ public class ShopCartItemVO implements Serializable {
     @JsonSerialize(using = ImgJsonSerializer.class)
     private String imgUrl;
 
-    @Schema(description = "总金额" , required = true)
+    @Schema(description = "总金额" , requiredMode = Schema.RequiredMode.REQUIRED)
     private Long totalAmount;
 
     @Schema(description = "sku规格信息" )

@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class AttachFileDTO {
     private static final long serialVersionUID = 1L;
 
-    @Schema()
+    
     private Long fileId;
 
     @Schema(description = "文件路径" )
