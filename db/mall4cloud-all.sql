@@ -1088,7 +1088,6 @@ INSERT INTO `menu` VALUES (256, '2021-01-27 14:14:51', '2021-04-22 10:30:44', 25
 INSERT INTO `menu` VALUES (257, '2021-01-28 09:48:39', '2021-04-22 10:30:44', 255, 2, NULL, 'index-img', 'platform/index-img', NULL, NULL, 0, '轮播图管理', '轮播图管理', 'el-icon-picture-outline', NULL, NULL, NULL, NULL, 0);
 INSERT INTO `menu` VALUES (258, '2021-01-28 11:06:52', '2021-01-28 11:06:52', 145, 1, NULL, 'hot-search', 'multishop/hot-search', NULL, NULL, 0, 'hot-search', '热搜管理', '', NULL, NULL, NULL, NULL, 0);
 INSERT INTO `menu` VALUES (302, '2021-05-13 19:02:02', '2021-05-13 19:02:20', 255, 2, NULL, 'shop-detail', 'platform/shop-detail', NULL, NULL, 1, '店铺详情', '店铺详情', '', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (306, '2021-05-14 17:32:04', '2021-05-14 17:34:08', 255, 2, NULL, 'shop-edit', 'platform/shop-edit', NULL, NULL, 1, '店铺编辑', '店铺编辑', '', NULL, NULL, NULL, NULL, 0);
 INSERT INTO `menu` VALUES (327, '2021-06-30 20:22:45', '2021-06-30 20:25:49', 255, 2, NULL, 'shop-manage', 'platform/shop-manage', NULL, NULL, 0, '店铺管理', '店铺管理', 'el-icon-s-order', NULL, NULL, NULL, NULL, 3);
 
 -- ----------------------------
@@ -1109,6 +1108,70 @@ CREATE TABLE `menu_permission`  (
   UNIQUE INDEX `uk_permission`(`permission`, `biz_type`) USING BTREE,
   INDEX `idx_menuid`(`menu_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 230 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单资源';
+
+
+
+insert into `menu_permission` (`menu_permission_id`, `menu_id`, `biz_type`, `permission`, `name`, `uri`, `method`) values
+('1','256','2','platform:hotSearch:save','新增','/admin/hot_search','2'),
+('2','256','2','platform:hotSearch:update','更新','/admin/hot_search','3'),
+('3','256','2','platform:hotSearch:delete','删除','/admin/hot_search','4'),
+('4','257','2','platform:indexImg:save','新增','/admin/index_img','2'),
+('5','256','2','platform:indexImg:update','更新','/admin/index_img','3'),
+('6','256','2','platform:indexImg:delete','删除','/admin/index_img','4'),
+('7','160','2','product:attr:save','新增','/admin/attr','2'),
+('8','160','2','product:attr:update','更新','/admin/attr','3'),
+('9','160','2','product:attr:delete','删除','/admin/attr','1'),
+('10','161','2','product:brand:save','新增','/platform/brand','2'),
+('11','161','2','product:brand:update','更新','/platform/brand','3'),
+('12','161','2','product:brand:delete','删除','/platform/brand','1'),
+('13','162','2','product:category:save','新增','/admin/category','2'),
+('14','162','2','product:category:update','更新','/admin/category','3'),
+('15','162','2','product:category:delete','删除','/admin/category','4'),
+('16','162','2','product:category:enableOrDisable','上架或下架','/admin/category/category_enable_or_disable','3'),
+('17','175','2','product:product:info','查看详情','/admin/spu','1'),
+('18','175','2','product:product:delete','删除','/admin/spu','4'),
+('19','156','2','system:user:save','新增','/sys_user','2'),
+('20','156','2','system:user:update','更新','/sys_user','3'),
+('21','156','2','system:user:delete','删除','/sys_user','4'),
+('22','156','2','system:userAccount:save','设置账号','/sys_user/account','2'),
+('23','156','2','system:userAccount:update','修改账号','/sys_user/account','3'),
+('24','157','2','system:role:save','新增','/role','2'),
+('25','157','2','system:role:update','更新','/role','3'),
+('26','157','2','system:role:delete','删除','/role','1'),
+('27','178','2','system:menuRoute:save','新增','/menu','2'),
+('28','178','2','system:menuRoute:update','更新','/menu','3'),
+('29','178','2','system:menuRoute:delete','删除','/menu','4'),
+('30','158','2','system:platformMenuRoute:save','新增','/menu','2'),
+('31','158','2','system:platformMenuRoute:update','更新','/menu','3'),
+('32','158','2','system:platformMenuRoute:delete','删除','/menu','4'),
+('33','159','2','system:menuPermission:save','新增','/menu_permission','2'),
+('34','159','2','system:menuPermission:update','更新','/menu_permission','3'),
+('35','159','2','system:menuPermission:delete','删除','/menu_permission','4'),
+('36','258','1','admin:hotSearch:save','保存','/admin/hot_search','2'),
+('37','258','1','admin:hotSearch:update','更新','/admin/hot_search','3'),
+('38','258','1','admin:hotSearch:delete','删除','/admin/hot_search','4'),
+('39','146','1','admin:indexImg:save','保存','/admin/index_img','2'),
+('40','146','1','admin:indexImg:update','更新','/admin/index_img','3'),
+('41','146','1','admin:indexImg:delete','删除','/admin/index_img','4'),
+('42','137','1','product:attr:save','保存','/admin/attr','2'),
+('43','137','1','product:attr:update','更新','/admin/attr','3'),
+('44','137','1','product:attr:delete','删除','/admin/attr','4'),
+('45','139','1','product:category:save','保存','/admin/category','2'),
+('46','139','1','product:category:update','更新','/admin/category','3'),
+('47','139','1','product:category:delete','删除','/admin/category','4'),
+('48','139','1','product:category:enableOrDisable','上架或下架','/admin/category/category_enable_or_disable','3'),
+('49','152','1','product:product:save','保存','/admin/spu','2'),
+('50','152','1','product:product:update','更新','/admin/spu','3'),
+('51','152','1','product:product:delete','删除','/admin/spu','4'),
+('52','152','1','product:product:status','上架或下架','/admin/spu/prod_status','3'),
+('53','148','1','admin:order:info','订单详情','/m/order/order_info','1'),
+('54','148','1','admin:order:delivery','发货','/m/order/delivery','2'),
+('55','112','1','admin:shopUser:save','保存','/m/shop_user','2'),
+('56','112','1','admin:shopUser:update','更新','/m/shop_user','3'),
+('57','112','1','admin:shopUser:delete','删除','/m/shop_user','4'),
+('58','134','1','admin:role:save','保存','/role','2'),
+('59','134','1','admin:role:update','更新','/role','3'),
+('60','134','1','admin:role:delete','删除','/role','4');
 
 -- ----------------------------
 -- Records of menu_permission

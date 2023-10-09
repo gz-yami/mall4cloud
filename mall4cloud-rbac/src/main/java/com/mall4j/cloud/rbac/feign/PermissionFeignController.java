@@ -36,8 +36,7 @@ public class PermissionFeignController implements PermissionFeignClient {
 				sysType, BooleanUtil.isTrue(isAdmin));
 
 		// uri,方法对应的权限 map
-		List<UriPermissionBO> uriPermissions = menuPermissionService
-				.listUriPermissionInfo(sysType);
+		List<UriPermissionBO> uriPermissions = menuPermissionService.listUriPermissionInfo(sysType);
 
 		AntPathMatcher pathMatcher = new AntPathMatcher();
 

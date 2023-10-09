@@ -14,12 +14,9 @@
         <result column="biz_type" property="bizType"/>
     </resultMap>
     <sql id="Vo_Column_List">
-
         `menu_permission_id`,`menu_id`,`biz_type`,`permission`,`name`,`uri`,`method`
-
     </sql>
     <select id="list" resultType="com.mall4j.cloud.rbac.vo.MenuPermissionVO">
-
         select mp.`menu_permission_id`,
                mp.`menu_id`,
                mp.`biz_type`,
@@ -32,70 +29,46 @@
                      left join menu m on mp.menu_id = m.menu_id
         where mp.biz_type = #{sysType}
         order by mp.menu_permission_id desc
-
     </select>
     <select id="getByMenuPermissionId" resultType="com.mall4j.cloud.rbac.vo.MenuPermissionVO">
-
         select
-
         <include refid="Vo_Column_List"/>
-
         from menu_permission
         where menu_permission_id = #{menuPermissionId}
-
     </select>
     <insert id="save">
-
         insert into menu_permission (`menu_id`, `biz_type`, `permission`, `name`, `uri`, `method`)
         values (#{menuPermission.menuId}, #{menuPermission.bizType}, #{menuPermission.permission},
                 #{menuPermission.name}, #{menuPermission.uri}, #{menuPermission.method});
-
     </insert>
     <update id="update">
-
         update menu_permission
-
         <set>
             <if test="menuPermission.menuId != null">
                 menu_id = #{menuPermission.menuId},
-
             </if>
             <if test="menuPermission.bizType != null">
-
                 biz_type = #{menuPermission.bizType},
-
             </if>
             <if test="menuPermission.permission != null">
-
                 permission = #{menuPermission.permission},
-
             </if>
             <if test="menuPermission.name != null">
-
                 name = #{menuPermission.name},
-
             </if>
             <if test="menuPermission.uri != null">
-
                 uri = #{menuPermission.uri},
-
             </if>
             <if test="menuPermission.method != null">
-
                 method = #{menuPermission.method},
             </if>
         </set>
-
         where menu_permission_id = #{menuPermission.menuPermissionId}
-
     </update>
     <delete id="deleteById">
-
-        delete
-        from menu_permission
+        delete from menu_permission
         where menu_permission_id = #{menuPermissionId}
           and biz_type = #{sysType}
-
     </delete>
     <select id="listAllPermissionBySysType" resultType="java.lang.String">
 
@@ -113,30 +86,19 @@
             WHERE ur.user_id = #{userId}
     </select>
     <select id="listUriPermissionInfo" resultType="com.mall4j.cloud.api.rbac.bo.UriPermissionBO">
-
         select permission, uri, method
         from menu_permission
         where biz_type = #{sysType}
-
     </select>
     <select id="listByMenuId" resultType="com.mall4j.cloud.rbac.vo.MenuPermissionVO">
-
         select
-
         <include refid="Vo_Column_List"/>
-
         from menu_permission
         where menu_id = #{menuId}
-
     </select>
     <select id="getByPermission" resultMap="BaseResultMap">
-
-    select
-
-        <include refid="Vo_Column_List"/>
-
+        select <include refid="Vo_Column_List"/>
         from menu_permission
         where permission = #{permission} and biz_type = #{sysType}
-
     </select>
 </mapper>
