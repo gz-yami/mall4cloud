@@ -185,11 +185,12 @@ export default {
             duration: 1500,
             onClose: () => {
               this.visible = false
+              this.canSubmit = true
               this.$emit('refreshDataList')
               this.$refs['dataForm'].resetFields()
             }
           })
-        }).finally(() => {
+        }).catch(() => {
           this.canSubmit = true
         })
       })
