@@ -19,3 +19,9 @@ spring:
         password: ${spring.cloud.nacos.discovery.password}
   profiles:
     active: @profiles.active@
+
+# 健康检查失败：Elasticsearch health check failed，对服务运行没有影响，也可通过下面配置强行关闭spring对Elasticsearch的健康检查
+#management:
+#  health:
+#    elasticsearch:
+#      enabled: false
