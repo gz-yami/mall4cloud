@@ -87,7 +87,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public List<Long> submit(Long userId, ShopCartOrderMergerVO mergerOrder) {
+    @GlobalTransactional(rollbackFor = Exception.class)
+    public List<Long>  submit(Long userId, ShopCartOrderMergerVO mergerOrder) {
         List<Order> orders = saveOrder(userId, mergerOrder);
         List<Long> orderIds = new ArrayList<>();
         List<SkuStockLockDTO> skuStockLocks = new ArrayList<>();
