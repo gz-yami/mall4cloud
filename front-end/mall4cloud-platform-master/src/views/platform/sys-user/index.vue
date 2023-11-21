@@ -3,7 +3,7 @@
     <!-- 搜索相关区域 -->
     <div class="filter-container">
       <el-button size="mini" icon="el-icon-search" class="filter-item" @click="getPage()">{{ $t('table.search') }}</el-button>
-      <el-button v-permission="['multishop:shopUser:save']" size="mini" icon="el-icon-plus" type="primary" class="filter-item" @click="addOrUpdateHandle()">{{ $t('table.create') }}</el-button>
+      <el-button v-permission="['system:user:save']" size="mini" icon="el-icon-plus" type="primary" class="filter-item" @click="addOrUpdateHandle()">{{ $t('table.create') }}</el-button>
     </div>
 
     <!-- 列表相关区域 -->
@@ -41,16 +41,16 @@
       </el-table-column>
       <el-table-column :label="$t('table.actions')" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
-          <el-button v-if="!row.hasAccount" v-permission="['account:authAccount:shopSave']" type="text" @click="addOrUpdateAccountHandle(row.sysUserId,row.hasAccount)">
+          <el-button v-if="!row.hasAccount" v-permission="['system:userAccount:save']" type="text" @click="addOrUpdateAccountHandle(row.sysUserId,row.hasAccount)">
             设置账号
           </el-button>
-          <el-button v-if="row.hasAccount" v-permission="['account:authAccount:shopUpdate']" type="text" @click="addOrUpdateAccountHandle(row.sysUserId,row.hasAccount)">
+          <el-button v-if="row.hasAccount" v-permission="['system:userAccount:update']" type="text" @click="addOrUpdateAccountHandle(row.sysUserId,row.hasAccount)">
             修改账号
           </el-button>
-          <el-button v-permission="['platform:shopUser:update']" type="text" @click="addOrUpdateHandle(row.sysUserId)">
+          <el-button v-permission="['system:user:update']" type="text" @click="addOrUpdateHandle(row.sysUserId)">
             {{ $t('table.edit') }}
           </el-button>
-          <el-button v-permission="['platform:shopUser:delete']" type="text" @click="deleteHandle(row.sysUserId)">
+          <el-button v-permission="['system:user:delete']" type="text" @click="deleteHandle(row.sysUserId)">
             {{ $t('table.delete') }}
           </el-button>
         </template>
