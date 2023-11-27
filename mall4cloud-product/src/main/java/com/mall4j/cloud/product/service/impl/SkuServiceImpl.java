@@ -1,6 +1,7 @@
 package com.mall4j.cloud.product.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import com.mall4j.cloud.api.product.vo.SpuSkuAttrValueVO;
 import com.mall4j.cloud.common.cache.constant.CacheNames;
 import com.mall4j.cloud.common.cache.util.RedisUtil;
@@ -188,9 +189,16 @@ public class SkuServiceImpl implements SkuService {
             SkuAppVO skuAppVO = BeanUtil.map(sku, SkuAppVO.class);
             String properties = "";
             for (SpuSkuAttrValueVO spuSkuAttrValue : sku.getSpuSkuAttrValues()) {
+                if (Objects.isNull(spuSkuAttrValue.getSpuSkuAttrId())) {
+                    continue;
+                }
                 properties = properties + spuSkuAttrValue.getAttrName() + attrUnionAttrValue + spuSkuAttrValue.getAttrValueName() + attrUnionAttr;
             }
-            skuAppVO.setProperties(properties.substring(0, properties.length()-1));
+            if (StrUtil.isNotBlank(properties)) {
+                skuAppVO.setProperties(properties.substring(0, properties.length()-1));
+            } else {
+                skuAppVO.setProperties(properties);
+            }
             skuAppList.add(skuAppVO);
         }
         return skuAppList;
