@@ -1,0 +1,18 @@
+# eslint 忽略列表
+src/utils/wxqrcode.js
+src/components/icons
+# disk编译目录
+dist
+
+build/*.js
+src/assets
+src/components/tki-barcode
+src/package-activities/components/uv-parse
+src/uni_modules
+src/utils/jwx
+src/js_sdk
+public
+
+uni_modules
+auto-imports.d.ts
+

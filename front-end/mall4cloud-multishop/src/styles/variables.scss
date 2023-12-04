@@ -1,0 +1,44 @@
+/*
+* Copyright (c) 2018-2999 广州市蓝海创新科技有限公司 All rights reserved.
+*
+* https://www.mall4j.com/
+*
+* 未经允许，不可做商业用途！
+*
+* 版权所有，侵权必究！
+*/
+// base color
+$blue:#324157;
+$light-blue:#3A71A8;
+$red:#C03639;
+$pink: #E65D6E;
+$green: #30B08F;
+$tiffany: #4AB7BD;
+$yellow:#FEC171;
+$panGreen: #30B08F;
+
+// sidebar
+$menuText:#333333;
+$menuActiveText:#409EFF;
+$subMenuActiveText:#333333; // https://github.com/ElemeFE/element/issues/12951
+
+$menuBg:#ffffff;
+$menuHover:#e7eefb;
+
+$subMenuBg:#ffffff;
+$subMenuHover:#e7eefb;
+
+$sideBarWidth: 230px;
+
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  menuBg: $menuBg;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+  sideBarWidth: $sideBarWidth;
+}

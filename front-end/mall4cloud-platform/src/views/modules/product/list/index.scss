@@ -1,0 +1,104 @@
+.page-product-list {
+  // 1.筛选条件搜索
+  .screening-conditions {
+    padding: 20px;
+    background: #f9f9f9;
+    margin-bottom: 30px;
+
+    :deep(.el-input){
+      width: 200px;
+    }
+
+    :deep(.unit-wrapper .el-input){
+      width: 88px;
+    }
+
+    .el-form-item {
+      margin-right: 30px;
+      .el-form-item__label {
+        width: 80px;
+      }
+      .el-form-item__content {
+        width: 200px;
+      }
+      .el-input__inner {
+        height: 31px !important;
+        line-height: 31px !important;
+      }
+      .range-box {
+        display: flex;
+        .interval-line {
+          padding: 0 10px;
+        }
+      }
+    }
+    .operation-box {
+      display: inline-block;
+      margin-left: 20px;
+    }
+  }
+
+  // 2.商品操作
+  .prod-opration {
+    display: flex;
+    margin-bottom: 30px;
+    .release-prod-btn {
+      margin-left: 50px;
+      margin-right: 20px;
+    }
+  }
+
+  // 3.商品展示表格
+  .prod-form {
+    .change-prod-status {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      margin-bottom: 20px;
+      .checked-words {
+        font-size: 12px;
+        margin-left: 10px;
+      }
+      .button-box {
+        margin-left: 20px;
+      }
+    }
+    .table {
+      .el-table-column--selection {
+        .cell {
+          padding-left: 10px;
+        }
+      }
+      .can-edit-item {
+        display: flex;
+        align-items: center;
+      }
+      .prod-name-box {
+        .prod-img {
+          width: 60px;
+          height: 60px;
+        }
+        .prod-name {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+          width: 100px;
+          margin-left: 10px;
+        }
+      }
+      .prod-price-box {
+        display: flex;
+        align-items: center;
+        .el-icon-edit {
+          margin-left: 5px;
+        }
+      }
+    }
+    .page-number {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+  }
+}

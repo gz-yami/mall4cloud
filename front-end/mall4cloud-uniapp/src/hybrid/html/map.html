@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <title>地点选择</title>
+  <style type="text/css">
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    iframe {
+      border: none;
+    }
+  </style>
+</head>
+<body>
+<script type="text/javascript" src="https://gitee.com/dcloud/uni-app/raw/dev/dist/uni.webview.1.5.4.js"></script>
+<script>
+  var key = serializeUrlParam(window.location.href).key
+  var coord = serializeUrlParam(window.location.href).data
+
+  function serializeUrlParam(sUrl) {
+    let indexStart = sUrl.indexOf('?')
+    if (indexStart === -1) {
+      return {}
+    }
+    let k = sUrl.slice(indexStart + 1);
+    let x = k.replace(/&/g, '","').replace(/=/g, '":"')
+    let y = '{"' + x + '"}'
+    return JSON.parse(y)
+  }
+
+  var iframe = document.createElement("iframe");
+  iframe.width = "100%"
+  iframe.height = "750px"
+  iframe.id = "mapPage"
+  iframe.src = `https://apis.map.qq.com/tools/locpicker?search=1&type=1&key=${key}&referer=myapp&coord=${coord}`;
+  document.body.appendChild(iframe)
+</script>
+<script type="text/javascript">
+  window.addEventListener('message', function (event) {
+    var loc = event.data;
+    if (loc && loc.module === 'locationPicker') {
+      uni.postMessage({
+        data: loc
+      })
+    }
+  }, false);
+</script>
+</body>
+</html>

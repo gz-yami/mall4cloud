@@ -1,0 +1,22 @@
+export default {
+  rightsName: 'Name of rights',
+  status: 'Status',
+  rightsIcon: 'Equity Icons',
+  rightsIntroduce: 'Benefits Introduction',
+  rightDetail: 'Benefit Details',
+  sequence: 'Seq',
+  customBenefits: 'New',
+  enterContent: 'Please enter the content, no more than six characters in length',
+  errorIntegerTip: 'Please enter an integer',
+  nameCanNotEmpty: 'Rights name cannot be blank',
+  iconCanNotEmpty: 'The rights icon cannot be empty',
+  intrCanNotEmpty: 'Rights introduction cannot be blank',
+  rightsType: 'Type of interest',
+  customization: 'Customization',
+  rointsRebateMultiplier: 'Points rebate multiplier',
+  coupons: 'Coupons',
+  bonusPoints: 'Bonus Points',
+  discountRange: 'Member Discount',
+  memberDiscount: 'Member Discount',
+  packageType: 'Package'
+}

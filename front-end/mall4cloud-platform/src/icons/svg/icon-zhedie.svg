@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+      .cls-2 {
+        fill: #333;
+      }
+    </style>
+  </defs>
+  <g id="Group" transform="translate(20 0.303)">
+    <rect id="Rectangle_9" data-name="Rectangle 9" class="cls-1" width="18" height="18" transform="translate(-20 -0.303)"/>
+    <rect id="Combined_Shape" data-name="Combined Shape" class="cls-2" width="15.485" height="1.659" rx="0.83" transform="translate(-18.894 2.212)"/>
+    <rect id="Rectangle_Copy" data-name="Rectangle Copy" class="cls-2" width="9.955" height="1.659" rx="0.83" transform="translate(-13.364 8.019)"/>
+    <path id="Rectangle_6" data-name="Rectangle 6" class="cls-2" d="M3.178.139a.138.138,0,0,0-.229-.1L.095,2.529a.277.277,0,0,0,0,.417L2.949,5.433a.138.138,0,0,0,.229-.1Z" transform="translate(-18.754 6.111)"/>
+    <rect id="Rectangle_Copy_2" data-name="Rectangle Copy 2" class="cls-2" width="15.485" height="1.659" rx="0.83" transform="translate(-18.894 13.826)"/>
+  </g>
+</svg>

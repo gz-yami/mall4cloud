@@ -1,0 +1,78 @@
+page {
+  background: #f2f3f7;
+}
+
+.page-user-settings {
+  padding-bottom: env(safe-area-inset-bottom);
+
+
+  .first-box {
+    background: #fff;
+    border-radius: 0 0 10rpx 10rpx;
+    padding: 0 30rpx;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    padding: 30rpx 0;
+    border-bottom: 2rpx solid #f9f9f9;
+  }
+
+  .item .text {
+    flex: 1;
+    font-size: 28rpx;
+    margin-right: 20rpx;
+  }
+
+  .item .img {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .item .text-arrow {
+    color: #999;
+    text-align: right;
+    padding-right: 20rpx;
+  }
+
+  .item .text-arrow::after {
+    width: 12rpx;
+    height: 12rpx;
+    border-color: #999;
+  }
+
+  .item .name {
+    font-weight: 600;
+  }
+
+  .item .des {
+    color: #999;
+    font-size: 24rpx;
+    margin-top: 6rpx;
+  }
+
+  .other-entrance {
+    background: #fff;
+    border-radius: 10rpx;
+    margin-top: 20rpx;
+    padding: 0 30rpx;
+  }
+
+  .first-box .item:last-child,
+  .other-entrance .item:last-child {
+    border-bottom: 0;
+  }
+
+  .login-out {
+    background: #fff;
+    border-radius: 10rpx;
+    margin-top: 20rpx;
+    padding: 30rpx;
+    font-size: 28rpx;
+    text-align: center;
+  }
+}

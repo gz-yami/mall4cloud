@@ -1,0 +1,33 @@
+export default {
+  liveRoom: {
+    roomName: 'Live room name',
+    view: 'View',
+    viewLRoomInfo: 'View live room information',
+    anchorName: 'Anchor Name',
+    liveTime: 'Time of live broadcast',
+    liveBackgroundImage: 'Live background image',
+    prod: 'Live Prod',
+    anchorSharingPicture: 'Anchor sharing picture',
+    liveCoverImage: 'Live cover image',
+    anchorNickname: 'Anchor nickname',
+    anchorMobile: 'Anchor Mobile',
+    liveRoomStatus: 'Live room status',
+    whetherToTop: 'Whether to top',
+    liveBroadcastTime: 'Broadcast time',
+    live: 'Live',
+    over: 'over',
+    LiveStartTime: 'Live broadcast start time',
+    LiveOverTime: 'Live broadcast end time',
+    suspend: 'Time out',
+    notPinned: 'Not pinned',
+    pinned: 'Pinned',
+    top: 'Top',
+    cancelTopping: 'Cancel topping',
+    violationOffShelf: 'Violation off shelf',
+    reasonForOffline: 'Offline reason',
+    offlineReasonTip1: 'The reason for going offline cannot exceed 100 words',
+    offlineReasonTip: 'Offline reason cannot be empty',
+    offlineTip: 'Are you sure to offline activity [ACTIVITYNAME]? If yes, please fill in the reason for offline',
+    tips: 'Tips'
+  }
+}

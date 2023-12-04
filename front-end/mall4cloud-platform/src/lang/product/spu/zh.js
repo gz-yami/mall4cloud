@@ -1,0 +1,20 @@
+export default {
+  spuId: 'spu id',
+  brandId: '品牌ID',
+  categoryId: '分类ID',
+  name: '商品名称',
+  sellingPoint: '卖点',
+  imgUrls: '图片',
+  priceFee: '售价',
+  priceScale: '售价',
+  marketPriceFee: '市场价',
+  marketPriceScale: '市场价',
+  prodSelect: '商品选择',
+  status: '状态',
+  categoryName: '商品分类',
+  fileSuccess: '文件导入成功',
+  fileFail: '文件导入失败',
+  fileUploadFail: '文件上传失败！',
+  downloadTemplateTips1: '上传模板只能是 xls、xlsx格式!',
+  downloadTemplateTips2: '上传模板大小不能超过 10MB!'
+}

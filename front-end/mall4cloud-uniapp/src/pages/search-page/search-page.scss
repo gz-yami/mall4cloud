@@ -1,0 +1,117 @@
+
+.search-page {
+  padding-top: 100rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 搜索栏 */
+.search-page .search-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 750rpx;
+  margin: auto;
+  background: #fff;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.search-page .search-top .search-box {
+  flex: 1;
+  margin-right: 30rpx;
+  height: 60rpx;
+  background: #f5f5f5;
+  border-radius: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+.search-page .search-top .search-box .icon {
+  width: 24rpx;
+  height: 24rpx;
+  font-size: 0;
+  margin-left: 20rpx;
+}
+
+.search-page .search-top .search-box .input {
+  margin: 0 16rpx 0 10rpx;
+  flex: 1;
+}
+
+.search-page .search-top .search-cancel {
+  color: #999;
+}
+
+/* 搜索历史、热门搜索 */
+.search-page .search-con {
+  padding: 10rpx 30rpx 30rpx;
+}
+
+.search-page .search-con .search-tit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 38rpx;
+}
+
+.search-page .search-con .search-tit .text {
+  font-weight: 600;
+  font-size: 28rpx;
+}
+
+.search-page .search-con .search-tit .hot-icon {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 6rpx;
+  margin-left: 4rpx;
+  width: 24rpx;
+  height: 24rpx;
+  font-size: 0;
+}
+
+.search-page .search-con .search-tit .del {
+  width: 24rpx;
+  height: 24rpx;
+  font-size: 0;
+  padding: 10rpx;
+  background: #f5f5f5;
+  border-radius: 50%;
+}
+
+.search-page .search-con .search-history {
+  display: flex;
+  flex-wrap: wrap;
+}
+ 
+.search-page .search-con .search-history .item {
+  padding: 0 20rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  font-size: 22rpx;
+  background: #f5f5f5;
+  border-radius: 48rpx;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+}
+
+.search-page .search-con .search-hot {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-page .search-con .search-hot .item {
+  width: 33.3%;
+  margin-top: 30rpx;
+  margin-bottom: -10rpx;
+  line-height: 32rpx;
+  box-sizing: border-box;
+  padding-right: 20rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

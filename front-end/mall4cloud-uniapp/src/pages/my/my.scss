@@ -1,0 +1,260 @@
+page {
+  background: #f2f3f7;
+}
+
+.page-my {
+
+  /* 用户资料 */
+  .user-box {
+    display: flex;
+    align-items: center;
+    padding: 40rpx 30rpx 30rpx;
+    background: #fff;
+  }
+
+  .user-box .img {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .user-box .text-box {
+    flex: 1;
+    margin: 0 20rpx;
+  }
+
+
+  .user-box .text-box .name {
+    font-size: 36rpx;
+    font-weight: 600;
+  }
+
+  .user-box .text-box .level {
+    display: flex;
+    align-items: center;
+    margin-top: 16rpx;
+    padding-bottom: 14rpx;
+  }
+
+  .user-box .text-box .level .level-style,
+  .user-box .text-box .level .level-name {
+    padding: 6rpx 12rpx;
+    line-height: 20rpx;
+    border-radius: 30rpx 30rpx 30rpx 0;
+    margin-right: 10rpx;
+    font-size: 20rpx;
+    font-family: PingFangSC-Medium, tahoma;
+  }
+
+  .user-box .text-box .level .level-style {
+    color: #fff;
+    background: #aaa;
+  }
+
+  .user-box .text-box .level .level-style.vip {
+    /* color: #fffcf3;
+  background: #fcbf05; */
+    color: #fff;
+    background: #fc1b35;
+  }
+
+  .user-box .text-box .level .level-name {
+    color: #999;
+    background: #f0f0f0;
+  }
+
+  .user-box .text-box .level .level-name.vip {
+    /* color: #dfa700;
+  background: #fff7df; */
+    color: #fc1b35;
+    background: #ffecee;
+  }
+
+  .user-box .sign-in {
+    padding: 10rpx 26rpx;
+    font-weight: 600;
+    background: #fff;
+    border-radius: 60rpx;
+    box-shadow: 0 0 8rpx rgba(0, 0, 0, .1);
+    line-height: 28rpx;
+    display: flex;
+    align-items: center;
+    margin-right: 10rpx;
+  }
+
+  .user-box .sign-in image {
+    width: 24rpx;
+    height: 24rpx;
+    margin-right: 6rpx;
+  }
+
+  /* 用户资产 */
+  .user-assets {
+    background: #fff;
+    padding: 0 30rpx 30rpx;
+    display: flex;
+  }
+
+  .user-assets .item {
+    flex: 1;
+    text-align: center;
+  }
+
+  .user-assets .item .number {
+    font-size: 36rpx;
+    font-weight: 600;
+    font-family: PingFangSC-Medium, tahoma;
+  }
+
+  .user-assets .item .text {
+    color: #999;
+    margin-top: 10rpx;
+  }
+
+  /* 开通会员 */
+  .open-vip {
+    padding: 30rpx;
+    padding-top: 0;
+    height: 140rpx;
+    background: linear-gradient(to bottom, #fff, #f2f3f7);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .open-vip .bg {
+    position: absolute;
+    left: 30rpx;
+    right: 30rpx;
+    top: 30rp;
+    width: 690rpx;
+    height: 140rpx;
+    font-size: 0;
+    border-radius: 10rpx;
+    overflow: hidden;
+  }
+
+  .open-vip .text-box {
+    padding: 0 30rpx;
+    position: relative;
+  }
+
+  .open-vip .text-box .tit {
+    display: flex;
+    align-items: center;
+  }
+
+  .open-vip .text-box .tit .img {
+    width: 100rpx;
+    height: 30rpx;
+    font-size: 0;
+  }
+
+  .open-vip .text-box .tit .text {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #f0ce96;
+    margin-left: 20rpx;
+  }
+
+  .open-vip .text-box .des {
+    margin-top: 12rpx;
+    color: #fff;
+    opacity: 0.3;
+  }
+
+  /* 我的订单,我的工具 */
+  .open-vip .btn {
+    position: relative;
+    padding: 6rpx 30rpx;
+    line-height: 40rpx;
+    font-weight: 600;
+    border-radius: 60rpx;
+    background: #f0ce96;
+    margin-right: 38rpx;
+  }
+
+
+  .my-con {
+    background: #fff;
+    padding: 30rpx 0;
+    margin: 30rpx;
+    border-radius: 10rpx;
+  }
+
+  .my-con .tit {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30rpx;
+  }
+
+  .my-con .tit .text {
+    font-weight: 600;
+    font-size: 28rpx;
+  }
+
+  .my-con .tit .more {
+    color: #999;
+  }
+
+  .my-con .tit .more.text-arrow::after {
+    border-top: 2rpx solid #999;
+    border-right: 2rpx solid #999;
+    top: 44%;
+  }
+
+  .my-con .con-box {
+    display: flex;
+    text-align: center;
+    padding: 0 10rpx;
+    flex-wrap: wrap;
+  }
+
+  .my-con.my-tools .con-box {
+    padding-bottom: 16rpx;
+  }
+
+  .my-con .con-box .item {
+    width: 25%;
+    margin-top: 40rpx;
+  }
+
+  .my-con .con-box .item .img {
+    font-size: 0;
+    margin: auto;
+    width: 40rpx;
+    height: 40rpx;
+    position: relative;
+  }
+
+  .my-con .con-box .item .img .mark {
+    position: absolute;
+    top: -18rpx;
+    left: 50%;
+    min-width: 20rpx;
+    padding: 0 4rpx;
+    height: 28rpx;
+    line-height: 28rpx;
+    border-radius: 28rpx;
+    background: #fc1b35;
+    color: #fff;
+    font-size: 20rpx;
+    font-family: PingFangSC-Medium, tahoma;
+    margin-left: 10rpx;
+  }
+
+  .my-con .con-box .item.w70 .img {
+    width: 48rpx;
+    height: 40rpx;
+  }
+
+  .my-con .con-box .item .text {
+    margin-top: 16rpx;
+    color: #999;
+  }
+
+
+
+}
