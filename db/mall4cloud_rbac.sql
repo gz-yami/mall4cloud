@@ -47,35 +47,38 @@ CREATE TABLE `menu` (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES (111, '2020-12-01 14:20:42', '2021-01-28 10:12:08', 0, 1, NULL, '/rbac', 'Layout', NULL, NULL, 0, '权限管理', '权限管理', 'el-icon-office-building', NULL, NULL, NULL, NULL, 99);
-INSERT INTO `menu` VALUES (112, '2020-12-01 14:22:09', '2021-01-28 10:12:14', 111, 1, NULL, '/multishop/shop_user', 'multishop/shop-user', NULL, NULL, 0, '用户管理', '用户管理', '', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (134, '2020-12-03 16:49:48', '2021-01-28 10:12:22', 111, 1, NULL, 'role', 'rbac/role', NULL, NULL, 0, '角色管理', '角色管理', NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `menu` VALUES (137, '2020-12-03 17:54:02', '2021-01-28 10:13:07', 141, 1, NULL, 'attr', 'product/attr', NULL, NULL, 0, '属性管理', '属性管理', NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (139, '2020-12-03 17:54:02', '2021-01-28 10:13:20', 141, 1, NULL, 'category', 'product/category', NULL, NULL, 0, 'category', '分类管理', NULL, NULL, NULL, NULL, NULL, 2);
-INSERT INTO `menu` VALUES (141, '2020-12-03 17:55:22', '2021-01-01 09:01:48', 0, 1, NULL, '/product', 'Layout', NULL, NULL, 0, '商品管理', '商品管理', 'product', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (142, '2020-12-03 17:54:02', '2021-03-12 09:31:52', 141, 1, NULL, 'prod_info', 'product/prod-info', NULL, NULL, 0, '发布商品', '发布商品', NULL, NULL, NULL, NULL, NULL, 4);
-INSERT INTO `menu` VALUES (145, '2020-12-04 10:08:17', '2021-01-28 10:13:47', 0, 1, NULL, '/multishop', 'Layout', NULL, NULL, 0, '店铺管理', '店铺管理', 'el-icon-house', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (146, '2020-12-04 10:09:38', '2021-01-28 10:13:53', 145, 1, NULL, 'index_img', 'multishop/index-img', NULL, NULL, 0, '轮播图管理', '轮播图管理', '', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (147, '2020-12-04 11:30:59', '2021-01-01 09:28:45', 0, 1, NULL, '/order', 'Layout', NULL, NULL, 0, '订单管理', '订单管理', 'order', NULL, NULL, NULL, NULL, 90);
-INSERT INTO `menu` VALUES (148, '2020-12-04 11:32:46', '2021-01-28 09:52:10', 147, 1, NULL, 'order', 'order/order', NULL, NULL, 0, 'order', '订单管理', NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `menu` VALUES (152, '2020-12-16 10:16:39', '2021-01-28 10:13:32', 141, 1, NULL, 'list', 'product/list', NULL, NULL, 0, '商品列表', '商品列表', '', NULL, NULL, NULL, NULL, 5);
-INSERT INTO `menu` VALUES (155, '2020-12-01 14:20:42', '2021-04-22 10:30:44', 0, 2, NULL, '/rbac', 'Layout', NULL, NULL, 0, '权限管理', '权限管理', 'el-icon-office-building', NULL, NULL, NULL, NULL, 99);
-INSERT INTO `menu` VALUES (156, '2020-12-01 14:22:09', '2021-04-22 10:30:44', 155, 2, NULL, '/platform/sys_user', 'platform/sys-user', NULL, NULL, 0, '用户管理', '用户管理', '', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (157, '2020-12-03 16:49:48', '2021-04-22 10:30:44', 155, 2, NULL, 'role', 'rbac/role', NULL, NULL, 0, '角色管理', '角色管理', NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `menu` VALUES (158, '2020-12-03 16:49:48', '2021-04-22 10:30:44', 155, 2, NULL, 'menu', 'rbac/menu', NULL, NULL, 0, '平台菜单管理', '平台菜单管理', NULL, NULL, NULL, NULL, NULL, 2);
-INSERT INTO `menu` VALUES (159, '2020-12-03 16:49:48', '2021-04-22 10:30:44', 155, 2, NULL, 'menu_permission', 'rbac/menu-permission', NULL, NULL, 0, '菜单资源', '菜单资源', NULL, NULL, NULL, NULL, NULL, 3);
-INSERT INTO `menu` VALUES (160, '2020-12-03 17:54:02', '2021-04-22 10:30:44', 164, 2, NULL, 'attr', 'product/attr', NULL, NULL, 0, '属性管理', '属性管理', NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (161, '2020-12-03 17:54:02', '2021-04-22 10:30:44', 164, 2, NULL, 'brand', 'product/brand', NULL, NULL, 0, '品牌管理', '品牌管理', NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `menu` VALUES (162, '2020-12-03 17:54:02', '2021-04-22 10:30:44', 164, 2, NULL, 'category', 'product/category', NULL, NULL, 0, 'category', '分类管理', NULL, NULL, NULL, NULL, NULL, 2);
-INSERT INTO `menu` VALUES (164, '2020-12-03 17:55:22', '2021-04-22 10:30:44', 0, 2, NULL, '/product', 'Layout', NULL, NULL, 0, 'product', '商品管理', 'el-icon-shopping-bag-1', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (175, '2020-12-16 10:16:39', '2021-04-22 10:30:44', 164, 2, NULL, 'list', 'product/list', NULL, NULL, 0, '商品管理', '商品管理', '', NULL, NULL, NULL, NULL, 5);
-INSERT INTO `menu` VALUES (178, '2020-12-22 09:26:41', '2021-04-22 10:30:44', 155, 2, NULL, 'shop-menu', 'rbac/shop-menu', NULL, NULL, 0, '店铺菜单管理', '店铺菜单管理', '', NULL, NULL, NULL, NULL, 2);
-INSERT INTO `menu` VALUES (255, '2021-01-27 14:10:56', '2021-04-22 10:30:44', 0, 2, NULL, '/platform', 'Layout', NULL, NULL, 0, 'platform', '平台管理', 'tree', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (256, '2021-01-27 14:14:51', '2021-04-22 10:30:44', 255, 2, NULL, 'hot-search', 'platform/hot-search', NULL, NULL, 0, 'hot-search', '热搜管理', 'el-icon-search', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (257, '2021-01-28 09:48:39', '2021-04-22 10:30:44', 255, 2, NULL, 'index-img', 'platform/index-img', NULL, NULL, 0, '轮播图管理', '轮播图管理', 'el-icon-picture-outline', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (258, '2021-01-28 11:06:52', '2021-01-28 11:06:52', 145, 1, NULL, 'hot-search', 'multishop/hot-search', NULL, NULL, 0, 'hot-search', '热搜管理', '', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (302, '2021-05-13 19:02:02', '2021-05-13 19:02:20', 255, 2, NULL, 'shop-detail', 'platform/shop-detail', NULL, NULL, 1, '店铺详情', '店铺详情', '', NULL, NULL, NULL, NULL, 0);
-INSERT INTO `menu` VALUES (327, '2021-06-30 20:22:45', '2021-06-30 20:25:49', 255, 2, NULL, 'shop-manage', 'platform/shop-manage', NULL, NULL, 0, '店铺管理', '店铺管理', 'el-icon-s-order', NULL, NULL, NULL, NULL, 3);
+
+insert into `menu` (`menu_id`, `parent_id`, `biz_type`, `permission`, `path`, `component`, `redirect`, `always_show`, `hidden`, `name`, `title`, `icon`, `no_cache`, `breadcrumb`, `affix`, `active_menu`, `seq`) values
+('111','0','1',NULL,'/rbac','Layout',NULL,NULL,'0','权限管理','权限管理','office-buildingplus',NULL,NULL,NULL,NULL,'99'),
+('112','111','1',NULL,'shop_user','rbac/shop-user',NULL,NULL,'0','用户管理','用户管理','',NULL,NULL,NULL,NULL,'0'),
+('134','111','1',NULL,'role','rbac/role',NULL,NULL,'0','角色管理','角色管理',NULL,NULL,NULL,NULL,NULL,'1'),
+('137','141','1',NULL,'attr','product/attr',NULL,NULL,'0','属性管理','属性管理',NULL,NULL,NULL,NULL,NULL,'0'),
+('139','141','1',NULL,'category','product/category',NULL,NULL,'0','category','分类管理',NULL,NULL,NULL,NULL,NULL,'2'),
+('141','0','1',NULL,'/product','Layout',NULL,NULL,'0','商品管理','商品管理','ShoppingBagplus',NULL,NULL,NULL,NULL,'0'),
+('142','141','1',NULL,'prod_info','product/prod-info',NULL,NULL,'0','发布商品','发布商品',NULL,NULL,NULL,NULL,NULL,'4'),
+('145','0','1',NULL,'/multishop','Layout',NULL,NULL,'0','店铺管理','店铺管理','Shopplus',NULL,NULL,NULL,NULL,'0'),
+('146','145','1',NULL,'index_img','multishop/index-img',NULL,NULL,'0','轮播图管理','轮播图管理','',NULL,NULL,NULL,NULL,'0'),
+('147','0','1',NULL,'/order','Layout',NULL,NULL,'0','订单管理','订单管理','documentplus',NULL,NULL,NULL,NULL,'90'),
+('148','147','1',NULL,'order','order/order',NULL,NULL,'0','order','订单管理',NULL,NULL,NULL,NULL,NULL,'1'),
+('152','141','1',NULL,'list','product/list',NULL,NULL,'0','商品列表','商品列表','',NULL,NULL,NULL,NULL,'5'),
+('155','0','2',NULL,'/rbac','Layout',NULL,NULL,'0','权限管理','权限管理','office-buildingplus',NULL,NULL,NULL,NULL,'99'),
+('156','155','2',NULL,'sys-user','rbac/sys-user',NULL,NULL,'0','用户管理','用户管理','',NULL,NULL,NULL,NULL,'0'),
+('157','155','2',NULL,'role','rbac/role',NULL,NULL,'0','角色管理','角色管理',NULL,NULL,NULL,NULL,NULL,'1'),
+('158','155','2',NULL,'menu','rbac/menu',NULL,NULL,'0','平台菜单管理','平台菜单管理',NULL,NULL,NULL,NULL,NULL,'2'),
+('159','155','2',NULL,'menu-permission','rbac/menu-permission',NULL,NULL,'0','菜单资源','菜单资源',NULL,NULL,NULL,NULL,NULL,'3'),
+('160','164','2',NULL,'attr','product/attr',NULL,NULL,'0','属性管理','属性管理',NULL,NULL,NULL,NULL,NULL,'0'),
+('161','164','2',NULL,'brand','product/brand',NULL,NULL,'0','品牌管理','品牌管理',NULL,NULL,NULL,NULL,NULL,'1'),
+('162','164','2',NULL,'category','product/category',NULL,NULL,'0','category','分类管理',NULL,NULL,NULL,NULL,NULL,'2'),
+('164','0','2',NULL,'/product','Layout',NULL,NULL,'0','product','商品管理','ShoppingBagplus',NULL,NULL,NULL,NULL,'0'),
+('175','164','2',NULL,'list','product/list',NULL,NULL,'0','商品管理','商品管理','',NULL,NULL,NULL,NULL,'5'),
+('178','155','2',NULL,'shop-menu','rbac/shop-menu',NULL,NULL,'0','店铺菜单管理','店铺菜单管理','',NULL,NULL,NULL,NULL,'2'),
+('255','0','2',NULL,'/platform','Layout',NULL,NULL,'0','platform','平台管理','tree',NULL,NULL,NULL,NULL,'0'),
+('256','255','2',NULL,'hot-search','platform/hot-search',NULL,NULL,'0','hot-search','热搜管理','el-icon-search',NULL,NULL,NULL,NULL,'0'),
+('257','255','2',NULL,'index-img','platform/index-img',NULL,NULL,'0','轮播图管理','轮播图管理','el-icon-picture-outline',NULL,NULL,NULL,NULL,'0'),
+('258','145','1',NULL,'hot-search','multishop/hot-search',NULL,NULL,'0','hot-search','热搜管理','',NULL,NULL,NULL,NULL,'0'),
+('302','255','2',NULL,'shop-detail','platform/shop-detail',NULL,NULL,'1','店铺详情','店铺详情','',NULL,NULL,NULL,NULL,'0'),
+('306','255','2',NULL,'shop-edit','platform/shop-edit',NULL,NULL,'1','店铺编辑','店铺编辑','',NULL,NULL,NULL,NULL,'0'),
+('327','255','2',NULL,'shop-manage','platform/shop-manage',NULL,NULL,'0','店铺管理','店铺管理','el-icon-s-order',NULL,NULL,NULL,NULL,'3');
 
 /*Table structure for table `menu_permission` */
 
