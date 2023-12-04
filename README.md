@@ -151,13 +151,13 @@ mall4cloud
 
 - 平台端
 
-  ![image-20210705152109738](doc/img/readme/image-20210705152109738.png)
+  ![](doc/img/readme/image-20231130110607548.png)
 
 - 商家端
 
-  ![image-20210705151729559](doc/img/readme/image-20210705151729559.png)
+  ![image-20210705151729559](doc/img/readme/image-20231130112350296.png)
 
-  ![image-20210705151847270](doc/img/readme/image-20210705151847270.png)
+  ![image-20210705151847270](doc/img/readme/image-20231130112429089.png)
 
 ### 2.小程序截图
 
