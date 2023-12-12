@@ -10,7 +10,6 @@
     "preview": "vite preview",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --fix --ext .js,.vue src",
-    "prepare": "husky install",
     "lint:staged": "lint-staged"
   },
   "dependencies": {
@@ -48,7 +47,6 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-vue": "^9.14.0",
     "eslint-plugin-vue-scoped-css": "^2.4.0",
-    "husky": "8.0.3",
     "lint-staged": "13.2.2",
     "sass": "^1.62.1",
     "unplugin-auto-import": "^0.16.2",
