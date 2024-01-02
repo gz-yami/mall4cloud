@@ -378,7 +378,7 @@ const Data = reactive({
   groupList: [], // 分组列表
   attachFiles: [],
   resourcesUrl: import.meta.env.VITE_APP_RESOURCES_URL,
-  resourcesActionType: import.meta.env.VUE_APP_RESOURCES_TYPE,
+  resourcesActionType: import.meta.env.VITE_APP_RESOURCES_TYPE,
   showGroupVisible: false, // 选择/创建分组弹窗
   selectGroup: false, // 选择分组
   createGroup: false, // 创建分组
