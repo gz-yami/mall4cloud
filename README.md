@@ -3,7 +3,7 @@
 
 一个基于Spring Cloud、Nacos、Seata、Mysql、Redis、RocketMQ、canal、ElasticSearch、minio的微服务B2B2C电商商城系统，采用主流的互联网技术架构、全新的UI设计、支持集群部署、服务注册和发现以及拥有完整的订单流程等，代码完全开源，没有任何二次封装，是一个非常适合二次开发的电商平台系统。
 
-## Spring以及VUE官方宣布，SpringBoot2与Vue2将在2023年底停止维护。新项目建议使用SpringBoot3+Vue3的组合，本商城已完成升级!!!
+## Spring以及VUE官方宣布，SpringBoot2与Vue2已在2023年底停止维护。新项目建议使用SpringBoot3+Vue3的组合，本商城已完成升级!!!
 
 
 ## 前言
