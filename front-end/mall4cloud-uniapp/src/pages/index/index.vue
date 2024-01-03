@@ -166,7 +166,7 @@
           @tap="toProdDetail(item.spuId)"
         >
           <view class="img">
-            <image :src="item.mainImgUrl" />
+            <image :src="addDomain(item.mainImgUrl)" />
           </view>
           <view class="text-box">
             <view class="name">
@@ -302,6 +302,16 @@ onReachBottom(() => {
     Data.isLoadAll = true
   }
 })
+
+// 添加图片域名
+const addDomain = (path) => {
+  const resourcesUrl = import.meta.env.VITE_APP_RESOURCES_URL
+  if (!path || /^http?:\/\//.test(path)) {
+    return path
+  } else {
+    return resourcesUrl + path
+  }
+}
 
 /**
      * 跳转商品详情
