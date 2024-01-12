@@ -574,4 +574,15 @@ page {
     color: #fc1b35;
     font-family: arial;
   }
+  /* #ifdef H5 */
+  :deep(checkbox){
+  .uni-checkbox-input:empty{
+    background-color: transparent;
+  }
+  .uni-checkbox-input{
+    background-color:#fc1b35 ;
+    border-color: #d1d1d1;
+  } 
+  }
+  /* #endif */
 }
