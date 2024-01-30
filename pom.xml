@@ -54,7 +54,7 @@
         <rocketmq-springboot.version>2.2.3</rocketmq-springboot.version>
         <weixin.version>4.5.0</weixin.version>
         <fastjson.version>1.2.83</fastjson.version>
-        <fastjson2.version>2.0.38</fastjson2.version>
+        <fastjson2.version>2.0.44</fastjson2.version>
         <spring-javaformat.version>0.0.22</spring-javaformat.version>
     </properties>
 
