@@ -52,6 +52,7 @@
       >
         <el-input
           v-model="dataForm.firstLetter"
+          maxlength="1"
           placeholder="请输入首字母"
         />
       </el-form-item>
@@ -128,7 +129,8 @@ const Data = reactive({
       { required: true, message: 'logo图片不能为空', trigger: 'blur' }
     ],
     firstLetter: [
-      { required: true, message: '首字母不能为空', trigger: 'blur' }
+      { required: true, message: '首字母不能为空', trigger: 'blur' },
+      { pattern: /^[A-Z]$/, message: '首字母必须为大写英文字母', trigger: 'blur' }
     ]
   }
 })
