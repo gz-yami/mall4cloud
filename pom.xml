@@ -33,7 +33,7 @@
         <java.version>17</java.version>
 
         <!-- 核心依赖 -->
-        <spring-boot.version>3.1.2</spring-boot.version>
+        <spring-boot.version>3.1.7</spring-boot.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
 
