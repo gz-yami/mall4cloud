@@ -200,7 +200,12 @@ const dataFormSubmit = () => {
 
       Data.dataForm.menuIds = menuIds
       Data.dataForm.menuPermissionIds = menuPermissionIds
-
+      if (!menuIds.length && !menuPermissionIds.length) {
+        return ElMessage.warning({
+          message: '权限不能为空',
+          duration: 1500
+        })
+      }
       const request = Data.dataForm.roleId ? api.update(Data.dataForm) : api.save(Data.dataForm)
       request.then(() => {
         ElMessage({
