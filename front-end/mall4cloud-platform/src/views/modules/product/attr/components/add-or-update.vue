@@ -284,7 +284,10 @@ const deleteCategoryItemOfSelected = (index) => {
  */
 const addAttrValue = (attrVal) => {
   if (!attrVal) {
-    return
+    return ElMessage({
+      message: '添加属性值为空',
+      type: 'warning'
+    })
   }
   Data.dataForm.attrValues.forEach((el, idx) => {
     if (el.value === attrVal) {
