@@ -292,6 +292,10 @@ const addAttrValue = (attrVal) => {
   Data.dataForm.attrValues.forEach((el, idx) => {
     if (el.value === attrVal) {
       Data.dataForm.attrValues.splice(idx, 1)
+      ElMessage({
+        message: '属性值重复',
+        type: 'warning'
+      })
     }
   })
   Data.dataForm.attrValues.push({ value: attrVal })
