@@ -7,8 +7,9 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
-    ports:
-      - 3306:3306
+    network_mode: "host"
+    expose:
+      - 3306
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/conf.d:/etc/mysql/conf.d
@@ -19,8 +20,9 @@ services:
     container_name: mall4cloud-minio
     restart: always
     command: server /data
-    ports:
-      - 9000:9000
+    network_mode: "host"
+    expose:
+      - 9000
     volumes:
       - ./minio/data:/data
     environment:
@@ -31,8 +33,9 @@ services:
     image: redis:6.2
     container_name: mall4cloud-redis
     restart: always
-    ports:
-      - 6379:6379
+    network_mode: "host"
+    expose:
+      - 6379
 
 
   mall4cloud-nacos:
@@ -41,10 +44,11 @@ services:
     restart: always
     depends_on:
       - mall4cloud-mysql
-    ports:
-      - 8848:8848
-      - 9848:9848
-      - 9849:9849
+    network_mode: "host"
+    expose:
+      - 8848
+      - 9848
+      - 9849
     environment:
       - JVM_XMS=256m
       - JVM_XMX=256m
@@ -66,9 +70,10 @@ services:
     depends_on:
       - mall4cloud-mysql
       - mall4cloud-nacos
-    ports:
-      - 8091:8091
-      - 7091:7091
+    network_mode: "host"
+    expose:
+      - 8091
+      - 7091
     environment:
       - SEATA_IP=192.168.1.46
     volumes:
@@ -78,9 +83,10 @@ services:
     image: elasticsearch:7.17.5
     container_name: mall4cloud-elasticsearch
     restart: always
-    ports:
-      - 9200:9200
-      - 9300:9300
+    network_mode: "host"
+    expose:
+      - 9200
+      - 9300
     environment:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
@@ -93,10 +99,11 @@ services:
     image: kibana:7.17.5
     container_name: mall4cloud-kibana
     restart: always
-    ports:
-      - 5601:5601
-    links:
-      - mall4cloud-elasticsearch:elasticsearch
+    network_mode: "host"
+    expose:
+      - 5601
+    environment:
+      - ELASTICSEARCH_HOSTS=http://192.168.1.46:9200
     depends_on:
       - mall4cloud-elasticsearch
 
@@ -104,8 +111,9 @@ services:
     image: canal/canal-server:v1.1.6
     container_name: mall4cloud-canal
     restart: always
-    ports:
-      - 11111:11111
+    network_mode: "host"
+    expose:
+      - 11111
     volumes:
       - ./canal/conf/example:/home/admin/canal-server/conf/example
       - ./canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties
@@ -116,39 +124,33 @@ services:
     image: apache/rocketmq:4.9.4
     container_name: mall4cloud-rocketmq-namesrv
     restart: always
-    ports:
-      - 9876:9876
+    network_mode: "host"
+    expose:
+      - 9876
     volumes:
       - ./rocketmq/namesrv/logs:/home/rocketmq/logs
       - ./rocketmq/namesrv/store:/home/rocketmq/store
     environment:
       JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128M"
     command: ["sh","mqnamesrv"]
-    networks:
-      rocketmq:
-        aliases:
-          - mall4cloud-rocketmq-namesrv
 
   mall4cloud-rocketmq-broker:
     image: apache/rocketmq:4.9.4
     container_name: mall4cloud-rocketmq-broker
     restart: always
-    ports:
-      - 10909:10909
-      - 10911:10911
+    network_mode: "host"
+    expose:
+      - 10909
+      - 10911
     volumes:
       - ./rocketmq/broker/logs:/home/rocketmq/logs
       - ./rocketmq/broker/store:/home/rocketmq/store
       - ./rocketmq/broker/conf/broker.conf:/etc/rocketmq/broker.conf
     environment:
       JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128M -XX:-AssumeMP"
-    command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","mall4cloud-rocketmq-namesrv:9876","autoCreateTopicEnable=true"]
+    command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","192.168.1.46:9876","autoCreateTopicEnable=true"]
     depends_on:
       - mall4cloud-rocketmq-namesrv
-    networks:
-      rocketmq:
-        aliases:
-          - mall4cloud-rocketmq-broker
 
 
   mall4cloud-rocketmq-dashboard:
@@ -161,13 +163,3 @@ services:
       JAVA_OPTS: "-Drocketmq.namesrv.addr=mall4cloud-rocketmq-namesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
     depends_on:
       - mall4cloud-rocketmq-namesrv
-    networks:
-      rocketmq:
-        aliases:
-          - mall4cloud-rocketmq-console
-
-
-networks:
-  rocketmq:
-    name: rocketmq
-    driver: bridge
