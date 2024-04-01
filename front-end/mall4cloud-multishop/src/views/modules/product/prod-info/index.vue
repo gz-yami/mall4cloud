@@ -997,6 +997,7 @@ const resetForm = () => {
     hasCityDelivery: false
   }
   Data.dataForm.detail = ''
+  Data.selectedShopCategorys = []
   if (!Data.dataForm.spuId) {
     Data.selectedCategorys = []
     Data.dataForm.categoryId = ''
