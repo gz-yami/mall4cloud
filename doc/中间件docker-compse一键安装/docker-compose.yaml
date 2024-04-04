@@ -62,20 +62,18 @@ services:
   #   volumes:
   #     - ./nacos/logs:/home/nacos/logs
 
-
   mall4cloud-seata:
-    image: seataio/seata-server:1.6.1
+    image: seataio/seata-server:2.0.0
     container_name: mall4cloud-seata
     restart: always
     # depends_on:
     #   - mall4cloud-mysql
     #   - mall4cloud-nacos
-    network_mode: "host"
-    ports:
-      - "8091:8091"
-      - "7091:7091"
-    environment:
       - SEATA_IP=127.0.0.1
+      - TZ
+      - STORE_MODE=db
+      - SEATA_IP=172.23.55.91
+      - SEATA_PORT=8091
     volumes:
       - ./seata/application.yml:/seata-server/resources/application.yml
 
