@@ -2,13 +2,14 @@ package com.mall4j.cloud.auth.model;
 
 import com.mall4j.cloud.common.database.annotations.DistributedId;
 import com.mall4j.cloud.common.model.BaseModel;
-
+import lombok.Data;
 /**
  * 统一账户信息
  *
  * @author FrozenWatermelon
  * @date 2020/07/02
  */
+@Data
 public class AuthAccount extends BaseModel {
 
 	/**
@@ -56,78 +57,6 @@ public class AuthAccount extends BaseModel {
 	 * 是否是管理员
 	 */
 	private Integer isAdmin;
-
-	public Long getUid() {
-		return uid;
-	}
-
-	public void setUid(Long uid) {
-		this.uid = uid;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getCreateIp() {
-		return createIp;
-	}
-
-	public void setCreateIp(String createIp) {
-		this.createIp = createIp;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public Integer getSysType() {
-		return sysType;
-	}
-
-	public void setSysType(Integer sysType) {
-		this.sysType = sysType;
-	}
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public Long getTenantId() {
-		return tenantId;
-	}
-
-	public void setTenantId(Long tenantId) {
-		this.tenantId = tenantId;
-	}
-
-	public Integer getIsAdmin() {
-		return isAdmin;
-	}
-
-	public void setIsAdmin(Integer isAdmin) {
-		this.isAdmin = isAdmin;
-	}
 
 	@Override
 	public String toString() {

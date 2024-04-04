@@ -1,19 +1,19 @@
 version: "3.5"
 
 services:
-  mall4cloud-mysql:
-    image: mysql:8.0
-    container_name: mall4cloud-mysql
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-    network_mode: "host"
-    expose:
-      - 3306
-    volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/conf.d:/etc/mysql/conf.d
-      - ./mysql/initdb:/docker-entrypoint-initdb.d
+  # mall4cloud-mysql:
+  #   image: mysql:8.0
+  #   container_name: mall4cloud-mysql
+  #   restart: always
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root
+  #   network_mode: "host"
+  #   expose:
+  #     - 3306
+  #   volumes:
+  #     - ./mysql/data:/var/lib/mysql
+  #     - ./mysql/conf.d:/etc/mysql/conf.d
+  #     - ./mysql/initdb:/docker-entrypoint-initdb.d
 
   mall4cloud-minio:
     image: minio/minio:RELEASE.2021-06-17T00-10-46Z
@@ -21,8 +21,8 @@ services:
     restart: always
     command: server /data
     network_mode: "host"
-    expose:
-      - 9000
+    ports:
+      - "9000:9000"
     volumes:
       - ./minio/data:/data
     environment:
@@ -34,48 +34,48 @@ services:
     container_name: mall4cloud-redis
     restart: always
     network_mode: "host"
-    expose:
-      - 6379
+    ports:
+      - "6379:6379"
 
 
-  mall4cloud-nacos:
-    image: nacos/nacos-server:v2.2.0-slim
-    container_name: mall4cloud-nacos
-    restart: always
-    depends_on:
-      - mall4cloud-mysql
-    network_mode: "host"
-    expose:
-      - 8848
-      - 9848
-      - 9849
-    environment:
-      - JVM_XMS=256m
-      - JVM_XMX=256m
-      - MODE=standalone
-      - PREFER_HOST_MODE=hostname
-      - SPRING_DATASOURCE_PLATFORM=mysql
-      - MYSQL_SERVICE_HOST=192.168.1.46
-      - MYSQL_SERVICE_DB_NAME=mall4cloud_nacos
-      - MYSQL_SERVICE_USER=root
-      - MYSQL_SERVICE_PASSWORD=root
-    volumes:
-      - ./nacos/logs:/home/nacos/logs
+  # mall4cloud-nacos:
+  #   image: nacos/nacos-server:v2.2.0-slim
+  #   container_name: mall4cloud-nacos
+  #   restart: always
+  #   depends_on:
+  #     - mall4cloud-mysql
+  #   network_mode: "host"
+  #   expose:
+  #     - 8848
+  #     - 9848
+  #     - 9849
+  #   environment:
+  #     - JVM_XMS=256m
+  #     - JVM_XMX=256m
+  #     - MODE=standalone
+  #     - PREFER_HOST_MODE=hostname
+  #     - SPRING_DATASOURCE_PLATFORM=mysql
+  #     - MYSQL_SERVICE_HOST=192.168.1.46
+  #     - MYSQL_SERVICE_DB_NAME=mall4cloud_nacos
+  #     - MYSQL_SERVICE_USER=root
+  #     - MYSQL_SERVICE_PASSWORD=root
+  #   volumes:
+  #     - ./nacos/logs:/home/nacos/logs
 
 
   mall4cloud-seata:
     image: seataio/seata-server:1.6.1
     container_name: mall4cloud-seata
     restart: always
-    depends_on:
-      - mall4cloud-mysql
-      - mall4cloud-nacos
+    # depends_on:
+    #   - mall4cloud-mysql
+    #   - mall4cloud-nacos
     network_mode: "host"
-    expose:
-      - 8091
-      - 7091
+    ports:
+      - "8091:8091"
+      - "7091:7091"
     environment:
-      - SEATA_IP=192.168.1.46
+      - SEATA_IP=127.0.0.1
     volumes:
       - ./seata/application.yml:/seata-server/resources/application.yml
 
@@ -84,9 +84,9 @@ services:
     container_name: mall4cloud-elasticsearch
     restart: always
     network_mode: "host"
-    expose:
-      - 9200
-      - 9300
+    ports:
+      - "9200:9200"
+      - "9300:9300"
     environment:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
@@ -100,24 +100,24 @@ services:
     container_name: mall4cloud-kibana
     restart: always
     network_mode: "host"
-    expose:
-      - 5601
+    ports:
+      - "5601:5601"
     environment:
-      - ELASTICSEARCH_HOSTS=http://192.168.1.46:9200
+      - ELASTICSEARCH_HOSTS=http://127.0.0.1:9200
     depends_on:
       - mall4cloud-elasticsearch
 
-  mall4cloud-canal:
-    image: canal/canal-server:v1.1.6
-    container_name: mall4cloud-canal
-    restart: always
-    network_mode: "host"
-    expose:
-      - 11111
-    volumes:
-      - ./canal/conf/example:/home/admin/canal-server/conf/example
-      - ./canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties
-      - ./canal/logs:/home/admin/canal-server/logs
+  # mall4cloud-canal:
+  #   image: canal/canal-server:v1.1.6
+  #   container_name: mall4cloud-canal
+  #   restart: always
+  #   network_mode: "host"
+  #   expose:
+  #     - 11111
+  #   volumes:
+  #     - ./canal/conf/example:/home/admin/canal-server/conf/example
+  #     - ./canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties
+  #     - ./canal/logs:/home/admin/canal-server/logs
 
 
   mall4cloud-rocketmq-namesrv:
@@ -125,8 +125,10 @@ services:
     container_name: mall4cloud-rocketmq-namesrv
     restart: always
     network_mode: "host"
-    expose:
-      - 9876
+    # expose:
+    #   - 9876
+    ports:
+      - "9876:9876"
     volumes:
       - ./rocketmq/namesrv/logs:/home/rocketmq/logs
       - ./rocketmq/namesrv/store:/home/rocketmq/store
@@ -139,16 +141,19 @@ services:
     container_name: mall4cloud-rocketmq-broker
     restart: always
     network_mode: "host"
-    expose:
-      - 10909
-      - 10911
+    # expose:
+    #   - 10909
+    #   - 10911
+    ports:
+      - "10909:10909"
+      - "10911:10911"
     volumes:
       - ./rocketmq/broker/logs:/home/rocketmq/logs
       - ./rocketmq/broker/store:/home/rocketmq/store
       - ./rocketmq/broker/conf/broker.conf:/etc/rocketmq/broker.conf
     environment:
       JAVA_OPT_EXT: "-Duser.home=/home/rocketmq -Xms512M -Xmx512M -Xmn128M -XX:-AssumeMP"
-    command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","192.168.1.46:9876","autoCreateTopicEnable=true"]
+    command: ["sh","mqbroker","-c","/etc/rocketmq/broker.conf","-n","127.0.0.1:9876","autoCreateTopicEnable=true"]
     depends_on:
       - mall4cloud-rocketmq-namesrv
 

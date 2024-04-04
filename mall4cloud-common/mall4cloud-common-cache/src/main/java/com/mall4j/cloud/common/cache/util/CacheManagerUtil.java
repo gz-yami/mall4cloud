@@ -6,8 +6,8 @@ import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
 
 /**
- * @author FrozenWatermelon
- * @date 2020/09/03
+ * 缓存管理工具类
+ * 用于操作缓存的增删改查
  */
 @Component
 public class CacheManagerUtil {
@@ -19,6 +19,12 @@ public class CacheManagerUtil {
 		this.cacheManager = cacheManager;
 	}
 
+	/**
+	 * 获取缓存中指定key的值
+	 * @param cacheName 缓存名称
+	 * @param key 缓存键
+	 * @return 缓存值
+	 */
 	@SuppressWarnings({ "unchecked" })
 	public <T> T getCache(String cacheName, String key) {
 		Cache cache = cacheManager.getCache(cacheName);
@@ -32,6 +38,12 @@ public class CacheManagerUtil {
 		return (T) valueWrapper.get();
 	}
 
+	/**
+	 * 向缓存中添加指定key-value对
+	 * @param cacheName 缓存名称
+	 * @param key 缓存键
+	 * @param value 缓存值
+	 */
 	public void putCache(String cacheName, String key, Object value) {
 		Cache cache = cacheManager.getCache(cacheName);
 		if (cache != null) {
@@ -39,6 +51,11 @@ public class CacheManagerUtil {
 		}
 	}
 
+	/**
+	 * 从缓存中删除指定key的值
+	 * @param cacheName 缓存名称
+	 * @param key 缓存键
+	 */
 	public void evictCache(String cacheName, String key) {
 		Cache cache = cacheManager.getCache(cacheName);
 		if (cache != null) {

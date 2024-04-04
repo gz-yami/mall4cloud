@@ -109,6 +109,12 @@
             </dependency>
             <!-- 次要依赖 -->
             <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <!-- <version>1.18.20</version> -->
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-core</artifactId>
                 <version>${hutool-version}</version>

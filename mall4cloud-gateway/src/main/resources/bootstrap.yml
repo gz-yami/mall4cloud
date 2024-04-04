@@ -6,13 +6,14 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: ${NACOS_HOST:192.168.1.46}:${NACOS_PORT:8848}
+        # server-addr: ${NACOS_HOST:city.duo88.cn}:${NACOS_PORT:3987}
+        server-addr: city.duo88.cn:3987
         username: nacos
         password: nacos
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-        namespace: @nacos.namespace@
+        namespace: f50860af-9263-415a-b2fe-cb1397b02bcb
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         username: ${spring.cloud.nacos.discovery.username}
