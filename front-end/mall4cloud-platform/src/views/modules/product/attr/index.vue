@@ -13,21 +13,6 @@
             placeholder="属性名称"
           />
         </el-form-item>
-        <el-form-item label="属性类型">
-          <el-select
-            v-model="pageQuery.attrType"
-            placeholder="请选择属性类型"
-          >
-            <el-option
-              label="销售属性"
-              value="0"
-            />
-            <el-option
-              label="基本属性"
-              value="1"
-            />
-          </el-select>
-        </el-form-item>
         <el-form-item>
           <el-button
             type="primary"
@@ -165,8 +150,7 @@ const Data = reactive({
   pageQuery: {
     pageSize: 10,
     pageNum: 1,
-    name: undefined,
-    attrType: undefined
+    name: undefined
   },
   // 返回参数
   pageVO: {
