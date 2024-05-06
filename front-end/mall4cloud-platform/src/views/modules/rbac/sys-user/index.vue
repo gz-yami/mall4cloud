@@ -3,12 +3,6 @@
     <!-- 搜索相关区域 -->
     <div class="filter-container">
       <el-button
-        class="filter-item"
-        @click="getPage()"
-      >
-        {{ $t('table.search') }}
-      </el-button>
-      <el-button
         v-permission="['multishop:shopUser:save']"
         type="primary"
         class="filter-item"
