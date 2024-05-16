@@ -159,6 +159,6 @@ services:
     ports:
       - 8180:8080
     environment:
-      JAVA_OPTS: "-Drocketmq.namesrv.addr=mall4cloud-rocketmq-namesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
+      JAVA_OPTS: "-Drocketmq.namesrv.addr=192.168.1.46:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false"
     depends_on:
       - mall4cloud-rocketmq-namesrv
