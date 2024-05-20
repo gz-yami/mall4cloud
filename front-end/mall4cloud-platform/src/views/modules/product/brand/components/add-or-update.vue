@@ -244,7 +244,7 @@ const dataFormSubmit = () => {
       imgUrl: Data.dataForm.imgUrl,
       firstLetter: Data.dataForm.firstLetter,
       categoryIds: Data.dataForm.categoryIds, // 分类id列表
-      seq: Data.dataForm.seq
+      seq: Data.dataForm.seq || 0
     }
     const request = Data.dataForm.brandId ? api.update(dataForm) : api.save(dataForm)
     request.then(() => {
