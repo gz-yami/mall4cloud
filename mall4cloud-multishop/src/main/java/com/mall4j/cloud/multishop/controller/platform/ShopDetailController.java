@@ -9,11 +9,13 @@ import com.mall4j.cloud.common.response.ResponseEnum;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import com.mall4j.cloud.common.security.AuthUserContext;
 import com.mall4j.cloud.multishop.dto.ShopDetailDTO;
+import com.mall4j.cloud.multishop.dto.UpdateShopPasswordDTO;
 import com.mall4j.cloud.multishop.model.ShopDetail;
 import com.mall4j.cloud.multishop.service.ShopDetailService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
 import com.mall4j.cloud.common.util.BeanUtil;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +67,13 @@ public class ShopDetailController {
     @Operation(summary = "更新店铺" , description = "更新店铺")
     public ServerResponseEntity<Void> updateShop(@RequestBody ShopDetailDTO shopDetailDTO) {
         shopDetailService.update(BeanUtil.map(shopDetailDTO, ShopDetail.class));
+        return ServerResponseEntity.success();
+    }
+
+    @PutMapping("/reset_shop_password")
+    @Operation(summary = "重置店铺密码" , description = "重置店铺密码")
+    public ServerResponseEntity<Void> resetShopPassword(@Valid @RequestBody UpdateShopPasswordDTO updateShopPasswordDTO) {
+        shopDetailService.resetShopPassword(updateShopPasswordDTO);
         return ServerResponseEntity.success();
     }
 }

@@ -70,8 +70,8 @@ export function getManageDetail (shopId) {
 // 保存账号密码
 export function savaAccountAndPassword (data) {
   return request({
-    url: '/mall4cloud_multishop/platform/shop_detail/save_username_and_password',
-    method: 'POST',
+    url: '/mall4cloud_multishop/platform/shop_detail/reset_shop_password',
+    method: 'PUT',
     data
   })
 }

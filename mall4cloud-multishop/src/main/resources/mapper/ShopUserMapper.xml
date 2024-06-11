@@ -59,4 +59,9 @@
   <select id="getUserIdByShopId" resultType="java.lang.Long">
     SELECT shop_user_id FROM shop_user WHERE shop_id = #{shopId} HAVING MAX(create_time) ORDER BY shop_user_id ASC
   </select>
+
+  <select id="getShopAdminUser" resultType="com.mall4j.cloud.multishop.vo.ShopUserVO">
+<!--    店铺管理员账号的创建时间要早于店员的账号, 根据创建时间倒序，并返回第一条数据即可-->
+    select <include refid="Base_Column_List" /> from shop_user where shop_id = #{shopId} order by create_time desc limit 1
+  </select>
 </mapper>

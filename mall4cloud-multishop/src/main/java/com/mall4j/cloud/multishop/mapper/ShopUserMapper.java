@@ -67,4 +67,11 @@ public interface ShopUserMapper {
      */
     Long getUserIdByShopId(@Param("shopId") Long shopId);
 
+    /**
+     * 查询店铺管理员账号
+     *
+     * @param shopId
+     * @return
+     */
+    ShopUserVO getShopAdminUser(@Param("shopId") Long shopId);
 }

@@ -4,6 +4,7 @@ import com.mall4j.cloud.api.multishop.bo.EsShopDetailBO;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.vo.PageVO;
 import com.mall4j.cloud.multishop.dto.ShopDetailDTO;
+import com.mall4j.cloud.multishop.dto.UpdateShopPasswordDTO;
 import com.mall4j.cloud.multishop.model.ShopDetail;
 import com.mall4j.cloud.api.multishop.vo.ShopDetailVO;
 import com.mall4j.cloud.multishop.vo.ShopDetailAppVO;
@@ -120,4 +121,10 @@ public interface ShopDetailService {
 	 * @return
 	 */
     Boolean checkShopName(String shopName);
+
+	/**
+	 * 重置店铺密码
+	 * @param updateShopPasswordDTO
+	 */
+	void resetShopPassword(UpdateShopPasswordDTO updateShopPasswordDTO);
 }

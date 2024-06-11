@@ -152,4 +152,12 @@ public class AccountFeignController implements AccountFeignClient {
         return ServerResponseEntity.success(authAccountVO);
     }
 
+    @Override
+    public ServerResponseEntity<Void> updateShopPassword(AuthAccountDTO authAccountDTO) {
+        if (StrUtil.isNotBlank(authAccountDTO.getPassword())) {
+            authAccountDTO.setPassword(passwordEncoder.encode(authAccountDTO.getPassword()));
+        }
+        authAccountMapper.updatePassword(authAccountDTO.getUserId(), authAccountDTO.getSysType(), authAccountDTO.getPassword());
+        return ServerResponseEntity.success();
+    }
 }

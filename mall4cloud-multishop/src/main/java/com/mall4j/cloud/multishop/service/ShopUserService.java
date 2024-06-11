@@ -56,4 +56,11 @@ public interface ShopUserService {
 	 * @return
 	 */
 	Long getUserIdByShopId(Long shopId);
+
+	/**
+	 * 查询店铺管理员账号
+	 * @param shopId
+	 * @return
+	 */
+    ShopUserVO getShopAdminUser(Long shopId);
 }

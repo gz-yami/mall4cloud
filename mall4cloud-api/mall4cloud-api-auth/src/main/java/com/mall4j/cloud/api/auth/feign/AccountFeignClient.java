@@ -92,4 +92,12 @@ public interface AccountFeignClient {
 	 */
 	@GetMapping(value = FeignInsideAuthConfig.FEIGN_INSIDE_URL_PREFIX + "/insider/account/getMerchantInfoByTenantId")
 	ServerResponseEntity<AuthAccountVO> getMerchantInfoByTenantId(@RequestParam("tenantId") Long tenantId);
+
+	/**
+	 * 更新密码
+	 * @param authAccountDTO
+	 * @return
+	 */
+	@PostMapping(value = FeignInsideAuthConfig.FEIGN_INSIDE_URL_PREFIX + "/account/updatePassword")
+	ServerResponseEntity<Void> updateShopPassword(@RequestBody AuthAccountDTO authAccountDTO);
 }

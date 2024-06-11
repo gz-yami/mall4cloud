@@ -91,4 +91,9 @@ public class ShopUserServiceImpl implements ShopUserService {
         return shopUserMapper.getUserIdByShopId(shopId);
     }
 
+	@Override
+	public ShopUserVO getShopAdminUser(Long shopId) {
+		return shopUserMapper.getShopAdminUser(shopId);
+	}
+
 }

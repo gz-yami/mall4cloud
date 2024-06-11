@@ -27,6 +27,7 @@ import com.mall4j.cloud.common.util.PrincipalUtil;
 import com.mall4j.cloud.multishop.constant.ShopStatus;
 import com.mall4j.cloud.multishop.constant.ShopType;
 import com.mall4j.cloud.multishop.dto.ShopDetailDTO;
+import com.mall4j.cloud.multishop.dto.UpdateShopPasswordDTO;
 import com.mall4j.cloud.multishop.mapper.ShopDetailMapper;
 import com.mall4j.cloud.multishop.model.ShopDetail;
 import com.mall4j.cloud.multishop.model.ShopUser;
@@ -34,6 +35,7 @@ import com.mall4j.cloud.multishop.service.ShopDetailService;
 import com.mall4j.cloud.api.multishop.vo.ShopDetailVO;
 import com.mall4j.cloud.multishop.service.ShopUserService;
 import com.mall4j.cloud.multishop.vo.ShopDetailAppVO;
+import com.mall4j.cloud.multishop.vo.ShopUserVO;
 import io.seata.spring.annotation.GlobalTransactional;
 import com.mall4j.cloud.common.util.BeanUtil;
 import org.springframework.cache.annotation.CacheEvict;
@@ -209,6 +211,16 @@ public class ShopDetailServiceImpl implements ShopDetailService {
     public Boolean checkShopName(String shopName) {
         int count = shopDetailMapper.countShopName(shopName, null);
         return count <= 0;
+    }
+
+    @Override
+    public void resetShopPassword(UpdateShopPasswordDTO updateShopPasswordDTO) {
+        ShopUserVO shopAdminUser = shopUserService.getShopAdminUser(updateShopPasswordDTO.getShopId());
+        AuthAccountDTO authAccountDTO = new AuthAccountDTO();
+        authAccountDTO.setPassword(updateShopPasswordDTO.getPassword());
+        authAccountDTO.setUserId(shopAdminUser.getShopUserId());
+        authAccountDTO.setSysType(SysTypeEnum.MULTISHOP.value());
+        accountFeignClient.updateShopPassword(authAccountDTO);
     }
 
     /**
