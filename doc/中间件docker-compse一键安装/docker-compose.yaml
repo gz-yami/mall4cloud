@@ -16,7 +16,7 @@ services:
       - ./mysql/initdb:/docker-entrypoint-initdb.d
 
   mall4cloud-minio:
-    image: minio/minio:RELEASE.2021-06-17T00-10-46Z
+    image: minio/minio:RELEASE.2024-04-18T19-09-19Z
     container_name: mall4cloud-minio
     restart: always
     command: server /data
@@ -30,7 +30,7 @@ services:
       - MINIO_ROOT_PASSWORD=admin123456
 
   mall4cloud-redis:
-    image: redis:6.2
+    image: redis:7.0
     container_name: mall4cloud-redis
     restart: always
     network_mode: "host"
@@ -39,7 +39,7 @@ services:
 
 
   mall4cloud-nacos:
-    image: nacos/nacos-server:v2.2.0-slim
+    image: nacos/nacos-server:v2.3.2
     container_name: mall4cloud-nacos
     restart: always
     depends_on:
@@ -59,6 +59,10 @@ services:
       - MYSQL_SERVICE_DB_NAME=mall4cloud_nacos
       - MYSQL_SERVICE_USER=root
       - MYSQL_SERVICE_PASSWORD=root
+      - NACOS_AUTH_ENABLE=true
+      - NACOS_CORE_AUTH_PLUGIN_NACOS_TOKEN_SECRET_KEY=TWFsbDRqTWFsbDRjbG91ZE1hbGw0ak1hbGw0Y2xvdWRNYWxsNGpNYWxsNGNsb3Vk
+      - NACOS_CORE_AUTH_SERVER_IDENTITY_KEY=mall4jmall4jmall4jmall4jmall4jmall4jmall4jmall4j
+      - NACOS_CORE_AUTH_SERVER_IDENTITY_VALUE=mall4cloudmall4cloudmall4cloudmall4cloudmall4cloudmall4cloudmall4cloud
     volumes:
       - ./nacos/logs:/home/nacos/logs
 
@@ -79,7 +83,7 @@ services:
       - ./seata/application.yml:/seata-server/resources/application.yml
 
   mall4cloud-elasticsearch:
-    image: elasticsearch:7.17.5
+    image: elasticsearch:7.17.21
     container_name: mall4cloud-elasticsearch
     restart: always
     network_mode: "host"
@@ -95,7 +99,7 @@ services:
       - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
 
   mall4cloud-kibana:
-    image: kibana:7.17.5
+    image: kibana:7.17.21
     container_name: mall4cloud-kibana
     restart: always
     network_mode: "host"
@@ -107,7 +111,7 @@ services:
       - mall4cloud-elasticsearch
 
   mall4cloud-canal:
-    image: canal/canal-server:v1.1.6
+    image: canal/canal-server:v1.1.7
     container_name: mall4cloud-canal
     restart: always
     network_mode: "host"
@@ -120,7 +124,7 @@ services:
 
 
   mall4cloud-rocketmq-namesrv:
-    image: apache/rocketmq:4.9.4
+    image: apache/rocketmq:5.2.0
     container_name: mall4cloud-rocketmq-namesrv
     restart: always
     network_mode: "host"
@@ -134,7 +138,7 @@ services:
     command: ["sh","mqnamesrv"]
 
   mall4cloud-rocketmq-broker:
-    image: apache/rocketmq:4.9.4
+    image: apache/rocketmq:5.2.0
     container_name: mall4cloud-rocketmq-broker
     restart: always
     network_mode: "host"
@@ -153,7 +157,7 @@ services:
 
 
   mall4cloud-rocketmq-dashboard:
-    image: apacherocketmq/rocketmq-dashboard:1.0.0
+    image: fsckzy01/rocketmq-dashboard:1.0.1
     container_name: mall4cloud-rocketmq-dashboard
     restart: always
     ports:
