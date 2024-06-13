@@ -20,7 +20,7 @@ chmod -R 777 ./elasticsearch/data
 > ps: 容器一共要下载7G左右的数据，请耐心等待
 
 ```
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 
