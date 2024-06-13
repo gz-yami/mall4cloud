@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   mall4cloud-mysql:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/mysql:8.0.35
+    image: mysql:8.0
     container_name: mall4cloud-mysql
     restart: always
     environment:
@@ -16,7 +16,7 @@ services:
       - ./mysql/initdb:/docker-entrypoint-initdb.d
 
   mall4cloud-minio:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/minio:RELEASE.2024-04-18T19-09-19Z
+    image: minio/minio:RELEASE.2024-04-18T19-09-19Z
     container_name: mall4cloud-minio
     restart: always
     command: server /data
@@ -30,7 +30,7 @@ services:
       - MINIO_ROOT_PASSWORD=admin123456
 
   mall4cloud-redis:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/redis:7.0
+    image: redis:7.0
     container_name: mall4cloud-redis
     restart: always
     network_mode: "host"
@@ -39,7 +39,7 @@ services:
 
 
   mall4cloud-nacos:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/nacos-server:v2.3.2
+    image: nacos/nacos-server:v2.3.2
     container_name: mall4cloud-nacos
     restart: always
     depends_on:
@@ -67,7 +67,7 @@ services:
       - ./nacos/logs:/home/nacos/logs
 
   mall4cloud-seata:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/seata-server:2.0.0
+    image: seataio/seata-server:2.0.0
     container_name: mall4cloud-seata
     restart: always
     network_mode: "host"
@@ -83,7 +83,7 @@ services:
       - ./seata/application.yml:/seata-server/resources/application.yml
 
   mall4cloud-elasticsearch:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/elasticsearch:7.17.21
+    image: elasticsearch:7.17.21
     container_name: mall4cloud-elasticsearch
     restart: always
     network_mode: "host"
@@ -99,7 +99,7 @@ services:
       - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
 
   mall4cloud-kibana:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/kibana:7.17.21
+    image: kibana:7.17.21
     container_name: mall4cloud-kibana
     restart: always
     network_mode: "host"
@@ -111,7 +111,7 @@ services:
       - mall4cloud-elasticsearch
 
   mall4cloud-canal:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/canal-server:v1.1.7
+    image: canal/canal-server:v1.1.7
     container_name: mall4cloud-canal
     restart: always
     network_mode: "host"
@@ -124,7 +124,7 @@ services:
 
 
   mall4cloud-rocketmq-namesrv:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/rocketmq:5.2.0
+    image: apache/rocketmq:5.2.0
     container_name: mall4cloud-rocketmq-namesrv
     restart: always
     network_mode: "host"
@@ -138,7 +138,7 @@ services:
     command: ["sh","mqnamesrv"]
 
   mall4cloud-rocketmq-broker:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/rocketmq:5.2.0
+    image: apache/rocketmq:5.2.0
     container_name: mall4cloud-rocketmq-broker
     restart: always
     network_mode: "host"
@@ -157,7 +157,7 @@ services:
 
 
   mall4cloud-rocketmq-dashboard:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/rocketmq-dashboard:1.0.1
+    image: fsckzy01/rocketmq-dashboard:1.0.1
     container_name: mall4cloud-rocketmq-dashboard
     restart: always
     ports:
