@@ -131,6 +131,14 @@ const dataFormSubmit = () => {
   dataFormRef.value.validate((valid) => {
     if (valid) {
       api.savaAccountAndPassword(Data.dataForm).then(() => {
+        ElMessage({
+          message: $t('table.actionSuccess'),
+          type: 'success',
+          duration: 1500,
+          onClose: () => {
+            Data.visible = false
+          }
+        })
       })
     } else {
       ElMessage.error('请输入密码')
