@@ -34,6 +34,7 @@
           v-model="dataForm.seq"
           controls-position="right"
           :precision="0"
+          @blur="onChangeSeq"
         />
       </el-form-item>
       <!-- 状态 0下线 1上线 -->
@@ -82,7 +83,7 @@ const Data = reactive({
   dataForm: {
     hotSearchId: 0,
     content: null,
-    seq: null,
+    seq: 0,
     status: 1,
     title: null
   },
@@ -112,6 +113,12 @@ const init = (hotSearchId) => {
       Data.dataForm = data
     })
   })
+}
+
+const onChangeSeq = () => {
+  if (!Data.dataForm.seq) {
+    Data.dataForm.seq = 0
+  }
 }
 
 // 表单提交
