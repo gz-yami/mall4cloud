@@ -49,11 +49,11 @@ docker compose up -d --build
 
 新建索引
 
-根据自己本地ip地址打开控制台，如下界面
+根据自己本地ip地址打开post，设置es的用户名密码如下界面
 
-http://192.168.1.46:5601/app/dev_tools#/console
 
-![image-20210621114010421](../img/中间件安装/es新建索引-1.png)
+
+![image-20210621114010421](../img/中间件安装/es%20postman设置密码.png)
 
 需创建`order`、`product`两个索引
 
@@ -61,6 +61,6 @@ http://192.168.1.46:5601/app/dev_tools#/console
 
 命令的内容参考本目录下`../es/order.md` `../es/product.md`
 
-![image-20210621131013166](../img/中间件安装/es新建索引-2.png)
+![image-20210621131013166](../img/中间件安装/es%20操作mapping.png)
 
 
