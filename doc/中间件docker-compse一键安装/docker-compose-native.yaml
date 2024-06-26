@@ -6,7 +6,7 @@ services:
     container_name: mall4cloud-mysql
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=80jpnH4.r5g
     network_mode: "host"
     expose:
       - 3306
@@ -27,13 +27,14 @@ services:
       - ./minio/data:/data
     environment:
       - MINIO_ROOT_USER=admin
-      - MINIO_ROOT_PASSWORD=admin123456
+      - MINIO_ROOT_PASSWORD=80jpnH4.r5g
 
   mall4cloud-redis:
     image: redis:7.0
     container_name: mall4cloud-redis
     restart: always
     network_mode: "host"
+    command: redis-server --requirepass 80jpnH4.r5g
     expose:
       - 6379
 
@@ -93,6 +94,9 @@ services:
     environment:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTIC_PASSWORD=hn02le.34lkdLKD
+      - xpack.security.enabled=true
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./elasticsearch/data:/usr/share/elasticsearch/data
