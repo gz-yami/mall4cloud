@@ -98,18 +98,6 @@ services:
       - ./elasticsearch/data:/usr/share/elasticsearch/data
       - ./elasticsearch/plugins:/usr/share/elasticsearch/plugins
 
-  mall4cloud-kibana:
-    image: registry.cn-hongkong.aliyuncs.com/mall4j-images/kibana:7.17.21
-    container_name: mall4cloud-kibana
-    restart: always
-    network_mode: "host"
-    expose:
-      - 5601
-    environment:
-      - ELASTICSEARCH_HOSTS=http://192.168.1.46:9200
-    depends_on:
-      - mall4cloud-elasticsearch
-
   mall4cloud-canal:
     image: registry.cn-hongkong.aliyuncs.com/mall4j-images/canal-server:v1.1.7
     container_name: mall4cloud-canal
