@@ -175,7 +175,7 @@ mall4cloud
 - mall4cloud开源技术QQ群：561496886
 - 如需购买商业版源码，请联系商务微信
 
-  ![输入图片说明](https://19838323.s21i.faiusr.com/4/4/ABUIABAEGAAgksmNlAYojomK2gIwrAI4rAI!160x160.png)
+![输入图片说明](doc/img/readme/%E5%95%86%E5%8A%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
 
 
 
