@@ -253,12 +253,12 @@
 
       <!-- 选择/创建/修改分组 -->
       <el-dialog
-        v-model:visible="showGroupVisible"
+        v-model="showGroupVisible"
         :title="selectGroup ? '选择分组' : createGroup ? '新建分组' : ''"
         :append-to-body="showGroupVisible"
       >
         <el-form
-          ref="groupForm"
+          ref="groupFormRef"
           :model="groupForm"
           label-width="90px"
           style="width:400px"
