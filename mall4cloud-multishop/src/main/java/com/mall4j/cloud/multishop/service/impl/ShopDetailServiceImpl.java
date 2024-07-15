@@ -215,6 +215,9 @@ public class ShopDetailServiceImpl implements ShopDetailService {
 
     @Override
     public void resetShopPassword(UpdateShopPasswordDTO updateShopPasswordDTO) {
+        if (!Objects.equals(updateShopPasswordDTO.getPassword(), updateShopPasswordDTO.getConfirmPsw())) {
+            throw new Mall4cloudException("密码不一致");
+        }
         ShopUserVO shopAdminUser = shopUserService.getShopAdminUser(updateShopPasswordDTO.getShopId());
         AuthAccountDTO authAccountDTO = new AuthAccountDTO();
         authAccountDTO.setPassword(updateShopPasswordDTO.getPassword());
