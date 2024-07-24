@@ -9,8 +9,7 @@
 3.执行授权命令
 
 ```
-chmod -R 777 ./rocketmq/broker/logs
-chmod -R 777 ./rocketmq/broker/store
+chmod -R 777 ./rocketmq
 chmod -R 666 ./minio/data
 chmod -R 777 ./elasticsearch/data
 ```
