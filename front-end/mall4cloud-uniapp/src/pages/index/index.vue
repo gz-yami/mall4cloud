@@ -16,7 +16,10 @@
     </view>
 
     <!-- banner -->
-    <view class="banner">
+    <view
+      v-if="indexImgs.length"
+      class="banner"
+    >
       <view class="bg">
         <image src="/static/images/bannerBg.png" />
       </view>
