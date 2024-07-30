@@ -106,7 +106,6 @@ sudo systemctl restart docker
 
 ```json
 {
-  "registry-mirrors": ["https://xxx"],
   "log-driver": "json-file",
   "log-opts": {
     "max-size": "100m","max-file": "1"
