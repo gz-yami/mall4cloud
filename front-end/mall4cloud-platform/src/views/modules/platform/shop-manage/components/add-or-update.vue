@@ -146,6 +146,7 @@
             {{ $t('table.cancel') }}
           </el-button>
           <el-button
+            v-if="shopId===null"
             type="primary"
             @click="dataFormSubmit()"
           >
@@ -213,10 +214,10 @@ const { visible, shopId, dataForm, picturePreviewVisible, rules } = toRefs(Data)
 const dataFormRef = ref()
 const init = (shopId) => {
   Data.visible = true
-  Data.shopId = shopId || null
+  Data.shopId = shopId ?? null
   nextTick(() => {
     dataFormRef.value.resetFields()
-    if (!Data.shopId) {
+    if (Data.shopId === null) {
       return
     }
     api.getManageDetail(Data.shopId).then(data => {
