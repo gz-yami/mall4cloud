@@ -6,7 +6,7 @@ services:
     container_name: mall4cloud-mysql
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=80jpnH4.r5g
     network_mode: "host"
     expose:
       - 3306
@@ -27,13 +27,14 @@ services:
       - ./minio/data:/data
     environment:
       - MINIO_ROOT_USER=admin
-      - MINIO_ROOT_PASSWORD=admin123456
+      - MINIO_ROOT_PASSWORD=80jpnH4.r5g
 
   mall4cloud-redis:
     image: registry.cn-hongkong.aliyuncs.com/mall4j-images/redis:7.0
     container_name: mall4cloud-redis
     restart: always
     network_mode: "host"
+    command: redis-server --requirepass 80jpnH4.r5g
     expose:
       - 6379
 
@@ -58,7 +59,7 @@ services:
       - MYSQL_SERVICE_HOST=192.168.1.46
       - MYSQL_SERVICE_DB_NAME=mall4cloud_nacos
       - MYSQL_SERVICE_USER=root
-      - MYSQL_SERVICE_PASSWORD=root
+      - MYSQL_SERVICE_PASSWORD=80jpnH4.r5g
       - NACOS_AUTH_ENABLE=true
       - NACOS_CORE_AUTH_PLUGIN_NACOS_TOKEN_SECRET_KEY=TWFsbDRqTWFsbDRjbG91ZE1hbGw0ak1hbGw0Y2xvdWRNYWxsNGpNYWxsNGNsb3Vk
       - NACOS_CORE_AUTH_SERVER_IDENTITY_KEY=mall4jmall4jmall4jmall4jmall4jmall4jmall4jmall4j
@@ -93,6 +94,9 @@ services:
     environment:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTIC_PASSWORD=hn02le.34lkdLKD
+      - xpack.security.enabled=true
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./elasticsearch/data:/usr/share/elasticsearch/data
