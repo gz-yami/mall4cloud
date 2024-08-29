@@ -242,6 +242,15 @@ const dataFormSubmit = () => {
       Data.canSubmit = true
       return
     }
+    if (Data.relatedSpu === 1 && !Data.dataForm.spuId) {
+      ElMessage({
+        message: '请选择商品',
+        type: 'warning',
+        duration: 1500
+      })
+      Data.canSubmit = true
+      return
+    }
     const data = JSON.parse(JSON.stringify(Data.dataForm))
     if (!Data.relatedSpu) {
       data.spu = null
