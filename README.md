@@ -14,9 +14,9 @@
 
 这代码有没有文档呀？ 当然有啦，你已经下载了，在doc这个文件夹上，实在不知道，我就给链接出来咯：
 
-gitee：https://gitee.com/gz-yami/mall4cloud/tree/master/doc
+gitee：[https://gitee.com/gz-yami/mall4cloud/tree/master/doc](https://gitee.com/gz-yami/mall4cloud/tree/master/doc)
 
-**开发环境搭建视频（推荐先看下文档再看视频）：https://www.bilibili.com/video/BV1TK411C7aV** 
+**开发环境搭建视频（推荐先看下文档再看视频）：[https://www.bilibili.com/video/BV1TK411C7aV](https://www.bilibili.com/video/BV1TK411C7aV)** 
 
 有声音了。如果视频对你有用，记得点赞投币噢。 
 
@@ -25,33 +25,33 @@ gitee：https://gitee.com/gz-yami/mall4cloud/tree/master/doc
 
 ![阿里代码规约扫描结果](doc/img/readme/阿里代码规约扫描结果.png)
 
-具体目录结构和代码规范，可以查看 https://gitee.com/gz-yami/mall4cloud/tree/master/doc/%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84
+具体目录结构和代码规范，可以查看 [https://gitee.com/gz-yami/mall4cloud/tree/master/doc/%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84](https://gitee.com/gz-yami/mall4cloud/tree/master/doc/%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84)
 
 ## 授权
 
 除开源版本外，本商城还提供商业版本的商城，欲知详情，请访问官网。
 
-商城官网：https://www.mall4j.com
+商城官网：[https://www.mall4j.com](https://www.mall4j.com)
 
-商城使用 AGPLv3 开源，请遵守 AGPLv3 的相关条款，或者联系作者获取商业授权(https://www.mall4j.com)
+商城使用 AGPLv3 开源，请遵守 AGPLv3 的相关条款，或者联系作者获取商业授权([https://www.mall4j.com](https://www.mall4j.com))
 
 ## 项目链接
 
-JAVA后台：https://gitee.com/gz-yami/mall4cloud
+JAVA后台：[https://gitee.com/gz-yami/mall4cloud](https://gitee.com/gz-yami/mall4cloud)
 
-平台端：https://gitee.com/gz-yami/mall4cloud-platform
+平台端：[https://gitee.com/gz-yami/mall4cloud-platform](https://gitee.com/gz-yami/mall4cloud-platform)
 
-商家端：https://gitee.com/gz-yami/mall4cloud-multishop
+商家端：[https://gitee.com/gz-yami/mall4cloud-multishop](https://gitee.com/gz-yami/mall4cloud-multishop)
 
-uni-app：https://gitee.com/gz-yami/mall4cloud-uniapp
+uni-app：[https://gitee.com/gz-yami/mall4cloud-uniapp](https://gitee.com/gz-yami/mall4cloud-uniapp)
 
 ## 演示地址
 
 商业版演示地址：
 
-pc端：https://cloud-pc.mall4j.com
+pc端：[https://cloud-pc.mall4j.com](https://cloud-pc.mall4j.com)
 
-H5端：https://h5.mall4j.com/cloud
+H5端：[https://h5.mall4j.com/cloud](https://h5.mall4j.com/cloud)
 
 商业版小程序演示
 
@@ -171,19 +171,19 @@ mall4cloud
 
 
 ## 提交反馈
-- Mall4j官网 https://www.mall4j.com
+- Mall4j官网 [https://www.mall4j.com](https://www.mall4j.com)
 - mall4cloud开源技术QQ群：561496886
 - 如需购买商业版源码，请联系商务微信
 
-![输入图片说明](doc/img/readme/%E5%95%86%E5%8A%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
+![输入图片说明](https://gitee.com/gz-yami/mall4j/raw/master/screenshot/%E5%95%86%E5%8A%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
 
 
 
 ## springboot版本商城请点击
-https://gitee.com/gz-yami/mall4j
+[https://gitee.com/gz-yami/mall4j](https://gitee.com/gz-yami/mall4j)
 
 ## 你的点赞鼓励，是我们前进的动力~
 ## 你的点赞鼓励，是我们前进的动力~
 ## 你的点赞鼓励，是我们前进的动力~
 
-## 更多信息请查看官网 https://www.mall4j.com
+## 更多信息请查看官网 [https://www.mall4j.com](https://www.mall4j.com)
