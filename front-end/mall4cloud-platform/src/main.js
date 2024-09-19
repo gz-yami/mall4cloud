@@ -7,6 +7,9 @@ import { setupI18n } from '@/lang'
 import 'virtual:svg-icons-register'
 import svgIcon from '@/icons/svg-icon.vue'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
 // import 'default-passive-events'
 // 全局样式
 import '@/styles/index.scss'
@@ -27,6 +30,9 @@ for (const [key, component] of Object.entries(
 app.use(setupI18n)
 // router
 app.use(router)
+// element-plus
+app.use(ElementPlus)
+
 // 状态管理
 setupStore(app)
 // 注册指令(directive)

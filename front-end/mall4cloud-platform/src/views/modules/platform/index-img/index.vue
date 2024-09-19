@@ -31,10 +31,12 @@
         width="300px"
       >
         <template #default="{row}">
-          <img
-            :src="(row.imgUrl).indexOf('http')===-1 ? resourcesUrl + row.imgUrl : row.imgUrl"
-            class="img"
-          >
+          <div class="img-box">
+            <img
+              :src="(row.imgUrl).indexOf('http')===-1 ? resourcesUrl + row.imgUrl : row.imgUrl"
+              class="img"
+            >
+          </div>
         </template>
       </el-table-column>
       <!-- 顺序 -->
@@ -187,11 +189,15 @@ const deleteById = (imgId) => {
 </script>
 <style lang="scss" scoped>
 .page-index-img {
-  .img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 300px;
+  .img-box {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 }
 </style>
