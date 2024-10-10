@@ -212,7 +212,9 @@
               :on-error="onUploadError"
               :on-exceed="onUploadExceedTip"
             >
-              <i class="el-icon-plus" />
+              <el-icon class="el-icon-plus">
+                <Plus />
+              </el-icon>
             </el-upload>
 
             <div class="file-gropu-btn">
