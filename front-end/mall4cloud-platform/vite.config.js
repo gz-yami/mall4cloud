@@ -23,7 +23,13 @@ export default defineConfig(({ command }) => {
       AutoImport({
         imports: [
           'vue',
-          'vue-router'
+          'vue-router',
+          {
+            'element-plus':[
+              ['ElMessage', 'ElMessage'],
+              ['ElMessageBox', 'ElMessageBox'],
+            ]
+          }
         ],
         dirs: [
           'src/hooks/**',
