@@ -42,7 +42,7 @@
         <nacos.version>2.3.2</nacos.version>
 
         <!-- 次要依赖 -->
-        <hutool-version>5.8.28</hutool-version>
+        <hutool-version>5.8.29</hutool-version>
         <mybatis-spring-boot-starter.version>3.0.3</mybatis-spring-boot-starter.version>
         <pagehelper-spring-boot-starter.version>2.1.0</pagehelper-spring-boot-starter.version>
         <captcha.version>1.3.0</captcha.version>
