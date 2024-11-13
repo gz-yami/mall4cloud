@@ -7,6 +7,9 @@ import { setupI18n } from '@/lang'
 import 'virtual:svg-icons-register'
 import svgIcon from '@/icons/svg-icon.vue'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
 // import 'default-passive-events'
 // 全局样式
 import '@/styles/index.scss'
@@ -36,6 +39,9 @@ setupDirective(app)
 app.component('SvgIcon', svgIcon)
 
 app.mount('#app')
+
+// element-plus
+app.use(ElementPlus)
 
 // 自定义moment（js时间组件）
 moment.locale('zh-cn', {
