@@ -16,10 +16,10 @@
         <el-form-item>
           <el-button
             type="primary"
-            icon="el-icon-search"
             @click="getPage()"
           >
-            查询
+            <el-icon><Search /></el-icon>
+            <span>查询</span>
           </el-button>
         </el-form-item>
       </el-form>
