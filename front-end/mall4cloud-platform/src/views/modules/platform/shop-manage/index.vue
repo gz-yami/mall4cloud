@@ -75,10 +75,9 @@
         width="200px"
       >
         <template #default="{row}">
-          <img
-            :src="row.shopLogo?.indexOf('http')===-1 ? resourcesUrl + row.shopLogo : row.shopLogo"
-            class="img"
-          >
+          <div style="width: 100px; height: 100px; overflow: hidden; margin: auto;">
+            <img-show :src="row.shopLogo" />
+          </div>
         </template>
       </el-table-column>
       <!-- 店铺简介 -->
@@ -186,7 +185,6 @@ import AddOrUpdate from './components/add-or-update.vue'
 import accountManage from './components/account-manage.vue'
 
 const Data = reactive({
-  resourcesUrl: import.meta.env.VITE_APP_RESOURCES_URL,
   // 查询的参数
   pageQuery: {
     pageSize: 10,
@@ -208,7 +206,7 @@ const Data = reactive({
   accountManageVisible: false
 })
 
-const { resourcesUrl, pageQuery, searchParam, pageVO, pageLoading, addOrUpdateVisible, accountManageVisible } = toRefs(Data)
+const { pageQuery, searchParam, pageVO, pageLoading, addOrUpdateVisible, accountManageVisible } = toRefs(Data)
 
 onMounted(() => {
   getPage()
@@ -242,13 +240,4 @@ const accountManageHandle = (shopId) => {
 
 </script>
 
-<style lang="scss" scoped>
-.page-shop-manage {
-  .img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 100px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
