@@ -123,12 +123,12 @@ watch(route, (route) => {
 })
 
 const username = ref()
-const password = ref()
+const passwordRef = ref()
 onMounted(() => {
   if (Data.loginForm.username === '') {
     username.value.focus()
   } else if (Data.loginForm.password === '') {
-    password.value.focus()
+    passwordRef.value.focus()
   }
 })
 
@@ -144,7 +144,7 @@ const showPwd = () => {
     Data.passwordType = 'password'
   }
   nextTick(() => {
-    password.value.focus()
+    passwordRef.value.focus()
   })
 }
 
