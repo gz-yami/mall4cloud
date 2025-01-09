@@ -95,7 +95,7 @@ services:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - ELASTICSEARCH_USERNAME=elastic
-      - ELASTIC_PASSWORD=hn02le.34lkdLKD
+      - ELASTIC_PASSWORD=80jpnH4.r5g
       - xpack.security.enabled=true
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
