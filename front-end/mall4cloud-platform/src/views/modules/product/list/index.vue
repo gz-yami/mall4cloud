@@ -27,6 +27,7 @@
           <el-form-item label="平台分类">
             <el-cascader
               v-model="selectedMenu"
+              placeholder="请选择"
               clearable
               expand-trigger="hover"
               :options="categoryList"
@@ -150,10 +151,9 @@
           >
             <template #default="scope">
               <div class="prod-name-box can-edit-item">
-                <img
-                  class="prod-img"
-                  :src="(scope.row.mainImgUrl).indexOf('http') === -1 ? resourcesUrl + scope.row.mainImgUrl : scope.row.mainImgUrl"
-                >
+                <div class="prod-img">
+                  <img-show :src="scope.row.mainImgUrl" />
+                </div>
                 <el-popover
                   placement="top-start"
                   trigger="hover"
@@ -354,7 +354,7 @@ const Data = reactive({
   spuId: null // 商品id
 })
 
-const { resourcesUrl, dataForm, selectedMenu, categoryList, categoryListTreeProps, prodStatusRadio, pageQuery, pageVO, prodDetailsVisible } = toRefs(Data)
+const { dataForm, selectedMenu, categoryList, categoryListTreeProps, prodStatusRadio, pageQuery, pageVO, prodDetailsVisible } = toRefs(Data)
 
 onMounted(() => {
   getDataList()
