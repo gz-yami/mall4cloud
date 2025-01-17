@@ -23,11 +23,13 @@ services:
     network_mode: "host"
     expose:
       - 9000
+      - 9001
     volumes:
       - ./minio/data:/data
     environment:
       - MINIO_ROOT_USER=admin
       - MINIO_ROOT_PASSWORD=80jpnH4.r5g
+      - MINIO_BROWSER_REDIRECT_URL=http://192.168.1.46:9001
 
   mall4cloud-redis:
     image: redis:7.0
