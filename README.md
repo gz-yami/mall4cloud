@@ -175,8 +175,7 @@ mall4cloud
 - mall4cloud开源技术QQ群：561496886
 - 如需购买商业版源码，请联系商务微信
 
-![输入图片说明](https://gitee.com/gz-yami/mall4j/raw/master/screenshot/%E5%95%86%E5%8A%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
-
+![输入图片说明](https://img.mall4j.com/contact.png-v)
 
 
 ## springboot版本商城请点击
