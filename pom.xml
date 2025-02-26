@@ -28,14 +28,14 @@
 
     <properties>
         <project.encoding>UTF-8</project.encoding>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <maven-compiler-plugin.version>3.12.0</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <java.version>17</java.version>
 
         <!-- 核心依赖 -->
-        <spring-boot.version>3.3.0</spring-boot.version>
-        <spring-cloud.version>2023.0.2</spring-cloud.version>
-        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
+        <spring-boot.version>3.4.3</spring-boot.version>
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
 
         <!--分离出这两个东西，是为了能够在 spring cloud alibaba不更新的时候，及时更新-->
         <seata.version>2.0.0</seata.version>
@@ -47,6 +47,8 @@
         <pagehelper-spring-boot-starter.version>2.1.0</pagehelper-spring-boot-starter.version>
         <captcha.version>1.3.0</captcha.version>
         <knife4j.version>4.4.0</knife4j.version>
+        <!--这个是为了兼容springboot 3.4,knife4j更新这个大于2.7的版本就可以考虑删除掉-->
+        <springdoc.version>2.8.4</springdoc.version>
         <elasticsearch.version>7.17.21</elasticsearch.version>
         <minio.version>8.2.2</minio.version>
         <rocketmq-springboot.version>2.3.0</rocketmq-springboot.version>
@@ -159,6 +161,11 @@
                 </exclusions>
             </dependency>
             <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.elasticsearch.client</groupId>
                 <artifactId>elasticsearch-rest-high-level-client</artifactId>
                 <version>${elasticsearch.version}</version>
@@ -215,6 +222,30 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+
+
+    <repositories>
+        <!--阿里云代理-->
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>aliyun-plugin</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
         <finalName>${project.name}</finalName>
         <pluginManagement>
@@ -262,34 +293,4 @@
         </resources>
     </build>
 
-    <profiles>
-        <!--使用 mvn clean package -Pprod 进行激活prod环境的配置，否则激活默认环境-->
-        <profile>
-            <id>dev</id>
-            <properties>
-                <!-- 环境标识，需要与配置文件的名称相对应 -->
-                <profiles.active>dev</profiles.active>
-                <!--https://github.com/alibaba/nacos/issues/3460  默认的命名空间不要去设置namespace -->
-                <nacos.namespace/>
-            </properties>
-            <activation>
-                <!-- 默认环境 -->
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>test</id>
-            <properties>
-                <profiles.active>test</profiles.active>
-                <nacos.namespace>x</nacos.namespace>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <profiles.active>prod</profiles.active>
-                <nacos.namespace>x</nacos.namespace>
-            </properties>
-        </profile>
-    </profiles>
 </project>
