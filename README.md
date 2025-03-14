@@ -41,7 +41,11 @@ JAVA后台：[https://gitee.com/gz-yami/mall4cloud](https://gitee.com/gz-yami/ma
 
 平台端：[https://gitee.com/gz-yami/mall4cloud-platform](https://gitee.com/gz-yami/mall4cloud-platform)
 
+平台端默认账号： admin  密码： 123456
+
 商家端：[https://gitee.com/gz-yami/mall4cloud-multishop](https://gitee.com/gz-yami/mall4cloud-multishop)
+
+商家端默认账号： admin  密码： 123456
 
 uni-app：[https://gitee.com/gz-yami/mall4cloud-uniapp](https://gitee.com/gz-yami/mall4cloud-uniapp)
 
