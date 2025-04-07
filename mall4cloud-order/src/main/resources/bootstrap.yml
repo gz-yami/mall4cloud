@@ -18,8 +18,7 @@ spring:
         file-extension: yml
         username: ${spring.cloud.nacos.discovery.username}
         password: ${spring.cloud.nacos.discovery.password}
-  profiles:
-    active: @profiles.active@
+
 mall4cloud:
   job:
     executor:
