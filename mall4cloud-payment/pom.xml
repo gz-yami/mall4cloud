@@ -57,10 +57,6 @@
             <artifactId>mall4cloud-api-platform</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

@@ -33,9 +33,9 @@
         <java.version>17</java.version>
 
         <!-- 核心依赖 -->
-        <spring-boot.version>3.4.3</spring-boot.version>
-        <spring-cloud.version>2024.0.0</spring-cloud.version>
-        <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
+        <spring-boot.version>3.4.6</spring-boot.version>
+        <spring-cloud.version>2024.0.1</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.3.3</spring-cloud-alibaba.version>
 
         <!--分离出这两个东西，是为了能够在 spring cloud alibaba不更新的时候，及时更新-->
         <seata.version>2.0.0</seata.version>
@@ -55,7 +55,6 @@
         <weixin.version>4.6.0</weixin.version>
         <fastjson.version>1.2.83</fastjson.version>
         <fastjson2.version>2.0.51</fastjson2.version>
-        <aspectjweaver.version>1.9.22.1</aspectjweaver.version>
     </properties>
 
     <dependencyManagement>
@@ -206,12 +205,6 @@
                 <artifactId>fastjson2</artifactId>
                 <version>${fastjson2.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>${aspectjweaver.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
