@@ -19,7 +19,7 @@ services:
     image: registry.cn-hongkong.aliyuncs.com/mall4j-images/minio:RELEASE.2024-04-18T19-09-19Z
     container_name: mall4cloud-minio
     restart: always
-    command: server /data
+    command: server /data --console-address ":9001"
     network_mode: "host"
     expose:
       - 9000
