@@ -35,7 +35,6 @@
     "@uni-ui/code-ui": "1.5.3",
     "big.js": "6.2.1",
     "crypto-js": "4.2.0",
-    "flv.js": "^1.6.2",
     "js-base64": "3.7.5",
     "moment": "2.29.4",
     "uni-crazy-router": "1.1.3",
