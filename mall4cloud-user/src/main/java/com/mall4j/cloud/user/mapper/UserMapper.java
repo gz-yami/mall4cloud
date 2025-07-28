@@ -48,7 +48,7 @@ public interface UserMapper {
 	 * 根据用户id列表，获取用户信息
 	 *
 	 * @param userIds
-	 * @return
+	 * @return 用户信息
 	 */
 	List<UserApiVO> getUserByUserIds(@Param("userIds") List<Long> userIds);
 }

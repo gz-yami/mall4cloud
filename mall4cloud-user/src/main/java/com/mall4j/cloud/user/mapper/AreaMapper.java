@@ -54,7 +54,7 @@ public interface AreaMapper {
 	 * 获取该地址id下的下级地址数量
 	 *
 	 * @param areaId
-	 * @return
+	 * @return 下级地址数量
 	 */
 	int countByAreaId(@Param("areaId") Long areaId);
 
@@ -62,7 +62,7 @@ public interface AreaMapper {
 	 * 根据上级分类id获取下级地址列表
 	 *
 	 * @param pid
-	 * @return
+	 * @return 下级地址列表
 	 */
 	List<AreaVO> listByPid(@Param("pid") Long pid);
 
@@ -75,7 +75,7 @@ public interface AreaMapper {
 
 	/**
 	 * 获取可用的省市区列表
-	 * @return
+	 * @return 省市区列表
 	 */
     List<AreaVO> listAreaOfEnable();
 }
