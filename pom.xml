@@ -39,7 +39,7 @@
 
         <!--分离出这两个东西，是为了能够在 spring cloud alibaba不更新的时候，及时更新-->
         <seata.version>2.0.0</seata.version>
-        <nacos.version>2.3.2</nacos.version>
+        <nacos.version>2.4.3</nacos.version>
 
         <!-- 次要依赖 -->
         <hutool-version>5.8.29</hutool-version>
