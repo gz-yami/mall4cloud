@@ -281,6 +281,7 @@ import * as api from '@/api/product/prod-info'
 import { shopCategoryPage, platformCategoryPage, getShopAttrs } from '@/api/product/category'
 import { onMounted, reactive } from 'vue'
 import Big from 'big.js'
+import { ElMessage } from 'element-plus'
 
 const route = useRoute()
 
