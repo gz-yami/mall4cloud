@@ -67,3 +67,6 @@ docker compose up -d --build
 ![image-20210621131013166](../img/中间件安装/es%20操作mapping.png)
 
 
+8.nacos、canal和seata配置
+
+配置都放在当前目录`mysql/initdb`下面的三个sql里面，如果有自己的mysql注意执行这几个sql
