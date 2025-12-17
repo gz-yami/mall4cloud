@@ -72,7 +72,6 @@ mall4cloud
 │  ├─mall4cloud-common-core  -- 公共模块核心（公共中的公共代码）
 │  ├─mall4cloud-common-database  -- 数据库连接相关公共代码
 │  ├─mall4cloud-common-order  -- 订单相关公共代码
-│  ├─mall4cloud-common-product  -- 商品相关公共代码
 │  ├─mall4cloud-common-rocketmq  -- rocketmq相关公共代码
 │  └─mall4cloud-common-security  -- 安全相关公共代码
 ├─mall4cloud-gateway  -- 网关
