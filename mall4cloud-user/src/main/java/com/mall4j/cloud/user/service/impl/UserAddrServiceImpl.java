@@ -53,7 +53,7 @@ public class UserAddrServiceImpl implements UserAddrService {
     @Override
     public UserAddrVO getUserAddrByUserId(Long addrId, Long userId) {
         // 获取用户默认地址
-        if (addrId == 0) {
+        if (addrId == 0L) {
             return userAddrMapper.getUserDefaultAddrByUserId(userId);
         }
         return userAddrMapper.getByAddrId(addrId,userId);

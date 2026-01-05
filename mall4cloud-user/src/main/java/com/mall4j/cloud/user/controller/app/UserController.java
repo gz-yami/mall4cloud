@@ -1,5 +1,6 @@
 package com.mall4j.cloud.user.controller.app;
 
+import cn.hutool.core.util.StrUtil;
 import com.mall4j.cloud.api.auth.bo.UserInfoInTokenBO;
 import com.mall4j.cloud.api.user.vo.UserApiVO;
 import com.mall4j.cloud.common.response.ResponseEnum;
@@ -62,8 +63,8 @@ public class UserController {
         UserApiVO byUserId = userService.getByUserId(userId);
         User user = new User();
         user.setUserId(userId);
-        user.setNickName(Objects.isNull(userApiVO.getNickName())? byUserId.getNickName() : userApiVO.getNickName());
-        user.setPic(Objects.isNull(userApiVO.getPic())? byUserId.getPic() : userApiVO.getPic());
+        user.setNickName(StrUtil.isBlank(userApiVO.getNickName())? byUserId.getNickName() : userApiVO.getNickName());
+        user.setPic(StrUtil.isBlank(userApiVO.getPic())? byUserId.getPic() : userApiVO.getPic());
         userService.update(user);
         return ServerResponseEntity.success();
     }
