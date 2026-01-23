@@ -64,10 +64,6 @@ public class UserAddrController {
         userAddr.setAddrId(null);
         userAddr.setUserId(userId);
         userAddrService.save(userAddr);
-        // 清除默认地址缓存
-        if (UserAddr.DEFAULT_ADDR.equals(userAddr.getIsDefault())) {
-            userAddrService.removeUserDefaultAddrCacheByUserId(userId);
-        }
         return ServerResponseEntity.success();
     }
 
@@ -86,10 +82,6 @@ public class UserAddrController {
         UserAddr userAddr = BeanUtil.map(userAddrDTO, UserAddr.class);
         userAddr.setUserId(userId);
         userAddrService.update(userAddr);
-        // 清除默认地址缓存
-        if (userAddr.getIsDefault().equals(UserAddr.DEFAULT_ADDR)) {
-            userAddrService.removeUserDefaultAddrCacheByUserId(userId);
-        }
         return ServerResponseEntity.success();
     }
 

@@ -51,11 +51,4 @@ public interface UserAddrService {
      * @return 数量
      */
     int countByUserId(Long userId);
-
-
-    /**
-     * 移除用户默认地址的缓存
-     * @param userId 用户id
-     */
-    void removeUserDefaultAddrCacheByUserId(Long userId);
 }

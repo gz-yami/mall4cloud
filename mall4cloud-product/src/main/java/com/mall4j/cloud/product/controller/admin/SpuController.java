@@ -92,7 +92,7 @@ public class SpuController {
     @Operation(summary = "更新spu信息" , description = "更新spu信息")
     public ServerResponseEntity<Void> update(@Valid @RequestBody SpuDTO spuDTO) {
         checkSaveOrUpdateInfo(spuDTO);
-        List<Long> skuIds = spuDTO.getSkuList().stream().filter(sku -> Objects.nonNull(sku.getSkuId())).map(SkuDTO::getSkuId).collect(Collectors.toList());
+        List<Long> skuIds = spuDTO.getSkuList().stream().map(SkuDTO::getSkuId).filter(skuId -> Objects.nonNull(skuId)).collect(Collectors.toList());
         spuService.update(spuDTO);
         // 清除缓存
         spuService.removeSpuCacheBySpuId(spuDTO.getSpuId());

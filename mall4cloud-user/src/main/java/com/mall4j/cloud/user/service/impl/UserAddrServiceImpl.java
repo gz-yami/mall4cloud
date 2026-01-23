@@ -64,9 +64,4 @@ public class UserAddrServiceImpl implements UserAddrService {
         return userAddrMapper.countByUserId(userId);
     }
 
-    @Override
-    @CacheEvict(cacheNames = UserCacheNames.USER_DEFAULT_ADDR, key = "#userId")
-    public void removeUserDefaultAddrCacheByUserId(Long userId) {
-
-    }
 }
