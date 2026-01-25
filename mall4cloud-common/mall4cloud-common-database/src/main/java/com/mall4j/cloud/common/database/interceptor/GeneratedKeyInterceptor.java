@@ -78,37 +78,52 @@ public class GeneratedKeyInterceptor implements Interceptor {
         // 找数据库中的对象
         Object dbObject = findDbObject(parameter);
 
+        //这里如果批量插入只有list传递参数dbObject为null不会提前退出吗 list中的实体类的id还没有生成
         if (dbObject == null) {
             return invocation.proceed();
         }
 
         // 插入
-        if (mappedStatement.getId().contains(INSERT) || mappedStatement.getId().contains(SAVE)){
-            generatedKey(dbObject);
+        if (mappedStatement.getId().contains(INSERT) || mappedStatement.getId().contains(SAVE)) {
+            if (dbObject instanceof BaseModel) {
+                generatedKey(dbObject);
+            }
         }
         // 批量插入
-        else if (mappedStatement.getId().contains(BATCH_INSERT) || mappedStatement.getId().contains(BATCH_SAVE)){
-            // 获取批量查询的参数并生成主键
-            if (parameter instanceof HashMap){
-                Object list = ((Map)parameter).get("list");
-                if (list instanceof ArrayList) {
-                    for (Object o : (ArrayList) list) {
-                        generatedKey(dbObject);
+        else if (mappedStatement.getId().contains(BATCH_INSERT) || mappedStatement.getId().contains(BATCH_SAVE)) {
+            if (parameter instanceof HashMap) {
+                //insert函数可能通过@Param指定不同的名字 通过“list” 可能会找不到list
+                //可以考虑通过类型来判断获取list类型
+//                if (list instanceof ArrayList) {
+//                    for (Object o : (ArrayList) list) {
+//                        generatedKey(dbObject);  //为什么要对dbObject调用generatedKey呢 不应该对list中的每一个baseModel调用吗
+//                    }
+//                }
+                //dbObject不仅可能是baseModel类也可能是List
+                if (dbObject instanceof ArrayList<?> arrayList) {
+                    if (!arrayList.isEmpty()) {
+                        Object firstObject = arrayList.get(0);
+                        if (findDbObject(firstObject) != null) {
+                            for (Object o : arrayList) {
+                                generatedKey(o);
+                            }
+                        }
                     }
                 }
             }
         }
-
         return invocation.proceed();
     }
 
-    protected BaseModel findDbObject(Object parameterObj) {
+    //不止返回baseModel 将可能的list也进行返回而不是通过“list”名称查找map中的潜在list类型参数
+    //TODO 但是如果存在多个list如何解决 但是远来的代码中也存在这个问题只能找到map中的一个baseModel类型 可能是一个无需考虑的问题
+    protected Object findDbObject(Object parameterObj) {
         if (parameterObj instanceof BaseModel) {
-            return  (BaseModel)parameterObj;
+            return parameterObj;
         } else if (parameterObj instanceof Map) {
             for (Object val : ((Map<?, ?>) parameterObj).values()) {
-                if (val instanceof BaseModel) {
-                    return  (BaseModel)val;
+                if (val instanceof BaseModel || val instanceof ArrayList<?>) {
+                    return val;
                 }
             }
         }
