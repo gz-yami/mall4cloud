@@ -177,9 +177,7 @@ mall4cloud
 ## 提交反馈
 - Mall4j官网 [https://www.mall4j.com](https://www.mall4j.com)
 - mall4cloud开源技术QQ群：561496886
-- 如需购买商业版源码，请联系商务微信
-
-![输入图片说明](https://img.mall4j.com/contact.png-v)
+- 如需购买商业版源码，请联系Mall4j官网
 
 
 ## springboot版本商城请点击
