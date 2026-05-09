@@ -68,12 +68,11 @@ H5端：[https://h5.mall4j.com/cloud](https://h5.mall4j.com/cloud)
 ![img](./doc/img/%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%92%8C%E8%A7%84%E8%8C%83/%E5%BA%94%E7%94%A8%E5%88%86%E5%B1%82.png)
 
 - VO（View Object）：显示层对象，通常是 Web 向模板渲染引擎层传输的对象。
-- DTO（Data Transfer Object）：数据传输对象，前端像后台进行传输的对象，类似于param。
+- DTO（Data Transfer Object）：数据传输对象，前端向后台进行传输的对象，类似于param。
 - BO（Business Object）：业务对象，内部业务对象，只在内部传递，不对外进行传递。
 - Model：模型层，此对象与数据库表结构一一对应，通过 Mapper 层向上传输数据源对象。
 - Controller：主要是对外部访问控制进行转发，各类基本参数校验，或者不复用的业务简单处理等。为了简单起见，一些与事务无关的代码也在这里编写。
 - FeignClient：由于微服务之间存在互相调用，这里是内部请求的接口。
-- Controller：主要是对内部访问控制进行转发，各类基本参数校验，或者不复用的业务简单处理等。为了简单起见，一些与事务无关的代码也在这里编写。
 - Service 层：相对具体的业务逻辑服务层。
 - Manager 层：通用业务处理层，它有如下特征：
   - 1） 对第三方平台封装的层，预处理返回结果及转化异常信息，适配上层接口。
