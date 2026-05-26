@@ -1,7 +1,7 @@
 {
   "easycom": {
 		"custom":{
-    	"^w-(.*)": "@uni-ui/code-ui/components/w-$1/index.vue"//二维码条形码的配置
+    	"^w-(.*)": "@uni-ui/code-ui/components/w-$1/index.vue"
 		}
   },
   "pages": [
@@ -166,8 +166,7 @@
         "iconPath": "/static/tabbar/my.png",
         "selectedIconPath": "/static/tabbar/my-r.png"
       }
-    ],
-    "backgroundColor": ""
+    ]
   },
   "globalStyle": {
     "navigationBarTextStyle": "black",
