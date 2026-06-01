@@ -47,7 +47,7 @@
         <pagehelper-spring-boot-starter.version>2.1.1</pagehelper-spring-boot-starter.version>
         <captcha.version>1.3.0</captcha.version>
         <knife4j.version>4.5.0</knife4j.version>
-        <!--这个是为了兼容springboot 3.4,knife4j更新这个大于2.7的版本就可以考虑删除掉-->
+        <!--这个是为了兼容springboot 新版,knife4j更新这个大于2.7的版本就可以考虑删除掉-->
         <springdoc.version>3.0.2</springdoc.version>
         <elasticsearch.version>7.17.21</elasticsearch.version>
         <minio.version>8.2.2</minio.version>
