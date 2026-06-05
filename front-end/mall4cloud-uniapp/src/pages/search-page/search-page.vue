@@ -126,8 +126,9 @@ const getHotSearchList = () => {
      * 搜索店铺/商品(跳转到搜索列表页)
      */
 const toSearchListPage = () => {
+  const keyword = Data.searchKeyword ? Data.searchKeyword.trim() : ''
   // 判断搜索框是否为空
-  if (!Data.searchKeyword || !Data.searchKeyword.trim()) {
+  if (!keyword) {
     uni.showToast({
       title: '请输入关键字',
       icon: 'none'
@@ -136,8 +137,9 @@ const toSearchListPage = () => {
   }
   let recentSearchHistory = uni.getStorageSync('cloudRecentSearchHistory') || []
   // 过滤掉重复的搜索关键词
-  recentSearchHistory = recentSearchHistory.filter(item => item !== Data.searchKeyword)
-  recentSearchHistory.unshift(Data.searchKeyword)
+  recentSearchHistory = recentSearchHistory.filter(item => item !== keyword)
+  recentSearchHistory.unshift(keyword)
+  // 保留最近 10 条搜索历史
   if (recentSearchHistory.length > 10) {
     recentSearchHistory.pop()
   }
@@ -145,7 +147,7 @@ const toSearchListPage = () => {
   uni.setStorageSync('cloudRecentSearchHistory', recentSearchHistory)
   // 跳转到搜索列表页
   uni.redirectTo({
-    url: '/pages/search-list/search-list?keyword=' + Data.searchKeyword
+    url: '/pages/search-list/search-list?keyword=' + keyword
   })
 }
 
