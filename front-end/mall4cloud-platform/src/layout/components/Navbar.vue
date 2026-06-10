@@ -59,9 +59,7 @@
 
 <script setup>
 import { ElMessageBox } from 'element-plus'
-// import UpdatePassword from '@/components/update-password/index.vue'
 
-const resourcesUrl = import.meta.env.VITE_APP_RESOURCES_URL
 const webConfigStore = useWebConfigStore()
 const webConfig = computed(() => webConfigStore.webConfig)
 
