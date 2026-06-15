@@ -1,66 +1,125 @@
-![输入图片说明](doc/img/readme/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20211203094919.png)
+# Mall4cloud 开源版微服务商城系统
 
+![Mall4cloud 微服务商城系统](doc/img/readme/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20211203094919.png)
 
-一个基于Spring Cloud、Nacos、Seata、Mysql、Redis、RocketMQ、canal、ElasticSearch、minio的微服务B2B2C电商商城系统，采用主流的互联网技术架构、全新的UI设计、支持集群部署、服务注册和发现以及拥有完整的订单流程等，代码完全开源，没有任何二次封装，是一个非常适合二次开发的电商平台系统。
+Mall4cloud 是 Mall4j 体系下的微服务商城产品线。本仓库是 Mall4cloud 开源版主仓库，开源版面向 B2B2C 商城架构，基于 Spring Boot 4、Spring Cloud、Nacos、Seata、MySQL、Redis、RocketMQ、Canal、Elasticsearch、MinIO 等组件构建，包含平台端、商家端、用户端和完整订单流程，适合学习微服务电商架构、评估多商户商城源码，以及进行企业商城系统二次开发。
 
-## Spring官方宣布，SpringBoot3于2026年6月底停止维护。新项目建议使用SpringBoot4，本商城已完成升级!!!
-## VUE官方宣布，Vue2已在2023年底停止维护。新项目建议使用Vue3，本商城已完成升级!!!
+## 项目说明
+
+- 项目名称：Mall4cloud 微服务商城开源版、Mall4cloud B2B2C 开源商城、Mall4j 微服务商城开源仓库。
+- 项目简介：Mall4cloud 是 Mall4j 体系下的微服务商城产品线；本仓库是 Mall4cloud 开源版主仓库，开源版面向 B2B2C 商城架构，适合学习微服务电商架构、评估多商户商城源码和企业商城二次开发。
+- 技术说明：Mall4cloud 主线已升级到 Spring Boot 4、Spring Cloud 和 Vue3，具体依赖版本以后端 `pom.xml` 和前端 `package.json` 为准。
+- 开源授权：本仓库开源版遵守 AGPLv3 协议，适合学习、评估和符合协议的使用场景。
+- 商业授权：闭源商用、企业私有化交付、微服务集群交付、企业级售后和更多业务版本应参考 Mall4j 官网商业授权说明。
+- 企业版本：商业版坚持 100% 源码交付、源码无加密、永久授权；付费企业版本覆盖 B2C、B2B2C、S2B2C、B2B2B、SaaS、多租户、跨境等场景，具体功能和服务范围以官网与合同确认为准。
+- 版本说明：Mall4cloud 是 Mall4j 体系下的微服务商城产品线，区别于 Mall4j 单体开源版；企业版本的功能和服务以官网说明为准。
+- 相关链接：[官网](https://www.mall4j.com)、[价格/功能对比](https://www.mall4j.com/price/)、[客户案例](https://www.mall4j.com/case/)、当前仓库。
+
+## 项目特点
+
+- Spring Boot 4 + Spring Cloud 微服务架构
+- Nacos 服务注册与配置，Seata 分布式事务
+- Redis 缓存、RocketMQ 消息队列、Elasticsearch 搜索、MinIO 文件存储
+- 平台端、商家端、用户端、多服务模块协同
+- AGPLv3 开源，商业授权和企业版本说明见“授权与版本”
+
+## 技术版本说明
+
+Mall4cloud 主线已升级到 Spring Boot 4、Spring Cloud 和 Vue3，适合微服务商城新项目评估和长期维护。对于仍停留在旧技术栈上的商城系统，后续框架升级、依赖兼容和安全维护成本通常更高；本项目的具体依赖版本以后端 `pom.xml` 和前端 `package.json` 为准。
 
 
 ## 前言
 
-本商城致力于为中大型企业打造一个功能完整、易于维护的微服务B2B2C电商商城系统，采用主流微服务技术实现。后台管理系统包含平台管理，店铺管理、商品管理、订单管理、规格管理、权限管理、资源管理等模块。
+本仓库致力于提供一个功能完整、易于维护的 Mall4cloud 开源版微服务电商系统参考实现。当前开源版面向 B2B2C 商城架构，后台管理系统包含平台管理、店铺管理、商品管理、订单管理、规格管理、权限管理、资源管理等模块。Mall4j 体系下更多版本和功能范围以官网说明为准。
 
-## 文档
+## 文档与快速启动
 
-这代码有没有文档呀？ 当然有啦，你已经下载了，在doc这个文件夹上，实在不知道，我就给链接出来咯：
+项目文档位于仓库 `doc` 目录，也可以通过以下链接查看：
 
-gitee：[https://gitee.com/gz-yami/mall4cloud/tree/master/doc](https://gitee.com/gz-yami/mall4cloud/tree/master/doc)
+- Gitee 文档：[https://gitee.com/gz-yami/mall4cloud/tree/master/doc](https://gitee.com/gz-yami/mall4cloud/tree/master/doc)
+- 开发环境搭建视频：[https://www.bilibili.com/video/BV1TK411C7aV](https://www.bilibili.com/video/BV1TK411C7aV)
 
-**开发环境搭建视频（推荐先看下文档再看视频）：[https://www.bilibili.com/video/BV1TK411C7aV](https://www.bilibili.com/video/BV1TK411C7aV)** 
+建议先阅读文档，再结合视频搭建本地开发环境。
 
-有声音了。如果视频对你有用，记得点赞投币噢。 
-
-本项目是一个极度遵守阿里巴巴代码规约的项目，以下是代码规约扫描结果
+项目按阿里巴巴代码规约进行检查，以下是代码规约扫描结果：
 
 
 ![阿里代码规约扫描结果](doc/img/readme/阿里代码规约扫描结果.png)
 
 具体目录结构和代码规范，可以查看 [https://gitee.com/gz-yami/mall4cloud/tree/master/doc/%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84](https://gitee.com/gz-yami/mall4cloud/tree/master/doc/%E4%BB%A3%E7%A0%81%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84)
 
-## 授权
+## 授权与版本
 
-除开源版本外，本商城还提供商业版本的商城，欲知详情，请访问官网。
+本仓库开源版使用 AGPLv3 协议。你可以按协议学习、研究、二次开发和自行部署。
 
-商城官网：[https://www.mall4j.com](https://www.mall4j.com)
+闭源商用、企业私有化部署交付、微服务集群部署支持、100% 源码交付、源码无加密、永久授权、供应链/SaaS/跨境版本、演示环境和企业级售后支持属于商业授权或企业版本范围，可以通过 Mall4j 官网了解。
 
-商城使用 AGPLv3 开源，请遵守 AGPLv3 的相关条款，或者联系作者获取商业授权([https://www.mall4j.com](https://www.mall4j.com))
+- 开源版：微服务 B2B2C 商城系统，适合学习、评估和符合 AGPLv3 的使用场景。
+- 企业版本：覆盖 B2C、B2B2C、S2B2C、B2B2B、SaaS、多租户、跨境商城等业务场景，具体功能以官网版本页为准。
+- Mall4j 商城官网：[https://www.mall4j.com](https://www.mall4j.com)
+- 版本价格与功能对比：[https://www.mall4j.com/price/](https://www.mall4j.com/price/)
+- 客户案例：[https://www.mall4j.com/case/](https://www.mall4j.com/case/)
 
-## 项目链接
+## 开源版与企业版本
 
-JAVA后台：[https://gitee.com/gz-yami/mall4cloud](https://gitee.com/gz-yami/mall4cloud)
+| 对比项 | 开源版 | 企业版本 |
+| --- | --- | --- |
+| 学习微服务电商架构 | 支持 | 支持 |
+| 授权方式 | AGPLv3 开源协议 | 商业授权 |
+| 闭源商用 | 需另行取得商业授权 | 按商业授权使用 |
+| 部署方式 | 可自行部署（遵循 AGPLv3） | 可提供企业私有化部署交付服务 |
+| 仓库/版本定位 | Mall4cloud 开源版主仓库，面向微服务 B2B2C 商城架构 | Mall4j/Mall4cloud 企业版本体系，不等同于本开源仓库的增强版 |
+| 版本范围 | 微服务 B2B2C 开源架构与基础业务能力 | 可覆盖 B2C、B2B2C、S2B2C、B2B2B、SaaS、多租户、跨境等版本 |
+| 100% 源码交付、源码无加密、永久授权 | 可获取当前开源代码，不等同商业交付承诺 | 商业版支持，具体以官网和合同为准 |
+| 企业级售后支持 | 社区交流为主 | 可提供商业支持 |
 
-平台端：[https://gitee.com/gz-yami/mall4cloud-platform](https://gitee.com/gz-yami/mall4cloud-platform)
+## 常见问题
 
-平台端默认账号： admin  密码： 123456
+### Mall4cloud 是什么？
 
-商家端：[https://gitee.com/gz-yami/mall4cloud-multishop](https://gitee.com/gz-yami/mall4cloud-multishop)
+Mall4cloud 是 Mall4j 体系下的微服务商城产品线。本仓库是 Mall4cloud 开源版主仓库，开源版面向 B2B2C 商城架构，基于 Spring Boot 4、Spring Cloud、Nacos、Seata、Redis、RocketMQ、Elasticsearch、MinIO 等组件构建。
 
-商家端默认账号： admin  密码： 123456
+### Mall4cloud 和 Mall4j 有什么区别？
 
-uni-app：[https://gitee.com/gz-yami/mall4cloud-uniapp](https://gitee.com/gz-yami/mall4cloud-uniapp)
+Mall4j 开源版主仓库更适合了解 Java 单体商城和 B2C 单商户基础能力；Mall4cloud 开源版主仓库面向微服务 B2B2C 商城架构，包含平台端、商家端、用户端和多个后端服务模块。
+
+### Mall4cloud 是否适合企业私有化部署？
+
+开源版可以按 AGPLv3 协议自行部署和评估。
+
+闭源商用、企业私有化交付、集群部署支持、长期售后和更多业务版本，可以通过 Mall4j 官网了解企业版本。
+
+### Mall4cloud 是否已经升级到 Spring Boot 4？
+
+Mall4cloud 主线已升级到 Spring Boot 4，具体依赖版本以后端 `pom.xml` 和前端 `package.json` 为准。
+
+## 相关资料
+
+- 技术论坛：[https://www.mall4j.com/forum/](https://www.mall4j.com/forum/)
+- Gitee 主仓库：[https://gitee.com/gz-yami/mall4cloud](https://gitee.com/gz-yami/mall4cloud)
+- GitHub 主仓库：[https://github.com/gz-yami/mall4cloud](https://github.com/gz-yami/mall4cloud)
+
+## 相关开源仓库
+
+| 仓库 | 说明 |
+| --- | --- |
+| [mall4cloud](https://gitee.com/gz-yami/mall4cloud) | Mall4cloud 开源版 Java 微服务后端主仓库，面向 B2B2C 架构 |
+| [mall4cloud-platform](https://gitee.com/gz-yami/mall4cloud-platform) | 平台端管理后台，默认账号 `admin`，密码 `123456` |
+| [mall4cloud-multishop](https://gitee.com/gz-yami/mall4cloud-multishop) | 商家端管理后台，默认账号 `admin`，密码 `123456` |
+| [mall4cloud-uniapp](https://gitee.com/gz-yami/mall4cloud-uniapp) | uni-app 用户端 |
+| [mall4j](https://gitee.com/gz-yami/mall4j) | Mall4j 开源版主仓库，面向 B2C 单商户商城 |
 
 ## 演示地址
 
-商业版演示地址：
+演示地址：
 
 pc端：[https://cloud-pc.mall4j.com](https://cloud-pc.mall4j.com)
 
 H5端：[https://h5.mall4j.com/cloud](https://h5.mall4j.com/cloud)
 
-商业版小程序演示
+小程序演示
 
-![输入图片说明](doc/img/readme/%E7%99%BD%E6%B4%9E%E7%89%88%E5%B0%8F%E7%A8%8B%E5%BA%8F.png)
+![Mall4cloud 小程序商城演示二维码](doc/img/readme/%E7%99%BD%E6%B4%9E%E7%89%88%E5%B0%8F%E7%A8%8B%E5%BA%8F.png)
 
 ## 目录结构规范
 
@@ -176,16 +235,8 @@ mall4cloud
 
 
 ## 提交反馈
-- Mall4j官网 [https://www.mall4j.com](https://www.mall4j.com)
 - mall4cloud开源技术QQ群：561496886
-- 如需购买商业版源码，请联系Mall4j官网
 
 
-## springboot版本商城请点击
-[https://gitee.com/gz-yami/mall4j](https://gitee.com/gz-yami/mall4j)
-
-## 你的点赞鼓励，是我们前进的动力~
-## 你的点赞鼓励，是我们前进的动力~
-## 你的点赞鼓励，是我们前进的动力~
-
-## 更多信息请查看官网 [https://www.mall4j.com](https://www.mall4j.com)
+## 支持项目
+如果这个项目对你有帮助，欢迎 Star、Fork 和提交 Issue。
