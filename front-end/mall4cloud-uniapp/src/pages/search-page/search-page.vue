@@ -147,7 +147,7 @@ const toSearchListPage = () => {
   uni.setStorageSync('cloudRecentSearchHistory', recentSearchHistory)
   // 跳转到搜索列表页
   uni.redirectTo({
-    url: '/pages/search-list/search-list?keyword=' + keyword
+    url: '/pages/search-list/search-list?keyword=' + encodeURIComponent(keyword)
   })
 }
 
