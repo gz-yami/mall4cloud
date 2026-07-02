@@ -218,8 +218,12 @@ const popConfirm = () => {
      * 保存地址
      */
 const saveAddress = () => {
+  const consignee = Data.consignee ? Data.consignee.trim() : ''
+  const mobile = Data.mobile ? Data.mobile.trim() : ''
+  const addr = Data.addr ? Data.addr.trim() : ''
+
   // 数据校验
-  if (!Data.consignee.trim()) {
+  if (!consignee) {
     uni.showToast({
       title: '请输入收件人姓名',
       icon: 'none',
@@ -227,7 +231,7 @@ const saveAddress = () => {
     })
     return
   }
-  if (Data.consignee.length < 2) {
+  if (consignee.length < 2) {
     uni.showToast({
       title: '收件人姓名需在2到20个字符之间',
       icon: 'none',
@@ -235,7 +239,7 @@ const saveAddress = () => {
     })
     return
   }
-  if (!util.checkPhoneNumber(Data.mobile)) {
+  if (!util.checkPhoneNumber(mobile)) {
     uni.showToast({
       title: '请输入正确的手机号',
       icon: 'none',
@@ -251,7 +255,7 @@ const saveAddress = () => {
     })
     return
   }
-  if (!Data.addr.trim() || Data.addr.length < 5) {
+  if (!addr || addr.length < 5) {
     uni.showToast({
       title: '请输入字数在5-50之间的详细地址',
       icon: 'none',
@@ -269,15 +273,15 @@ const saveAddress = () => {
     url: '/mall4cloud_user/user_addr',
     method: Data.addrId ? 'PUT' : 'POST',
     data: {
-      addr: Data.addr,
+      addr,
       addrId: Data.addrId,
       area: Data.area,
       areaId: Data.areaId,
       city: Data.city,
       cityId: Data.cityId,
-      consignee: Data.consignee,
+      consignee,
       isDefault: Data.isDefault,
-      mobile: Data.mobile,
+      mobile,
       province: Data.province,
       provinceId: Data.provinceId
     }
