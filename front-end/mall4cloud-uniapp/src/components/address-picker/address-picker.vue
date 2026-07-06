@@ -18,36 +18,46 @@
       <view class="line" />
       <picker-view
         :class="{show: showPicker}"
-        indicator-style="height: 60rpx;"
+        class="region-picker"
+        indicator-style="height: 68rpx;"
         :value="value"
         @change="bindChange"
         @tap.stop="nono"
       >
         <!--省-->
-        <picker-view-column>
+        <picker-view-column class="region-picker-column region-picker-column--province">
           <view
             v-for="(item, pIndex) in provArray"
             :key="pIndex"
+            class="region-picker-item"
           >
-            {{ item.areaName }}
+            <text class="region-picker-text">
+              {{ item.areaName }}
+            </text>
           </view>
         </picker-view-column>
         <!--地级市-->
-        <picker-view-column>
+        <picker-view-column class="region-picker-column region-picker-column--city">
           <view
             v-for="(item, cIndex) in cityArray"
             :key="cIndex"
+            class="region-picker-item"
           >
-            {{ item.areaName }}
+            <text class="region-picker-text">
+              {{ item.areaName }}
+            </text>
           </view>
         </picker-view-column>
         <!--区县-->
-        <picker-view-column>
+        <picker-view-column class="region-picker-column region-picker-column--area">
           <view
             v-for="(item, aIndex) in areaArray"
             :key="aIndex"
+            class="region-picker-item"
           >
-            {{ item.areaName }}
+            <text class="region-picker-text">
+              {{ item.areaName }}
+            </text>
           </view>
         </picker-view-column>
       </picker-view>
@@ -242,6 +252,47 @@ picker-view-column view {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.region-picker {
+  background-color: white;
+  padding: 0;
+  width: 100%;
+  height: 476rpx;
+  top: 90rpx;
+  position: absolute;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+.region-picker-column--province {
+  flex: 0 0 34%;
+}
+.region-picker-column--city {
+  flex: 0 0 26%;
+}
+.region-picker-column--area {
+  flex: 0 0 40%;
+}
+.region-picker-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 68rpx;
+  padding: 0 8rpx;
+  box-sizing: border-box;
+  font-size: 26rpx;
+  color: #333;
+  text-align: center;
+  overflow: visible;
+}
+.region-picker-text {
+  display: -webkit-box;
+  overflow: hidden;
+  width: 100%;
+  line-height: 30rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .right-bt {

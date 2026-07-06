@@ -258,5 +258,7 @@ const clearSearchInfo = () => {
 </script>
 
 <style lang="scss" scoped>
-
+.el-select {
+  width: 192px;
+}
 </style>

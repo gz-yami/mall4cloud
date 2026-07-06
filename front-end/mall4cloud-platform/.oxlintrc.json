@@ -1,0 +1,96 @@
+{
+  // 指定 OXLint 配置结构定义，方便编辑器提供配置提示
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  // 合并自动导入生成的全局变量清单，避免把自动导入 API 误判为未定义
+  "extends": ["./.oxlintrc-auto-import.json"],
+  // 启用 eslint 和 vue 插件，检查基础 JavaScript 规则和 Vue 单文件组件脚本
+  "plugins": ["eslint", "vue"],
+  // 启用错误类和可疑类规则分类
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  // 声明浏览器、内建对象和 ES2021 环境，避免环境变量误报
+  "env": {
+    "browser": true,
+    "builtin": true,
+    "es2021": true
+  },
+  // 统一忽略编译产物、自动生成文件和历史兼容组件，避免无意义扫描
+  "ignorePatterns": ["dist/**", "build/**", "src/auto-import/**", "src/components/Verifition/**", "src/icons/iconfont.js"],
+  // 项目级规则
+  "rules": {
+    // 禁止继续使用 var，统一使用 let / const
+    "no-var": "error",
+    // 防止 for 循环计数器方向写反导致死循环
+    "for-direction": "error",
+    // 禁止在块级作用域内声明函数或变量，减少提升带来的歧义
+    "no-inner-declarations": "error",
+    // 允许 console.error 和 console.warn，其余 console 调用保持警告
+    "no-console": [
+      "warn",
+      {
+        "allow": ["error", "warn"]
+      }
+    ],
+    // 未使用变量以警告处理
+    "no-unused-vars": [
+      "warn",
+      {
+        // 所有参数都参与未使用校验
+        "args": "all",
+        // catch 参数暂不强制校验
+        "caughtErrors": "none",
+        // 允许解构剩余参数场景忽略兄弟属性
+        "ignoreRestSiblings": true,
+        // 所有变量都参与未使用校验
+        "vars": "all",
+        // 放行项目里常见的占位参数命名
+        "argsIgnorePattern": "^(rule|value|i|to|from|binding)$"
+      }
+    ],
+    // 关闭变量名遮蔽检查
+    "no-shadow": "off",
+    // 允许短路表达式和三元表达式作为执行语句使用
+    "no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true
+      }
+    ],
+    // 限制最大嵌套层级，避免方法内部逻辑过深
+    "max-depth": ["error", 5],
+    // 限制单个函数最大行数为 200，但忽略空行
+    "max-lines-per-function": [
+      "error",
+      {
+        "max": 200,
+        "skipBlankLines": true
+      }
+    ],
+    // 限制回调嵌套层级，降低异步流程复杂度
+    "max-nested-callbacks": [
+      "error",
+      {
+        "max": 10
+      }
+    ],
+    // 限制函数参数数量，避免接口过度膨胀
+    "max-params": [
+      "error",
+      {
+        "max": 5
+      }
+    ],
+    // 允许 Promise reject 传入空值
+    "prefer-promise-reject-errors": [
+      "error",
+      {
+        "allowEmptyReject": true
+      }
+    ],
+    // 关闭严格等值比较限制
+    "eqeqeq": "off"
+  }
+}

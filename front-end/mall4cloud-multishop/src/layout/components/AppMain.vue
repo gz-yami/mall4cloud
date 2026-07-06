@@ -68,7 +68,16 @@ const isDecorate = computed(() => {
     border-radius: 0;
     box-shadow: none;
     border-top: none;
-
+    // 显式重置卡片内容区布局，保证面包屑始终从左侧开始布局
+    :deep(.el-card__body) {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 0 20px;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
     .breadcrumb-item:last-child span {
       color: #155BD4 !important;
     }

@@ -5,14 +5,42 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import viteCompression from 'vite-plugin-compression'
+import { compression } from 'vite-plugin-compression2'
 
-// eslint
-import eslintPlugin from 'vite-plugin-eslint'
+/**
+ * 解析第三方依赖的分包名称
+ * @param {String} moduleId 模块路径
+ * @returns {String|null} 分包名称
+ */
+function resolveVendorChunkName(moduleId) {
+  // 统一路径分隔符，避免 Windows 和 Linux 构建环境下路径格式不一致。
+  const normalizedModuleId = moduleId.replace(/\\/g, '/')
+
+  // 仅处理第三方依赖，业务代码交给 Vite/Rolldown 默认拆分策略。
+  if (!normalizedModuleId.includes('node_modules')) {
+    return null
+  }
+
+  // 兼容 pnpm 的 .pnpm 物理目录结构，保持依赖分包名称稳定。
+  if (normalizedModuleId.includes('.pnpm/')) {
+    return normalizedModuleId.split('.pnpm/')[1].split('/')[0].toString()
+  }
+
+  // 兼容普通 node_modules 目录结构，避免 CI 安装方式变化导致分包名称异常。
+  if (normalizedModuleId.includes('node_modules/')) {
+    return normalizedModuleId.split('node_modules/')[1].split('/')[0].toString()
+  }
+
+  return 'vendor'
+}
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
   return {
+    define: {
+      // 将 Node 生态依赖中的 global 映射到浏览器标准。
+      global: 'self'
+    },
     plugins: [
       vue(),
       createSvgIconsPlugin({
@@ -23,40 +51,46 @@ export default defineConfig(({ command }) => {
       AutoImport({
         imports: [
           'vue',
-          'vue-router'
+          'vue-router',
+          {
+            'element-plus': [
+              ['ElMessage', 'ElMessage'],
+              ['ElMessageBox', 'ElMessageBox']
+            ]
+          }
         ],
-        dirs: [
-          'src/hooks/**',
-          'src/stores/**',
-          'src/utils/**'
-        ],
+        dirs: ['src/hooks/**', 'src/stores/**', 'src/utils/**'],
         resolvers: command === 'build' ? [ElementPlusResolver()] : [],
         dts: 'src/auto-import/imports.d.ts',
+        // 继续输出自动导入的全局变量清单，供 oxlint 兼容消费
         eslintrc: {
-          enabled: false
+          enabled: true,
+          filepath: './.oxlintrc-auto-import.json',
+          globalsPropValue: true
         }
       }),
       // 自动引入组件
       Components({
-        dirs: [
-          'src/components'
-        ],
+        dirs: ['src/components'],
         resolvers: command === 'build' ? [ElementPlusResolver()] : [],
         dts: 'src/auto-import/components.d.ts'
       }),
-      // eslint
-      eslintPlugin({
-        include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']
-      }),
       // 对大于 1k 的文件进行压缩
-      viteCompression({
-        threshold: 1000,
+      compression({
+        threshold: 1024,
+        algorithms: ['gzip']
       })
     ],
     server: {
       host: true,
       port: 9527,
       open: true
+    },
+    css: {
+      lightningcss: {
+        // 兼容历史样式中的 IE hack，交给 Lightning CSS 自动恢复后继续压缩。
+        errorRecovery: true
+      }
     },
     resolve: {
       alias: {
@@ -65,27 +99,32 @@ export default defineConfig(({ command }) => {
       }
     },
     build: {
+      target: ['chrome64', 'firefox67', 'safari11.1', 'edge79'],
       base: './',
-      rollupOptions: {
+      rolldownOptions: {
         // 静态资源分类打包
         output: {
           chunkFileNames: 'static/js/[name]-[hash].js',
           entryFileNames: 'static/js/[name]-[hash].js',
           assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
-          // 静态资源分拆打包
-          manualChunks (id) {
-            if (id.includes('node_modules')) {
-              if (id.toString().indexOf('.pnpm/') !== -1) {
-                return id.toString().split('.pnpm/')[1].split('/')[0].toString();
-              } else if (id.toString().indexOf('node_modules/') !== -1) {
-                return id.toString().split('node_modules/')[1].split('/')[0].toString();
+          // 使用 Rolldown 的 codeSplitting 配置替代 manualChunks，减少 CI 和本地打包差异。
+          codeSplitting: {
+            groups: [
+              {
+                // 动态计算第三方依赖分包名称，延续原有按包拆分缓存策略。
+                name(moduleId) {
+                  return resolveVendorChunkName(moduleId)
+                },
+                // 仅匹配 node_modules 依赖，避免业务模块被归入第三方依赖分包。
+                test: /node_modules[\\/]/
               }
-            }
+            ]
           }
         }
       },
       sourcemap: false,
-      target: 'es2015',
+      // 主构建切换为 oxc 压缩以降低常规产物压缩耗时
+      minify: 'oxc',
       reportCompressedSize: false
     }
   }

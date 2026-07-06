@@ -9,6 +9,8 @@ import svgIcon from '@/icons/svg-icon.vue'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+// 导入Element中文包
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 // import 'default-passive-events'
 // 全局样式
@@ -19,10 +21,15 @@ import '@/permission.js'
 import { setupDirective } from '@/directive'
 import moment from 'moment'
 
-// element-plus 图标
 const app = createApp(App)
-for (const [key, component] of Object.entries(
-  ElementPlusIconsVue)) {
+
+// ========== 提前注册ElementPlus，传入中文locale ==========
+app.use(ElementPlus, {
+  locale: zhCn
+})
+
+// element-plus 图标
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 
@@ -38,10 +45,8 @@ setupDirective(app)
 // svg
 app.component('SvgIcon', svgIcon)
 
+// 挂载放到最后
 app.mount('#app')
-
-// element-plus
-app.use(ElementPlus)
 
 // 自定义moment（js时间组件）
 moment.locale('zh-cn', {
@@ -52,7 +57,6 @@ moment.locale('zh-cn', {
     LL: 'YYYY-MM-DD HH:mm:ss'
   },
   week: {
-    // GB/T 7408-1994《数据元和交换格式·信息交换·日期和时间表示法》与ISO 8601:1988等效
     dow: 1, // 星期一， 是一个星期的第一天
     doy: 4 // 1月4日所在的的一周是一年的第一周
   }

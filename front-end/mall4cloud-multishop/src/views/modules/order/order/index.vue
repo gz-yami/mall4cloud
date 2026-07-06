@@ -1091,5 +1091,12 @@ const changeOrder = (order) => {
   .errortip {
     border-color: #e43130;
   }
+  
+  .el-select {
+    width: 214px;
+    .el-select__wrapper {
+      height: 34px;
+    }
+  }
 }
 </style>

@@ -103,7 +103,7 @@
 import * as api from '@/api/product/category'
 import { reactive } from 'vue'
 
-const emit = defineEmits('getCategorySelected')
+const emit = defineEmits(['getCategorySelected'])
 
 const Data = reactive({
   visible: false,

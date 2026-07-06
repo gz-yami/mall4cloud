@@ -1,5 +1,5 @@
 <script setup>
-import zh from 'element-plus/lib/locale/lang/zh-cn'
+import zh from 'element-plus/es/locale/lang/zh-cn'
 const language = zh
 </script>
 

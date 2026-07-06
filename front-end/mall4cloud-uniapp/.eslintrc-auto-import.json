@@ -110,6 +110,15 @@
     "watchSyncEffect": true,
     "wechat": true,
     "wgs84togcj02": true,
-    "wxqrcode": true
+    "wxqrcode": true,
+    "DirectiveBinding": true,
+    "MaybeRef": true,
+    "MaybeRefOrGetter": true,
+    "Slot": true,
+    "Slots": true,
+    "onWatcherCleanup": true,
+    "useId": true,
+    "useModel": true,
+    "useTemplateRef": true
   }
 }

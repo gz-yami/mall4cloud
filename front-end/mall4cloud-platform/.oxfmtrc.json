@@ -1,0 +1,22 @@
+{
+  // 指定 Oxfmt 配置结构定义，方便编辑器提供配置提示
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  // 统一忽略编译产物、自动生成文件和历史兼容组件，避免格式化无关内容
+  "ignorePatterns": ["dist/**", "build/**", "src/auto-import/**", "src/components/Verifition/**", "src/icons/iconfont.js"],
+  // 单行最大长度统一提升到 200，尽量保留现有项目的长行写法
+  "printWidth": 200,
+  // 缩进统一使用 2 个空格
+  "tabWidth": 2,
+  // 禁用 Tab 缩进，统一改为空格
+  "useTabs": false,
+  // 统一不补分号，保持当前项目风格
+  "semi": false,
+  // 统一使用单引号
+  "singleQuote": true,
+  // Vue / HTML 标签属性统一单条独占一行
+  "singleAttributePerLine": true,
+  // 多行结构不保留尾随逗号，贴合当前项目历史风格
+  "trailingComma": "none",
+  // 行尾统一为 LF，避免跨平台换行差异
+  "endOfLine": "lf"
+}
