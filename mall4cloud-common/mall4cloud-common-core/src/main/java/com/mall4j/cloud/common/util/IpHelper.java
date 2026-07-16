@@ -23,18 +23,21 @@ public class IpHelper {
         }
         HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
         String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
+        if (isUnknown(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
+        if (isUnknown(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
+        if (isUnknown(ip)) {
             ip = request.getRemoteAddr();
         }
         String[] ips = ip.split(",");
         return ips[0].trim();
     }
 
+    private static boolean isUnknown(String ip) {
+        return ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip);
+    }
 
 }

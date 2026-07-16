@@ -14,9 +14,6 @@ public class BooleanUtil {
 	 * @return 是否为true
 	 */
 	public static boolean isTrue(Integer num) {
-		if (num == null) {
-			return false;
-		}
 		return Objects.equals(num, 1);
 	}
 
