@@ -70,9 +70,6 @@ export default {
     isLanding: false,
     // 购物车商品数量
     totalCartCount: 0
-  },
-  methods: {
-
   }
 }
 </script>
