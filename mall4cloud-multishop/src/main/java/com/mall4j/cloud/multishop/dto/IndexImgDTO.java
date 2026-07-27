@@ -1,6 +1,7 @@
 package com.mall4j.cloud.multishop.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -18,7 +19,7 @@ public class IndexImgDTO{
     @Schema(description = "店铺ID" )
     private Long shopId;
 
-    @NotNull(message = "图片不能为空")
+    @NotBlank(message = "图片不能为空")
     @Schema(description = "图片" )
     private String imgUrl;
 

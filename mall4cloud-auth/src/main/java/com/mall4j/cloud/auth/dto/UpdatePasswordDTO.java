@@ -3,7 +3,6 @@ package com.mall4j.cloud.auth.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 /**
  * 更新密码
@@ -17,7 +16,7 @@ public class UpdatePasswordDTO {
 	@Schema(description = "旧密码" , requiredMode = Schema.RequiredMode.REQUIRED)
 	private String oldPassword;
 
-	@NotNull(message = "newPassword NotNull")
+	@NotBlank(message = "newPassword NotBlank")
 	@Schema(description = "新密码" , requiredMode = Schema.RequiredMode.REQUIRED)
 	private String newPassword;
 

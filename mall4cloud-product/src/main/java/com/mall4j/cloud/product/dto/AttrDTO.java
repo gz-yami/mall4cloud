@@ -2,6 +2,7 @@ package com.mall4j.cloud.product.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class AttrDTO{
 	@Schema(description = "店铺id" )
 	private Long shopId;
 
-	@NotNull(message = "属性名称不能为空")
+	@NotBlank(message = "属性名称不能为空")
     @Schema(description = "属性名称" )
     private String name;
 
