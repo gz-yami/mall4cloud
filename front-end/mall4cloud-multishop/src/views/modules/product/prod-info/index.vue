@@ -610,7 +610,6 @@ const skuBackShow = (skus) => {
       skuItem.marketPriceFee = parseFloat(bigActualTotal(parseFloat(skuItem.marketPriceFee), 100)) // 市场价
       skuItem.priceFee = parseFloat(bigActualTotal(parseFloat(skuItem.priceFee), 100)) // 销售价
     })
-    // console.log('计算后skus:', skus)
     skus.forEach((skuItem, i) => {
       Data.flatten[i] = skuItem
     })
