@@ -2,6 +2,7 @@ package com.mall4j.cloud.product.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -23,7 +24,7 @@ public class CategoryDTO{
     @Schema(description = "父ID" )
     private Long parentId;
 
-	@NotNull(message = "分类名称不能为空")
+	@NotBlank(message = "分类名称不能为空")
     @Schema(description = "分类名称" )
     private String name;
 

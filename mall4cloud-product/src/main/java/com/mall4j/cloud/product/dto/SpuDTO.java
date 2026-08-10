@@ -1,6 +1,7 @@
 package com.mall4j.cloud.product.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
@@ -28,18 +29,18 @@ public class SpuDTO{
 	@Schema(description = "店铺分类ID" )
 	private Long shopCategoryId;
 
-	@NotNull(message = "商品名称不能为空")
+	@NotBlank(message = "商品名称不能为空")
 	@Schema(description = "spu名称" )
 	private String name;
 
 	@Schema(description = "卖点" )
 	private String sellingPoint;
 
-	@NotNull(message = "商品轮播图不能为空")
+	@NotBlank(message = "商品轮播图不能为空")
 	@Schema(description = "商品介绍主图 多个图片逗号分隔" )
 	private String imgUrls;
 
-	@NotNull(message = "商品主图不能为空")
+	@NotBlank(message = "商品主图不能为空")
 	@Schema(description = "商品主图" )
 	private String mainImgUrl;
 

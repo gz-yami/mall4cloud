@@ -25,11 +25,11 @@ public class BrandDTO{
     @Schema(description = "品牌描述" )
     private String desc;
 
-	@NotNull(message = "logo图片不能为空")
+	@NotBlank(message = "logo图片不能为空")
     @Schema(description = "品牌logo图片" )
     private String imgUrl;
 
-	@NotNull(message = "首字母不能为空")
+	@NotBlank(message = "首字母不能为空")
     @Schema(description = "检索首字母" )
     private String firstLetter;
 

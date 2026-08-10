@@ -16,7 +16,7 @@ public class UpdateShopPasswordDTO {
 	@Schema(description = "确认密码" , requiredMode = Schema.RequiredMode.REQUIRED)
 	private String confirmPsw;
 
-	@NotNull(message = "password NotNull")
+	@NotBlank(message = "password NotBlank")
 	@Schema(description = "新密码" , requiredMode = Schema.RequiredMode.REQUIRED)
 	private String password;
 
