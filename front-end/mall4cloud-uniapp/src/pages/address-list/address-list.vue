@@ -90,7 +90,7 @@ const toEditAddress = (addrId) => {
 const addAddress = () => {
   if (Data.addressList.length === 10) {
     uni.showToast({
-      title: $t('addNewAddressTips'),
+      title: '新增地址已达上限(10条)',
       icon: 'none'
     })
   } else {
