@@ -26,10 +26,12 @@ public class CanalListener implements RocketMQListener<String> {
     private CanalGlue canalGlue;
     @Override
     public void onMessage(String message) {
-        Map map = JSON.parseObject(message, Map.class);
-        String table = map.get("table").toString();
-        String database = map.get("database").toString();
-        log.info("canal-database: {}, table: {}, mq message:{}", database, table, message);
+        Map<?, ?> map = JSON.parseObject(message, Map.class);
+        if (map == null || map.get("table") == null || map.get("database") == null) {
+            log.warn("ignore invalid canal message: {}", message);
+            return;
+        }
+        log.info("canal-database: {}, table: {}, mq message:{}", map.get("database"), map.get("table"), message);
         canalGlue.process(message);
     }
 }
