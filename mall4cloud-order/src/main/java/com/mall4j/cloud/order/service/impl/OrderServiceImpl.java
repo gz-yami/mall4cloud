@@ -255,12 +255,14 @@ public class OrderServiceImpl implements OrderService {
             // 每个店铺生成一个订单
             for (ShopCartOrderVO shopCartOrderDto : shopCartOrders) {
                 Order order = getOrder(userId, mergerOrder.getDvyType(), shopCartOrderDto);
+                List<OrderItem> currentOrderItems = new ArrayList<>();
                 for (ShopCartItemVO shopCartItemVO : shopCartOrderDto.getShopCartItemVO()) {
                     OrderItem orderItem = getOrderItem(order, shopCartItemVO);
+                    currentOrderItems.add(orderItem);
                     orderItems.add(orderItem);
                     shopCartItemIds.add(shopCartItemVO.getCartItemId());
                 }
-                order.setOrderItems(orderItems);
+                order.setOrderItems(currentOrderItems);
                 order.setOrderAddrId(orderAddr.getOrderAddrId());
                 orders.add(order);
             }
