@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import com.mall4j.cloud.biz.config.MinioTemplate;
 import com.mall4j.cloud.biz.config.OssConfig;
 import com.mall4j.cloud.biz.constant.OssType;
+import com.mall4j.cloud.biz.util.ImageUploadValidator;
 import com.mall4j.cloud.biz.vo.OssVO;
 import com.mall4j.cloud.common.response.ServerResponseEntity;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -82,8 +83,15 @@ public class OssController {
         if (file.isEmpty()) {
             return ServerResponseEntity.success();
         }
+        byte[] content = file.getBytes();
+        String contentType;
+        try {
+            contentType = ImageUploadValidator.validate(content);
+        } catch (IllegalArgumentException e) {
+            return ServerResponseEntity.showFailMsg(e.getMessage());
+        }
         OssVO oss = loadOssVO(new OssVO());
-        minioTemplate.uploadMinio(file.getBytes(), oss.getDir() + oss.getFileName(), file.getContentType());
+        minioTemplate.uploadMinio(content, oss.getDir() + oss.getFileName(), contentType);
         return ServerResponseEntity.success(oss);
     }
 
