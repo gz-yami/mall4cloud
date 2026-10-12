@@ -161,7 +161,7 @@
     </select>
     <update id="updateByToPaySuccess">
         update `order` set `status` = 2,is_payed =1,update_time=NOW(),pay_time=NOW()
-        where order_id in
+        where is_payed = 0 and `status` in (1, 6) and order_id in
         <foreach collection="orderIds" item="orderId" separator="," open="(" close=")">
             #{orderId}
         </foreach>

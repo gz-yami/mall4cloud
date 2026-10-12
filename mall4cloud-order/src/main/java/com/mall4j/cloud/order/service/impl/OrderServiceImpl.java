@@ -158,7 +158,8 @@ public class OrderServiceImpl implements OrderService {
         List<OrderStatusBO> ordersStatus = orderMapper.getOrdersStatus(orderIds);
         List<Long> cancelOrderIds = new ArrayList<>();
         for (OrderStatusBO orderStatusBO : ordersStatus) {
-            if (orderStatusBO.getStatus() != null || !Objects.equals(orderStatusBO.getStatus(), OrderStatus.CLOSE.value()))  {
+            // 仅待付款订单可超时/取消；已关闭或已支付的不再处理
+            if (Objects.equals(orderStatusBO.getStatus(), OrderStatus.UNPAY.value())) {
                 cancelOrderIds.add(orderStatusBO.getOrderId());
             }
         }
@@ -166,8 +167,8 @@ public class OrderServiceImpl implements OrderService {
             return;
         }
         orderMapper.cancelOrders(cancelOrderIds);
-        // 解锁库存状态
-        SendStatus stockSendStatus = stockMqTemplate.syncSend(RocketMqConstant.STOCK_UNLOCK_TOPIC, new GenericMessage<>(orderIds)).getSendStatus();
+        // 只对真正进入取消流程的订单解锁库存（cancelOrders SQL 另有 is_payed=0 条件）
+        SendStatus stockSendStatus = stockMqTemplate.syncSend(RocketMqConstant.STOCK_UNLOCK_TOPIC, new GenericMessage<>(cancelOrderIds)).getSendStatus();
         if (!Objects.equals(stockSendStatus,SendStatus.SEND_OK)) {
             // 消息发不出去就抛异常，发的出去无所谓
             throw new Mall4cloudException(ResponseEnum.EXCEPTION);
@@ -255,12 +256,15 @@ public class OrderServiceImpl implements OrderService {
             // 每个店铺生成一个订单
             for (ShopCartOrderVO shopCartOrderDto : shopCartOrders) {
                 Order order = getOrder(userId, mergerOrder.getDvyType(), shopCartOrderDto);
+                // 每个店铺订单使用独立订单项列表，避免多店铺拆单时共享累计 list 导致重复锁库存
+                List<OrderItem> currentOrderItems = new ArrayList<>();
                 for (ShopCartItemVO shopCartItemVO : shopCartOrderDto.getShopCartItemVO()) {
                     OrderItem orderItem = getOrderItem(order, shopCartItemVO);
+                    currentOrderItems.add(orderItem);
                     orderItems.add(orderItem);
                     shopCartItemIds.add(shopCartItemVO.getCartItemId());
                 }
-                order.setOrderItems(orderItems);
+                order.setOrderItems(currentOrderItems);
                 order.setOrderAddrId(orderAddr.getOrderAddrId());
                 orders.add(order);
             }
