@@ -82,8 +82,7 @@
     <update id="reduceActualStockByCancelOrder">
         <foreach collection="skuWithStocks" item="skuWithStock" separator=";">
             update spu_extension
-            set `lock_stock` = `lock_stock` - #{skuWithStock.count},
-            `actual_stock` = `actual_stock` - #{skuWithStock.count},
+            set `actual_stock` = `actual_stock` - #{skuWithStock.count},
             `stock` = `stock` - #{skuWithStock.count},
             `sale_num` = `sale_num` + #{skuWithStock.count}
             where spu_id = #{skuWithStock.spuId}

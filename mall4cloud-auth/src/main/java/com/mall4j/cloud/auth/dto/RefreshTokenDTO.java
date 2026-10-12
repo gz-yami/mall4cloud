@@ -29,7 +29,7 @@ public class RefreshTokenDTO {
 
 	@Override
 	public String toString() {
-		return "RefreshTokenDTO{" + "refreshToken='" + refreshToken + '\'' + '}';
+		return "RefreshTokenDTO{" + "refreshToken='***'" + '}';
 	}
 
 }

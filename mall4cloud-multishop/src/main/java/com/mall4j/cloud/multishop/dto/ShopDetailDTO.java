@@ -163,7 +163,7 @@ public class ShopDetailDTO{
 				", identityCardFront='" + identityCardFront + '\'' +
 				", identityCardLater='" + identityCardLater + '\'' +
 				", username='" + username + '\'' +
-				", password='" + password + '\'' +
+				", password='***'" +
 				", mobileBackgroundPic='" + mobileBackgroundPic + '\'' +
 				'}';
 	}

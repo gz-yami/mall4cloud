@@ -165,7 +165,7 @@ public class ShopDetailVO extends BaseVO{
 				", identityCardLater='" + identityCardLater + '\'' +
 				", mobileBackgroundPic='" + mobileBackgroundPic + '\'' +
 				", username='" + username + '\'' +
-				", password='" + password + '\'' +
+				", password='***'" +
 				'}';
 	}
 }

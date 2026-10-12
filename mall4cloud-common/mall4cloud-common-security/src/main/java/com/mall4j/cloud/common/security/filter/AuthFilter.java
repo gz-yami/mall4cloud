@@ -39,6 +39,8 @@ public class AuthFilter implements Filter {
 
 	private static Logger logger = LoggerFactory.getLogger(AuthFilter.class);
 
+	private final AntPathMatcher pathMatcher = new AntPathMatcher();
+
 	@Autowired
 	private AuthConfigAdapter authConfigAdapter;
 
@@ -76,7 +78,6 @@ public class AuthFilter implements Filter {
 		// 如果匹配不需要授权的路径，就不需要校验是否需要授权
 		if (CollectionUtil.isNotEmpty(excludePathPatterns)) {
 			for (String excludePathPattern : excludePathPatterns) {
-				AntPathMatcher pathMatcher = new AntPathMatcher();
 				if (pathMatcher.match(excludePathPattern, req.getRequestURI())) {
 					chain.doFilter(req, resp);
 					return;
@@ -144,11 +145,46 @@ public class AuthFilter implements Filter {
 	}
 
 	/**
+	 * 按 URI 前缀校验 sysType，防止普通用户 token 访问平台/商家接口（越权）。
+	 * /ua/** 已在 exclude 中跳过鉴权，此处不再处理。
+	 */
+	private boolean checkSysTypeByUri(UserInfoInTokenBO userInfoInToken, String uri) {
+		Integer sysType = userInfoInToken.getSysType();
+
+		// 平台端：/platform/** 以及平台服务路径 /sys_config、/sys_user
+		if (pathMatcher.match("/platform/**", uri)
+				|| pathMatcher.match("/sys_config", uri)
+				|| pathMatcher.match("/sys_config/**", uri)
+				|| pathMatcher.match("/sys_user", uri)
+				|| pathMatcher.match("/sys_user/**", uri)) {
+			return Objects.equals(SysTypeEnum.PLATFORM.value(), sysType);
+		}
+
+		// 商家端或平台端：/admin/**、/m/**
+		if (pathMatcher.match("/admin/**", uri) || pathMatcher.match("/m/**", uri)) {
+			return Objects.equals(SysTypeEnum.MULTISHOP.value(), sysType)
+					|| Objects.equals(SysTypeEnum.PLATFORM.value(), sysType);
+		}
+
+		// 用户端：/a/** 仅普通用户
+		if (pathMatcher.match("/a/**", uri)) {
+			return Objects.equals(SysTypeEnum.ORDINARY.value(), sysType);
+		}
+
+		return true;
+	}
+
+	/**
 	 * 用户角色权限校验
 	 * @param uri uri
 	 * @return 是否校验成功
 	 */
 	public boolean checkRbac(UserInfoInTokenBO userInfoInToken, String uri, String method) {
+
+		// 先按路径校验系统类型，再走菜单/按钮权限
+		if (!checkSysTypeByUri(userInfoInToken, uri)) {
+			return false;
+		}
 
 		if (!Objects.equals(SysTypeEnum.PLATFORM.value(), userInfoInToken.getSysType()) && !Objects.equals(SysTypeEnum.MULTISHOP.value(), userInfoInToken.getSysType())) {
 			return true;

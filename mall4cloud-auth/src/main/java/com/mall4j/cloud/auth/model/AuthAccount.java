@@ -134,7 +134,7 @@ public class AuthAccount extends BaseModel {
 		return "AuthAccount{" +
 				"uid=" + uid +
 				", username='" + username + '\'' +
-				", password='" + password + '\'' +
+				", password='***'" +
 				", createIp='" + createIp + '\'' +
 				", status=" + status +
 				", sysType=" + sysType +

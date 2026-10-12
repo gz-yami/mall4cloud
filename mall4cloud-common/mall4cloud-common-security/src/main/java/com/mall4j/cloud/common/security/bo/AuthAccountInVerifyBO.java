@@ -33,7 +33,7 @@ public class AuthAccountInVerifyBO extends UserInfoInTokenBO {
 	@Override
 	public String toString() {
 		return "AuthAccountInVerifyBO{" +
-				"password='" + password + '\'' +
+				"password='***'" +
 				", status=" + status +
 				"} " + super.toString();
 	}

@@ -82,7 +82,7 @@ public class UserRegisterDTO {
 	@Override
 	public String toString() {
 		return "UserRegisterDTO{" +
-				"password='" + password + '\'' +
+				"password='***'" +
 				", img='" + img + '\'' +
 				", nickName='" + nickName + '\'' +
 				", userName='" + userName + '\'' +

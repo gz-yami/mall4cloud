@@ -39,8 +39,8 @@ public class UpdatePasswordDTO {
 	@Override
 	public String toString() {
 		return "UpdatePasswordDTO{" +
-				"oldPassword='" + oldPassword + '\'' +
-				", newPassword='" + newPassword + '\'' +
+				"oldPassword='***'" +
+				", newPassword='***'" +
 				'}';
 	}
 }

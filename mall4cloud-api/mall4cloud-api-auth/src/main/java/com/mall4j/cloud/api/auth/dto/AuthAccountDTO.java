@@ -123,7 +123,7 @@ public class AuthAccountDTO {
     public String toString() {
         return "AuthAccountDTO{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", password='***'" +
                 ", createIp='" + createIp + '\'' +
                 ", status=" + status +
                 ", sysType=" + sysType +

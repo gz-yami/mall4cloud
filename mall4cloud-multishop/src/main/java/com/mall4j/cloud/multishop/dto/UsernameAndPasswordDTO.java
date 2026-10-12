@@ -53,7 +53,7 @@ public class UsernameAndPasswordDTO {
     public String toString() {
         return "UsernameAndPasswordDTO{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", password='***'" +
                 ", shopId='" + shopId +
                 '}';
     }

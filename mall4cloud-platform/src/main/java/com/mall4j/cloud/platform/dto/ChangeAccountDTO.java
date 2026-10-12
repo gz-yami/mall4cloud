@@ -64,7 +64,7 @@ public class ChangeAccountDTO {
         return "ChangeAccountDTO{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", password='***'" +
                 ", status=" + status +
                 '}';
     }

@@ -58,8 +58,8 @@ public class TokenInfoBO {
 
 	@Override
 	public String toString() {
-		return "TokenInfoBO{" + "userInfoInToken=" + userInfoInToken + ", accessToken='" + accessToken + '\''
-				+ ", refreshToken='" + refreshToken + '\'' + ", expiresIn=" + expiresIn + '}';
+		return "TokenInfoBO{" + "userInfoInToken=" + userInfoInToken + ", accessToken='***'"
+				+ ", refreshToken='***'" + ", expiresIn=" + expiresIn + '}';
 	}
 
 }

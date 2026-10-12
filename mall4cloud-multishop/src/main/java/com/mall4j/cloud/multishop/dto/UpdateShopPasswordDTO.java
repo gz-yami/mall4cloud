@@ -51,8 +51,8 @@ public class UpdateShopPasswordDTO {
 	@Override
 	public String toString() {
 		return "UpdateShopPasswordDTO{" +
-				"confirmPsw='" + confirmPsw + '\'' +
-				", password='" + password + '\'' +
+				"confirmPsw='***'" +
+				", password='***'" +
 				", shopId=" + shopId +
 				'}';
 	}

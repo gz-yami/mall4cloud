@@ -45,7 +45,7 @@ public class TokenInfoVO {
 
 	@Override
 	public String toString() {
-		return "TokenInfoVO{" + "accessToken='" + accessToken + '\'' + ", refreshToken='" + refreshToken + '\''
+		return "TokenInfoVO{" + "accessToken='***'" + ", refreshToken='***'"
 				+ ", expiresIn=" + expiresIn + '}';
 	}
 

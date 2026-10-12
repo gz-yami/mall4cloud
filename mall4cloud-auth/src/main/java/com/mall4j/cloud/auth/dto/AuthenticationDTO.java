@@ -62,7 +62,7 @@ public class AuthenticationDTO {
 	public String toString() {
 		return "AuthenticationDTO{" +
 				"principal='" + principal + '\'' +
-				", credentials='" + credentials + '\'' +
+				", credentials='***'" +
 				", sysType=" + sysType +
 				'}';
 	}
