@@ -56,8 +56,7 @@ public class OrderCanalListener extends BaseCanalBinlogEventProcessor<OrderBO> {
             IndexResponse indexResponse = restHighLevelClient.index(request, RequestOptions.DEFAULT);
             log.info(indexResponse.toString());
         } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.toString());
+            log.error("保存es信息异常, orderId={}", orderId, e);
             throw new Mall4cloudException("保存es信息异常", e);
         }
     }
@@ -76,8 +75,8 @@ public class OrderCanalListener extends BaseCanalBinlogEventProcessor<OrderBO> {
             UpdateResponse updateResponse = restHighLevelClient.update(request, RequestOptions.DEFAULT);
             log.info(updateResponse.toString());
         } catch (IOException e) {
-            log.error(e.toString());
-            throw new Mall4cloudException("更新订单es信息异常",e);
+            log.error("更新订单es信息异常, orderId={}", orderId, e);
+            throw new Mall4cloudException("更新订单es信息异常", e);
         }
     }
 

@@ -10,6 +10,8 @@ import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.util.PageUtil;
 import com.mall4j.cloud.common.database.vo.PageVO;
 import com.mall4j.cloud.common.security.AuthUserContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ import java.util.Objects;
  */
 @Service
 public class AttachFileServiceImpl implements AttachFileService {
+
+    private static final Logger log = LoggerFactory.getLogger(AttachFileServiceImpl.class);
 
     @Autowired
     private AttachFileMapper attachFileMapper;
@@ -72,14 +76,17 @@ public class AttachFileServiceImpl implements AttachFileService {
      * @param filePath 文件路径
      */
     public void deleteFile(String filePath){
-        // 获取文件的实际路径--数据库中保存的文件路径为： / + 实际的文件路径
-        if (StrUtil.isNotBlank(filePath)) {
-            filePath = filePath.substring(1);
+        if (StrUtil.isBlank(filePath)) {
+            return;
+        }
+        String objectName = filePath.charAt(0) == '/' ? filePath.substring(1) : filePath;
+        if (StrUtil.isBlank(objectName)) {
+            return;
         }
         try {
-            minioTemplate.removeObject(filePath);
+            minioTemplate.removeObject(objectName);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("删除文件失败, filePath={}", filePath, e);
         }
     }
 }
