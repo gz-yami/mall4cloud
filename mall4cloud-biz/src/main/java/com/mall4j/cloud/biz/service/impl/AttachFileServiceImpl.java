@@ -9,6 +9,7 @@ import com.mall4j.cloud.biz.vo.AttachFileVO;
 import com.mall4j.cloud.common.database.dto.PageDTO;
 import com.mall4j.cloud.common.database.util.PageUtil;
 import com.mall4j.cloud.common.database.vo.PageVO;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
 import com.mall4j.cloud.common.security.AuthUserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +58,7 @@ public class AttachFileServiceImpl implements AttachFileService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(Long fileId) {
-        AttachFile attachFile = attachFileMapper.getById(fileId);
+        AttachFile attachFile = getOwnFile(fileId);
         deleteFile(attachFile.getFilePath());
         attachFileMapper.deleteById(fileId);
     }
@@ -67,8 +68,17 @@ public class AttachFileServiceImpl implements AttachFileService {
         if (Objects.isNull(attachFile.getFileName()) && Objects.isNull(attachFile.getAttachFileGroupId())) {
             return Boolean.TRUE;
         }
+        getOwnFile(attachFile.getFileId());
         attachFileMapper.update(attachFile);
         return Boolean.TRUE;
+    }
+
+    private AttachFile getOwnFile(Long fileId) {
+        AttachFile attachFile = attachFileMapper.getById(fileId);
+        if (attachFile == null || !Objects.equals(attachFile.getShopId(), AuthUserContext.get().getTenantId())) {
+            throw new Mall4cloudException("文件不存在");
+        }
+        return attachFile;
     }
 
     /**
