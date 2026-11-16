@@ -9,6 +9,8 @@ import com.mall4j.cloud.multishop.model.IndexImg;
 import com.mall4j.cloud.multishop.mapper.IndexImgMapper;
 import com.mall4j.cloud.multishop.service.IndexImgService;
 import com.mall4j.cloud.multishop.vo.IndexImgVO;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
+import com.mall4j.cloud.common.security.AuthUserContext;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 轮播图
@@ -37,7 +40,11 @@ public class IndexImgServiceImpl implements IndexImgService {
 
     @Override
     public IndexImgVO getByImgId(Long imgId) {
-        return indexImgMapper.getByImgId(imgId);
+        IndexImgVO indexImg = indexImgMapper.getByImgId(imgId);
+        if (indexImg == null || !Objects.equals(indexImg.getShopId(), AuthUserContext.get().getTenantId())) {
+            throw new Mall4cloudException("轮播图不存在");
+        }
+        return indexImg;
     }
 
     @Override
@@ -49,6 +56,10 @@ public class IndexImgServiceImpl implements IndexImgService {
     @Override
     @CacheEvict(cacheNames = CacheNames.INDEX_IMG_KEY, key = "#indexImg.shopId")
     public void update(IndexImg indexImg) {
+        IndexImgVO dbIndexImg = indexImgMapper.getByImgId(indexImg.getImgId());
+        if (dbIndexImg == null || !Objects.equals(dbIndexImg.getShopId(), indexImg.getShopId())) {
+            throw new Mall4cloudException("轮播图不存在");
+        }
         indexImgMapper.update(indexImg);
     }
 

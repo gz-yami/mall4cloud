@@ -9,6 +9,8 @@ import com.mall4j.cloud.multishop.model.HotSearch;
 import com.mall4j.cloud.multishop.mapper.HotSearchMapper;
 import com.mall4j.cloud.multishop.service.HotSearchService;
 import com.mall4j.cloud.multishop.vo.HotSearchVO;
+import com.mall4j.cloud.common.exception.Mall4cloudException;
+import com.mall4j.cloud.common.security.AuthUserContext;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 热搜
@@ -36,7 +39,11 @@ public class HotSearchServiceImpl implements HotSearchService {
 
     @Override
     public HotSearchVO getByHotSearchId(Long hotSearchId) {
-        return hotSearchMapper.getByHotSearchId(hotSearchId);
+        HotSearchVO hotSearch = hotSearchMapper.getByHotSearchId(hotSearchId);
+        if (hotSearch == null || !Objects.equals(hotSearch.getShopId(), AuthUserContext.get().getTenantId())) {
+            throw new Mall4cloudException("热搜不存在");
+        }
+        return hotSearch;
     }
 
     @Override
@@ -46,6 +53,10 @@ public class HotSearchServiceImpl implements HotSearchService {
 
     @Override
     public void update(HotSearch hotSearch) {
+        HotSearchVO dbHotSearch = hotSearchMapper.getByHotSearchId(hotSearch.getHotSearchId());
+        if (dbHotSearch == null || !Objects.equals(dbHotSearch.getShopId(), hotSearch.getShopId())) {
+            throw new Mall4cloudException("热搜不存在");
+        }
         hotSearchMapper.update(hotSearch);
     }
 
